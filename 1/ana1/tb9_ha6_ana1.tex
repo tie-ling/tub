@@ -1,0 +1,227 @@
+\documentclass[12pt]{extarticle}
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,fancyhdr,color,graphicx,}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{parskip}
+\usepackage{tikz}
+\renewcommand{\familydefault}{\sfdefault}
+\pagestyle{fancy}
+\setlength{\parindent}{0pt}
+\lhead{Yuchen Guo 480788, Meng Zhang 484981, Chaeyoung Hong 478363}
+\rhead{6. Hausaufgabenblatt, Ana I\\Tilman, Gruppe TB9}
+\begin{document}
+\textbf{H 6.1.i}
+
+\textit{Behauptung.}  Die Reihe konvergiert gegen \(2\).
+\begin{proof}
+  Wir zeigen, dass das Cauchy-Produkt konvergiert gegen \(2\), indem wir
+  zeigen, dass die Reihen \(\sum_{n=0}^{\infty}{\frac{1}{2^n}}\) und
+  \(\sum_{n=0}^{\infty}{\frac{1}{(k+1)(k+2)}}\) konvergiert absolut
+  gegen \(2\) und \(1\).
+
+  Die Reihe \(\sum_{n=0}^{\infty}{\frac{1}{2^n}}\)  ist eine
+  geometrische Reihe mit $\left|  q \right|  = \left|  \frac{1}{2}
+  \right|  < 1$ und konvergiert damit absolut gegen \(\frac{1}{1-q}=2\).
+
+  Wir betrachten die \(n\)-te Partialsumme \(s_n\) der Reihe
+  \(\sum_{n=0}^{\infty}{\frac{1}{(k+1)(k+2)}}\).  Es gilt
+\begin{align*}
+  s_n &= \sum_{k=0}^n{\frac{1}{(k+1)(k+2)}}\\
+      &= \sum_{k=0}^n{\frac{1}{k+1}-\frac{1}{k+2}}\\
+      &=
+        \frac{1}{0+1}-\frac{1}{0+2}
+        +\frac{1}{1+1}-\frac{1}{1+2}
+        +\frac{1}{2+1}-\frac{1}{2+2}+\ldots-\frac{1}{n+2}\\
+      &= 1 - \frac{1}{n+2}
+\end{align*}
+
+Die Folge \((s_n)\) hat den Grenzwert \(1\).  Damit konvergiert die Reihe
+\(\sum_{n=0}^{\infty}{\frac{1}{(k+1)(k+2)}}\) gegen \(1\).
+
+Wegen Satz 3.32 konvergiert das Cauchy-Produkt dann gegen \(2\).
+\end{proof}
+
+\textbf{H 6.1.ii}
+
+\textit{Behauptung.}  Die Reihe \(\sum_{n=0}^{\infty}{a_n}\) konvergent.
+
+\begin{proof}
+  Die Folge \((\left|  a_n \right| )_{n \in \mathbb{N}_{\geq 1}}\) ist eine monoton
+  fallende Nullfolge.  Denn, es gilt $\lim_{n \rightarrow
+    \infty}{\frac{1}{\sqrt{n}}}=0$ und
+\begin{align*}
+  \left|  a_n \right|  - \left|  a_{n+1} \right|
+  &= \frac{1}{\sqrt{n}} - \frac{1}{\sqrt{n+1}}\\
+  &= \frac{\sqrt{n+1}-\sqrt{n}}{\sqrt{n(n+1)}} \\
+  &> 0.
+\end{align*}
+
+Aus dem Leibniz-Kriterium folgt, dass \(\sum_{n=0}^{\infty}{a_n}\) konvergiert.
+\end{proof}
+
+\textit{Behauptung.}  Das Cauchy-Produkt der Reihe $
+\sum_{n=0}^{\infty}{a_n}$ divergiert.
+
+\begin{proof}
+Es gilt,
+\begin{align*}
+  \sum_{k=0}^{\infty}{\left( \sum_{l=0}^k{a_{k-l}a_l} \right)}
+  &= \sum_{k=0}^{\infty}{\left( \sum_{l=0}^k{a_{k-l}a_l} \right)} \\
+\end{align*}
+
+???
+\end{proof}
+
+\textbf{H 6.2}
+
+\textbf{H 6.3.i}
+
+\textit{Behauptung.} Die Menge \(\mathbb{A}\) der
+algebraischen Zahlen ist abzählbar.
+
+\begin{proof}
+  Sei \(M_n\) die Menge aller \(n\)-elementige Teilmenge
+  von \(\mathbb{Q}\).  Wir zeigen, dass die Menge \(M_n\)
+  abzählbar ist, mittels vollständigen Induktion.
+
+  \textbf{Induktionsanfang:} \(n=1\).  Die Menge
+  $M_1 = \left\{ \left\{ q_0 \right\}, \left\{ q_1
+    \right\}, \left\{ q_2 \right\}, \ldots \right\}$
+  mit \(q_1, q_2, \ldots \in \mathbb{Q}\) ist abzählbar,
+  denn es eine Bijektion
+  $f \colon \left\{ q  \mid  N \in M, q \in N\right\}
+  \rightarrow \mathbb{Q}$ gibt.  Die Menge der
+  rationalen Zahlen ist abzählbar, deshalb \(M_1\) ist
+  auch abzählbar.
+
+  \textbf{Induktionsannahme:} Die Menge
+  $M_n= \{ \underbrace{\left\{ q_a, \ldots, q_b
+      \right\}}_{n \text{ Elementen}}, \ldots,
+    \underbrace{\left\{ q_c, \ldots, q_d \right\}}_{n
+      \text{ Elementen}} \}$ ist abzählbar.
+
+    \textbf{Induktionsschritt:} \(n \rightarrow n+1\).
+    Die Menge \(M_{n+1}\) ist auch abzählbar, weil es
+    gibt nur abzählbare viele Möglichkeiten, eine Zahl
+    aus \(\mathbb{Q}\) wählen und in eine Teilmenge von
+    \(M_n\) hinzufügen, also die Menge
+    $\{ \underbrace{ N \cup \{q_{x}\}}_{n+1 \text{ Elementen}}  \mid  q_x \in
+    \mathbb{Q}, N \in M_n \}$ ist abzählbar.  Wegen (Satz 3.44:
+    Die Vereinigung abzählbar vieler abzählbarer Mengen
+    ist abzählbar) ist die Menge \(M_{n+1}\) abzählbar. \qed
+
+    Weil die Menge \(M_n\) abzählbar ist, dann gibt es
+    für jede Teilmenge \(N_i \in M_n\) höchstens \(n\)
+    verschiedene Lösungen für die Gleichung
+    \(\sum_{k=0}^n{a_kx^k}\).  Also die Lösungsmenge
+    \(\left| X_{N_i}  \right| \leq n\).  Weil \(M_n\) abzählbar ist, ist die
+    Vereinigung abzählbare viele Teilmenge
+    \(\bigcup_{i=0}^n{X_{N_i}}\) auch abzählbar.
+    Außerdem ist die Menge
+    \(Y= \left\{ M_1, M_2, \ldots, M_n \right\}\) auch
+    abzählbar, weil es eine Bijektion
+    \(f\colon \mathbb{N} \rightarrow Y\) gibt.
+    Daraus folgt, dass die Vereinigung der Lösungsmenge
+    abzählbar ist.
+  \end{proof}
+
+  \textbf{H 6.3.ii}
+
+  \textbf{H 6.4}
+
+  \textit{Lemma.} Es gibt zu jedem $a \in \left]0,
+    1\right[$ ein \(b \in \left]0, 1\right[\) mit \(b > a\).
+
+  \begin{proof}
+  Sei also die Zahl \(a \in \left]0, 1\right[\) beliebig gewählt.  Wir
+zeigen, dass es eine Zahl \(b \in \left]0, 1\right[\) mit \(b > a\)
+existieren muss.
+
+Angenommen, es existiert keine Zahl \(b \in \left]0, 1\right[\) mit $b >
+a\(.  Dann gilt \(b \leq a\) für alle \(b \in \left]0, 1\right[\), also \)a =
+\sup \left]0, 1\right[$.  Es gilt auch, dass \(a \in \left]0, 1\right[\), daraus folgt,
+dass \(a = \max \left]0, 1\right[\).  Dies ist ein Widerspruch, denn \(\left]0, 1\right[\)
+ist eine offene Intervall und hat daher kein Maximum.
+  \end{proof}
+
+
+  \textit{Behauptung.}  Es gibt eine überabzählbare
+  Menge von paarweise disjunkten offenen und nicht leeren Intervallen.
+
+  \begin{proof}
+
+    Es gilt, dass die Intervall \(\left]0, 1\right[\)
+    überabzählbar ist.  Daraus folgt, dass die Menge
+    aller Intervallen \(\left]a, 1\right[\) mit
+    \(a \in \left]0, 1\right[\) überabzählbar ist, denn
+    es existiert eine bijektive Abbildung
+    $f\colon \left]0, 1\right[ \rightarrow M, a \mapsto
+    \left]a, 1\right[$.
+
+    O.B.d.A seien die Mengen \(A:= \left]a, 1\right[\),
+    \(B:=\left]b, 1\right[\) und \(C:= \left]c, 1\right[\)
+    drei Teilmengen von \(\left]0, 1\right[\) mit
+    \(a < b < c\).  Dann gilt $A \setminus B = \left]a,
+      b\right[\( und \)B \setminus C = \left]b,
+      c\right[\(. Die Mengen \(A \setminus B\) und \)B
+    \setminus C$ sind paarweise disjunkte offene und
+    nicht leere Intervallen.
+
+
+    Wegen Lemma existiert zu jedem
+    \(a \in \left]0, 1\right[\) ein \(b\) und \(c\) dass
+    \(a < b < c\).  Also, es gibt eine überabzählbare
+    Menge von paarweise disjunkten offenen und nicht
+    leeren Intervallen innerhalb \( \left]0, 1\right[\).
+\end{proof}
+
+\textbf{Zusatzaufgabe 2}
+
+\textit{Behauptung.}  Die Menge \(\mathcal{I}\) aller
+induktiven Teilmengen von \(\mathbb{R}\) ist
+überabzählbar.
+
+\begin{proof}
+  Wir zeigen, dass für alle \(x \in \left] 0, 1 \right[\)
+  dass die Mengen
+  $I_x:= \mathbb{N} \cup \left\{ x+n  \mid  n \in \mathbb{N}
+  \right\}$ induktiv ist, per (Definition 1.17).
+
+  \begin{itemize}
+  \item Es gilt \(0 \in I_x\) wegen $\mathbb{N} \subseteq
+    I_x$.
+  \item Für alle \(a \in \mathbb{R}\) mit \(a \in I_x\)
+    gilt, dass \(a \in \mathbb{N}\) oder
+    \(a \in \left\{ x + n  \mid  n \in \mathbb{N}\right\}\).
+    Falls \(a \in \mathbb{N}\), dann gilt \(a+1 \in I_x\),
+    weil die Menge der natürlichen Zahlen \(\mathbb{N}\)
+    induktiv ist. Falls
+    \(a \in \left\{ x + n  \mid  n \in \mathbb{N}\right\}\),
+    dann gilt \(a = x + n\) und
+    $a + 1 = x + (n + 1) \in \left\{ x + n  \mid  n \in
+      \mathbb{N}\right\}$, weil \(n+1 \in \mathbb{N}\).
+  \end{itemize}
+
+  Die Abbildung \(x \mapsto I_x\) mit
+  \(x \in \left]0, 1 \right[\) ist injektiv, denn es gilt
+  für alle \(x_1, x_2 \in \left]0, 1\right[\) mit
+  \(x_1 \neq x_2\) dass
+  $\left\{ x_1+n \mid n \in \mathbb{N} \right\} \cap
+  \left\{ x_2+n \mid n \in \mathbb{N} \right\} =
+  \emptyset$ und damit \(I_{x_1} \neq I_{x_2}\).
+
+  Wir haben gezeigt, dass es eine Injektion
+  \(x \mapsto I_x\) mit \(x \in \left] 0, 1 \right[\)
+  existiert und \(I_x\) induktiven Teilmengen von
+  \(\mathbb{R}\) sind.  Es gilt auch, dass
+  \(\left] 0, 1 \right[\) überabzählbar, damit ist auch
+  \(I_x\) überabzählbar. Weil \(I_x\) eine überabzählbare
+  Teilmenge von \(\mathcal{I}\) ist, ist auch die Menge
+  \(\mathcal{I}\) aller induktiven Teilmengen von
+  \(\mathbb{R}\) überabzählbar.
+
+\end{proof}
+\end{document}

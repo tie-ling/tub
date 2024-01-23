@@ -1,0 +1,118 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+\documentclass[draft,a5paper]{article}
+
+% 让每个章节 subsection 在新的一页上开始
+% 而不是紧接着上一章节
+\AddToHook{cmd/subsection/before}{\clearpage}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+
+\geometry{left=1cm,
+ right=1cm,
+ top=1cm,
+ bottom=2cm}
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+
+% 调整 Emacs 预览字体大小
+% (setq preview-scale-function 1.5)
+
+\usepackage{amsmath,mathtools,fontspec,amssymb,amsthm,parskip,interval,unicode-math}
+\usepackage{xcharter-otf}
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+% 定义新函数，依赖于AMSmath
+\DeclareMathOperator{\card}{card}
+
+\newcommand{\wt}{\widetilde}
+\newcommand{\dd}{\,\mathrm{d}}
+% 标题与作者
+\title{HA 9, Ana 3, Monika, MM 11}
+\author{Zhang 484981, Yang 466096, Guo 480788}
+
+\begin{document}
+\maketitle
+\begin{center}
+  Meng Zhang 484981, Yiwen Yang 466096, Yuchen Guo 480788
+\end{center}
+
+\subsection{H 9.1}
+Sei die Funktion
+\begin{align*}
+  f\colon \mathbb{R} \to \mathbb{R}, \quad f(x) =
+  \begin{cases}
+    (x + \pi)(x + \frac{\pi}{2}) & x \in \rinterval{-\pi}{-\frac{\pi}{2}} \\
+    4x \cdot \frac{1}{\pi} & x \in \interval{-\frac{\pi}{2}}{0} \\
+    \frac{1}{x} \cdot (\exp(x / \pi) - 1) \cdot \pi & x \in \ointerval{0}{\pi}
+  \end{cases}
+\end{align*}
+und setzen wir sie \(2\pi\)-periodisch fort.
+\begin{Behauptung}
+  Die komplexe Fourierreihe
+  \begin{align*}
+    c(x) = \sum_{k \in \mathbb{Z}}{c_{k} \exp (ikx)}
+  \end{align*}
+  von \(f\) konvergent auf ganz \(\interval{-\pi}{\pi}\).
+\end{Behauptung}
+\begin{proof}
+  Wir zeigen, dass hier [punkt. Konv. der Fourierpolynome] gilt, indem
+  wir zeigen, dass für alle \(x \in \mathbb{R}\) sowohl die rechts- und
+  linksseitigen Grenzwerte als auch die rechts- und linksseitigen
+  Ableitungen existieren.
+
+  Wir berechnen \(f(x_{-}), f(x_{+}), f'(x_{-}), f'(x_{+})\) für
+  \(x = \{-\pi, -\frac{\pi}{2}, 0, \pi\}\).  Weil \(f(x)\) auf
+  \(\interval{-\pi}{0}\) Polynome sind, existieren die rechts- und
+  linksseitigen Ableitungen und Grenzwerte für alle
+  \(x \in \interval{-\pi}{0}\) und deren \(2\pi\)-periodische Fortsetzung.
+
+  Wir betrachten den Fall mit
+  \[f(x) = \frac{1}{x} \cdot (\exp(x / \pi) - 1) \cdot \pi, \quad x \in
+    \ointerval{0}{\pi}.\]  Weil diese Funktion als Komposition von
+  stetiger Funktionen stetig ist, existiert die links- und
+  rechtsseitige Grenzwerte.
+
+  Es gilt
+  \[
+    f'(x) = -x^{-2} \cdot \pi \cdot (\exp(x / \pi) - 1) + \pi \cdot \exp(x / \pi)
+  \]
+  und daher \(f'(\pi_{-})= -\frac{1}{\pi}(e-1) + \pi \cdot e \).  Wegen Regel von de L'Hospital gilt
+  \[
+    f'(0_{+}) = \lim_{x \to 0} \frac{\pi \cdot (\exp(x / \pi) - 1)}{x} = \lim_{x \to 0}
+    \frac{\pi \cdot x \cdot \exp(x/\pi)}{1} = 0.
+  \]
+  Daher existiert für alle \(x \in \mathbb{R}\) die links- und rechtsseitige
+  Grenzwerte und Ableitungen und die Folge der Fourierpolynome
+  konvergiert punktweise gegen \(\frac12 (f(x_{+}) + f(x_{-}))\).
+
+  Wir berechnen \(c(-\pi)\) und \(c(\pi)\).  Es gilt
+  \[
+    c(-\pi) = \frac{1}{2}(f(-\pi_{-}) + f(-\pi_{+})) = \frac12 ((e-1) + 0)
+    = \frac{e-1}{2}.
+  \]
+  Weil \(f\) periodisch ist, gilt \(c(-\pi) = c(\pi)\).
+\end{proof}
+\subsection{H 9.2}
+Wir berechnen den Wert der Reihe
+\[\sum_{n=0}^{\infty}\frac{(-1)^{n}}{2n+1} = \frac{\pi}{4}.\]
+Wir betrachten \(\abs{\det(A)}\)
+\end{document}

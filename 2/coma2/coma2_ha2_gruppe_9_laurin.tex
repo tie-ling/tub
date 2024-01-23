@@ -1,0 +1,241 @@
+\documentclass[draft,a5paper]{article}
+\usepackage[ngerman]{babel}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath,mathtools,fontspec,amssymb,mathtools}
+
+% for theorems and lemma
+\usepackage{amsthm}
+\newtheorem*{beh}{Behauptung}
+\newtheorem*{lem}{Lemma}
+
+% times new roman font
+\usepackage{newtx}
+
+\linespread{1.2}
+
+% multicol
+\usepackage{multicol}
+
+\author{Yiwen Yang 466096, Yuchen Guo 480788, Qing Wang 458040}
+\date{\today}
+\title{HA 2, CoMa 2 -- Gruppe 9, Laurin Geyer}
+
+% syntax highlighting
+\usepackage{minted}
+
+% tikz pictures
+
+
+\begin{document}
+\maketitle
+
+\newpage
+
+\subsection*{1. Aufgabe. (Queue mit Stack)}
+Wir implementieren ein \texttt{julia}-Konstruktor \texttt{Queue} mit
+den Methoden \texttt{queue\textunderscore insert},
+\texttt{queue\textunderscore pop} und \texttt{queue\textunderscore
+  isEmpty}.  Wir nehmen an, dass ein Konstruktor \texttt{Stack} mit den
+folgenden Methoden existiert, vgl. Folie 25.
+
+\begin{minted}[frame=lines,fontsize=\footnotesize,linenos,]{julia}
+## Konstruktor Stack von Folie 25
+mutable struct Stack{T}
+function isEmpty(Q::Stack)
+function insert(Q::Stack, x)
+function pop(Q::Stack)
+function peek(Q::Stack)
+## end of Konstruktor Stack von Folie 25
+
+mutable struct Queue
+    reversed::Stack
+    not_reversed::Stack
+    function Queue(data::Vector)
+        return new(Stack([]), Stack(data))
+    end
+end
+
+function queue_isEmpty(Q::Queue)
+    return isEmpty(Q.reversed) && isEmpty(Q.not_reversed)
+end
+
+function queue_insert(Q::Queue, x)
+    insert(Q.not_reversed, x)
+    return Q
+end
+
+
+function queue_pop(Q::Queue)
+    #
+    # Case 1:
+    ## if the reversed stack is not empty,
+    ## pop the reversed stack first.
+    #
+    if ! isEmpty(Q.reversed)
+        return pop(Q.reversed)
+
+    #
+    # Case 2:
+    ## if the reversed stack of queue is empty,
+    ## and not_reversed stack is not empty,
+    ##
+    ## pop all elements in not_reversed stack, then
+    ## insert all but last popped element into reversed stack.
+    ## Return the last popped element as result.
+    #
+    elseif ! isEmpty(Q.not_reversed)
+        result = pop(Q.not_reversed)
+        while ! isEmpty(Q.not_reversed)
+            insert(Q.reversed, result)
+            result = pop(Q.not_reversed)
+        end
+        return result
+    else
+    #
+    # Case 3:
+    ## Both stacks is empty. Then the queue is empty.
+    #
+        return "Queue is empty!"
+    end
+end
+\end{minted}
+\begin{beh}
+  Für die Methode \texttt{queue\textunderscore insert} werden im
+  schlechtesten Fall bei \(n\) Elementen \(1\)-mal \texttt{insert}
+  Operation benötigt.
+
+  Für die Methode \texttt{queue\textunderscore pop} werden im
+  schlechtesten Fall \(n\)-mal \texttt{insert} und \(n\)-mal
+  \texttt{pop} Operationen benötigt.
+\end{beh}
+
+\begin{proof}
+  Aus der Definition von der Methode \texttt{queue\textunderscore
+    insert} folgt, dass es nur \(1\)-mal \texttt{insert} Operation
+  benötigt wird.
+
+  Andereseits wird bei Aufruf von \texttt{queue\textunderscore
+    pop} im schlechtesten Fall \(n\)-mal \texttt{insert} und \(n\)-mal
+  \texttt{pop} benötigt.  Denn, wir müssen jeder Element des Stacks
+  \texttt{q.not\textunderscore reversed} "`poppen"' und das Element
+  im Stack \texttt{q.reversed} einfügen.
+\end{proof}
+
+\newpage
+
+\subsection*{2. Aufgabe. (Catalan-Zahlen, Teil 2)}
+
+Die Catalan-Zahlen sind durch \(C_{0} \coloneq 1\) und die rekursive Regel
+\begin{align*}
+  C_{n} \coloneq \sum_{k=0}^{n-1}{C_{k} \cdot C_{n-1-k}}
+\end{align*}
+für alle \(n \ge 1\) definiert.
+
+\subsubsection*{2. Aufgabe, Teil i.}
+
+Wir entwerfen eine \texttt{julia}-Funktion \texttt{Catalan2(n)}, die
+die \(n\)-te Catalan-Zahl \(C_{n}\) mittels der Rekursionsformel
+berechnet. Dabei wird \(C_{i}, 1 \le i \le n - 1\) höchstens einmal berechnet.
+
+\begin{minted}[frame=lines,fontsize=\footnotesize,linenos]{julia}
+function Catalan(n::Int, list_of_results::Vector{Union{Nothing, Int}})
+    if n == 0
+        return 1
+    end
+
+    if list_of_results[n] != nothing
+        return list_of_results[n]
+    end
+
+    result = 0
+    for x in 0:n-1
+        # Die Anzahl von Additionen und Multiplikationen
+        # sind gleich
+        result += Catalan(x, list_of_results) * Catalan(n-1-x, list_of_results)
+    end
+
+    return result
+end
+
+function Catalan2(n::Int)
+    if n == 0
+        return 1
+    end
+
+    # initialize the list of n-results with "nothing" entries
+    list_of_results = Vector{Union{Nothing, Int}}(nothing, n)
+
+    for x in 1:n
+        # fill the list of n-results, smallest number first
+        list_of_results[x] = Catalan(x, list_of_results)
+    end
+
+    return last(list_of_results)
+end
+\end{minted}
+
+\begin{beh}
+  Es gilt für die Laufzeit des Codes \(T(n)\) dass
+  \(T(n) \in \Theta(n^{2})\).
+\end{beh}
+
+\begin{proof}
+  Wir berechnen die gesamte Anzahl von Additionen und
+  Multiplikationen.  Wir bemerken, dass die Anzahl von Additionen und
+  Multiplikationen gleich sind und alle andere Operationen eine
+  lineare Anzahl bzgl. \(n\) haben.
+
+  Die gesamte Anzahl von Aufrufe der \texttt{Catalan} Funktion ist
+  durch die \texttt{for}-Schleife der \texttt{Catalan2} Funktion
+  bestimmt.  Diese \texttt{for}-Schleife läuft wegen Definition
+  \((n-1)\) Mal.
+
+  Wir betrachten nun die Funktion \texttt{Catalan}. Die gesamt Anzahl
+  von Multiplikation innerhalb dieser Funktion wird durch die
+  \texttt{for}-Schleife bestimmt.  Wir bemerken, dass die rekursive
+  Aufrufe von \texttt{Catalan} innerhalb der \texttt{for}-Schleife
+  ohne Multiplikation oder Addition beendet, wegen der Existenz des
+  Variables \texttt{list\textunderscore of\textunderscore results}.
+  Daraus folgt, dass für jede Aufrufe von \texttt{Catalan} mit
+  \((n-1)\) Mal Multiplikation und \(n-1\) Mal Addition beendet.
+  Insgesamt ergibt sich
+  \begin{align*}
+    T(n) = an + (n-1)^{2} \in \Theta(n^{2}).
+  \end{align*}
+  Damit gilt die Behauptung.
+\end{proof}
+
+\subsubsection*{2. Aufgabe, Teil ii.}
+
+Wir entwerfen eine \texttt{julia}-Funktion
+\texttt{CatalanTriangle(n)}, die die \(n\)-te Catalan-Zahl \(C_{n}\)
+mittels des Catalan'schen Dreiecks berechnet.  Wir speichern nur die
+letzten zwei Zeilen des Dreiecks während des gesamten Aufrufs.  Jeder
+Eintrag \(C(n, k)\) wird höchstens einmal berechnet, denn, beim Beginn
+der äußeren \texttt{for}-Schleife wird jedes Mal die letzte Zeile
+\texttt{line1} als neue Zeile \texttt{line0} kopiert.
+
+\begin{minted}[frame=lines,fontsize=\footnotesize,linenos]{julia}
+function CatalanTriangle(n::Int)
+    # only the last two lines of the triangle are needed
+    line0 = Vector{Union{Nothing, Int}}(nothing, n+1)
+    line1 = Vector{Union{Nothing, Int}}(nothing, n+1)
+
+    # be careful, julia array indices begin with 1 (number one)
+    for x in 0:n-1
+        line0 = copy(line1)
+        line0[1] = 1;  line1[1] = 1
+        line0[2] = x;  line1[2] = x+1
+        for k in 2:x+1
+            line1[k] = line1[k-1] + line0[k]
+        end
+        if x > 0
+            line1[x + 2] = line1[x + 1]
+        end
+    end
+
+    return line1[n]
+end
+\end{minted}
+
+\end{document}

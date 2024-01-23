@@ -1,0 +1,228 @@
+\documentclass[12pt]{extarticle}
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,fancyhdr,color,graphicx,}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{tikz}
+\renewcommand{\familydefault}{\sfdefault}
+\pagestyle{fancy}
+\setlength{\parindent}{0pt}
+\lhead{Yiwen Yang 466096, Qing Wang 458040, Yuchen Guo 480788}
+\rhead{CoMa 2. Übungsblatt\\Tutor: Tino Mo 4-5.30pm}
+\author{HA Gruppe 103: \\Yiwen Yang 466096\\Qing Wang 458040\\Yuchen Guo 480788\\Tutor: Tino Mo 4-5.30pm}
+\title{2. Übungsblatt\\\small CoMa I WS 22/23}
+\date{}
+\begin{document}
+\maketitle
+\newpage
+\textbf{Aufgabe 1 (a)}
+\begin{proof}
+Weil \(f, g \in O(h)\), dann gilt von Definition
+\begin{align*}
+  \exists \alpha_1>0, \exists n_1 \in \mathbb{N}, \forall
+  n \geq n_1&: f(n) \leq \alpha_1h(n)\\
+  \exists \alpha_2>0, \exists n_2 \in \mathbb{N}, \forall
+  n \geq n_2&: g(n) \leq \alpha_2h(n)
+\end{align*}
+
+Sei \(n_3=\max \left\{ n_1, n_2 \right\}\), dann gilt
+\begin{align*}
+  \forall n \geq n_3&: f(n) \leq \alpha_1h(n)\\
+  \forall n \geq n_3&: g(n) \leq \alpha_2h(n)
+\end{align*}
+
+Multiplizieren wir die Ungleichungen jeweils mit $a, b \in
+\mathbb{R}_{>0}$ und addieren wir diese, erhalten wir
+\begin{align*}
+  \forall n \geq n_3&:
+  a\cdot f(n) + b\cdot g(n) \leq (\alpha_1\cdot a +\alpha_2 \cdot b )\cdot h(n)
+\end{align*}
+Setzen wir \(\alpha=\alpha_1\cdot a +\alpha_2 \cdot b\), dann erhalten
+wir
+\begin{align*}
+  \exists \alpha > 0, \exists n_3 \in \mathbb{N},
+  \forall n \geq n_3&:
+  a\cdot f(n) + b\cdot g(n) \leq \alpha \cdot h(n)
+\end{align*}
+
+Damit werde die Beziehung \(a \cdot f + b \cdot g \in O(h)\) gezeigt.
+\end{proof}
+
+\textbf{Aufgabe 1 (b)}
+
+\textit{Behauptung.}  Aus \(f \in \Omega(g)\) und \(g \in \Omega(h)\)
+folgt \(f \in \Omega(h)\).
+
+Diese Behauptung ist wahr.
+\begin{proof}
+
+  Sei
+\begin{align*}
+  f \in \Omega(g) &:= \left\{ f: \mathbb{N} \rightarrow \mathbb{R}_{\geq
+    0}|\exists \beta_1 >0, \exists n_1 \in \mathbb{N},
+  \forall n \geq n_1: f(n) \geq \beta_1 g(n)\right\}\\
+  g \in \Omega(h) &:= \left\{ g: \mathbb{N} \rightarrow \mathbb{R}_{\geq
+    0}|\exists \beta_2 >0, \exists n_2 \in \mathbb{N},
+  \forall n \geq n_2: g(n) \geq \beta_2 h(n)\right\}\\
+\end{align*}
+Dann gilt
+\begin{align*}
+  f \in \Omega(h) &:= \left\{
+                    f: \mathbb{N} \rightarrow \mathbb{R}_{\geq
+                    0}|    \forall n \geq \max \left\{ n_1, n_2 \right\}:
+                    f(n) \geq \beta_1 g(n) \geq \beta_1 \cdot
+                    \beta_2 h(n)\right\}\\
+\end{align*}
+\end{proof}
+
+\textbf{Aufgabe 1 (c)}
+
+Siehe unten.
+
+
+\textbf{Aufgabe 2 (a)}
+
+\begin{proof}
+  Wir bemühen einen Beweis mittels vollständigen Induktion.
+  \begin{itemize}
+  \item Induktionsanfang \(n=0\)
+
+    Wenn es keine Gerade gibt, bleibt die Ebene ganz.  Also es gibt
+    genau ein Gebiet.
+
+    Andereseits gilt \(\frac{0^2+0+2}{2}=1\).  Daher gilt die Aussage
+    für \(n=0\).
+  \item Induktionsschritt \(n \rightarrow n+1\)
+
+    Es gilt die Aussage, dass man mit \(n \in \mathbb{N}\) Geraden die
+    Ebene in höchstens \(\frac{n^2+n+2}{2}\) Gebiete zerlegen kann.
+
+    Ohne Beschränkung der Allgemeinheit betrachten wir den Fall, wo
+    die Ebene mit \(n\) Geraden genau in \(\frac{n^2+n+2}{2}\) Gebiete
+    geteilt wird.
+
+    Nun fügen wir eine \((n+1)\)-ten Gerade hinzu, sodass die
+    \((n+1)\)-ten Gerade alle \(n\) Geraden schneidet, und alle
+    Schnittpunkte der \((n+1)\)-ten Gerade von bereits existierenden
+    Schnittpunkte verschieden sind.
+
+    Weil jedes Gebiet konvex ist, kann am meisten \(n+1\) neue Gebiete
+    von der Teilung durch \((n+1)\)-ten Gerade entstehen.  Damit gilt,
+
+
+\begin{align*}
+f(n+1)=f(n)+n+1=\frac{n^2+n+2}{2}+n+1=\frac{(n+1)(n+2)+2}{2}
+\end{align*}
+  \end{itemize}
+\end{proof}
+
+\textbf{Aufgabe 2 (b)}
+
+\begin{proof}
+  Wir beweisen die Aussage, dass es unendlich viele Primzahlen gibt,
+  mittels Widerspruchsbeweis.
+
+  Angenommen, es gibt endlich viele Primzahlen:
+  \(M= \left\{ p_1, p_2, p_3, \cdots, p_n \right\}\).
+
+  Wir betrachten die Zahl $a=p_1\cdot p_2 \cdot p_3 \cdots \cdot
+  p_n+1$.
+
+  Weil \(a\) größer als alle Primzahlen ist, muss \(a\) nicht prim sein.
+  Also, \(p \notin M\).
+
+  Es gilt aber, dass \(a\) geteilt durch alle Primzahlen \(p \in M\) immer
+  einen Rest von \(1\) hat.  Es gilt, \(a\) ist eine Primzahl.  Diese ist
+  im Widerspruch zur Voraussetzung, dass die Menge \(M\) alle Primzahl enthält.
+\end{proof}
+
+\textbf{Aufgabe 3 (a)}
+\begin{proof}
+  Wir bemühen einen Beweis mittels vollständigen Induktion.
+
+  \begin{itemize}
+  \item Induktionsanfang \(n=2\)
+\begin{align*}
+\frac{1}{1 \cdot 2} = \frac{2-1}{2} = \frac{1}{2}
+\end{align*}
+\item Induktionsschritt \(n \rightarrow n+1\)
+\begin{align*}
+\sum_{k=2}^{n+1}{\frac{1}{(k-1)\cdot
+  k}}&=\sum_{k=2}^n{\frac{1}{(k-1)\cdot k}}+\frac{1}{(n+1)\cdot n}\\
+     &= \frac{n-1}{n}+\frac{1}{(n+1)n}\tag*{Induktionsvoraussetzung}\\
+  &=\frac{n}{n+1}
+\end{align*}
+  \end{itemize}
+\end{proof}
+
+
+\textbf{Aufgabe 3 (b)}
+\begin{proof}
+
+  Seien \(a, b, c\) die drei Seite einer Dreieck.  Wir beweisen, dass
+  die Gleichung
+\begin{align*}
+a^2-m^2=b^2-(c-m)^2
+\end{align*}
+
+Eine Lösung mit \(m \in \mathbb{R}_{\geq 0}\) hat.
+
+Es gilt \(m=\frac{a^2+c^2-b^2}{2c}\).  Zu zeigen: \(a^2+c^2-b^2 \geq 0\).
+\end{proof}
+\newpage
+\textbf{Aufgabe 4 (a)}
+\begin{align*}
+  &(101001)_2+(100110)_2 \\
+  &= (1 \times 2^5+0 \times 2^4+1 \times 2^3+0 \times 2^2+0 \times
+    2^1+1 \times 2^0)_{10} \\
+  &+ (1 \times 2^5+0 \times 2^4+0 \times 2^3+1 \times 2^2+1 \times
+    2^1+0 \times 2^0)_{10} \\
+  &= (1 \times 2^6+0 \times 2^5+0 \times 2^4+1 \times 2^3+1 \times 2^2+1 \times
+    2^1+1 \times 2^0)_{10} \\
+  &= (1001111)_2
+\end{align*}
+
+\textbf{Aufgabe 4 (b)}
+\begin{align*}
+  &(2102)_3+(2021)_3\\
+  &=(2 \times 3^3 + 1 \times 3^2 + 0 \times 3^1 + 2 \times 3^0)_{10}\\
+  &+(2 \times 3^3 + 0 \times 3^2 + 2 \times 3^1 + 1 \times 3^0)_{10}\\
+  &=(1 \times 3^4 +1 \times 3^3 + 2 \times 3^2 + 0 \times 3^1 + 0
+    \times 3^0)_{10}\\
+  &=(11200)_3
+\end{align*}
+
+
+\textbf{Aufgabe 4 (c)}
+\begin{align*}
+  &(7541)_8-(2005)_8\\
+  &=(7 \times 8^3 + 5 \times 8^2 + 4 \times 8^1 + 1 \times 8^0)_{10}\\
+  &-(2 \times 8^3 + 0 \times 8^2 + 0 \times 8^1 + 5 \times 8^0)_{10}\\
+  &=(5 \times 8^3 + 5 \times 8^2 + 3 \times 8^1 + 4 \times 8^0)_{10}\\
+  &=(5534)_8
+\end{align*}
+
+
+\textbf{Aufgabe 4 (d)}
+\begin{align*}
+  &(AB2E)_{16}-(1001)_{16}\\
+  &=(10 \times 16^3 + 11 \times 16^2 + 2 \times 16^1 + 14 \times 16^0)_{10}\\
+  &-(1 \times 16^3 + 0 \times 16^2 + 0 \times 16^1 + 1 \times 16^0)_{10}\\
+  &=(9 \times 16^3 + 11 \times 16^2 + 2 \times 16^1 + 13 \times 16^0)_{10}\\
+  &=(9B2D)_{16}
+\end{align*}
+
+\textbf{Aufgabe 4 (e)}
+\begin{align*}
+  &(11101)_{2}\cdot (101001)_{2}\\
+  &=(1 \times 2^4 + 1 \times 2^3 + 1 \times 2^2 + 0 \times 2^1 + 1 \times 2^0)_{10}\\
+  &\cdot(1 \times 2^5+ 0 \times 2^4+ 1 \times 2^3 + 0 \times 2^2 + 0 \times 2^1 + 1 \times 2^0)_{10}\\
+  &=(29)_{10} \cdot (41)_{10}\\
+  &=(1189)_{10}\\
+  &=(1 \times 2^{10} + 1 \times 2^7 + 1 \times 2^5 + 1 \times 2^2 + 1
+    \times 2^0)_{10}\\
+  &=(10010100101)_2
+\end{align*}
+\end{document}

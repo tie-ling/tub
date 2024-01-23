@@ -1,0 +1,364 @@
+\documentclass[12pt]{extarticle}
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,fancyhdr,color,graphicx,}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{tikz}
+\renewcommand{\familydefault}{\sfdefault}
+\pagestyle{fancy}
+\setlength{\parindent}{0pt}
+\lhead{Yuchen Guo 480788, Meng Zhang 484981}
+\rhead{4. Hausaufgabenblatt, LinA I\\Tutorin: Saskia, Mi 2-4 p.m.}
+\newcommand{\idf}{\operatorname{id}}
+\begin{document}
+\textbf{H 4.1.i}
+
+Wir zeigen, dass \(R\) eine Äquivalenzrelation ist, indem wir zeigen,
+dass diese Relation reflexiv, symmetrisch und transitiv ist.
+
+\begin{proof}
+
+Zur Abkürzung setzen wir die Mengen \(M := \left\{ 1,\ldots,m \right\}\)
+und \(N := \left\{ 1,\ldots,n \right\}\) ein.
+\begin{itemize}
+\item Diese Relation ist reflexiv.
+
+  Es existiert eine Permutation der Zahlen \(1, \ldots, m\), nämlich
+  \(\idf_M\).  Es gilt für alle \(f \in X\) dass \(f = \idf_M \circ f\).
+  Daraus folgt, dass \((f,f) \in R\) für alle \(f \in X\).  Diese Relation
+  ist daher reflexiv.
+\item Diese Relation ist symmetrisch.
+
+  Sei \((f,g) \in R\).  Daraus folgt, dass es eine Permutation
+  \(\sigma \in S_m\) gibt mit \(f=\sigma \circ g\).  Aus der Definition
+  der Permutation folgt, dass \(\sigma\) bijektiv ist mit
+  \(\sigma: M \rightarrow M\).  Wegen der Bijektivität von \(\sigma\)
+  existiert eine Umkehrabbildung von \(\sigma\).  Wir bezeichnen diese
+  Abbildung als \(\sigma^{-1}\). Die Abbildung \(\sigma^{-1}\) ist eine
+  bijektive Abbildung mit \(\sigma^{-1}: M \rightarrow M\).  D.h.,
+  \(\sigma^{-1} \in S_m\).
+
+  Es gilt für alle \(n \in N\) dass \(f(n)=\sigma(g(n))\).  Daraus folgt,
+  dass \(\sigma^{-1}(f(n))=g(n)\) und \((g,f) \in R\).  Damit ist diese
+  Abbildung symmetrisch.
+\item Diese Relation ist transitiv.
+
+  Seien \((f,g),(g,h) \in R\).  Aus der Definition der Relation \(R\)
+  folgt, dass es \(\sigma_1,\sigma_2 \in S_m\) existiert mit $f=\sigma_1
+  \circ g\( und \(g = \sigma_2 \circ h\).  Daraus folgt, dass für alle \)n
+  \in N$ gilt \(f(n)=\sigma_1(g(n))\) und \(g(n)=\sigma_2(h(n))\) und
+  daher \(f(n)=\sigma_1(\sigma_2(h(n)))\).
+
+  Es existiert daher eine Permutation der Menge \(M\), nämlich
+  \(\sigma = \sigma_1 \circ \sigma_2\) mit \(f = \sigma \circ h\).  Damit
+  ist diese Relation transitiv.
+\end{itemize}
+\end{proof}
+
+\textbf{H 4.1.ii}
+
+\textit{Behauptung.}  Es gilt \(m=n\) und \(f \in X\) bijektiv.  Die
+Aussage \((f,g) \in R\) ist äquivalent zu der Aussage „\(g\) ist
+bijektiv“.
+\begin{proof}
+  Wir setzen zur Abkürzung die Menge \(M:= \left\{ 1,\ldots,m \right\}\) ein.
+
+\vspace{4mm}
+\textit{Hinrichtung.}
+  \begin{itemize}
+  \item \(g\) ist injektiv
+
+    Seien \(x_1, x_2 \in M\) mit \(x_1 \neq x_2\).  Aus der Bijektivität
+    von \(f\) folgt, \(f(x_1) \neq f(x_2)\).  Die Abbildung \(\sigma\) ist
+    eine Permutation und besitzt daher eine bijektive Umkehrabbildung
+    \(\sigma^{-1}\).
+
+    Weil \(\sigma^{-1}\) bijektiv ist, gilt
+    \(\sigma^{-1}(f(x_1)) \neq \sigma^{-1}(f(x_2))\).  Es gilt auch,
+    \(g=\sigma^{-1} \circ f\).  Es gilt daher \(g(x_1) \neq g(x_2)\) für
+    alle \(x_1 \neq x_2\).  Damit ist \(g\) injektiv.
+
+  \item \(g\) ist surjektiv
+
+    Wir bemühen uns einen Widerspruchsbeweis.
+
+    Sei \(g\) nicht surjektiv.  Dann existiert ein \(y \in M\) sodass
+    \(g(x) \neq y\) für alle \(x \in M\).  Weil \(\sigma\) bijektiv ist,
+    dann gilt \(f(x)=(\sigma \circ g)(x) \neq \sigma(y)\) für alle
+    \(x \in M\).
+
+    Es gilt \(\sigma: M \rightarrow M\) und \(y \in M\).  Daraus folgt,
+    dass \(\sigma(y) \in M\).  Daraus folgt, dass \(f(x) \neq \sigma(y)\)
+    für alle \(x \in M\) mit \(\sigma(y) \in M\).  Die Abbildung \(f\) ist
+    damit im Widerspruch zur Voraussetzung nicht surjektiv.
+
+    Daraus folgt, dass \(g\) surjektiv sein muss.
+  \end{itemize}
+\textit{Rückrichtung.}
+
+  Seien \(f, g \in X\) bijektive Abbildungen.  Weil \(f\) und \(g\) bijektiv
+  sind, existiert die Umkehrabbildungen \(f^{-1}\) und \(g^{-1}\).
+
+  Es gilt \(f^{-1} \circ f = g^{-1} \circ g = \idf_M\).  Dann existiert
+  eine Permutation der Menge \(M\), nämlich \(\sigma = f \circ g^{-1}\)
+  mit \(f = \sigma \circ g\).
+\end{proof}
+
+\textbf{H 4.2.i}
+
+Sei \(m, n \in \mathbb{N}\) mit \(m, n \geq 1\).
+\begin{align*}
+F: \mathbb{Z}_m\rightarrow\mathbb{Z}_n, \quad [x]_m\mapsto[x]_n
+\end{align*}
+
+\textit{Behauptung.}  Eine Abbildung ist durch \(F\) definiert, wenn \(m\)
+durch \(n\) teilbar ist.
+
+\begin{proof}
+  Aus der Definition der Quotientenmenge folgt, dass $\mathbb{Z}_m= \left\{
+    [0]_m, \ldots, [m-1]_m \right\}\( und \)\mathbb{Z}_n= \left\{
+    [0]_n, \ldots, [n-1]_n \right\}$.
+
+  Sei \([x]_m \in \mathbb{Z}_m\) beliebig gewählt und \(m\) durch \(n\)
+  teilbar.  Wir zeigen, dass es existiert genau eine Restklasse,
+  nämlich \([x]_n\), als Abbildung von \([x]_m\).
+
+  Es gilt, \(n|m\).  Daraus folgt, dass \(m = kn\) mit \(k \in \mathbb{N}\).
+  Es gilt dann,
+\begin{align*}
+  \mathbb{Z}_m&= \left\{ [0]_m, \ldots, [m-1]_m \right\}\\
+              &= \left\{[0]_m, \ldots, [n-1]_m, \right\} \cup \ldots
+                \cup \left\{ [(k-1)n]_m, \ldots, [kn-1]_m \right\}\\
+  &= \bigcup_{i=0}^{(k-1)}{\bigcup_{j=in}^{(i+1)n-1}{[j]_m}}.
+\end{align*}
+
+Sei \(p,q \in \mathbb{N}\) mit \(0 \leq p \leq k-1\) und
+\(0 \leq q \leq n-1\). Es gilt \([pn+q]_m = [q]_n\), denn für alle
+\(x \in [pn+q]_m\) gilt
+\(x = pn+q+m\mathbb{Z}=pn+q+kn\mathbb{Z}=q+n\mathbb{Z}'\).
+
+D.h., für alle \([pn+q]_m \in \mathbb{Z}_m\) existiert genau eine
+\([q]_n \in \mathbb{Z}_n\) als Abbildung, wenn \(n|m\) gilt.
+\end{proof}
+
+Die Relation \(F\) definiert keine Abbildung, wenn \(n|m\) nicht gilt.
+Ein Gegenbeispiel wäre \(m=3\) und \(n=2\).  Zur Restklasse
+\([2]_3= \left\{ 2, 5, \ldots, 2+3\mathbb{Z}\right\}\) existiert keine
+Abbildung in \(\mathbb{Z}_2= \left\{ [0]_2, [1]_2 \right\}\).
+
+\vspace{4mm}
+
+\textbf{H 4.2.ii}
+
+\textit{Behauptung.}  Wenn \(n|m\) gilt, ist die Relation \(F\) eine
+surjektive Abbildung.  Wenn zusätzlich \(m=n\) gilt, ist \(F\) ist eine
+bijektive Abbildung.
+
+
+\begin{proof}
+    Die Relation \(F\) definiert zuerst eine Abbildung, siehe (H 4.2.i).
+  \begin{itemize}
+\item Falls \(m \neq n\).
+  Sei \(p,q,k \in \mathbb{N}\) mit \(m=kn\), \(0 \leq p \leq k-1\) und
+  \(0 \leq q \leq n-1\).
+
+  Es gilt \([pn+q]_m = [q]_n\), denn für alle \(x \in [pn+q]_m\) gilt
+  \(x = pn+q+m\mathbb{Z}=pn+q+kn\mathbb{Z}=q+n\mathbb{Z}'\). Es gilt
+  auch, \(k \geq 2\) wegen \(m \neq n\).
+
+  Daraus folgt, \([q]_n\) hat mindestens zwei Urbild in \(\mathbb{Z}_m\),
+  nämlich \([pn+q]_m\) für alle \(0 \leq p \leq k-1\).
+
+\item Falls \(m = n\).
+
+  Dann gilt \([x]_m=[x]_n\) für alle \([x]_m \in \mathbb{Z}_m\) und
+  \([x]_n=[x]_m\) für alle \([x]_n \in \mathbb{Z}_n\).  Die Abbildung \(F\)
+  ist dann bijektiv.
+  \end{itemize}
+\end{proof}
+
+\textbf{H 4.3.i}
+
+Diese \((G, \star)\) erfüllt den Assoziativgesetz.  Denn für alle $a, b,
+c \in \mathbb{N}\( gilt \)\min \left\{  \min \left\{ a,b \right\},
+  c\right\} = \min \left\{ a, \min \left\{ b, c \right\}\right\} =
+\min \left\{ a,b,c \right\}$.
+
+\vspace{4mm}
+
+Es existiert jedoch kein neutrales Element
+\(n \in \mathbb{N}\) mit \(a=\min \left\{ a,n \right\}\) für alle
+\(a \in \mathbb{N}\).  Denn, für alle \(n \in \mathbb{N}\) gilt auch $n+1
+\in \mathbb{N}$, weil \(\mathbb{N}\) induktiv ist.  Aus der
+Anordnungsaxiomen folgt unmittelbar \(n=\min \left\{ n, n+1 \right\}\)
+im Widerspruch zur Voraussetzung, dass \(a= \min \left\{ a,n \right\}\)
+für alle \(a \in \mathbb{N}\).
+
+\vspace{4mm}
+
+Weil es kein neutrales Element \(n\) gibt, gibt es auch kein inverses
+Element \(a'\) zum \(a\) mit \(a' \star a = n\).
+
+\vspace{4mm}
+
+\textbf{H 4.3.ii}
+
+Diese \((G, \star)\) erfüllt den Assoziativgesetz.  Denn für alle
+\(a, b, c \in \mathbb{R}\) gilt
+$\sqrt{\left(\sqrt{a^2+b^2}
+  \right)^2+c^2}=\sqrt{a^2+\left(\sqrt{b^2+c^2}
+  \right)^2}=\sqrt{a^2+b^2+c^2}$.
+
+\vspace{4mm}
+
+Es existiert jedoch kein neutrales Element \(n \in \mathbb{R}\) mit
+\(a=n \star a\) für alle \(a \in \mathbb{R}\).  Denn, für alle
+\(a \in \mathbb{R}_{<0}\) gilt \(n \star a \geq 0\) für alle
+\(n \in \mathbb{R}\).  Insbesondere gilt \(n \star a \neq a\) für alle
+\(n \in \mathbb{R}\).
+
+\vspace{4mm}
+
+Weil es kein neutrales Element \(n\) gibt, gibt es auch kein inverses
+Element \(a'\) zum \(a\) mit \(a' \star a = n\).
+
+\vspace{4mm}
+\textbf{H 4.3.iii}
+
+Diese \((G, \star)\) erfüllt nicht den Assoziativgesetz.  Denn, für alle
+\(A, B, C \in \mathcal{P}(X)\) gilt,
+\begin{align*}
+  (A \setminus B) \setminus C
+  &= (A \cap \overline{B}) \cap \overline{C}\\
+  &= A \cap \overline{B} \cap \overline{C}\\
+  &= \left\{ x|x \in A \wedge x \notin B \wedge x \notin C \right\}\\
+  \\
+  A \setminus (B \setminus C)
+  &= A \cap \overline{(B \cap \overline{C})}\\
+  &= A \cap (\overline{B} \cup C)\\
+  &= (A \cap \overline{B}) \cup (A \cap C)\\
+  &= \left\{ x | (x \in A \wedge x \notin B) \lor (x \in A \wedge x
+    \in C) \right\}.
+\end{align*}
+
+Daraus folgt, dass \((A \star B) \star C \neq A \star (B \star C)\).
+
+\vspace{4mm}
+
+Es existiert kein neutrales Element.  Denn, für alle $N, A \in
+\mathcal{P}(X)$ gilt \(N \setminus A \neq A\).
+Weil es kein neutrales Element \(N\) gibt, gibt es auch kein inverses
+Element \(A'\) zum \(A\) mit \(A' \star A = N\).
+
+\vspace{4mm}
+
+\textbf{H 4.4.i}
+
+Wir zeigen, dass \(F\) eine Abbildung definiert, indem wir zeigen, dass
+für alle $x=([(p_1,q_1)]_{R_{\mathbb{Q}}},[(p_2,q_2)]_{R_{\mathbb{Q}}})
+\in \mathbb{Z}_{\mathbb{Q}} \times \mathbb{Z}_{\mathbb{Q}}$
+existiert genau ein \(y=[(p_1q_2+p_2q_1,q_1q_2)]_{R_{\mathbb{Q}}}\) mit
+\(x \mapsto y\).
+
+\vspace{4mm}
+
+Zuerst zeigen wir, dass eine Abbildung existiert.  Es gilt
+\(p_1, p_2 \in \mathbb{Z}\) und
+\(q_1, q_2 \in \mathbb{Z} \setminus \left\{ 0 \right\}\).  Daraus folgt,
+dass \(p_1q_2+p_2q_1 \in \mathbb{Z}\) und
+\(q_1q_2 \in \mathbb{Z} \setminus \left\{ 0 \right\}\).  Damit gilt
+$(p_1q_2+p_2q_1,q_1q_2) \in \mathbb{Z} \times \mathbb{Z} \setminus
+\left\{ 0 \right\}$ und liegt in der Definitionsbereich von
+\(R_{\mathbb{Q}}\).  Deshalb existiert die Äquivalenzklasse
+\([(p_1q_2+p_2q_1,q_1q_2)]_{R_{\mathbb{Q}}}\).
+
+\vspace{4mm}
+
+Danach zeigen wir, dass die Abbildung eindeutig bestimmt ist.  Wegen
+(Skript Satz 2.16.iii:  für zwei Äquivalenzklassen \([x]_R\), \([y]_R\)
+gilt entweder \([x]_R=[y]_R\) oder \([x]_R \cap [y]_R = \emptyset\)), gilt
+für alle \(x \mapsto y\) dass $y =
+[(p_1q_2+p_2q_1,q_1q_2)]_{R_{\mathbb{Q}}}$.  Damit ist die Abbildung
+eindeutig bestimmt.
+
+\vspace{4mm}
+
+\textbf{H 4.4.ii}
+
+Wir zeigen, dass die Verknüpfung \((\mathbb{Z}_{\mathbb{Q}}, F)\) die
+folgenden Eigenschaften besitzt.
+
+\begin{itemize}
+\item Es gilt \((aFb)Fc=aF(bFc)\) für alle
+  \(a,b,c \in \mathbb{Z}_{\mathbb{Q}}\).
+  \begin{proof}
+    Seien $a = [(p_a,q_a)]_{R_{\mathbb{Q}}}, b =
+    [(p_b,q_b)]_{R_{\mathbb{Q}}}, c = [(p_c,q_c)]_{R_{\mathbb{Q}}} \in
+    \mathbb{Z}_{\mathbb{Q}}$ beliebig gewählt.
+
+    Es gilt,
+\begin{align*}
+  (aFb)Fc
+  &=
+     [(p_aq_b+p_bq_a,q_aq_b)]_{R_{\mathbb{Q}}}F[(p_c,q_c)]_{R_{\mathbb{Q}}}\\
+  &= [((p_aq_b+p_bq_a)q_c+p_cq_aq_b,q_aq_bq_c)]_{R_{\mathbb{Q}}}\\
+  &= [(p_aq_bq_c+p_bq_aq_c+p_cq_aq_b,q_aq_bq_c)]_{R_{\mathbb{Q}}}\\
+  \\
+  aF(bFc)
+  &=[(p_a,q_a)]_{R_{\mathbb{Q}}}F[(p_bq_c+p_cq_b,q_bq_c)]_{R_{\mathbb{Q}}}\\
+  &= [(p_aq_bq_c+q_a(p_bq_c+p_cq_b),q_aq_bq_c)]_{R_{\mathbb{Q}}}\\
+  &= [(p_aq_bq_c+p_bq_aq_c+p_cq_aq_b,q_aq_bq_c)]_{R_{\mathbb{Q}}}\\
+\end{align*}
+Damit gilt \((aFb)Fc=aF(bFc)\).
+  \end{proof}
+\item Es existiert ein neutrales Element
+  \(n \in \mathbb{Z}_{\mathbb{Q}}\) mit \(nFa=a\) für alle
+  \(a \in \mathbb{Z}_{\mathbb{Q}}\).
+
+  \begin{proof}
+    Seien dieses neutrale Element \(n = [(0,1)]_{R_{\mathbb{Q}}}\) und
+    \(a = [(p_a,q_a)]_{R_{\mathbb{Q}}} \in \mathbb{Z}_{\mathbb{Q}}\)
+    beliebig gewählt.  Wir zeigen, dass \(nFa=a\) gilt.
+\begin{align*}
+  nFa &= [(0\cdot q_a + 1\cdot p_a, 1\cdot q_a)]_{R_{\mathbb{Q}}}\\
+      &= [(p_a,q_a)]_{R_{\mathbb{Q}}}
+\end{align*}
+Damit gilt \(nFa = a\).
+  \end{proof}
+\item Zu jedem \(a \in \mathbb{Z}_{\mathbb{Q}}\) existiert ein inverses
+  Element \(a' \in \mathbb{Z}_{\mathbb{Q}}\) mit \(a'Fa=n\).
+  \begin{proof}
+    Seien \(a = [(p_a,q_a)]_{R_{\mathbb{Q}}}\) und $a' =
+    [(p_a,-q_a)]_{R_{\mathbb{Q}}}$.
+
+    Es gilt \(a'Fa=[(0,-q_a^2)]_{R_{\mathbb{Q}}}\).  Wir zeigen, dass
+    \([(0,-q_a^2)]_{R_{\mathbb{Q}}} = [(0,1)]_{R_{\mathbb{Q}}}\) gilt.
+
+    Für alle \((m_1,n_1) \in [(0,-q_a^2)]_{R_{\mathbb{Q}}}\) gilt
+    \(m_1 \cdot -q_a^2 = n_1 \cdot 0 = 0\).  Wegen \(q_a \neq 0\) gilt
+    \(m_1 =0\).  Für alle \((m_2,n_2) \in [(0,1)]_{R_{\mathbb{Q}}}\) gilt
+    \(m_2 \cdot 1 = n_2 \cdot 0 = 0\).  Wegen \(1 \neq 0\) gilt \(m_2 =0\).
+    Es gilt für alle \((m_1,n_1) \in [(0,1)]_{R_{\mathbb{Q}}}\) und alle
+    \((m_2,n_2) \in [(0,-q_a^2)]_{R_{\mathbb{Q}}}\) dass \(m_1, m_2=0\)
+    sein muss und
+    \(n_1, n_2 \in \mathbb{Z} \setminus \left\{ 0 \right\}\) beliebig.
+    Daher gilt
+    \([(0,-q_a^2)]_{R_{\mathbb{Q}}} = [(0,1)]_{R_{\mathbb{Q}}}\).
+  \end{proof}
+\item Es gilt \(aFb=bFa\) für alle \(a,b \in \mathbb{Z}_{\mathbb{Q}}\).
+  \begin{proof}
+    Seien
+    $a = [(p_a,q_a)]_{R_{\mathbb{Q}}}, b =
+    [(p_b,q_b)]_{R_{\mathbb{Q}}} \in \mathbb{Z}_{\mathbb{Q}}$ beliebig
+    gewählt.
+
+    Es gilt \(aFb = [(p_aq_b+p_bq_a, q_aq_b)]_{R_{\mathbb{Q}}}\) und
+    \(bFa = [(p_bq_a+p_aq_b, q_bq_a)]_{R_{\mathbb{Q}}}\) Weil Addition
+    kommutativ ist, gilt \(aFb=bFa\).  Die Gruppe
+    \((\mathbb{Z}_{\mathbb{Q}}, F)\) ist daher abelsch.
+  \end{proof}
+\end{itemize}
+
+\end{document}

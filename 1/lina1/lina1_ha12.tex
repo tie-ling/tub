@@ -1,0 +1,477 @@
+%% page style
+\documentclass[12pt]{extarticle}
+\usepackage[margin=2cm]{geometry}
+\usepackage{fancyhdr,parskip}
+\pagestyle{fancy}
+\usepackage[onehalfspacing]{setspace}
+\setlength{\parindent}{0pt}
+\lhead{\myAuthor}
+\rhead{\mySubject \ \myHausaufgaben. Übungsblatt \\ \myTutor}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+
+%% language
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+
+%% default packages
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,
+  stmaryrd, % for the lightning symbol used in proof by contraction
+  tikz,     % used to draw diagrams
+}
+
+%% metadata
+\newcommand{\myAuthor}{Yuchen Guo 480788 | Meng Zhang 484981}
+\newcommand{\myHausaufgaben}{12}
+\newcommand{\mySubject}{LinA}
+\newcommand{\myTutor}{Saskia}
+
+
+%% custom commands
+\newcommand{\mg}[1]{\mathbb{#1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\lin}{\operatorname{lin}}
+\newcommand{\aufgn}[1]{\textbf{Aufgabe #1.}}
+\newcommand{\beh}{\textit{Behauptung.}\ }
+\newcommand{\Bild}{\operatorname{Bild}}
+\newcommand{\rg}{\operatorname{rg}}
+
+\begin{document}
+\aufgn{12.1}
+
+Zur Abkürzung setzen wir
+$A =
+\begin{pmatrix}
+  2 + i & 1 + i \\
+  1 - i & 2
+\end{pmatrix}$. Bestimmen \(f(A)\), \(\ker(f)\) und \(\rg(f)\)
+sowie \(M_{\mc{B}_2,\mc{C}_2}(f)\).
+
+\begin{proof}
+  Wir nehmen drei Schritte.
+\begin{itemize}
+\item Bestimmen \(f(A)\).
+
+Wegen (Übung 12) gilt
+\begin{align*}
+f(A) = \Phi_{\mc{C}_1}^{-1}(M_{\mc{B}_1,\mc{C}_1}(f) \cdot \Phi_{\mc{B}_1}(A)).
+\end{align*}
+Zunächst bestimmen wir \(\Phi_{\mc{B}_1}(A)\).
+Angenommen, $\Phi_{\mc{B}_1}(A) =
+\begin{pmatrix}
+  a \\
+  b \\
+  c \\
+  d
+\end{pmatrix}
+$.  Dann gilt
+\begin{align*}
+a
+\begin{pmatrix}
+  1 & 0 \\
+  0 & 0
+\end{pmatrix}
+  + b
+\begin{pmatrix}
+  0 & 1 \\
+  1 & 0
+\end{pmatrix}
+  + c
+\begin{pmatrix}
+  0 & 1 \\
+  -1 & 0
+\end{pmatrix}
+  + d
+\begin{pmatrix}
+  1 & 1 \\
+  1 & 1
+\end{pmatrix}
+  =
+\begin{pmatrix}
+  2 + i & 1 + i \\
+  1 - i & 2
+\end{pmatrix}.
+\end{align*}
+Daraus folgt,
+$
+  \Phi_{\mc{B}_1}(A) =
+\begin{pmatrix}
+  i \\
+  -1 \\
+  i \\
+  2
+\end{pmatrix}.
+\( und \)M_{\mc{B}_1,\mc{C}_1}(f) \cdot \Phi_{\mc{B}_1}(A)
+=
+\begin{pmatrix}
+  2 \\
+  9 \\
+  3i + 2 \alpha
+\end{pmatrix}
+$.
+
+Dann bestimmen wir \(\Phi_{\mc{C}_1}\) und
+\(\Phi_{\mc{C}_1}^{-1}\).  Angenommen, es gilt
+$\Phi_{\mc{C}_1} \colon \mg{C}_{\le 2}[t] \to \mg{C}^3,
+(at^2 + bt + c) \mapsto
+\begin{pmatrix}
+  m \\
+  n \\
+  p
+\end{pmatrix}$.  Dann gilt
+\begin{align*}
+at^2 + bt + c = m(t^2 - t) + n(t - 1) + p = mt^2 +
+  (n-m)t + p - n.
+\end{align*}
+Daraus folgt
+\begin{align*}
+  \Phi_{\mc{C}_1} \colon
+   (at^2 + bt + c) \mapsto
+\begin{pmatrix}
+  a \\
+  a + b \\
+  a + b + c
+\end{pmatrix}\\
+\Phi_{\mc{C}_1}^{-1} \colon
+\begin{pmatrix}
+  a \\
+  a + b \\
+  a + b + c
+\end{pmatrix} \mapsto (at^2 + bt + c).
+\end{align*}  Daraus folgt,
+\begin{align*}
+f(A) = 2t^2 + 7t + 3i + 2\alpha - 9.
+\end{align*}
+\item Bestimmen \(\ker(f)\).
+
+Wegen (Übung 12) gilt
+\begin{align*}
+\ker(f) = \Phi_{\mc{B}_1}^{-1}(\ker(M_{\mc{B}_1,\mc{C}_1}(f))).
+\end{align*}
+
+Zuerst bestimmen wir \(\ker(M_{\mc{B}_1,\mc{C}_1}(f))\).
+\begin{align*}
+\ker(M_{\mc{B}_1,\mc{C}_1}(f)) &= \ker
+\begin{pmatrix}
+  1 & -2 & -1 & 0\\
+  0 & 1 & 0 & 5 \\
+  0 & 0 & 3 & \alpha
+\end{pmatrix}\\
+  &=
+\begin{pmatrix}
+  -10 - \frac{\alpha}{3} \\
+  -5 \\
+  - \frac{\alpha}{3} \\
+  1
+\end{pmatrix} \cdot \mg{C}.
+\end{align*}
+Daraus folgt, dass
+\begin{align*}
+  \ker(f) =   \Phi_{\mc{B}_1}^{-1}(\ker(M_{\mc{B}_1,\mc{C}_1}(f)))
+  =
+\begin{pmatrix}
+  -9 - \frac{\alpha}{3} & -4 -\frac{\alpha}{3} \\
+  \frac{\alpha}{3} - 4 & 1
+\end{pmatrix}.
+\end{align*}
+\item Bestimmen \(\rg(f)\).
+
+  Wegen (Übung 12) gilt
+\begin{align*}
+  \rg(f) = \dim(\Bild(f)) = \dim V - \dim \ker f = 4 - 4
+  = 0.
+\end{align*}
+\item Bestimmen \(M_{\mc{B}_2,\mc{C}_2}(f)\).
+
+  Es gilt
+\begin{align*}
+  M_{\mc{B}_2,\mc{C}_2}(f)
+  &= M(T_{C_1,C_2}) \cdot  M_{B_1,C_1}(f) \cdot
+    M(T_{B_2,B_1}).
+\end{align*}
+Weiter gilt
+\begin{align*}
+  M(T_{C_1,C_2})_{\cdot,j} = \Phi_{C_2}(p_j) \text{ mit }
+  p_j \in \mc{C}_1, \\
+  M(T_{B_2,B_1})_{\cdot,j} = \Phi_{B_1}(p_j) \text{ mit }  p_j \in \mc{B}_2.
+\end{align*}
+Wir bestimmen jetzt \(\Phi_{C_2}\) und \(\Phi_{B_1}\).
+
+Es gilt
+\begin{align*}
+\Phi_{C_2} \colon \mg{C}_{\le 2}[t] \to \mg{C}^3, at^2 +
+  bt + c \mapsto
+\begin{pmatrix}
+  a \\
+  b - a - c \\
+  a + c
+\end{pmatrix}.
+\end{align*}
+
+Es gilt
+\begin{align*}
+  \Phi_{B_1} \colon \mg{C}^{2 \times 2} \to \mg{C}^4,
+\begin{pmatrix}
+  a & b \\
+  c & d
+\end{pmatrix}
+  \mapsto
+\begin{pmatrix}
+  a - d \\
+  b + c - d \\
+  b \\
+  d
+\end{pmatrix}.
+\end{align*}
+
+Dann gilt
+\begin{align*}
+  M(T_{C_1,C_2}) =
+\begin{pmatrix}
+  1 & 0 & 0 \\
+  -2 & 2 & -1 \\
+  1 & -1 & 1
+\end{pmatrix}
+ \\
+  M(T_{B_2,B_1}) =
+\begin{pmatrix}
+  1 & 0 & 0 & -1 \\
+  0 & 1 & 1 & -1 \\
+  0 & 1 & 0 & 0 \\
+  0 & 0 & 0 & 1
+\end{pmatrix}
+\end{align*}
+Daraus folgt
+\begin{align*}
+  M_{\mc{B}_2,\mc{C}_2}(f) =
+  \begin{pmatrix}
+  1 & 0 & 0 \\
+  -2 & 2 & -1 \\
+  1 & -1 & 1
+  \end{pmatrix}
+  \cdot
+\begin{pmatrix}
+  1 & -2 & -1 & 0\\
+  0 & 1 & 0 & 5 \\
+  0 & 0 & 3 & \alpha
+\end{pmatrix}
+  \cdot
+\begin{pmatrix}
+  1 & 0 & 0 & -1 \\
+  0 & 1 & 1 & -1 \\
+  0 & 1 & 0 & 0 \\
+  0 & 0 & 0 & 1
+\end{pmatrix}
+\end{align*}
+\end{itemize}
+\end{proof}
+
+\newpage
+
+\aufgn{12.2.i}
+
+Es gilt zu jedem \(v \in V\) dass $v = \sum_{i =
+  1}^n{\lambda_i v_i}$ für \(\lambda_i \in \mg{R}\).
+Weil die Abbildung \(f\) eine lineare Abbildung ist, gilt
+dann
+\begin{align*}
+  f(v)
+  &= \sum_{i=1}^{n-1}{\lambda_i
+    (v_i + v_{i+1}) + \lambda_n(v_n+v_1)} \\
+  &= (\lambda_1 + \lambda_n) v_1 + (\lambda_2 +
+    \lambda_1) v_2 + \cdots + (\lambda_{n-1} +
+    \lambda_{n-2}) v_{n-1} +
+    (\lambda_n + \lambda_{n-1})v_n.
+\end{align*}
+
+Bestimmen \(M_{\mc{B},\mc{B}}(f)\).
+
+Es gilt
+$M_{\mc{B},\mc{B}}(f)=M(\Phi_B \circ f \circ
+\Phi_B^{-1})$.  Weil \(\Phi_B\) bijektiv ist, gilt für
+alle \(e_i\), \(1 \le i \le n\) dass $\Phi_B^{-1}(e_i) =
+v_i$.  Es gilt außerdem
+\begin{align*}
+M_{\mc{B},\mc{B}}(f) = \Phi_B \circ f(v_i) =
+\begin{cases}
+  e_i + e_{i+1}, & 1 \le i \le n - 1, \\
+  e_1 + e_n, & i = n.
+\end{cases}
+\end{align*}
+Daraus folgt,
+\begin{align*}
+M_{\mc{B},\mc{B}}(f) =
+\begin{pmatrix}
+  1 & 0 & 0 & \cdots & 0 & 1 \\
+  1 & 1 & 0 & \cdots & 0 & 0 \\
+  0 & 1 & 1 & \cdots & 0 & 0 \\
+    &   &   & \vdots &   &   \\
+  0 & 0 & 0 & 0      & 1 & 0 \\
+  0 & 0 & 0 & 0      & 1 & 1
+\end{pmatrix} \in \left\{ 0, 1 \right\}^{n \times n}.
+\end{align*}
+\aufgn{12.2.ii}
+
+Zu zeigen: \(\lin(\mc{C}) = V\) und
+\(\mc{C}= \left\{ w_1, \ldots, w_n \right\}\) mit
+\(w_j = j v_{n+1-j}\) und \(1 \le j \le n\) linear
+unabhängig.
+
+Linear Unabhängigkeit:  sei \(\lambda_i \in \mg{R}\), $1
+\le i \le n$ mit
+\begin{align*}
+\sum_{k = 1}^n{\lambda_k w_k} = \sum_{k=1}^n{\lambda_k
+  \cdot k \cdot v_{n+1-k}} = 0.
+\end{align*}
+Weil \(\mc{B} = \left( v_1, \ldots, v_n \right)\) eine
+Basis von \(V\) ist, sind die Vektoren \(v_1, \ldots, v_n\)
+linear unabhängig und \(\lambda_k \cdot k = 0\) für alle
+\(1 \le k \le n\).  Wegen \(k \ne 0\) gilt dann
+\(\lambda_k = 0\) für alle \(1 \le k \le n\) und \(\mc{C}\)
+ist daher linear unabhängig.
+
+Zu zeigen \(\lin(\mc{C}) \subseteq V\).  Sei $u \in
+\lin(\mc{C})$ beliebig gewählt.  Dann existiert
+\(\lambda_i \in \mg{R}\) mit \(1 \le i \le n\) sodass
+\begin{align*}
+u = \sum_{i = 1}^n{\lambda_i w_i} = \sum_{i =
+  1}^n{\lambda_i \cdot i \cdot v_{n+1-i}}.
+\end{align*}
+Es gilt insbesondere dass \(v_{n+1-i} \in \mc{B}\) und
+\(\lambda_i \cdot i \in \mg{R}\) für alle $1 \le i \le
+n$.  Daraus folgt, dass \(u \in \lin \mc{B}\).  Daraus
+folgt, dass \(\lin(\mc{C}) \subseteq V\).
+
+Zu zeigen \(V \subseteq \lin(\mc{C})\).  Sei \(u \in V\)
+beliebig gewählt.  Weil \(\mc{C}\) eine Basis von \(V\) ist, existiert
+\(\lambda_i \in \mg{R}\) mit \(1 \le i \le n\) sodass
+\begin{align*}
+u = \sum_{i=1}^n{\lambda_i v_i} = \sum_{i =
+  1}^n{\left( \frac{\lambda_i}{n+1-i} \cdot w_{n+1-i}  \right)}.
+\end{align*}
+Es gilt wegen \(1 \le i \le n\) dass \(n+1-i \ne 0\) und
+\(\frac{\lambda_i}{n+1-i} \in \mg{R}\).  Daraus folgt,
+dass \(u \in \lin \mc{C}\) und \(V \subseteq \lin(\mc{C})\).
+
+Bestimmen \(M_{\mc{B}, \mc{C}}(f)\),
+\(M_{\mc{C}, \mc{B}}(f)\) und \(M(T_{\mc{B}, \mc{C}})\).
+Zuerst bestimmen wir \(\Phi_{\mc{B}}\) und \(\Phi_{\mc{C}}\).
+Sei \(u \in \lin \mc{B}\) und
+\(w \in \lin \mc{C}\)
+beliebig gewählt.  Dann ist
+\(u = \sum_{i=1}^n{\lambda_i v_i}\) und $t = \sum_{i =
+  1}^n{\mu_i w_i}$ und
+\begin{align*}
+\Phi_\mc{B}(u) =
+\begin{pmatrix}
+  \lambda_1 \\
+  \vdots \\
+  \lambda_n
+\end{pmatrix},
+\Phi_\mc{C}(t) =
+\begin{pmatrix}
+  \mu_1 \\
+  \vdots \\
+  \mu_n
+\end{pmatrix}.
+\end{align*}
+Dann ist
+\begin{align*}
+  M_{\mc{B}, \mc{C}}(f)_{\cdot , j}
+  &= M(\Phi_{\mc{C}} \circ f \circ
+    \Phi_{\mc{B}}^{-1})_{\cdot, j} \\
+  &= (\Phi_{\mc{C}} \circ f \circ
+    \Phi_{\mc{B}}^{-1})(e_i) \\
+  &= (\Phi_{\mc{C}} \circ f)(v_i) \\
+  &= \Phi_{\mc{C}}(v_i + v_{i+1}) \\
+  &= \Phi_{\mc{C}} \left( \frac{1}{n+1-i}w_{n+1-i} + \frac{1}{n-i}w_{n-i} \right) \\
+  &=
+\begin{pmatrix}
+  0 \\
+  0 \\
+  \vdots \\
+  \frac{1}{n-i} \\
+  \frac{1}{n+1-i} \\
+  \vdots \\
+  0
+\end{pmatrix} \in \mg{R}^n.
+\end{align*}
+Analog gilt
+\begin{align*}
+  M_{\mc{C}, \mc{B}}(f)_{\cdot , j}
+  &= M(\Phi_{\mc{B}} \circ f \circ
+    \Phi_{\mc{C}}^{-1})_{\cdot, j} \\
+  &= (\Phi_{\mc{B}} \circ f \circ
+    \Phi_{\mc{C}}^{-1})(e_i) \\
+  &= (\Phi_{\mc{B}} \circ f)(w_i) \\
+  &= (\Phi_{\mc{B}} \circ f)(i \cdot v_{n+1 - i}) \\
+  &= \Phi_{\mc{B}}(i \cdot (v_{n+1-i} + v_{n+2-i})) \\
+  &=
+\begin{pmatrix}
+  0 \\
+  0 \\
+  \vdots \\
+  i \\
+  i \\
+  \vdots \\
+  0
+\end{pmatrix} \in \mg{R}^n.
+\end{align*}
+Analog gilt
+\begin{align*}
+  M(T_{\mc{B}, \mc{C}})_{\cdot, j}
+  &= M(\Phi_{\mc{C}} \circ
+    \Phi_{\mc{B}}^{-1})_{\cdot, j} \\
+  &= (\Phi_{\mc{C}} \circ
+    \Phi_{\mc{B}}^{-1})(e_i) \\
+  &= \Phi_{\mc{C}}(v_i) \\
+  &= \frac{1}{n+1-i}w_{n+1-i} \\
+  &=
+\begin{pmatrix}
+  0 \\
+  \vdots \\
+  \frac{1}{n+1-i} \\
+  \vdots \\
+  0
+\end{pmatrix}.
+\end{align*}
+
+\newpage
+
+\aufgn{12.3}
+
+Es sei \(A \in \mg{K}^{n \times n}\).  Zur Abkürzung
+setzen wir die Menge aller Spalten der Matrix \(A\) als
+$S := \left\{ A_{\cdot, 1}, \ldots, A_{\cdot, n}
+\right\}$. Es gilt wegen (Übung 12) dass
+\begin{align*}
+  \rg(A) &= \dim (\Bild (A)) \\
+         &= \dim (\lin S).
+\end{align*}
+\beh Es existiert ein \(1 \le p \le n\) sodass
+\(A_{\cdot, p} \in \lin (S \setminus \left\{ A_{\cdot, p} \right\})\)
+\(\iff\) Es existiert eine Matrix
+\(B \in \mg{K}^{n \times n} \setminus \left\{ 0 \right\}\)
+mit \(AB = 0\).
+
+\begin{proof}
+Hinrichtung.  Angenommen, es existiert ein $1 \le p \le
+n\( sodass \)A_{\cdot, p} \in \lin (S \setminus \left\{
+  A_{\cdot, p} \right\})\(.  Sei außerdem die Matrix \)B
+\in \mg{R}^{n \times n}$ so definiert:
+\begin{align*}
+B_{\cdot, j} =
+\begin{cases}
+0, & \text{ für alle } 1 \le j \le n \text{ und } j \ne p;
+  \\
+  D \in \mg{R}^n \text{ mit } \sum_{i=1}^n{A_{i, \cdot}
+  \cdot D} = 0, & \text{ falls } j = p.
+\end{cases}
+\end{align*}
+Es gilt
+\begin{align*}
+A_{\cdot, p} = \sum_{i=1}^{p-1}{\lambda_i A_{\cdot, i}}
+  + \sum_{i=p-1}^{n}{\lambda_i A_{\cdot, i}}
+\end{align*}
+\end{proof}
+\end{document}

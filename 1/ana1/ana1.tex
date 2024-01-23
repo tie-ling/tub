@@ -1,0 +1,488 @@
+\documentclass[draft,a5paper]{article}
+\usepackage{newtx}
+\usepackage[germanb]{babel}
+\usepackage[margin=2cm]{geometry}
+
+\linespread{1.1}
+\newcommand{\qed}{\(\blacksquare\)}
+\newcommand{\beh}{\setlength{\parindent}{0pt}\textit{Behauptung.}\ }
+\newcommand{\bew}{\setlength{\parindent}{0pt}\textit{Beweis.}\ }
+\newcommand{\mg}[1]{\mathbb{#1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\defn}[1]{\item \textbf{Definition} #1.}
+\newcommand{\satz}[1]{\item \textbf{Satz} #1.}
+
+\author{Yuchen Guo, Meng Zhang}
+\date{\today}
+\title{HA 1 -- Ana 2}
+
+\begin{document}
+\begin{enumerate}
+
+\defn{Binomial-Koeffizienten}  Seien \(n, k \in \mg{N}\).
+Dann gilt
+\begin{align*}
+\begin{pmatrix}
+n \\ k
+\end{pmatrix} :=
+  \prod_{j = 1}^k{\frac{n-j+1}{j}}.
+\end{align*}
+Für \(0 \le k \le n\) gilt
+\begin{align*}
+\begin{pmatrix}
+n \\ k
+\end{pmatrix} = \frac{n!}{k! (n-k)!} =
+\begin{pmatrix}
+n \\ n - k
+\end{pmatrix}.
+\end{align*}
+
+\satz{Binomischer Lehrsatz}  Seien \(x, y\) reelle Zahlen
+und \(n\) eine natürliche Zahl.  Dann gilt
+\begin{align*}
+(x+y)^n = \sum_{k=0}^n{
+\begin{pmatrix}
+n \\ k
+\end{pmatrix} x^{n-k}y^k
+}.
+\end{align*}
+
+\satz{Geometrische Reihe}  Für jede reelle Zahl $x \ne
+1$ und jede natürliche Zahl \(n\) gilt
+\begin{align*}
+\sum_{k=0}^n{x^k} = \frac{1-x^{n+1}}{1-x}.
+\end{align*}
+
+\satz{Dreiecks-Ungleichung}  Seien \(x, y \in \mg{R}\).
+Dann gilt
+\begin{align*}
+\left| x + y \right| \le \left| x \right| + \left| y \right|.
+\end{align*}
+
+\satz{Bernoullische Ungleichung} Sei \(x \ge -1\) und
+\(n \in \mg{N}\).  Dann gilt
+\begin{align*}
+(1+x)^n \ge 1 + nx.
+\end{align*}
+
+\defn{Konvergenz von Folgen} Sei \((a_n)_{n \in \mg{N}}\)
+eine Folge reeller Zahlen.  Die Folge heißt konvergent
+gegen \(a \in \mg{R}\), falls zu jedem \(\varepsilon > 0\)
+existiert ein \(N_{\varepsilon} \in \mg{N}\), sodass
+\(\left| a_n - a \right| < \varepsilon\) für alle
+\(n \ge N_{\varepsilon}\).  In diesem Fall nennt man \(a\)
+den Grenzwert der Folge und schreibt
+\(\lim_{n \to \infty}{a_n} = a\).
+
+\defn{\(\varepsilon\)-Umgebung} von \(a \in \mg{R}\) ist das
+Intervall
+\(\left] a- \varepsilon, a+ \varepsilon\right[\).
+
+\defn{Beschränktheit von Folgen}  Eine Folge $(a_n)_{n
+\in \mg{N}}$ reeller Zahlen heißt beschränkt, wenn es
+eine reelle Konstante \(M \ge 0\) gibt, sodass für alle $n
+\in \mg{N}$ gilt
+\begin{align*}
+\left| a_n \right| \le M.
+\end{align*}  Die Folge \((a_n)\) heißt nach oben (bzw. unten)
+beschränkt, wenn es eine Konstante \(K \in \mg{R}\) gibt,
+sodass \(a_n \le K\) (bzw. \(a_n \ge K\)) für alle \(n\) gilt.
+
+\satz{Summe und Produkt konvergenter Folgen}  Die
+Summenfolge und die Produktfolge zwei konvergenter
+Folgen sind konvergent und es gilt
+\begin{align*}
+\lim_{n \to \infty}{(a_n + b_n)} &= \lim_{n \to
+  \infty}{a_n} + \lim_{n \to \infty}{b_n}, \\
+  \lim_{n \to \infty}{(a_n b_n)} &= \lim_{n \to
+  \infty}{a_n} \cdot \lim_{n \to \infty}{b_n}.
+\end{align*}
+
+\satz{Unendliche geometrische Reihe}  Die Reihe
+\(\sum_{n=0}^{\infty}{x^n}\) konvergiert für alle $\left|
+  x \right| < 1$ mit dem Grenzwert
+\begin{align*}
+\sum_{n = 0}^{\infty}{x^n} = \frac{1}{1-x}.
+\end{align*}
+
+\defn{Bestimmte Divergenz einer Folgen}  Eine Folge
+\((a_n)_{n \in \mg{N}}\) reeller Zahlen heißt bestimmt
+divergent gegen \(+ \infty\), falls zu jedem $K \in
+\mg{R}\( ein \(N \in \mg{N}\) existiert, sodass für alle \)n
+\ge N$ gilt
+\begin{align*}
+a_n > K.
+\end{align*}
+
+\defn{Cauchy-Folge}  Eine Folge \((a_n)_{n \in \mg{N}}\)
+reeller Zahlen heißt Cauchy-Folge, falls zu jedem
+\(\varepsilon > 0\) ein \(N_{\varepsilon} \in \mg{N}\)
+existiert, sodass für alle \(n, m \ge N\) gilt
+\begin{align*}
+\left| a_n - a_m \right| < \varepsilon.
+\end{align*}
+
+\satz{Jede konvergente Folge reeller Zahlen ist eine Cauchy-Folge}
+
+\defn{Teilfolge} Sei \((a_n)_{n \in \mg{N}}\) eine Folge
+reeller Zahlen und sei \((n_k)_{k \in \mg{N}}\) eine
+streng monoton wachsende Folge mit \(n_k \in \mg{N}\) für
+alle \(k \in \mg{N}\).  Dann heißt die Folge
+\((a_{n_k})_{k \in \mg{N}}\) eine Teilfolge von \((a_n)\).
+
+\satz{Bolzano-Weierstraß}  Jede beschränkte Folge
+\((a_n)_{n\in \mg{N}}\) reeller Zahlen besitzt eine
+konvergente Teilfolge.
+
+\defn{Häufungspunkt} Eine Zahl \(a\) heißt Häufungspunkt
+einer Folge \((a_n)_{n \in \mg{N}}\), wenn es eine
+Teilfolge von \((a_n)\) gibt, die gegen \(a\) konvergiert.
+
+\satz{Jede beschränkte monotone Folge \((a_n)\) reeller
+  Zahlen konvergiert}
+
+\satz{Cauchysches Konvergenz-Kriterium für Reihen}  Sei
+\((a_n)_{n \in \mg{N}}\) eine Folge reeller Zahlen.  Die
+Reihe \(\sum_{n=0}^{\infty}{a_n}\) konvergiert genau dann,
+falls zu jedem \(\varepsilon > 0\) ein \(N \in \mg{N}\)
+existiert, sodass für alle \(n \ge m \ge N\) dass
+\begin{align*}
+\left| \sum_{k=m}^n{a_k} \right| < \varepsilon.
+\end{align*}
+
+\satz{Notwendiges Kriterium für die Konvergenz einer
+  Reihe \(\sum_{n=0}^{\infty}{a_n}\)} ist $\lim_{n\to
+  \infty}{a_n} = 0$.
+
+\satz{Eine Reihe \(\sum_{n = 0}^{\infty}{a_n}\) mit
+  \(a_n \ge 0\) für alle \(n \in \mg{N}\) konvergiert genau
+  dann, wenn die Reihe (d.h. die Folge der
+  Partialsummen) beschränkt ist}
+
+\satz{Die harmonische Reihe
+  \(\sum_{n=1}^{\infty}{\frac{1}{n}}\) divergiert}
+
+\satz{Die Reihen \(\sum_{n=1}^{\infty}{\frac{1}{n^k}}\)
+  konvergiert für \(k > 1\)}
+
+\satz{Leibniz'sches Konvergenz-Kriterium für
+  alternierende Reihen}  Sei $(a_n)_{n
+\in \mg{N}}$ eine monoton fallende Folge nicht-negativer
+Zahlen mit \(\lim_{n \to \infty}{a_n} = 0\).  Dann
+konvergiert die alternierende Reihe
+\begin{align*}
+\sum_{n=0}^{\infty}{(-1)^n {a_n}}.
+\end{align*}
+
+\defn{Absolute Konvergenz einer Reihe}  Eine Reihe
+\(\sum_{n=0}^{\infty}{a_n}\) heißt absolut konvergent,
+falls die Reihe der Absolutbeträge
+\(\sum_{n=0}^{\infty}{\left| a_n \right|}\) konvergiert.
+
+\satz{Majoranten-Kriterium} Sei
+\(\sum_{n=0}^{\infty}{c_n}\) eine konvergente Reihe mit
+lauter nicht-negativen Gliedern und $(a_n)_{n\in
+  \mg{N}}$ eine Folge sodass für alle \(n \in \mg{N}\)
+gilt
+\(\left| a_n \right| \le c_n\).
+Dann konvergiert die Reihe \(\sum_{n=0}^{\infty}{a_n}\)
+absolut.
+
+\defn{Limes superior, Limes inferior} Sei
+\((a_n)_{n \in \mg{N}}\) eine beschränkte Folge reeller
+Zahlen.  Dann definiert man
+\begin{align*}
+  \limsup_{n \to \infty}{a_n}
+  &:= \lim_{n \to \infty}
+    \left( \sup \left\{ a_k \colon k \ge n \right\}
+    \right), \\
+  \liminf_{n \to \infty}{a_n}
+  &:= \lim_{n \to \infty}
+    \left( \inf \left\{ a_k \colon k \ge n \right\} \right).
+\end{align*}
+
+
+\satz{Wurzel-Kriterium}  Sei \((a_n)_{n \in \mg{N}}\) eine
+Folge mit $a := \limsup_{n \to \infty}{\sqrt[n]{\left|
+      a_n \right|}} \in \mg{R} \cup \left\{ \infty
+\right\}$.  Falls \(a < 1\), so konvergiert die Reihe
+\(\sum_{k=0}^{\infty}{a_k}\) absolut.  Falls \(a > 1\) oder
+\(a = \infty\), so divergiert die Reihe.
+
+\satz{Quotienten-Kriterium}  Sei \((a_n)\) eine Folge mit
+\(a_n \ne 0\) für alle \(n \in \mg{N}\).  Falls $\limsup_{n
+  \to \infty}{\left| \frac{a_{n+1}}{a_n} \right|} < 1$,
+so konvergiert die Reihe \(\sum_{k=0}^{\infty}{a_k}\)
+absolut.  Falls $\liminf_{n \to \infty}{\left|
+    \frac{a_{n+1}}{a_n} \right|} > 1$, so divergiert die
+Reihe \(\sum_{k=0}^{\infty}{a_k}\).
+
+\satz{Umordnungssatz} Jede Umordnung einer absolut
+konvergenter Reihe konvergiert absolut gegen denselben
+Grenzwert.
+
+\satz{Exponentialreihe}  Für jedes \(x \in \mg{R}\)
+konvergiert die Exponentialreihe
+\begin{align*}
+\exp(x) = \sum_{n=0}^{\infty}{\frac{x^n}{n!}}
+\end{align*}
+absolut wegen Quotientenkriterium.
+
+\defn{Berührpunkt}  Sei \(A \subseteq \mg{R}\) und $a
+\in \mg{R}$.  Der Punkt \(a\) heißt Berührpunkt von \(A\),
+falls in jeder \(\varepsilon\)-Umgebung
+$U_{\varepsilon}(a) := \left] a- \varepsilon, a+
+  \varepsilon\right[$ mindestens ein Punkt von \(A\) liegt.
+
+\defn{Häufungspunkt}  Sei \(A \subseteq \mg{R}\) und $a
+\in \mg{R}$.  Der Punkt \(a\) heißt Häufungspunkt von \(A\),
+falls in jeder \(\varepsilon\)-Umgebung
+$U_{\varepsilon}(a) := \left] a- \varepsilon, a+
+  \varepsilon\right[$ unendlich viele Punkte von \(A\) liegen.
+
+\defn{Stetigkeit von Funktionen}  Sei $f \colon D \to
+\mg{R}$ eine Funktion und \(a \in D\).  Die Funktion \(f\)
+heißt stetig im Punkt \(a\), falls für jede Folge
+\((x_n)_{n \in \mg{N}}\), \(x_n \in D\) mit $\lim_{n \to
+  \infty}{x_n} = a$ gilt
+\begin{align*}
+\lim_{n \to \infty}{f(x_n)} = f(a).
+\end{align*}
+
+
+\satz{Zwischenwertsatz}  Sei $f \colon \left[a,
+  b\right] \to \mg{R}\( eine stetige Funktion mit \)f(a) <
+0$ und \(f(b) > 0\) (bzw. \(f(a) > 0\) und \(f(b) < 0\)).
+Dann existiert ein \(p \in \left[a,b\right]\) mit \(f(p) = 0\).
+
+\defn{Kompaktes Intervall}  Ein kompaktes Intervall ist
+ein abgeschlossenens und beschränktes Intervall
+\(\left[a,b\right] \subset \mg{R}\).
+
+\satz{von Minimum und Maximum}  Jede in einem kompakten
+Intervall stetige Funktion $f \colon \left[a,b\right]
+\to \mg{R}$ ist beschränkt und nimmt ihr Maximum und
+Minimum an.
+
+\satz{\(\varepsilon\)-\(\delta\) Definition der Stetigkeit}
+Sei \(D \subset \mg{R}\) und \(f \colon D \to \mg{R}\) eine
+Funktion.  \(f\) ist genau dann im Punkt \(p \in D\) stetig,
+falls zu jedem \(\varepsilon > 0\) existiert ein $\delta
+> 0\(, sodass für alle \(x \in D\) mit \)\left| x -p \right|
+< \delta$ gilt \(\left| f(x) - f(p) \right| < \varepsilon\).
+
+\satz{Gleichmäßige Stetigkeit}  Eine Funktion $f \colon
+D \to \mg{R}$ heißt in \(D\) gleichmäßig stetig, falls zu
+jedem \(\varepsilon > 0\) existiert ein \(\delta > 0\)
+sodass für alle \(x, x' \in D\) mit $\left| x - x' \right|
+< \delta\( gilt \)\left| f(x) - f(x') \right| <
+\varepsilon$.
+
+\satz{von Heine} Jede auf einem kompakten Intervall stetige
+  Funktion \(f \colon \left[a,b\right] \to \mg{R}\) ist
+  dort gleichmäßig stetig.
+
+\defn{Lipschitz-Stetigkeit}  Eine auf einer Teilmenge $D
+\subseteq \mg{R}\( definierte Funktion \)f \colon D \to
+\mg{R}$ heißt Lipschitz-stetig mit Lipschitz-Konstante
+\(L \in \mg{R}_{>0}\) falls für alle \(x, x' \in D\) gilt
+\begin{align*}
+\left| f(x) - f(x') \right| \le L \left| x - x' \right|.
+\end{align*}
+
+\defn{Exponentialfunktion zur Basis \(a\)}  Für \(a > 0\)
+sei die Funktion \(\exp_a \colon \mg{R} \to \mg{R}\)
+definiert durch
+\begin{align*}
+\exp_a(x) := \exp(x \ln a) = a^x = e^{x \ln a}.
+\end{align*}
+
+\defn{Cosinus, Sinus}  Für \(x \in \mg{R}\) ist
+\begin{align*}
+e^{ix} = \cos x + i \sin x.
+\end{align*}
+
+\satz{Additionstheoreme}  Für alle \(x, y \in \mg{R}\)
+gilt
+\begin{align*}
+  \cos(x+y)
+  &= \cos x \cos y - \sin x \sin y,\\
+  \sin ( x + y )
+  &= \sin x \cos y + \cos x \sin y,\\
+  \cos(2x)
+  &= 2\cos^2 x - 1,\\
+  \sin(2x)
+  &= 2\sin x \cos x.
+\end{align*}
+
+\defn{Diffbarkeit}  Sei \(D \subset \mg{R}\) und $f \colon
+D \to \mg{R}$ eine Funktion.  \(f\) heißt in einem Punkt
+\(x_0 \in D\) diffbar, falls \(x_0\) Häufungspunkt von \(D\) ist
+und der Grenzwert
+\begin{align*}
+f'(x_0) := \lim_{\substack{x \to x_0\\x \in D \setminus
+  \left\{ x_0 \right\}}}{\frac{f(x) - f(x_0)}{x - x_0}}
+\end{align*}
+existiert.
+
+\defn{Innere Punkt}  Sei \(M \subseteq \mg{R}\) eine
+Teilmenge der reeller Zahlen.  Ein Punkt \(x_0 \in M\)
+heißt innerer Punkt von \(M\), falls es ein $\varepsilon >
+0$ gibt, sodass \(U_{\varepsilon}(x_0) \subseteq M\) gilt.
+
+\defn{Offene Menge} \(M\) heißt offen, falls jeder Punkt
+von \(M\) ein innerer Punkt von \(M\) ist.
+
+\defn{Abgeschlossene Menge} \(M\) heißt abgeschlossen,
+falls \(\mg{R} \setminus M\) offen ist.
+
+\defn{Lokales Maximum, Minimum}  Sei $f \colon \left] a,
+  b \right[ \to \mg{R}$ eine Funktion.  Man sagt, \(f\)
+habe in \(x \in \left]a, b \right[\) ein lokales Maximum
+(bzw. Minimum), wenn ein \(\varepsilon > 0\) existiert,
+sodass für alle \(\xi\) mit $\left| x - \xi \right| <
+\varepsilon\( gilt \(f(x) \ge f(\xi)\) (bzw. \)f(x) \le
+f(\xi)$).
+
+\satz{von Rolle} Sei \(a < b\) und
+\(f \colon \left[a, b\right] \to \mg{R}\) Funktion auf
+\(\left[a, b\right]\) stetig und \(\left]a, b\right[\)
+diffbar mit \(f(a) = f(b)\).  Dann existiert ein $\xi \in
+\left]a, b\right[$ mit \(f'(\xi) = 0\).
+
+\satz{Mittelwertsatz der Differentialrechnung}  Sei
+\(a<b\) und \(f \colon \left[a, b\right] \to \mg{R}\) Funktion auf
+\(\left[a, b\right]\) stetig und \(\left]a, b\right[\)
+diffbar.  Dann existiert ein $\xi \in \left]a,
+  b\right[$, sodass
+\begin{align*}
+\frac{f(b) - f(a)}{b-a} = f'(\xi).
+\end{align*}
+
+\defn{Konvexität}  Sei \(D \subset \mg{R}\) ein
+Intervall.  Eine Funktion \(f \colon D \to \mg{R}\) heißt
+konvex, wenn für alle \(x_1, x_2 \in D\) und alle
+\(0<\lambda<1\) gilt
+\begin{align*}
+f(\lambda x_1 + (1-\lambda) x_2) \le \lambda f(x_1) +
+  (1-\lambda) f(x_2).
+\end{align*}
+
+\satz{Sei \(D \subset \mg{R}\) ein offenes Intervall und
+  \(f \colon D \to \mg{R}\) eine zweimal diffbare
+  Funktion.  \(f\) ist genau dann konvex, wenn $f''(x) \ge
+  0$ für alle \(x \in D\)}
+
+\satz{Regel von de l'Hospital} Sei \(I \subseteq \mg{R}\)
+ein Intervall, \(x_0 \in I\) und seien
+\(f,g \colon I \setminus \left\{ x_0 \right\} \to \mg{R}\)
+diffbar und \(g'(x) \ne 0\) für alle
+\(x \in I \setminus \left\{ x_0 \right\}\).  Falls es gilt
+\(\lim_{x \to x_0}{f(x)} = 0 = \lim_{x \to x_0}{g(x)}\)
+und der Grenzwert
+\(\lim_{x \to x_0}{\frac{f'(x)}{g'(x)}} =: a\) existiert,
+so ist der Grenzwert
+\(\lim_{x \to x_0}{\frac{f(x)}{g(x)}}\) gleich \(a\).
+
+\defn{Taylorpolynom}  Sei \(I \subseteq \mg{R}\) ein
+Intervall, \(x_0 \in I\), sowie \(f \colon I \to \mg{R}\)
+eine \(n\)-mal diffbare Funktion.  Die Polynomfunktion
+\(T_n \colon \mg{R} \to \mg{R}\) mit
+\begin{align*}
+T_n(x) = \sum_{k=0}^n{\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k}
+\end{align*}
+für alle \(x \in \mg{R}\) heißt \(n\)-tes Taylorpolynom von
+\(f\) im Entwicklungspunkt \(x_0\).  $R_n \colon I \to
+\mg{R},\ x \mapsto f(x) - T_n(x)$ heißt das zu \(T_n\)
+gehörige Restglied.
+
+\satz{Taylor-Formel}  Sei \(I \subseteq \mg{R}\) ein
+Intervall, \(x_0 \in I\), sowie \(f \colon I \to \mg{R}\)
+eine Funktion \(n\)-mal diffbar in \(x_0\), wobei $n \ge
+1$.  Für alle \(x \in I\) gilt
+\begin{align*}
+f(x) = \sum_{k=0}^n{\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k} +
+  R_n(x), \quad \text{wobei} \quad \lim_{x\to
+  x_0}{\frac{R_n(x)}{(x-x_0)^n}} = 0.
+\end{align*}
+
+\satz{Hinreichendes Kriterium für lokale Extremstellen}
+Sei \(D \subseteq \mg{R}\) und \(x_0 \in D\) ein innerer
+Punkt von \(D\) und sei \(f \colon D \to \mg{R}\) \(n\)-mal
+diffbar in \(x_0\) und es gilt für alle $1 \le m \le n -
+1$ dass \(f^{(m)}(x_0) = 0\) und \(f^{(n)}(x_0) \ne 0\).
+Falls \(n\) ungerade, dann hat \(f\) in \(x_0\) kein lokales
+Extremum.  Falls \(n\) gerade und \(f^{(n)}(x_0) >0\), so
+hat \(f\) in \(x_0\) ein striktes lokales Minimum.  Falls \(n\)
+gerade und \(f^{(n)}(x_0) <0\), so hat \(f\) in \(x_0\) ein
+striktes lokales Maximum.
+
+\satz{Integrierbarkeit}  Sei $f \colon \left[ a,b
+\right] \to \mg{R}$ stetig oder monoton, dann ist \(f\)
+integrierbar.
+
+\satz{Mittelwertsatz der Integralrechnung}  Gegeben sei
+die stetige Funktion $f \colon \left[ a, b \right] \to
+\mg{R}\(.  Dann existiert ein \)\xi \in \left[ a, b
+\right]$ sodass \(\int_a^b{f(x)dx}=f(\xi) (b-a)\).
+
+
+\satz{Hauptsatz der Differential- und Integralrechnung}
+Seien \(I \subseteq \mg{R}\) ein Intervall, $f \colon I
+\to \mg{R}$ stetig und \(a \in I\).  Dann ist die Funktion
+\begin{align*}
+F \colon I \to \mg{R},\ x \mapsto F(x) = \int_a^x{f(t)dt}
+\end{align*}
+eine Stammfunktion von \(f\).  Ist \(G \colon I \to \mg{R}\)
+eine weitere Stammfunktion von \(f\), so gibt es ein $c
+\in \mg{R}\(, sodass für alle \(x \in I\) gilt \)G(x) = F(x)
++ c$.
+
+\satz{Partielle Integration}  Seien $f,g \colon \left[
+  a, b \right] \to \mg{R}$ stetig diffbar.  Dann gilt
+\begin{align*}
+\int_a^b{f(x)g'(x)dx}=(fg)(x) \Big|_a^b - \int_a^b{f'(x)g(x)dx}.
+\end{align*}
+
+\satz{Substitutionsregel}  Sei \(I \subseteq \mg{R}\) ein
+Intervall, sei \(f \colon I \to \mg{R}\) stetig und sei $g
+\colon \left[ a, b \right] \to I$ stetig diffbar.  Dann
+gilt
+\begin{align*}
+\int_a^b{f(g(x)) g'(x)}dx = \int_{g(a)}^{g(b)}{f(x)}dx.
+\end{align*}
+
+\defn{Punktweise Konvergenz von Funktionenfolgen}  Sei
+\(K\) eine Menge und seien \(f_n \colon K \to \mg{C}\), $ n
+\in \mg{N}$, Funktionen.  Die Folge \((f_n)\) konvergiert
+punktweise gegen eine Funktion \(f \colon K \to \mg{C}\),
+falls für jedes \(x \in K\) die Folge \((f_n(x))\) gegen
+\(f(x)\) konvergiert, d.h., wenn gilt: zu jedem \(x \in K\)
+und \(\varepsilon > 0\) existiert ein $N = N(x,
+\varepsilon)\(, sodass \)\left| f_n(x) - f(x) \right| <
+\varepsilon$ für alle \(n \ge N\).
+
+\defn{Gleichmäßige Konvergenz von Funktionenfolgen}  Die
+Folge \((f_n)\) konvergiert gleichmäßig gegen eine
+Funktion \(f \colon K \to \mg{C}\), falls gilt: zu jedem
+\(\varepsilon > 0\) existiert ein \(N = N(\varepsilon)\),
+sodass \(\left| f_n(x) - f(x) \right| < \varepsilon\) für
+alle \(x \in K\) und alle \(n \ge N\).
+
+\defn{Supremumsnorm} Sei \(K\) eine Menge und \(f \colon K \to \mg{C}\)
+eine Funktion.  Dann setzt man
+\begin{align*}
+\| f \|_K := \sup \left\{ |f(x)|\colon x \in K\right\}.
+\end{align*}
+
+\defn{Gleichmäßigen Konvergenz, Umformung mit der Supremumsnorm}  Eine
+Folge \(f_n \colon K \to \mg{C}\), \(n \in \mg{N}\), von Funktionen
+konvergiert genau dannn gleichmäßig auf \(K\) gegen $f \colon K \to
+\mg{C}$, wenn
+\begin{align*}
+\lim_{n \to \infty}{\|f_n - f\|_K} = 0.
+\end{align*}
+Noch zu ergänzen: Uneigentliche Integrale, Konvergenz
+von Funktionenfolgen. test
+\end{enumerate}
+\end{document}

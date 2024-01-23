@@ -1,0 +1,149 @@
+% !TeX program = lualatex
+%%% TeX-engine: luatex
+
+\documentclass[draft,a5paper]{article}
+\usepackage[margin=2cm]{geometry}
+\linespread{1.2}
+
+% set language to german
+\usepackage[ngerman]{babel}
+
+% load math packages and unicode support
+% must in this order
+\usepackage{amsmath,mathtools,fontspec}
+\usepackage{amsthm}
+\usepackage{unicode-math,luatex85}
+
+% used for integral with respect to a variable x
+% like \int \dd{x}
+%\usepackage{physics}
+
+% set fonts
+\setmainfont{STIX Two Text}
+
+% theorem environment used in this document
+\theoremstyle{remark}
+\newtheorem*{beh}{Behauptung}
+\newtheorem*{lem}{Lemma}
+
+%    \interval is used to provide better spacing after a [ that
+%    is used as a closing delimiter.
+\newcommand{\interval}[1]{\mathinner{#1}}
+
+%%
+%% Julia definition (c) 2014 Jubobs
+%%
+\usepackage{listings}
+
+\lstdefinelanguage{Julia}%
+{morekeywords={function,for,in,end,while,true,false,
+    while,else,elseif,return,mutable,struct,Vector,Union},
+  sensitive=true,%
+  morecomment=[l]\#,%
+  morestring=[s]{"}{"},%
+  morestring=[m]{'}{'},%
+}[keywords,comments,strings]%
+
+\lstset{%
+  basicstyle       = \footnotesize,
+  numbers          = left,
+  language         = Julia,
+  showstringspaces = false,
+  frame            = lines,
+}
+
+% pseudocode
+\usepackage[commentColor=black]{algpseudocodex}
+
+%    Enclose the argument in vert-bar delimiters:
+\newcommand{\envert}[1]{\left\lvert#1\right\rvert}
+\let\abs=\envert
+
+\author{Yiwen Yang 466096, Yuchen Guo 480788, Qing Wang 458040}
+\date{\today}
+\title{HA 3, CoMa 2 -- Gruppe 9, Laurin Geyer}
+
+\begin{document}
+\maketitle
+
+\newpage
+
+\subsection*{1. Aufgabe (Coma-Heaps)}
+
+
+\subsection*{4. Aufgabe (Algorithmus von Ford)}
+
+Es sei \(G = (V, E, \Psi)\) ein einfacher gerichteter Graph mit
+Kantenlängen \(c_{e}\), \(e \in E\) und der Algorithmus von Ford wie
+folgt definiert.
+
+\begin{algorithmic}
+  \For{\(v \in V\)}
+    \State \(y_{v} \gets \infty\)
+    \State \(p(V) \gets \text{None}\)
+  \EndFor
+
+  \State \(y_{a} \gets 0\)
+
+  \While{\(\exists (v, w) \in E\) \textbf{with}
+      \(y_{w} > y_{v} + c_{(v, w)}\)}
+    \State \(y_{w} \gets y_{v} + c_{(v, w)}\)
+    \State \(p(w) \gets v\)
+  \EndWhile
+\end{algorithmic}
+
+\begin{beh}
+  Es sei \(c\) ganzzahlig und es gibt keine negativen Kreise.  Der
+  Algorithmus terminiert nach höchstens \(C \cdot \envert{V}^{2}\)
+  Iterationen, wobei \(C \coloneq 2 \cdot \max_{e \in E}{\envert{c_{e}}} + 1\) sei.
+\end{beh}
+
+\begin{proof}
+  Zuerst bemerken wir, dass die erste \textbf{for}-Schleife genau
+  \(\envert{V}\) Iterationen benötigt.  In der \textbf{while}-Schleife
+  müssen wir die Existenz von Paare \((v, w)\) mit \(v, w \in V\)
+  prüfen und zwar in dieser Reihenfolge:
+  \begin{algorithmic}
+    \If{\((a, a) \in E\) \textbf{with} \(y_{a} > y_{a} + c_{(a, a)}\)}
+      \State False
+    \EndIf
+    \If{\((a, b) \in E\) \textbf{with} \(y_{b} > y_{a} + c_{(a, b)}\)}
+      \State False
+    \EndIf
+    \If{\((a, c) \in E\) \textbf{with} \(y_{c} > y_{a} + c_{(a, c)}\)}
+      \State False
+    \EndIf
+    \If{\((a, d) \in E\) \textbf{with} \(y_{d} > y_{a} + c_{(a, d)}\)}
+      \State True
+      \State \(y_{d} \gets y_{a} + c_{(a, d)}\)
+      \State \(p(d) \gets a\)
+    \EndIf
+    \LComment{Die \textbf{while}-Schleife startet erneut vom \((a, a)\) an.}
+    \If{\((a, a) \in E\) \textbf{with} \(y_{a} > y_{a} + c_{(a, a)}\)}
+      \State False
+    \EndIf
+    \If{\((a, b) \in E\) \textbf{with} \(y_{b} > y_{a} + c_{(a, b)}\)}
+      \State False
+    \EndIf
+    \If{\((a, c) \in E\) \textbf{with} \(y_{c} > y_{a} + c_{(a, c)}\)}
+      \State False
+    \EndIf
+    \State \(\vdots\)
+    \LComment{In der letzten Aufruf von \textbf{while}-Schleife müssen alle Paare
+      \((v, w)\) geprüft werden mit dem Resultat "`False"'. Dieser
+      Schritt benötigt \(\envert{V}^{2}\)-mal Vergleich.}
+    \If{\((a, a) \in E\) \textbf{with} \(y_{a} > y_{a} + c_{(a, a)}\)}
+      \State False
+    \EndIf
+    \State \(\vdots\)
+    \If{\((z, z) \in E\) \textbf{with} \(y_{z} > y_{z} + c_{(z, z)}\)}
+      \State False
+    \EndIf
+    \LComment{Die \textbf{while}-Schleife terminiert.}
+  \end{algorithmic}
+  Wir können nicht feststellen, warum alle bis auf letzte Aufruf von
+  \textbf{while}-Schleife insgesamt höchstens
+  \(2 \cdot \max_{e \in E}{\envert{c_{e}}} \cdot \envert{V}^{2}\) Vergleich
+  benötigt.
+\end{proof}
+\end{document}

@@ -1,0 +1,215 @@
+\documentclass[draft,a5paper]{article}
+\usepackage[ngerman]{babel}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath,mathtools,fontspec,amssymb,mathtools}
+
+% for theorems and lemma
+\usepackage{amsthm}
+\newtheorem*{beh}{Behauptung}
+\newtheorem*{lem}{Lemma}
+
+% times new roman font
+\usepackage{newtx}
+
+\linespread{1.2}
+
+\author{Yuchen Guo 480788, Meng Zhang 484981}
+
+\date{\today}
+
+\title{HA 3, LinA 2 -- Francesco Patrick Nowell}
+
+% fuctions exclusive to this HA
+\DeclareMathOperator{\sign}{sign}
+
+\begin{document}
+\maketitle
+
+\newpage
+
+\subsection*{Aufgabe 3.1}
+
+Es seien \(n \in \mathbb{N}\), \(n \ge 2\) und
+\(a_{1}, \ldots, a_{n} \in \mathbb{R}\).  Weiter sei
+\(A = I_{n} + B\), indem \(B \in \mathbb{R}^{m \times n}\) mit
+\(B_{i, j} = a_{j}\) gilt.
+
+\begin{beh}
+  Falls \(m > n\), dann ist \(A\) linear abhängig und es gilt \(\det (A)
+= 0\).
+\end{beh}
+
+\begin{proof}
+  Die Funktion \(\det\) ist alternierend.
+\end{proof}
+
+\begin{beh}
+Falls \(m \le n\) und \(a_{i} = 0\) für alle \(1 \le i \le n\), dann gilt
+\(\det(A) = 1\).
+\end{beh}
+
+\begin{proof}
+  In diesem Fall ist \(A = I_{n}\).
+\end{proof}
+
+\begin{beh}
+Falls \(m \le n\) und \(a_{j} \ne 0\) und \(a_{i} = 0\) für alle \(1 \le i \le
+n, i \ne j\), dann gilt
+\(\det(A) = 2\).
+\end{beh}
+
+\begin{proof}
+Wir bezeichnen die Zeilen
+von \(A\) als \(\alpha_{i}\), die Zeilen von \(I_{n}\) als
+\(\beta_{i}\) und die Zeilen von \(B\) als \(\gamma_{i}\).  Dann gilt,
+\begin{align*}
+  \det(A)
+  &= \det(I_{n} + B) \\
+  \det(\alpha_{1}, \ldots, \alpha_{n})
+  &= \det(\beta_{1} + \gamma_{1}, \beta_{2} + \gamma_{2}, \ldots, \beta_{m}
+    + \gamma_{m}, \ldots \beta_{n}) \\
+  &= \det(\beta_{1}, \ldots) + \det(\gamma_{1}, \ldots)
+\end{align*}
+
+Es gibt nämlich nur zwei Kombinationen, die linear unabhägig sind und
+äquivalent zur \(I_{n}\) sind.  Die sind
+\begin{align*}
+  \det(\beta_{1}, \ldots, \beta_{j}, \ldots, \beta_{m}, \beta_{m+1}, \ldots, \beta_{n}) &= 1, \\
+  \det(\beta_{1}, \ldots, \gamma_{j}, \ldots, \beta_{m}, \beta_{m+1}, \ldots, \beta_{n}) &= 1.
+\end{align*}
+
+Daraus folgt \(\det(A) = 2\).
+\end{proof}
+
+\begin{beh}
+Falls \(m \le n\) und \(a_{i} \ne 0\) für alle \(1 \le i \le n\), dann gilt
+\(\det(A) = m + 1\).
+\end{beh}
+
+\begin{proof}
+  Analog zum oben, bezeichnen wir die Zeilen von \(A\) als
+  \(\alpha_{i}\), die Zeilen von \(I_{n}\) als \(\beta_{i}\) und die Zeilen von
+  \(B\) als \(\gamma_{i}\).  Dann gilt,
+\begin{align*}
+  \det(A)
+  &= \det(I_{n} + B) \\
+  \det(\alpha_{1}, \ldots, \alpha_{n})
+  &= \det(\beta_{1} + \gamma_{1}, \beta_{2} + \gamma_{2}, \ldots, \beta_{m}
+    + \gamma_{m}, \ldots \beta_{n}) \\
+  &= \det(\beta_{1}, \ldots) + \det(\gamma_{1}, \ldots)
+\end{align*}
+
+Wir betrachten die Determinant
+\(\det(\beta_{1}, \ldots) + \det(\gamma_{1}, \ldots)\).  Um die Matrix linear unabhängig
+zu sein, dürfen wir höchstens ein Mal ein \(\gamma_{i}\) Vektor in den
+\(m\) Zeilen setzen.  Das heißt
+\begin{align*}
+  \det(\beta_{1}, \beta_{2}, \beta_{3}, \ldots, \beta_{m}, \beta_{m + 1}, \ldots, \beta_{n}) &= 1 \\
+  \det(\gamma_{1}, \beta_{2}, \beta_{3}, \ldots, \beta_{m}, \beta_{m + 1}, \ldots, \beta_{n}) &= 1 \\
+  \det(\beta_{1}, \gamma_{2}, \beta_{3}, \ldots, \beta_{m}, \beta_{m + 1}, \ldots, \beta_{n}) &= 1 \\
+  \det(\beta_{1}, \beta_{2}, \gamma_{3}, \ldots, \beta_{m}, \beta_{m + 1}, \ldots, \beta_{n}) &= 1 \\
+                               &\vdots \\
+  \det(\beta_{1}, \beta_{2}, \beta_{3}, \ldots, \gamma_{m}, \beta_{m + 1}, \ldots, \beta_{n}) &= 1
+\end{align*}
+Daraus folgt, dass es insgesamt \(m+1\) Kombinationen von Vektoren
+gibt, die linear unabhängig und äquivalent zu \(I_{n}\) sind.  Daraus
+folgt, dass \(\det(A) = m + 1\).
+\end{proof}
+
+\subsection*{Aufgabe 3.2}
+
+\begin{beh}
+Sei \(\mathbb{K}\) ein Körper mit \(1 + 1 \ne 0\) und sei \(S_{n} \in \mathbb{K}^{n \times n}\)
+mit \(S_{n} = - S_{n}^{T}\).  Dann existiert ein \(\lambda \in \mathbb{K}\) mit
+\(\det(S_{n}) = \lambda^{2}\).
+\end{beh}
+
+\begin{proof}
+  Wegen Definition von Körper gilt insbesondere \(\lambda^{2} \ge 0\) für alle
+  \(\lambda \in \mathbb{K}\).  Wir zeigen, dass \(\det(S_{n}) \ge 0\) gilt.
+
+  Es gilt wegen Satz 18.1 dass \(\det(S_{n}) = \det(S_{n}^{T})\).  Es
+  gilt wegen Voraussetzung dass \(\det(S_{n}) = \det(-S_{n}^{T})\).
+  Daraus folgt, dass \(\det(S_{n}^{T})  = \det(-S_{n}^{T})\).
+
+  Daraus folgt, dass
+  \begin{align*}
+    \det(S_{n}^{T})  &= \det(-S_{n}^{T}) \\
+    \sum_{\sigma \in \mathcal{S}_{n} }{\sign(\sigma) \prod_{i = 1}^{n}{a_{\sigma(i), i}}}
+                     &=  \sum_{\sigma \in \mathcal{S}_{n} }{\sign(\sigma) \prod_{i =
+                       1}^{n}{-a_{\sigma(i), i}}} \\
+    2 \det(S_{n}) &= 0.
+  \end{align*}
+  Damit existiert ein \(\lambda = 0\) mit \(\lambda^{2} = \det(S_{n})\).
+\end{proof}
+
+\subsection*{Aufgabe 3.3}
+
+Sei der Matrix \(B_{n} = (b_{k, l}) \in \mathbb{R}^{n \times n}\).  Für
+\(k = 1\) oder \(l = 1\) gilt \(b_{k, l} = 1\) und sonst
+\(b_{k, l} = b_{k-1, l} + b_{k, l - 1}\).
+
+\begin{beh}
+  Es gilt \(\det(B_{n}) = 1\).
+\end{beh}
+
+\begin{proof}
+  Wir zeigen, dass die Matrix \(B_{n}\) symmetrisch ist, mittels
+  vollständigen Induktion über \(k, l\).
+  \begin{itemize}
+  \item Induktionsanfang, \(k = 1\).  Dann ist wegen Definition dass \((B_{n})_{k, l} = (B_{n})_{l,
+      k} = 1\) für alle \(l \in \mathbb{N}\).
+  \item   Induktionsvoraussetzung, es gilt für ein fest gewähltes \(k\) dass
+    \((B_{n})_{k, l} = (B_{n})_{l, k}\) für alle \(l \in \mathbb{N}\).
+  \item   Induktionsschritt. Es gilt     \((B_{n})_{k + 1, l} = (B_{n})_{l, k + 1}\).
+  \item Induktionsanfang, \(l = 1\).  Dann ist wegen Definition dass \((B_{n})_{k, l} = (B_{n})_{l,
+      k} = 1\) für alle \(k \in \mathbb{N}\).
+  \item   Induktionsvoraussetzung, es gilt für ein fest gewähltes \(k\) dass
+    \((B_{n})_{k, l} = (B_{n})_{l, k}\).
+  \item   Induktionsschritt. Es gilt     \((B_{n})_{k + 1, l} = (B_{n})_{l, k + 1}\).
+  \end{itemize}
+
+
+
+  Die Matrix \(B_{n}\) äquivalent zur Identitätsmatrix
+  \(I_{n}\) ist, indem wir die Matrix \(B_{n}\) im Zeilenstufenform von
+  Definition 14.6 bringen.
+  \begin{align*}
+    \begin{bmatrix}
+      1 & 1 & 1 & 1 \\
+      1 & 2 & 3 & 4 \\
+      1 & 3 & 6 & 10 \\
+      1 & 4 & 10 & 20
+    \end{bmatrix}
+    \to
+    \begin{bmatrix}
+      1 & 1 & 1 & 1 \\
+      0 & 1 & 2 & 3 \\
+      0 & 2 & 5 & 9 \\
+      0 & 3 & 9 & 19
+    \end{bmatrix}
+    \to
+    \begin{bmatrix}
+      1 & 1 & 1 & 1 \\
+      0 & 1 & 2 & 3 \\
+      0 & 0 & 1 & 3 \\
+      0 & 0 & 3 & 10
+    \end{bmatrix}
+    \to
+    \begin{bmatrix}
+      1 & 1 & 1 & 1 \\
+      0 & 1 & 2 & 3 \\
+      0 & 0 & 1 & 3 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix}
+    \to
+    \begin{bmatrix}
+      1 & 0 & 0 & 0 \\
+      0 & 1 & 0 & 0 \\
+      0 & 0 & 1 & 0 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix}
+  \end{align*}
+\end{proof}
+
+\end{document}

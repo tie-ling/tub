@@ -1,0 +1,183 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+% draft mode incompatible with tikz
+\documentclass[a5paper]{article}
+
+% 让每个章节 subsection 在新的一页上开始
+% 而不是紧接着上一章节
+\AddToHook{cmd/subsection/before}{\clearpage}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+\geometry{a5paper,
+ left=1cm,
+ right=1cm,
+ top=1cm,
+ bottom=2cm
+}
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+
+% 调整 Emacs 预览字体大小
+% (setq preview-scale-function 1.5)
+
+% TeX Gyre Schola and unicode-math
+% which in turn loads amsmath,mathtools,fontspec and friends
+\usepackage{xcharter-otf}
+
+
+% 加载数学相关的包
+\usepackage{
+  % 自然段间留空
+  parskip,
+  % 区间排版
+  interval
+}
+
+% 中文支持，暂时不需要
+% \usepackage[UTF8]{ctex}
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\usepackage{amsthm}
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+% 标题与作者
+\title{HA 4, CoMa 1, Laurin, Gruppe 108}
+\author{Kuan 480169, Yu 478912, Guo 480788}
+
+% 画图工具
+\usepackage{tikz,pgfplots}
+\pgfplotsset{compat=1.18}
+
+
+\begin{document}
+\maketitle
+\begin{center}
+Ting Yu Kuan 480169, Shilong Yu 478912, Yuchen Guo 480788
+\end{center}
+\subsection{3. Aufgabe}
+\subsubsection{Teil a}
+\begin{proof}
+  Wir beweisen diese Aussage mittels Kontraposition.
+
+  Es gelte die folgende Aussage:
+  \begin{quote}
+    Es gibt nur \(0\) oder \(1\) oder \(2\) Personen die sich alle
+    gegenseitig die Hand geschüttelt haben, \textbf{und},
+    es gibt nur \(0\) oder \(1\) oder \(2\) Personen, die sich alle
+    gegenseitig nicht die Hand geschüttelt haben.
+  \end{quote}
+
+  Der Fall mit nur \(1\) Person macht kein Sinn, deshalb erhalten wir
+  die folgende Aussage:
+  \begin{quote}
+    Es gibt nur \(0\) oder \(2\) (ein Paar) Personen die sich alle
+    gegenseitig die Hand geschüttelt haben, \textbf{und}, es gibt nur
+    \(0\) oder \(2\) (ein Paar) Personen, die sich alle gegenseitig nicht
+    die Hand geschüttelt haben.
+  \end{quote}
+
+  Es gibt nun vier Fällen zu betrachten, nämlich, \(0\) und \(0\); \(0\) und
+  \(2\); \(2\) und \(0\); \(2\) und \(2\).  In allen vier Fällen ist im
+  Widerspruch zur Voraussetzung die Anzahl der Coma-Betreuer weniger
+  als \(6\).
+\end{proof}
+\subsubsection{Teil b}
+\begin{proof}
+  Wir beweisen diese Aussage mittels Kontraposition.
+
+  Wir durchnummerieren die Betreuern mit natürliche Zahlen von \(1\) bis
+  \(n\) und sei die Menge der Anzahl von Handschütteln
+\begin{align*}
+M\coloneq \left\{ a_1, a_2, \ldots, a_n \right\}.
+\end{align*}
+
+Angenommen, es gilt für alle \(p,q \in \mathbb{N}_{\leq n}\) mit $p \neq
+q$ dass \(a_p \neq a_q\).
+
+O.B.d.A sei auch \(a_1 < a_2 < \ldots < a_n\).  Es gilt nun $a_n \leq n
+- 1$, denn ein Person kann höchstens alle andere \(n-1\) Personen die
+Hand schütteln.  Wegen Transitivität gilt \(a_{n-1} < n - 1\).  Wegen
+\(a_{n-1} \in \mathbb{N}\) gilt \(a_{n-1} \leq n-2\), und so weiter.
+Damit erhalten wir \(a_1 \leq 0\), also \(a_1 = 0\).
+
+Wir bemerken, dass die Menge der Anzahl von Handschütteln ist dann
+durch die im oben genannten Beschränkungen eindeutig bestimmt, also
+wegen \(a_1=0\) und \(a_1 < a_2\) und \(a_2 \leq 1\) muss \(a_2 = 1\) sein.
+Also die Menge ist \(\left\{ 0, 1, 2, 3, \ldots, n-1 \right\}\).  Aber
+der letzter Betreuer hat eine Anzahl von \(n-1\), also alle andere
+Personen die Hand geschüttelt, im Widerspruch zur \(a_1=0\).
+\end{proof}
+\subsection{4. Aufgabe}
+\subsubsection{Teil a}
+\begin{Behauptung}
+  Es gilt \(\chi(G) \le \abs{V}\).
+\end{Behauptung}
+\begin{proof}
+  O.B.d.A betrachten wir den Fall, wo zu beliebige Paar
+  \((v, w) \in V \times V, v \ne w\) eine Kante \(e = \{v, w\} \in E\) existiert.
+  Weil die Abbildung \(c\colon V \to \{1, \ldots, k\}\) für alle \(\{v, w\} \in E\) die
+  Eigenschaft \(c(v) \ne c(w)\) besitzt, folgt aus Voraussetzung, dass
+  \[\forall v, w \in V, v \ne w\colon c(v) \ne c(w)\]
+  damit gilt in diesem Fall
+  \[\chi(G) = \abs{V}.\]
+  In alle anderen Fälle muss nicht \(c(v) \ne c(w)\) zwingend für
+  \(\forall v, w \in V\) gelten, daraus folgt, dass
+  \[\chi(G) \le \abs{V}.\]
+\end{proof}
+
+\subsubsection{Teil b}
+Analog zum [Teil a], im Fall
+\[\forall(v, w) \in V \times V, v \ne w\colon \exists e = \{v, w\} \in E\]
+gilt
+\[\abs{V} = \chi(G) = n.\]
+
+\subsubsection{Teil c}
+
+Sei \(n \in \mathbb{N}_{> 1}\) und definieren wir
+\[C_{n} \coloneq (V_{n}, E_{n}),\quad  V_{n} \coloneq \{1, \ldots, n\},\quad  E_{n} \coloneq \{\{a, b\} \in
+  V_{n} \times V_{n}\mid b = (a+1) + n\mathbb{Z} \}.\]
+
+Dann gilt wegen \(1 \le a, b \le n\) dass
+\[
+  b = \begin{cases}
+    a + 1, & 1 \le a \le n, \\
+    1, & a = n.
+  \end{cases}
+\]
+Wir unterscheiden zwei Fälle.  Falls \(n\) gerade ist, dann gilt \(k =
+2\).  Beweis durch Induktion.  Falls \(n = 2\), dann existiert zwei Kante
+\((1, 2), (2, 1)\).  Offensichtlich gilt
+\[
+  k = 2, \quad c(1) = 1, \quad c(2) = 2.
+\]  Wählen wir eine
+gerade \(n\)  fest.  Wir betrachten \(n + 2\).  Durch Hinzufügen von \((n,
+n+1), (n+1, n+2), (n+2, 1)\) und Entfernen von \((n, 1)\) erhalten wir
+\[k = 2,~ c(n) = 2,~ c(n+1) = 1,~ c(n+2) = 2,~ c(1) = 1.\]
+
+Falls \(n\) ungerade ist, dann gilt \(k = 3\).
+Beweis durch Induktion.  Falls \(n = 3\), dann existiert zwei Kante
+\((1, 2), (2, 3), (3, 1)\).  Offensichtlich gilt
+\[
+  k = 3, \quad c(1) = 1, \quad c(2) = 2, \quad c(3) =3
+\]  Wählen wir eine
+ungerade \(n\)  fest.  Wir betrachten \(n + 3\).  Durch Hinzufügen von \((n,
+n+1), (n+1, n+2), (n+2, n+3), (n+3, 1)\) und Entfernen von \((n, 1)\) erhalten wir
+\[k = 3,~ c(n) = 3,~ c(n+1) = 1,~ c(n+2) = 2,~ c(n+3) = 3,~ c(1)=1.\]
+
+\end{document}

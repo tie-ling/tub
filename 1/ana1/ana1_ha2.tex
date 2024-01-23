@@ -1,0 +1,272 @@
+\documentclass[12pt]{extarticle}
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,fancyhdr,color,graphicx,}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{tikz}
+\renewcommand{\familydefault}{\sfdefault}
+\pagestyle{fancy}
+\setlength{\parindent}{0pt}
+\lhead{Yuchen Guo 480788, Meng Zhang 484981, Chaeyoung Hong 478363}
+\rhead{2. Hausaufgabenblatt, Ana I\\Tilman,  Fr 10-12 a.m.}
+\begin{document}
+\textbf{H 2.1}
+\begin{proof}
+  \begin{align*}
+    &\left( 1-a \right)^2 \sum_{k=1}^{2022}{ka^{k-1}}\\
+    &= \left( 1+a^2-2a \right) \sum_{k=1}^{2022}{ka^{k-1}}\\
+    &=
+      \sum_{k=1}^{2022}{ka^{k-1}}+\sum_{k=1}^{2022}{ka^{k+1}}-\sum_{k=1}^{2022}{2ka^k}\\
+    &=\sum_{k=0}^{2021}{(k+1)a^k}+\sum_{k=2}^{2023}{(k-1)a^k}-\sum_{k=1}^{2022}{2ka^k}\\
+    &=1+\sum_{k=1}^{2021}{(k+1)a^k}+\sum_{k=1}^{2021}{(k-1)a^k}+2021a^{2022}+2022a^{2023}-\sum_{k=1}^{2021}{2ka^k}-4044a^{2022}\\
+    &=1-2023a^{2022}+2022a^{2023}
+  \end{align*}
+\end{proof}
+\textbf{H 2.2.1}
+\vspace{4mm}
+
+
+\textbf{Definition 1.17}
+Eine Teilmenge \(M \subseteq \mathbb{R}\) heißt \textit{induktiv},
+falls gilt:
+\begin{itemize}
+\item \(0 \in M\).
+\item Für alle \(x \in \mathbb{R}\) gilt: $x \in M \implies x+1
+  \in M$.
+\end{itemize}
+\begin{proof}
+
+  Wir beweisen $M = \left\{ 0 \right\} \cup \left\{ x \in \mathbb{R}
+    | x \geq 1 \right\}$ als induktiv, indem wir zeigen, dass die
+  Menge \(M\) die Definition von induktiver Mengen erfüllt.
+
+  \begin{itemize}
+  \item Aus der Definition folgt, \(0 \in M\).
+  \item Für alle \(x \in M\), gilt \(x + 1 \in M\).
+
+    Wir beweisen diese Aussage mittels vollständiger Induktion
+    über \(x \in M\).
+
+    \begin{itemize}
+    \item Induktionsanfang \(x = 0\).
+
+      Wegen M3 der Körperaxiomen, existiert ein neutrales Element
+      von Multiplikation \(1 \in \mathbb{R}\) mit der Eigenschaft
+      \(x \cdot 1 = x\) für alle \(x \in \mathbb{R}\).
+
+      Wegen A3 der Körperaxiomen, existiert ein neutrales Element
+      von Addition \(0 \in \mathbb{R}\) mit der Eigenschaft
+      \(x + 0 = x\) für alle \(x \in \mathbb{R}\).
+
+      Daraus folgt
+      \begin{align*}
+        x+1 &= 0+1\\
+            &= 1+0 \tag*{A2}\\
+            &= 1 \tag*{A3}
+      \end{align*}
+      Wegen \(1 \geq 1\), es gilt \(x + 1 =1 \in M\).
+    \item Induktionsschritt \(x \rightarrow x + 1\)
+
+      Für alle \(x \in \left\{ x \in \mathbb{R} | x \geq 1 \right\}\) gilt
+      \begin{align*}
+        x \geq 1 &\implies x+1 \geq 1+1 \tag*{O3}\\
+                 &\implies x+1 > 1 \tag*{O2}\\
+                 &\implies x+1 \in M \tag*{Definition von \(M\)}
+      \end{align*}
+
+      Daraus folgt, für alle \(x \in M\) gilt: \(x = 0 \in M\) und $x \in M
+      \implies x+1 \in M$.
+    \end{itemize}
+  \end{itemize}
+  Die Menge \(M\) ist daher eine induktive Menge.
+\end{proof}
+
+\textbf{Lemma H2.2.1}  Für alle \(m, n \in \mathbb{N}\) mit \(m \geq n\)
+gilt \(m-n\in \mathbb{N}\).
+
+\begin{proof}
+  Wir bemühen uns eine vollständige Induktion.
+
+  \begin{itemize}
+  \item Induktionsanfang \(m=n=0\)
+\begin{align*}
+m-n=0-0=0+(-0)=0+0=0 \in \mathbb{N}
+\end{align*}
+\item Induktionsannahme: Es gelte nun \(m-n \in \mathbb{N}\) für
+  bestimmte \(m, n \in \mathbb{N}\).
+\item Erster Induktionsschritt \(m \rightarrow m+1\), \(n \rightarrow n\)
+
+  Aus \((m+1)-n=(m-n)+1\) folgt, dass \((m-n)+1 \in \mathbb{N}\), weil
+  \(m-n \in \mathbb{N}\) gelte.
+
+\item Zweiter Induktionsschritt \(m \rightarrow m+1\), $n \rightarrow n
+  + 1$
+
+  Aus \((m+1)-(n+1)=m-n\) folgt, dass \((m+1)-(n+1) \in \mathbb{N}\), weil
+  \(m-n \in \mathbb{N}\) gelte.
+
+\end{itemize}
+
+Damit ist die Behauptung bewiesen.
+  \end{proof}
+
+  \textbf{H2.2}
+
+  \textit{Behauptung.} Es existiert kein \(p \in \mathbb{N}\) mit $n < p
+  < n+1$.
+
+  \begin{proof}
+    Wir beweisen die Negation der Behauptung als falsch.
+
+
+    \vspace{4mm} Sei \(p \in \mathbb{N}\) mit \(n < p < n+1\) für alle
+    \(n \in \mathbb{N}\).  Es folgt die Ungleichung \(0 < p-n < 1\).
+
+
+    Insbesondere, es gilt \(p-n<1\) mit \(p, n \in \mathbb{N}\) und $p >
+    n$.  Nach der Lemma muss \(p-n \in \mathbb{N}\) sein mit \(p-n<1\).
+
+    Also bekommen wir \(p-n=0\) und daher \(n=p\).  Diese ist im
+    Widerspruch zur Behauptung \(n<p\).
+
+    Damit wurde die Behauptung als wahr gezeigt.
+  \end{proof}
+\vspace{2mm}
+
+
+  \textbf{HA 2.3.1}
+
+  Seien \(A, B \subseteq R\) beschränkte Mengen.  Wir
+  definieren: \(A+B:= \left\{ a+b | a \in A, b \in B \right\}\) und $A
+  \cdot B:= \left\{ ab| a \in A, b \in B \right\}$.
+
+\vspace{4mm}
+
+  \textit{Behauptung HA 2.3.1.}  Es gilt \(\sup (A+B)=\sup A + \sup B\).
+
+  Diese Behauptung ist wahr.
+
+  \begin{proof}
+Nach Definition von Supremum gilt, für alle \(a \in A\), \(a \leq \sup A\)
+und für alle \(b \in B\), \(b \leq \sup B\).
+
+Addieren die zwei Ungleichungen, bekommen wir:  für alle \(a \in A\) und
+\(b \in B\), gilt \(a+b \leq \sup A + b \leq \sup A + \sup B\).
+
+D.h., \(\sup A + \sup B\) ist eine obere Schranke der Menge \(A + B\).
+
+\vspace{4mm}
+
+Wir zeigen, dass \(\sup A + \sup B\) die kleinste obere Schranke der
+Menge \(A + B\) ist, indem wir zeigen, dass zu jedem \(\varepsilon > 0\)
+gibt es ein \(x \in A+B\) mit \(s- \varepsilon <x\).
+
+\vspace{4mm}
+
+Sei \(\varepsilon > 0\) beliebig gewählt.  Seien
+\(p = \sup A - \frac{\varepsilon}{2}\) und
+\(q = \sup B - \frac{\varepsilon}{2}\).  Aus der Definition der Suprema
+folgt, dass es gibt ein \(a_0 \in A\) mit \(p < a_0 \leq \sup A\) und ein
+\(b_0 \in B\) mit \(q < b_0 \leq \sup B\).
+
+Addieren wir die beide Ungleichungen, erhalten wir
+\begin{align*}
+\sup A + \sup B -\varepsilon < a_0 + b_0 \leq \sup A + \sup B
+\end{align*}
+
+mit \(a_0 + b_0 \in A + B\).  Damit gilt  \(\sup A + \sup B = \sup (A+B)\).
+  \end{proof}
+
+\vspace{4mm}
+
+  \textbf{HA 2.3.2}
+
+  \textit{Behauptung HA 2.3.2.}  Es gilt \(\sup (A \cdot B)=\sup A \cdot \sup B\).
+
+
+  Diese Aussage ist falsch.  Wir widerlegen diese Aussage mit einem
+  Gegenbeispiel.
+
+\vspace{4mm}
+
+  \begin{proof}
+  Seien \(A = [-4,-2]\) und \(B=[-6,-2]\).  Es gilt \(\sup A = -2\) und
+  \(\sup B = -2\) und \(\sup (A \cdot B)=24 \neq \sup A \cdot \sup B\).
+
+  Damit ist die Aussage falsch.
+  \end{proof}
+
+  \textbf{HA 2.4}
+\begin{center}
+\textit{  Bei dieser Aufgabe könnten wir leider nicht auf einen richtigen
+  Lösungsweg einigen und haben wir daher mehrer Alternativen
+  hingeschrieben.}
+\end{center}
+
+  \textit{Behauptung.}  Sei \(A \subseteq \mathbb{R}\) nach unten
+  beschränkt und \(a \in \mathbb{R}\) beliebig gewählt.
+  Es gilt
+\begin{align*}
+  a = \inf A \iff a = \sup \left\{ c \in \mathbb{R} | x > c
+       \text{ für alle } x \in A \right\}.
+\end{align*}
+      \textbf{Lösungsweg von Zhang.}
+\begin{proof}
+  Zu zeigen, dass \(a = \inf A = \sup M \)
+  \(M = \left\{ c \in \mathbb{R} | x > c, \forall x \in A \right\}\) \(\Rightarrow\) M ist nach oben beschränkt \(\Rightarrow\) M hat ein Supremum (Axiom 1.49 Vollständigkeitsaxiom), sei dieses Supremum \(\sup M\)
+  \(\Rightarrow \sup M \leq \inf A\) muss gelten. Wir zeigen jetzt mithilfe Widerspruchsbeweises, dass \(\sup M < \inf A\) nicht gilt
+  Gelte \(\sup M < \inf A\), so müsste es ein \(\tilde{a}\) geben, mit \(\sup M < \tilde{a} < \inf A\), und \( \tilde{a} \notin A, \tilde{a} \notin M \)
+  \(\tilde{a} \notin A \Rightarrow \tilde{a} \geq x\)
+  \(\tilde{a} \notin M \Rightarrow \tilde{a} < x\)
+  Das ist ein Widerspruch. Daher gilt nicht
+  \(\sup M < \tilde{a} < \inf A\), es kann nur sein \(\sup M = \inf A\)
+
+
+  \end{proof}
+      \textbf{Lösungsweg von Guo.}
+  \begin{proof}
+
+    Zur Abkürzung setzen wir $M = \left\{ c \in \mathbb{R} | x > c
+       \text{ für alle } x \in A \right\}$.
+
+      \begin{itemize}
+      \item Hinrichtung:
+
+        Aus der Definition der größten unteren Schranke folgt, dass
+        \(a \leq x\) für alle \(x \in A\).  Daraus folgt unmittelbar, dass
+        jedes Element \(x \in A\) eine obere Schranke der Menge
+        \(N_0 := \left\{ n | n \leq a \right\}\) ist.  Es gilt, $a = \sup
+        N_0$, weil für alle \(n \in N_0\) die Aussage \( \leq a\) gilt.
+        Wir machen hier eine Fallunterscheidung:
+         \begin{enumerate}
+             \item Falls \(a = \inf A \notin A\), dann gilt für alle
+             \(n \in N_0: n \leq a\) und für alle \(c \in M: c \leq a\).
+             Daraus folgt, dass \(a = \sup N_0 = \sup M\).
+             \item Falls \(a = \inf A \in A\), dann gilt für
+             \(N_1 := \left\{ n | n < a \right\}\), dass \(a = \sup N_1\).  Es
+             gilt für alle \(c \in M: c < a\).  Daraus folgt, dass
+             \(a = \sup N_1 = \sup M\).
+         \end{enumerate}
+
+      \item Rückrichtung:
+
+        Wegen \(a = \sup M\), gilt für alle \(x \in M: x \leq a\).  Daraus
+        folgt unmittelbar, dass jedes \(c \in M\) eine untere Schränke
+        der Menge \(N_2 := \left\{ n | n \geq a \right\}\) ist.  Es
+        gilt, \(a = \inf N_2\), weil für alle \(n \in N_2\) die Aussage $n
+        \geq a$ gilt.
+
+        Falls \(a = \sup M \in A\), dann gilt für alle
+        \(n \in N_2: n \geq a\) und für alle \(x \in A: x \geq a\).
+        Daraus folgt, dass \(a = \inf N_2 = \inf A\).
+
+        Falls \(a = \sup M \notin A \), dann gilt für
+        \(N_3 := \left\{ n | n > a \right\}\), dass \(a = \inf N_3\). Es
+        gilt für alle \(x \in A: x > a\).  Daraus folgt, dass
+        \(a = \inf N_3 = \inf A\).
+      \end{itemize}
+
+    \end{proof}
+\end{document}

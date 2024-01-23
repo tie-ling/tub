@@ -1,0 +1,336 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+\documentclass[fleqn,draft,a5paper]{article}
+
+% 让每个章节 subsection 在新的一页上开始
+% 而不是紧接着上一章节
+\AddToHook{cmd/subsection/before}{\clearpage}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+
+\geometry{left=1cm,
+ right=1cm,
+ top=1cm,
+ bottom=2cm}
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+
+% 调整 Emacs 预览字体大小
+% (setq preview-scale-function 1.5)
+
+\usepackage{amsmath,mathtools,fontspec,amsthm,parskip,interval,unicode-math}
+\setmainfont{texgyreschola}%
+ [
+  Extension = .otf ,
+  UprightFont = *-regular,
+  ItalicFont = *-italic,
+  BoldFont = *-bold,
+  BoldItalicFont = *-bolditalic,
+  Ligatures=TeX,
+ ]
+\setmathfont{texgyreschola-math.otf}
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\skp}[1]{\langle#1\rangle}
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\providecommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\providecommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+% 定义新函数，依赖于AMSmath
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\rg}{rg}
+
+\providecommand{\R}[1]{\mathrm{R#1}}
+
+\newcommand{\wt}{\widetilde}
+\newcommand{\dd}{\,\mathrm{d}}
+
+% 标题与作者
+\title{HA 10, CoMa 1, Melanie, Gruppe 108}
+\author{Kuan 480169, Yu 478912, Guo 480788}
+
+\begin{document}
+\maketitle
+\begin{center}
+Ting Yu Kuan 480169, Shilong Yu 478912, Yuchen Guo 480788
+\end{center}
+\newpage
+\subsection{1. Aufgabe}
+Sei der einfacher Graph \(A\) eine Aboreszenz.  Dann ist der Graph
+\(A\) ein zusammenhängendes Branching. D.h., der zu Grunde liegende
+ungerichtete Graph hat kein Kreis, ist zusammenhängend und es gilt
+\(\abs{\delta^{-}(v)} \le 1\) für alle Knoten \(v\).
+
+Sei \(I\) die Inzidenzmatrix von \(A\).
+\subsubsection{Teil a}
+\begin{Behauptung}
+  Die Spalten von \(I\) sind linear unabhängig.
+\end{Behauptung}
+\begin{proof}
+  Induktion über die Anzahl von Knoten \(n\).
+
+  Induktionsanfang. Falls \(n = 2\), dann gilt
+  die Behauptung offenbar.
+
+  Induktionsvoraussetzung. Wir nehmen an, dass die Behauptung für ein
+  festes \(n\) gelte.
+
+  Induktionsschritt.  Wir fügen einen Knote \(w\) hinzu.  O.B.d.A. sei
+  \(w\) einen Blatt und seien die Spalten von \(I = (p_{1}, \ldots, p_{n+1})\),
+  wobei \(p_{n+1}\) die Kante von \(w\) ist.  Wir betrachten die lineare
+  Kombination von die Spalten.
+  \[
+    a_{1}p_{1} + \ldots + a_{n+1}p_{n+1} = 0.
+  \]
+  Falls \(a_{n+1} = 0\).  Dann ist wegen Induktionsvoraussetzung dass
+  \(a_{1}, \ldots, a_{n} = 0\).  Falls \(a_{n+1} \ne 0\), dann gilt
+  \[
+    -\frac{a_{1}}{a_{n+1}}p_{1} + \ldots + -\frac{a_{n}}{a_{n+1}}p_{n} = p_{n+1}
+  \]
+  im Widerspruch zur Voraussetzung.  Damit folgt die Behauptung.
+\end{proof}
+\subsubsection{Teil b}
+Fehlt.
+
+\subsection{2. Aufgabe}
+\subsubsection{Teil a}
+\begin{align*}
+  & &\begin{bmatrix}
+    2 & 1 & 1 \\
+    6 & 3 & 1 \\
+    8 & 1 & 0
+  \end{bmatrix} \\
+  &\R{3} \leftarrow \R{3} + (-4) \R{1} &
+  \begin{bmatrix}
+    2 & 1 & 1 \\
+    6 & 3 & 1 \\
+    0 & -3 & -4
+  \end{bmatrix} \\
+  &\R{2} \leftarrow \R{2} + (-3) \R{1} &
+  \begin{bmatrix}
+    2 & 1 & 1 \\
+    0 & 0 & -2 \\
+    0 & -3 & -4
+  \end{bmatrix} \\
+  &\R{1} \leftarrow \frac12 \R{1} &
+  \begin{bmatrix}
+    1 & \frac12 & \frac12 \\
+    0 & 0 & -2 \\
+    0 & -3 & -4
+  \end{bmatrix} \\
+&  \R{2} \leftrightarrow \R{3} &
+  \begin{bmatrix}
+    1 & \frac12 & \frac12 \\
+    0 & -3 & -4 \\
+    0 & 0 & -2
+  \end{bmatrix} \\
+ & \R{3} \leftarrow -\frac12 \R{3} & 
+  \begin{bmatrix}
+    1 & \frac12 & \frac12 \\
+    0 & -3 & -4 \\
+    0 & 0 & 1
+  \end{bmatrix} \\
+ & \R{2} \leftarrow \R{2} + 4 \R{3} & 
+  \begin{bmatrix}
+    1 & \frac12 & \frac12 \\
+    0 & -3 & 0 \\
+    0 & 0 & 1
+  \end{bmatrix} \\
+ & \R{2} \leftarrow -\frac13 \R{2} & 
+  \begin{bmatrix}
+    1 & \frac12 & \frac12 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+  \end{bmatrix} \\
+ & \R{1} \leftarrow \R{1} + -\frac12 \R{2} &
+  \begin{bmatrix}
+    1 & 0 & \frac12 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+  \end{bmatrix} \\
+ & \R{1} \leftarrow \R{1} + - \frac12 \R{3} &
+  \begin{bmatrix}
+    1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1
+  \end{bmatrix}
+\end{align*}
+Dann gilt
+\begin{align*}
+  L =
+  \begin{bmatrix}
+    1 & 0 & 0 \\
+    \frac34 & 1 & 0 \\
+    \frac14 & \frac13 & 1
+  \end{bmatrix}, \quad
+  U =
+  \begin{bmatrix}
+    8 & 1 & 0 \\
+    0 & \frac94 & 1 \\
+    0 & 0 & \frac23
+  \end{bmatrix}, \quad
+  P =
+  \begin{bmatrix}
+    0 & 0 & 1 \\
+    0 & 1 & 0 \\
+    1 & 0 & 0
+  \end{bmatrix}, \quad A = PLU.
+\end{align*}
+\subsubsection{Teil b}
+Wir berechnen \(A x = PLUx =
+\begin{bmatrix}
+  1 \\ 5 \\ 7
+\end{bmatrix}
+\).  Sei \(y = Ux\).  Dann gilt
+\begin{align*}
+  L y =
+  P^{-1} \cdot
+  \begin{bmatrix}
+    1 \\ 5 \\ 7
+  \end{bmatrix} =
+  \begin{bmatrix}
+    7 \\ 5 \\ 1
+  \end{bmatrix}, \quad
+  y =
+  \begin{bmatrix}
+    7 \\ -1/4 \\ -2/3
+  \end{bmatrix}, \quad
+  Ux = y, \quad
+  x =
+  \begin{bmatrix}
+    5/6 \\ 1/3 \\ -1
+  \end{bmatrix}.
+\end{align*}
+Wir berechnen \(A x = PLUx =
+\begin{bmatrix}
+  5 \\ 1 \\ 2
+\end{bmatrix}
+\).  Sei \(y = Ux\).  Dann gilt
+\begin{align*}
+  L y =
+  P^{-1} \cdot
+  \begin{bmatrix}
+    5 \\ 1 \\ 2
+  \end{bmatrix} =
+  \begin{bmatrix}
+    2 \\ 1 \\ 5
+  \end{bmatrix}, \quad
+  y =
+  \begin{bmatrix}
+    2 \\ -1/2 \\ 14/3
+  \end{bmatrix}, \quad
+  Ux = y, \quad
+  x =
+  \begin{bmatrix}
+    2/3 \\ -10/3 \\ 7
+  \end{bmatrix}.
+\end{align*}
+\subsection{3. Aufgabe}
+\begin{multline*}
+  \begin{bmatrix}
+    1 & 0 & 2 \\
+    3 & 4 & 0 \\
+    0 & 5 & 6
+  \end{bmatrix}
+  \cdot
+  \begin{bmatrix}
+    a \\ b \\ c
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    10 \\ 18 \\ 12
+  \end{bmatrix} \to
+  \begin{cases}
+    a + 2c = 10 \\
+    3a + 4b = 18 \\
+    5b + 6c = 12
+  \end{cases} \to
+  \begin{cases}
+    a = 6 \\ b = 0 \\ c = 2
+  \end{cases}
+  \\
+  \begin{bmatrix}
+    1 & 0 & 2 \\
+    3 & 4 & 0 \\
+    0 & 5 & 6
+  \end{bmatrix}
+  \cdot
+  \begin{bmatrix}
+    a \\ b \\ c
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    7 \\ 31 \\ 26
+  \end{bmatrix} \to
+  \begin{cases}
+    a + 2c = 7 \\
+    3a + 4b = 31 \\
+    5b + 6c = 26
+  \end{cases} \to
+  \begin{cases}
+    a = 5 \\ b = 4 \\ c = 1
+  \end{cases}
+  \\
+  \begin{bmatrix}
+    1 & 0 & 2 \\
+    3 & 4 & 0 \\
+    0 & 5 & 6
+  \end{bmatrix}
+  \cdot
+  \begin{bmatrix}
+    a \\ b \\ c
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    0 \\ 12 \\ 15
+  \end{bmatrix} \to
+  \begin{cases}
+    a + 2c = 0 \\
+    3a + 4b = 12 \\
+    5b + 6c = 15
+  \end{cases} \to
+  \begin{cases}
+    a = 0 \\ b = 3 \\ c = 0
+  \end{cases}  \\
+\end{multline*}
+Wir erhalten dann
+\begin{align*}
+  X =
+  \begin{bmatrix}
+    6 & 5 & 0 \\ 0 & 4 & 3 \\ 2 & 1 & 0
+  \end{bmatrix}.
+\end{align*}
+
+\subsection{4. Aufgabe}
+\begin{Behauptung}
+  Sei \(D=(V,E)\) ein einfacher, gerichteter Graph und \(A\) seine
+  Adjazenzmatrix.  Graph \(D\) ist genau dann azyklisch, falls eine
+  Permutationsmatrix \(P\) existiert sodass \(P^{T}AP\) eine untere
+  Dreiecksmatrix ist.
+\end{Behauptung}
+\begin{proof}
+  Graph \(D\) ist genau dann azyklisch, falls es eine topologischer
+  Sortierung von den Knoten existert, sodass
+  \[\pi(j) \not{\le} \pi(i) \quad \text{für } i < j\]
+  gilt.
+
+  Da für alle Einträge oberhalb der Diagonal \(i < j\) gilt, sind solche
+  Einträge genau dann gleich Null, wenn topologischer Sortierung
+  existiert.  Damit folgt die Behauptung.
+\end{proof}
+\end{document}
+

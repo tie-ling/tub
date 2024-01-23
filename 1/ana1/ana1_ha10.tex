@@ -1,0 +1,153 @@
+%% page style
+\documentclass[12pt]{extarticle}
+\usepackage[margin=2cm]{geometry}
+\usepackage{fancyhdr,parskip}
+\pagestyle{fancy}
+\usepackage[onehalfspacing]{setspace}
+\setlength{\parindent}{0pt}
+\lhead{\myAuthor}
+\rhead{\mySubject \ \myHausaufgaben. Übungsblatt \\ \myTutor}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+
+%% language
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+
+%% default packages
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,
+  stmaryrd, % for the lightning symbol used in proof by contraction
+  tikz,     % used to draw diagrams
+}
+
+
+%% metadata
+\newcommand{\myAuthor}{Yuchen Guo 480788 | Meng Zhang 484981 | TB9}
+\newcommand{\myHausaufgaben}{10}
+\newcommand{\mySubject}{Analysis}
+\newcommand{\myTutor}{Tilman}
+
+
+%% custom commands
+\newcommand{\beh}{\textit{Behauptung.}\ }
+\newcommand{\aufgn}[1]{\textbf{Aufgabe #1.}}
+\newcommand{\mg}[1]{\mathbb{#1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\Real}{\operatorname{Re}}
+\newcommand{\Imag}{\operatorname{Im}}
+\begin{document}
+\aufgn{10.2}
+
+Es sei
+$\mc{S} := \left\{ z \in \mg{C} \colon \left| z \right|
+  = 1 \right\}$ und
+$\mc{E} := \left\{ z \in \mg{C} \mid \exists n \in
+  \mg{N} \colon z^n = 1 \right\}$
+
+\aufgn{10.2.i}
+
+\beh Es gilt \(\mc{E} \subseteq \mc{S}\) und zu
+jedem \(z \in \mc{S}\) existiert eine Folge \((z_k)\) in
+\(\mc{E}\) mit \(\lim_{k \to \infty}{z_k} = z\).
+
+\begin{proof}
+  Es gilt \(\mc{E} \subseteq \mc{S}\).  Denn sei
+  \(z \in \mc{E}\) beliebig gewählt.  Wegen (Satz
+  5.40) und (Satz 5.38) gibt es ein
+  \(r \in \left] 0, \infty \right[\) und \(\varphi \in \mg{R}\)
+  mit \(z = re^{i \varphi}\).  Wegen
+  $\left| z^n \right| = \left| z \right|^n = \left|
+    r^n \right| = 1$ folgt
+  \(r = \left| z \right| = 1\) und \(z \in \mc{S}\).
+
+  Zu jedem \(z \in \mc{S}\) existiert eine Folge \((z_k)\)
+  in \(\mc{E}\) mit \(\lim_{k \to \infty}{z_k} = z\).  Denn
+  sei \(z \in \mc{S}\) beliebig gewählt und sei die
+  Lösungsmenge
+  \(M_n := \left\{ w \in \mg{C} | w^n = 1\right\}\) für
+  alle \(n \in \mg{N}\) definiert.  Sei \(\varepsilon > 0\)
+  beliebig gewählt.  Als \(n \to \infty\) existiert in der
+  Menge \(M_n\) solche \(w\) sodass $\left| z - w \right| <
+  \varepsilon$ für alle \(n \ge N_{\varepsilon}\).  Daraus
+  folgt \(\lim_{k \to \infty}{z_k} = z\).
+\end{proof}
+
+\aufgn{10.2.ii}
+
+\beh Die stetige Funktionen \(f, g\) hat die Eigenschaft
+\(f\big|_{\mc{E}} = g\big|_{\mc{E}}\).  Dann folgt \(f=g\).
+
+\begin{proof}
+  Weil es zu jedem \(z \in \mc{S}\) eine Folge \((z_k)\) in
+  \(\mc{E}\) existiert mit \(\lim_{k \to \infty}{z_k}=z\),
+  gilt insbesondere zu jedem \(z \in \mc{S}\) wegen
+  \(f\big|_{\mc{E}} = g\big|_{\mc{E}}\) dass
+\begin{align*}
+\lim_{k \to \infty}{f(z_k)} = \lim_{k \to \infty}{g(z_k)}.
+\end{align*}
+Weil \(f,g\) stetig in \(\mc{S}\) sind, gilt zu jedem
+\(z \in \mc{S}\) dass
+\begin{align*}
+  \lim_{k \to \infty}{f(z_k)}
+  &= \lim_{k \to \infty}{g(z_k)} \\
+  f \left( \lim_{k \to \infty}{z_k} \right)
+  &= g \left( \lim_{k \to \infty}{z_k} \right) \\
+ f(z) &= g(z).
+\end{align*}
+Daraus folgt \(f = g\).
+\end{proof}
+
+\aufgn{10.3}
+
+Sei \(g \colon \mg{R} \to \mg{R}\) eine beschränkte
+Funktion.
+
+\aufgn{10.3.i}
+
+\beh Die Funktion $f_1 \colon \mg{R} \to \mg{R}, \quad
+f_1(x) := x \cdot g(x)$ ist stetig aber nicht
+diffbar in \(x_0 = 0\).
+
+\begin{proof}
+  Zuerst zeigen wir, dass die Funktion stetig ist.  Weil
+  die Funktion \(g \colon \mg{R} \to \mg{R}\) beschränkt
+  ist, gibt es solche \(a, b \in \mg{R}\) sodass
+  \(a \le g(x) \le b\) für alle \(x \in \mg{R}\).  Sei dann
+  \(\varepsilon > 0\) beliebig gewählt und sei
+  \(x < \frac{\varepsilon}{b}\).  Daraus folgt, dass
+\begin{align*}
+  \left| f(x) - f(0) \right|
+  &= \left| x \cdot g(x) \right| \\
+  &< \varepsilon.
+\end{align*}
+Nun zeigen wir, dass die Funktion nicht diffbar ist.
+Sei die Funktion
+\begin{align*}
+  g(x) =
+\begin{cases}
+  1 &\text{falls } x \ge 0, \\
+  -1 &\text{sonst.}
+\end{cases}
+\end{align*}
+Dann ist \(g\) nach oben und nach unten beschränkt und es
+gilt
+\begin{align*}
+f_1(x)=
+\begin{cases}
+  x &\text{falls } x \ge 0, \\
+  -x &\text{sonst.}
+\end{cases}
+\end{align*}
+Die Funktion \(f\) ist nicht diffbar in \(x_0 = 0\), denn es
+gilt
+\begin{align*}
+  \lim_{x \to 0^-}{f_1(x)}
+  = -1 \ne 1 = \lim_{x \to 0^+}{f_1(x)}.
+\end{align*}
+\end{proof}
+
+\aufgn{10.3.ii}
+
+\beh Die Funktion $f_2 \colon \mg{R} \to \mg{R}, \quad
+f_2(x) := x^2 \cdot g(x)$ ist stetig und diffbar.
+\end{document}

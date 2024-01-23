@@ -1,0 +1,349 @@
+\documentclass[12pt]{extarticle}
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,fancyhdr,color,graphicx,}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+\usepackage[onehalfspacing]{setspace}
+\newcommand{\ib}[1]{\boldsymbol{\mathit{#1}}}
+\newcommand{\im}{\operatorname{\textbf{i}}}
+\newcommand{\mg}[1]{\mathbb{#1}}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{parskip}
+\pagestyle{fancy}
+\setlength{\parindent}{0pt}
+\lhead{Yuchen Guo 480788, Meng Zhang 484981}
+\rhead{6. Hausaufgabenblatt, LinA I\\Tutorin: Saskia, Mi 2-4 p.m.}
+\begin{document}
+\textbf{Aufgabe 6.1.i}
+
+\textit{Behauptung.}  \((\mg{Z}, \oplus, \otimes)\) ist kein Körper.
+
+\begin{proof}
+  Wir zeigen, dass \((\mg{Z}, \oplus, \otimes)\) kein Körper ist,
+  indem wir zeigen, dass die Relation
+  \((\mg{Z}\setminus \left\{ 1 \right\}, \otimes)\) keine abelsche
+  Gruppe ist.
+
+  Wir zeigen zuerst, dass die Relation \((\mg{Z}, \oplus)\) eine
+  abelsche Gruppe ist mit neutralem Element \(1\) und inversem Element
+  \(a'=2-a\) für alle \(a \in \mg{Z}\).
+
+  \begin{itemize}
+  \item Die Menge \(\mg{Z}\) ist nicht leer.
+
+  \item Die Relation \((\mg{Z}, \oplus)\) ist assoziativ.
+    Denn, für alle \(x, y, z \in \mg{Z}\) gilt,
+\begin{align*}
+  (x \oplus y) \oplus z &= (x+y-1)+z-1\\
+                        &= x+(y+z-1)-1\\
+                        &= x \oplus(y+z-1)\\
+  &= x \oplus(y\oplus z).
+\end{align*}
+\item  Die Relation \((\mg{Z}, \oplus)\) hat ein neutrales Element
+  \(e:=1\), sodass für alle \(x \in \mg{Z}\) gilt $e \oplus x = x + 1 -
+  1 =x$.
+\item Es existiert zu jedem \(x \in \mg{Z}\) ein inverses Element
+  \(x':=2-x\), sodass \(x' \oplus x=(2-x) + x - 1 = 1 = e\).
+\item Für alle \(x, y \in \mg{Z}\) gilt, $a \oplus b = a + b - 1 = b
+  + a - 1 = b \oplus a$.  Damit ist diese Gruppe abelsch.
+\item Die Relation \((\mg{Z}\setminus \left\{ 1 \right\}, \otimes)\)
+  ist assoziativ.
+  Denn, für alle \(x, y, z \in \mg{Z}\setminus \left\{ 1 \right\}\)
+  gilt,
+\begin{align*}
+  a \otimes (b \otimes c) &= a \otimes (b+c - bc)\\
+                          &= (a+b+c - bc) - a(b+c-bc)\\
+                          &= a+b+c-bc-ab-ac+abc \\
+                          &= (a+b-ab)+c - (a+b-ab)c\\
+                          &= (a+b - ab) \otimes c\\
+  &= (a \otimes b) \otimes c.
+\end{align*}
+\item Die Relation
+  \((\mg{Z} \setminus \left\{ 1 \right\}, \otimes)\) hat ein
+  neutrales Element \(e:=0\), sodass für alle
+  \(x \in \mg{Z} \setminus \left\{ 1 \right\}\) gilt
+  \(e \otimes x = 0+ x - 0x =x\).
+\item Es existiert nicht zu jedem
+  \(x \in \mg{Z} \setminus \left\{ 1 \right\}\) ein inverses Element
+  \(x':=\frac{x}{x-1} \in \mg{Z} \setminus \left\{ 1 \right\}\),
+  sodass \(x' \otimes x= \frac{x}{x-1} + x - \frac{x^2}{x-1} = 0 =e\).
+  Die Relation ist keine Gruppe.
+\item Die Relation
+  \((\mg{Z} \setminus \left\{ 1 \right\}, \otimes)\) ist kommutativ,
+  denn für alle \(x, y \in \mg{Z} \setminus \left\{ 1 \right\}\)
+  gilt \(x \otimes y = x + y - xy = y+x - yx = y \otimes x\).
+\end{itemize}
+
+Weil \((\mg{Z} \setminus \left\{ 1 \right\}, \otimes)\) keine
+abelsche Gruppe ist, ist \((\mg{Z}, \oplus, \otimes)\) kein Körper.
+\end{proof}
+
+\textbf{Aufgabe 6.1.ii}
+
+\textit{Behauptung.}  \((\mg{Q}, \oplus, \otimes)\) ist ein Körper.
+
+\begin{proof}
+  Wir zeigen zuerst, dass die Relation \((\mg{Q}, \oplus)\) eine
+  abelsche Gruppe ist mit neutralem Element \(1\) und inversem Element
+  \(a'=2-a\) für alle \(a \in \mg{Q}\).
+
+  \begin{itemize}
+  \item Die Menge \(\mg{Q}\) ist nicht leer.
+  \item Die Relation \((\mg{Q}, \oplus)\) ist assoziativ.
+    Denn, für alle \(x, y, z \in \mg{Q}\) gilt,
+\begin{align*}
+  (x \oplus y) \oplus z &= (x+y-1)+z-1\\
+                        &= x+(y+z-1)-1\\
+                        &= x \oplus(y+z-1)\\
+  &= x \oplus(y\oplus z).
+\end{align*}
+\item  Die Relation \((\mg{Q}, \oplus)\) hat ein neutrales Element
+  \(e:=1\), sodass für alle \(x \in \mg{Q}\) gilt $e \oplus x = x + 1 -
+  1 =x$.
+\item Es existiert zu jedem \(x \in \mg{Q}\) ein inverses Element
+  \(x':=2-x\), sodass \(x' \oplus x=(2-x) + x - 1 = 1 = e\).
+\item Für alle \(x, y \in \mg{Q}\) gilt, $a \oplus b = a + b - 1 = b
+  + a - 1 = b \oplus a$.  Damit ist diese Gruppe abelsch.
+\item Die Relation \((\mg{Q}\setminus \left\{ 1 \right\}, \otimes)\)
+  ist assoziativ.
+
+  Denn, für alle \(x, y, z \in \mg{Q}\setminus \left\{ 1 \right\}\)
+  gilt,
+\begin{align*}
+  a \otimes (b \otimes c) &= a \otimes (b+c - bc)\\
+                          &= (a+b+c - bc) - a(b+c-bc)\\
+                          &= a+b+c-bc-ab-ac+abc \\
+                          &= (a+b-ab)+c - (a+b-ab)c\\
+                          &= (a+b - ab) \otimes c\\
+  &= (a \otimes b) \otimes c.
+\end{align*}
+\item Die Relation
+  \((\mg{Q} \setminus \left\{ 1 \right\}, \otimes)\) hat ein
+  neutrales Element \(e:=0\), sodass für alle
+  \(x \in \mg{Q} \setminus \left\{ 1 \right\}\) gilt
+  \(e \otimes x = 0+ x - 0x =x\).
+\item Es existiert zu jedem
+  \(x \in \mg{Q} \setminus \left\{ 1 \right\}\) ein inverses Element
+  \(x':=\frac{x}{x-1} \in \mg{Q} \setminus \left\{ 1 \right\}\),
+  sodass \(x' \otimes x= \frac{x}{x-1} + x - \frac{x^2}{x-1} = 0 =e\).
+\item Die Relation
+  \((\mg{Q} \setminus \left\{ 1 \right\}, \otimes)\) ist kommutativ,
+  denn für alle \(x, y \in \mg{Q} \setminus \left\{ 1 \right\}\)
+  gilt \(x \otimes y = x + y - xy = y+x - yx = y \otimes x\).
+\item Für alle \(x, y, z \in \mg{Q}\) gilt
+\begin{align*}
+  x \otimes (y \oplus z) &= x \otimes (y + z - 1)\\
+                         &= x + (y + z - 1) - x(y+z-1)\\
+                         &= x+y+z-1-xy-xz-x\\
+                         &= (x + y - xy) \oplus (x + z - xz)\\
+  &= x \otimes y \oplus x \otimes z.
+\end{align*}
+\end{itemize}
+
+Daher ist \((\mg{Q}, \oplus, \otimes)\) ein Körper.
+\end{proof}
+
+\textbf{Aufgabe 6.2}
+
+\begin{proof}
+  Wir zeigen, dass \((W, \oplus, \otimes)\) ein \(\mg{K}\)-Vektorraum
+  ist, indem wir zeigen, dass die Relation die Definition von
+  Vektorraum erfüllt.
+
+  Zuerst zeigen wir, dass \((W, \oplus)\) eine abelsche Gruppe ist.
+  Weil die Abbildung \(f \colon V \to W\) bijektiv ist, existiert eine
+  bijektive Umkehrabbildung \(f^{-1}\colon W \rightarrow V\).
+  \begin{itemize}
+  \item \((W, \oplus)\) ist assoziativ.
+
+    Denn, es gilt für alle \(\ib{v}, \ib{w}, \ib{x} \in \mg{W}\),
+\begin{align*}
+  (\ib{v} \oplus \ib{w}) \oplus \ib{x}
+  &= f(f^{-1}(\ib{v}) + f^{-1}(\ib{w})) \oplus \ib{x}\\
+  &= f(f^{-1}(f(f^{-1}(\ib{v}) + f^{-1}(\ib{w}))) +
+    f^{-1}(\ib{x}))\\
+  &= f(f^{-1}(\ib{v}) + f^{-1}(\ib{w}) + f^{-1}(\ib{x}))
+    \tag*{\(f\) bijektiv}\\
+  &= f(f^{-1}(\ib{v}) + (f^{-1}(\ib{w}) + f^{-1}(\ib{x})))
+    \tag*{\((V, \oplus)\) abelsche Gruppe}\\
+  &= f(f^{-1}(\ib{v}) + f^{-1}(f(f^{-1}(\ib{w}) + f^{-1}(\ib{x}))))\\
+  &= \ib{v} \oplus (\ib{w} \oplus \ib{x}).
+\end{align*}
+\item \((W, \oplus)\) hat ein neutrales Element.
+
+    Weil \(V\) ein \(\mg{K}\)-Vektorraum mit Addition und skalarer
+    Multiplikation ist, es existiert ein neutrales Element \(\ib{e_V} \in V\)
+    sodass für alle \(\ib{v} \in V\) gilt (1): \(\ib{e_V} + \ib{v} = \ib{v}\).
+    Weil \(f^{-1}\) bijektiv ist, existiert ein \(\ib{e_W} \in W\) mit
+    (2): \(f^{-1}(\ib{e_W})=\ib{e_V}\).
+
+    Sei \(\ib{x} \in W\) beliebig gewählt.  Dann gilt
+\begin{align*}
+  \ib{e_W} \oplus \ib{x} &= f(f^{-1}{(\ib{e_w})}+f^{-1}{(\ib{x})})\\
+                         &= f(f^{-1}{(\ib{x})}) \tag*{Wegen (1)}\\
+                         &= \ib{x}.
+\end{align*}
+\item Jedes Element in \((W, \oplus)\) hat ein inverses Element.
+
+  Weil \(V\) ein \(\mg{K}\)-Vektorraum mit Addition und skalarer
+  Multiplikation ist, es existiert zu jedes Element \(\ib{v} \in V\) ein
+  \(\ib{-v} \in V\) sodass (3): \((\ib{-v}) + \ib{v} = \ib{e_V}\) gilt.
+  Weil \(f^{-1}\) bijektiv ist, existiert ein \((\ib{-v})_W \in W\) mit
+  \(f^{-1}((\ib{-v})_W)=\ib{-v}\).
+
+    Sei \(\ib{x} \in W\) beliebig gewählt.  Dann gilt
+\begin{align*}
+  (\ib{-x})_{W} \oplus \ib{x}
+  &= f(f^{-1}((\ib{-x})_W) + f^{-1}(\ib{x}))\\
+  &= f(\ib{e}_V) \tag*{Wegen (3)}\\
+  &= \ib{e}_W. \tag*{Wegen (2)}
+\end{align*}
+  \item \((W, \oplus)\) ist kommutativ.
+
+    Weil \(V\) ein \(\mg{K}\)-Vektorraum mit Addition und skalarer
+    Multiplikation ist, gilt für alle \(\ib{a}, \ib{b} \in V\)
+    dass \(\ib{a}+\ib{b}=\ib{b}+\ib{a}\).
+
+    Daraus folgt, dass
+    \(f^{-1}(\ib{v})+f^{-1}(\ib{w})=f^{-1}(\ib{w})+f^{-1}(\ib{v})\)
+    und damit
+    \(\ib{v} \oplus \ib{w} = \ib{w} \oplus \ib{v}\)
+    gilt.  Die Relation \((W, \oplus)\) ist kommutativ.
+  \end{itemize}
+
+  Danach zeigen wir, dass die folgende Behauptung gilt.
+
+  Für alle \(\ib{v}, \ib{w} \in W\) und alle $\alpha, \beta \in
+  \mg{K}$ gilt
+  \begin{itemize}
+  \item \((\alpha + \beta) \ib{v}=\alpha \ib{v} \oplus \beta \ib{v}\).
+    Denn, es gilt
+\begin{align*}
+  \alpha \ib{v} \oplus \beta \ib{v}
+  &= f(\alpha f^{-1}(\ib{v})) \oplus f(\beta f^{-1}(\ib{v}))\\
+  &= f(f^{-1}(f(\alpha f^{-1}{(\ib{v})}))+f^{-1}(f(\beta
+    f^{-1}{(\ib{v})})))\\
+  &= f(\alpha f^{-1}{(\ib{v})} + \beta f^{-1}{(\ib{v})})
+    \tag*{\(f\) bijektiv}\\
+  &= f((\alpha+\beta)f^{-1}{(\ib{v})})\\
+  &= (\alpha+\beta)\ib{v}.
+\end{align*}
+  \item
+    $\alpha (\ib{v} \oplus \ib{w}) = \alpha \ib{v} \oplus \alpha
+    \ib{w} $.
+    Denn, es gilt
+\begin{align*}
+  \alpha ( \ib{v} \oplus \ib{w} )
+  &= \alpha ( f ( f^{-1}(\ib{v}) + f^{-1}(\ib{w})))\\
+  &= f(\alpha f^{-1}(f ( f^{-1}(\ib{v}) + f^{-1}(\ib{w}))))\\
+  &= f(\alpha( f^{-1}(\ib{v}) + f^{-1}(\ib{w})))\\
+  &= f(\alpha f^{-1}(\ib{v}) + \alpha f^{-1}(\ib{w}))
+    \tag*{Weil \(A\) ist \(\mg{K}\)-Vektorraum}\\
+  &= f(\alpha f^{-1}(\ib{v})) \oplus f(\alpha f^{-1}(\ib{w}))\\
+  &= \alpha \ib{v} \oplus \alpha \ib{w}.
+\end{align*}
+  \item \((\alpha\beta)\ib{v}=\alpha(\beta\ib{v})\).  Denn, es gilt
+\begin{align*}
+  \alpha(\beta\ib{v}) &= \alpha(f(\beta f^{-1}(\ib{v}))) \\
+                      &= f(\alpha f^{-1}(f(\beta f^{-1}(\ib{v}))))\\
+                      &= f(\alpha (\beta f^{-1}(\ib{v})))\\
+                      &= f(\alpha \beta f^{-1}(\ib{v}))
+                        \tag*{Weil \(A\) ist \(\mg{K}\)-Vektorraum}\\
+                      &= f((\alpha \beta) f^{-1}(\ib{v}))\\
+                      &= (\alpha \beta)\ib{v}.
+\end{align*}
+  \item \(1_{\mg{K}}\ib{v}=\ib{v}\).  Denn, es gilt $1_{\mg{K}}
+    \ib{x}$ für alle \(\ib{x} \in V\) und \(f^{-1}(\ib{v}) \in V\).
+    Daraus folgt, dass $1_{\mg{K}}\ib{v} =
+    f(1_{\mg{K}}f^{-1}(\ib{v})) = f(f^{-1}(\ib{v})) = \ib{v}$.
+  \end{itemize}
+\end{proof}
+
+\textbf{Aufgabe 6.3.i}
+
+\textit{Behauptung.}  Sei \((\mg{K}, +, \cdot)\) ein Körper,
+\((R, +, \cdot)\) ein kommutativer Ring mit Eins bezüglich der
+Multiplikation \(\cdot\) in \(\mg{K}\) und \(\mg{K} \subseteq R\).  Dann
+ist \(R\) ein \(\mg{K}\)-Vektorraum.
+
+Es bezeichne \(1\) das Einselement und \(0\) das Nullelement in \(\mg{K}\).
+
+\begin{proof}
+  Diese Aussage ist wahr.  Zuerst zeigen wir, dass \(1_R = 1\).
+
+  Weil \(\mg{K}\) ein Körper ist, ist $(\mg{K} \setminus \left\{
+    0 \right\}, \cdot)$ eine abelsche Gruppe mit neutralem Element
+  \(1\).  Also, es gilt für alle \(x \in \mg{K}\) dass \(1 \cdot x = x\).
+  Sei also \(1'\) ein anderes neutrales Element bzgl. Multiplikation.
+  Dann gilt wegen der Kommutativität dass $1' \cdot 1 = 1 = 1 \cdot 1'
+  = 1'$, also \(1 = 1'\).
+
+  Der Ring \((R, +, \cdot)\) erfüllt dann die Definition von
+  \(\mg{K}\)-Vektorraum.  Sei \(\alpha, \beta \in \mg{K}\) und
+  \(\ib{v}, \ib{w} \in R\).  Es gilt insbesondere
+  \(\alpha, \beta, \ib{v}, \ib{w} \in R\).
+  \begin{itemize}
+  \item Weil \((R, +, \cdot)\) ein Ring ist, ist die Gruppe \((R, +)\)
+    abelsch.
+  \item Weil \((R, +, \cdot)\) ein Ring ist, gilt
+    \((\alpha+\beta)\ib{v}=\alpha\ib{v}+\beta\ib{v}\).
+  \item Weil \((R, +, \cdot)\) ein Ring ist, gilt
+    \(\alpha(\ib{v}+\ib{w})=\alpha\ib{v}+\alpha\ib{w}\).
+  \item Weil \((R, +, \cdot)\) ein Ring ist, gilt
+    \((\alpha\beta)\ib{v}=\alpha(\beta\ib{v})\).
+  \item Wir haben oben bewiesen, dass \(1\) auch das Einelement von $(R
+    \setminus \left\{ 0 \right\}, \cdot)$ ist.  Dann gilt
+    \(1\ib{v}=\ib{v}\) für alle \(\ib{v} \in R\).
+  \end{itemize}
+\end{proof}
+
+\textbf{Aufgabe 6.3.ii}
+
+Diese Aussage ist falsch.  Wir widerlegen diese Aussage mit einem
+Beispiel.
+
+Sei \(\mg{K}:=\mg{R}\) und \(V:=\mg{R}\). Wegen (Bemerkung Seite 24: Jede
+Körper \(\mg{K}\) ist ein \(\mg{K}\)-Vektorraum) ist \(V\) ein \(\mg{K}\)-Vektorraum.
+
+Sei \(\lambda_1 := 0\), \(\lambda_2:=1\) und \(\ib{v}:=0\).  Dann gilt
+\(\lambda_1 \neq \lambda_2\) und
+\(\lambda_1 \ib{v} = \lambda_2 \ib{v} = 0\).
+
+\textbf{Aufgabe 6.3.iii}
+
+Diese Aussage ist falsch. Wir widerlegen diese Aussage mit einem Beispiel.
+
+Sei \(\mg{K}:=\mg{R}\) und \(V:=\mg{R}\). Wegen (Bemerkung Seite 24: Jede
+Körper \(\mg{K}\)) ist ein \(\mg{K}\)-Vektorraum ist \(V\) ein \(\mg{K}\)-Vektorraum.
+
+Sei \(\lambda:=0\), \(\ib{v}:=0\) und \(\ib{w}:=1\).  Dann gilt $\ib{v} \neq
+\ib{w}$ und \(\lambda\ib{v} = \lambda\ib{w} = 0\).
+
+\textbf{Aufgabe 6.3.iii}
+
+\textit{Behauptung.}  Die Aussage \(1+1=0\) und \(1+1+1+1=0\) ist
+äquivalent.
+
+\begin{proof}
+  Wir beweisen die Hinrichtung und Rückrichtung als wahr.
+  \begin{itemize}
+  \item \(1+1=0 \implies 1+1+1+1=0\).
+
+    Weil \((\mg{K},+)\) eine abelsche Gruppe ist, gilt
+\begin{align*}
+  1+1+1+1 &= (1+1) + (1+1) \tag*{Assoziativität}\\
+          &= 0 + 0 \tag*{Voraussetzung}\\
+          &= 0 \tag*{Existenz des neutralen Elements}
+\end{align*}
+\item \(1+1+1+1 = 0 \implies 1+1=0\)
+
+    Weil \((\mg{K},+)\) eine abelsche Gruppe ist, gilt
+\begin{align*}
+1+1+1+1 &= (1+1) + (1+1)
+\end{align*}
+Es gilt auch, dass \(1+1+1+1=0\).  Daraus folgt, dass \((1+1)=-(1+1)\).
+Daraus folgt, dass \(1+1=0\) muss.
+  \end{itemize}
+\end{proof}
+\end{document}

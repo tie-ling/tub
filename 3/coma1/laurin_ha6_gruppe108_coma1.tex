@@ -1,0 +1,317 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+% draft mode incompatible with tikz
+\documentclass[a5paper]{article}
+
+% 让每个章节 subsection 在新的一页上开始
+% 而不是紧接着上一章节
+\AddToHook{cmd/subsection/before}{\clearpage}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+\geometry{a5paper,
+ left=1cm,
+ right=1cm,
+ top=1cm,
+ bottom=2cm
+}
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+
+% 调整 Emacs 预览字体大小
+% (setq preview-scale-function 1.5)
+
+% TeX Gyre Schola and unicode-math
+% which in turn loads amsmath,mathtools,fontspec and friends
+\usepackage{xcharter-otf}
+
+
+% 加载数学相关的包
+\usepackage{
+  % 自然段间留空
+  parskip,
+  % 区间排版
+  interval
+}
+
+% 中文支持，暂时不需要
+% \usepackage[UTF8]{ctex}
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\usepackage{amsthm}
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+% 标题与作者
+\title{HA 6, CoMa 1, Laurin, Gruppe 108}
+\author{Kuan 480169, Yu 478912, Guo 480788}
+
+% 画图工具
+\usepackage{tikz,pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{shapes.geometric}
+ \usepackage{graphicx}
+
+\begin{document}
+\maketitle
+\begin{center}
+Ting Yu Kuan 480169, Shilong Yu 478912, Yuchen Guo 480788
+\end{center}
+\newpage
+\subsection{1. Aufgabe}
+\subsubsection{Teil i}
+\begin{Behauptung}
+Die Aussage gilt für jeden Baum auf \(n\) Knoten
+\(\implies\) Die Aussage gilt für jeden einfachen, ungerichteten,
+zusammenhängenden Graphen auf \(n\) Knoten.
+\end{Behauptung}
+\begin{proof}
+  Aus der Definition von Baum folgt, dass ein Baum ein ungerichteter,
+  zusammenhängender Graph ohne Kreise ist.
+
+  Nun fügen wir Kanten hinzu, sodass dieser ungerichteter,
+  zusammenhängender Graph nicht mehr ein Baum ist.  Wir haben aber
+  vorausgesetzt, dass es einen Knoten in dem Baum gibt, dessen Abstand
+  von allen anderen Knoten höchstens \(\frac{n}{2}\) ist.  Der Abstand
+  kann nur durch das Hinzufügen von Kanten verkürzt werden.  Daraus
+  folgt, dass die Aussage für jeden einfachen, ungerichteten,
+  zusammenhängenden Graphen auf \(n\) Knoten gilt.
+\end{proof}
+\subsubsection{Teil ii}
+\begin{Behauptung}
+  Es gibt in jedem einfachen, ungerichteten,
+zusammenhängenden Graphen \(G = (V, E, \Psi)\) ohne Kreise (Baum) mit \(n\) Knoten einen
+Knoten, dessen Abstand von allen anderen Knoten höchstens
+\(\frac{n}{2}\) ist.
+\end{Behauptung}
+\begin{proof}
+    Wir bemühen uns um einen Widerspruchsbeweis.
+
+  Falls \(n\) gerade.  Angenommen, der Abstand zwischen allen Knoten im
+  Baum \(G\) ist mindestens \(\frac{n}{2}+1\).  Es gibt insgesamt $\left|
+    V(G) \right|-1=n-1$ Kanten. Im Fall \(n=2\) dann gibt es nur \(2\)
+  Knoten und \(1\) Kante.  Der Abstand zwischen allen Knoten ist \(1\) im
+  Widerspruch zur Annahme \(\geq 2\).
+
+  Falls \(n\) ungerade.  Angenommen, der Abstand zwischen allen Knoten
+  im Baum \(G\) ist mindestens \(\lceil\frac{n}{2}\rceil\). Es gibt insgesamt $\left|
+    V(G) \right|-1=n-1$ Kanten. Im Fall \(n=3\) dann gibt es nur \(3\)
+  Knoten und \(2\) Kante.  Der Abstand zwischen den mittleren Punkt und
+  den beiden Punkt am Rand ist \(1\) im Widerspruch zur Annahme \(\geq 2\).
+\end{proof}
+\subsection{2. Aufgabe}
+Fehlt.
+
+\subsection{3. Aufgabe}
+
+\subsubsection{Teil i}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+  \begin{scope}[every node/.style={circle,thick,draw}]
+    \node (1) at (0,1) {1};
+    \node (2) at (0,0) {2};
+    \node (3) at (0,-1) {3};
+    \node (4) at (2,1) {4};
+    \node (5) at (2,0) {5};
+    \node (6) at (2,-1) {6};
+\end{scope}
+\begin{scope}
+  \path [-] (1) edge[bend right=60] (2);
+  \path [-] (2) edge[bend right=60] (3);
+  \path [-] (3) edge (4);
+  \path [-] (2) edge (5);
+  \path [-] (4) edge[bend left=60] (5);
+  \path [-] (5) edge[bend left=60] (6);
+  \path [-] (4) edge[bend left=90] (6);
+\end{scope}
+\end{tikzpicture}
+\caption{Original.}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+  \begin{scope}[every node/.style={circle,thick,draw}]
+    \node (1) at (0,1) {1};
+    \node (2) at (0,0) {2};
+    \node (3) at (0,-1) {3};
+    \node (4) at (2,1) {4};
+    \node (6) at (2,-1) {6};
+\end{scope}
+\begin{scope}
+  \path [-] (1) edge[bend right=60] (2);
+  \path [-] (2) edge[bend right=60] (3);
+  \path [-] (3) edge (4);
+  \path [-] (2) edge (4);
+  \path [-] (4) edge[bend left=60] (4);
+  \path [-] (4) edge[bend left=60] (6);
+\end{scope}
+\end{tikzpicture}
+\caption{Kontraktion.}
+\end{figure}
+
+\[
+  \begin{pmatrix}
+0 & 1 & 0 & 0 & 0 \\
+    1 & 0 & 1 & 1 & 0\\
+
+    0 & 1 & 0 & 1 & 0\\
+    0 & 1 & 1 & 0 & 1\\
+    0 & 0 & 0 & 1 & 0
+  \end{pmatrix}
+\]
+\subsubsection{Teil ii}
+\begin{Behauptung}
+  \(G\) zusammenhängend \(\implies\) \(G_{/e}\) zusammenhängend.
+\end{Behauptung}
+\begin{proof}
+    Angenommen, \(G_{/e}\) ist nicht zusammenhängend.  Dann existiert
+  mindestens ein \(v \in E_{/e}\) mit \(\delta(v) = \emptyset\).
+  \begin{itemize}
+  \item   Falls \(v \notin \Psi(e)\), dann ist \(G\) nicht
+    zusammenhängend.
+  \item   Falls \(v \in \Psi(e)\), dann gilt
+  $(\Psi(e_1) \cup \Psi(e_2)) \setminus \left\{ e \right\} =
+  \emptyset$.  Das heißt, die Knoten \(e_1, e_2\) besitzt keine Kante
+  anders als \(e\).  Es gibt kein Weg zwischen \(e_1, e_2\) und alle
+  andere Knoten in der Knotenmenge.  Dann ist \(G\) nicht
+  zusammenhängend.
+  \end{itemize}
+\end{proof}
+\begin{Behauptung}
+  \(G_{/e}\) zusammenhängend \(\implies\) \(G\) zusammenhängend.
+\end{Behauptung}
+\begin{proof}
+    Angenommen, \(G\) ist nicht zusammenhängend.  Es existiert ein $a, b
+  \in V$ sodass es kein a-b Weg gibt.  Nach Kontraktion gibt es immer
+  keinen a-b Weg.  Deshalb ist \(G_{/e}\) nicht zusammenhängend.
+\end{proof}
+\subsubsection{Teil iii}
+\begin{Behauptung}
+  \(G\) zusammenhängend mit \(n\) Kanten \(\implies\) nach \(n\)-ten
+Kantenkontraktion gibt es nur eine Knoten.
+\end{Behauptung}
+\begin{proof}
+    Dann gibt es für alle Knoten \(a, b \in V\) ein a-b Weg.  Daraus folgt
+  die Behauptung.
+\end{proof}
+\begin{Behauptung}
+  Nach \(n\)-ten Kantenkontraktion gibt es nur eine Knoten. \(\implies\) \(G\)
+zusammenhängend mit \(n\) Kanten.
+\end{Behauptung}
+\begin{proof}
+    Angenommen, \(G\) ist zusammenhängend aber lässt sich nicht auf eine
+  Knoten kontraktieren.  Dann ist \(G\) im Widerspruch zur Voraussetzung
+  nicht zusammenhängend.
+\end{proof}
+
+\subsection{4. Aufgabe}
+\begin{verbatim}
+def MinMaxSort(A, sta=0, end=-1):
+    if end < 0:
+        end += len(A)
+    if sta >= end:
+        return A
+    mini = maxi = A[sta]
+    mi = ma = sta
+
+    for i in range(sta+1, end+1):
+        if A[i] > maxi:
+            maxi, ma = A[i], i
+        if A[i] < mini:
+            mini, mi = A[i], i
+
+    A[mi], A[sta] = A[sta], A[mi]
+
+    if (ma != sta):
+        A[ma], A[end] = A[end], A[ma]
+    else:
+        A[mi], A[end] = A[end], A[mi]
+    return MinMaxSort(A, sta+1, end-1)
+\end{verbatim}
+\subsubsection{Teil i}
+\begin{Behauptung}
+  Die Funktion ist korrekt.
+\end{Behauptung}
+\begin{proof}
+    Wir zeigen, dass diese Funktion korrekt ist, mittels Induktion.
+
+  Induktionsanfang.  Eingabe ist List \texttt{A}.  Beim
+  ersten Aufruf dieser Funktion gilt \texttt{sta=0} und
+  \texttt{end=len(A)-1}.  Innerhalb der \texttt{for}-Schleife wird
+  jeweils
+  \begin{itemize}
+  \item das größte Element der Variable \texttt{maxi},
+  \item der Index des größte Element der Variable \texttt{ma},
+  \item das kleinste Element der Variable \texttt{mini},
+  \item der Index des kleinste Element der Variable \texttt{mi},
+  \end{itemize}
+  zugewiesen.  Anschließend werden das Element am Anfang dieses Lists
+  mit dem kleinsten Element dieses ganzen Lists und das Element am
+  Ende dieses Lists mit dem größten Element dieses ganzen Lists
+  getauscht.  So dass es gilt
+  \begin{itemize}
+  \item \texttt{L[0] \(\leq\) L[i]} für alle \texttt{i} \(\leq\)
+    \texttt{len[L] - 1}, und
+  \item \texttt{L[-1] \(\geq\) L[i]} für alle \texttt{i} \(\leq\)
+    \texttt{len[L] - 1}.
+  \end{itemize}
+
+  Induktionsannahme.  Beim \(n\)-ten rekursiven Aufruf dieser
+  Funktion, also \texttt{MinMaxSort (L, n, len(L)-n)} gilt, dass
+  jeweils die ersten und die letzten \(n\) Elemente dieses Lists korrekt
+  sortiert sind.
+
+  Induktionsschritt.  Als Eingabe \texttt{(L, n, len(L)-n)}
+  \(\rightarrow\) \texttt{(L, n+1, len(L)-n-1)}.  Dann gilt wegen
+  Induktionsannahme dass
+  \begin{itemize}
+  \item \texttt{L[n+1]} \(\geq\) \texttt{L[i]} für alle
+  \(0\leq\) \texttt{i} \(\leq\) \texttt{n},
+\item \texttt{L[len(L)-n-1]} \(\leq\) \texttt{L[i]} für alle
+  \texttt{len(L)-n} \(\leq\) \texttt{i} \(\leq\) \texttt{len(L)}.
+\end{itemize}
+
+Analog zum ersten Aufruf gilt auch \texttt{L[len(L)-n-1]}
+größer-gleich und \texttt{L[n+1]} kleiner-gleich alle Elemente
+inzwischen.  Deshalb werden die Elemente korrekt sortiert.
+\end{proof}
+\subsubsection{Teil ii}
+\begin{Behauptung}
+  Sei Laufzeitfunktion dieses Funktions \(g\).  Es gilt \(g \in \Theta(n^2)\).
+\end{Behauptung}
+\begin{proof}
+    Wir bemerken, dass nur die \texttt{for}-Schleife und deren rekursive
+  Aufrufe eine nicht konstante Laufzeit haben.
+
+  Die Funktion terminiert genau dann, wenn alle Elemente sortiert
+  sind. O.B.d.A, sei der Lange des Lists gerade, dann benötigt die
+  Funktion
+\begin{align*}
+\underbrace{n + (n - 2) + (n - 4) + (n - 6) + \ldots + 0}_{n/2\text{ Elemente}}
+\end{align*}
+Schritte zu terminieren.  Die Laufzeitfunktion ist dann
+\begin{align*}
+\frac{n^2}{2}-n^2-n.
+\end{align*}
+
+Damit folgt  \(g \in \Theta(n^2)\).
+\end{proof}
+\end{document}
+

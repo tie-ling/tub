@@ -1,0 +1,373 @@
+%% page style
+\documentclass[12pt]{extarticle}
+\usepackage[margin=2cm]{geometry}
+\usepackage{fancyhdr,parskip}
+\pagestyle{fancy}
+\usepackage[onehalfspacing]{setspace}
+\setlength{\parindent}{0pt}
+\lhead{\myAuthor}
+\rhead{\mySubject \ \myHausaufgaben. Übungsblatt \\ \myTutor}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+
+%% language
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+
+%% default packages
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,
+  stmaryrd, % for the lightning symbol used in proof by contraction
+  tikz,     % used to draw diagrams
+}
+
+%% metadata
+\newcommand{\myAuthor}{Yiwen Yang 466096 | Qing Wang 458040 | Yuchen Guo 480788}
+\newcommand{\myHausaufgaben}{8}
+\newcommand{\mySubject}{CoMa}
+\newcommand{\myTutor}{Lino}
+
+%% custom commands
+\newcommand{\aufgn}[1]{\textbf{Aufgabe #1.}}
+\newcommand{\mg}[1]{\mathbb{#1}}
+\newcommand{\lin}{\operatorname{lin}}
+\newcommand{\beh}{\textit{Behauptung.}\ }
+%% code listing options
+\usepackage{listings}
+\usepackage[lighttt]{lmodern}
+\lstset{
+  numbers=left,
+  basicstyle=\ttfamily,
+  keywordstyle=\ttfamily\bfseries,
+}
+\begin{document}
+\aufgn{1.a}
+\begin{proof}
+Es gibt insgesamt vier Aussagen zu beweisen.
+
+\begin{itemize}
+\item Ein größtes Element \(p\) von \(S\) ist ein maximales
+  Element in \(S\).
+
+  Weil \(p\) ein größtes Element von \(S\) ist, gilt für
+  alle \(y \in S\) dass \(y \preceq p\).  Insbesondere, es
+  gilt für alle \(y \in S\) mit \(y \succeq p\) dass
+  \(y \preceq p\).  Wegen Antisymmetrie folgt dann
+  \(y = p\).  Die Definition eines maximalen Elements ist
+  erfüllt.
+\item Es gibt kein anderes maximale Element in \(S\).
+
+  Sei \(q\) ein maximales Element in \(S\).  Weil \(p\) ein
+  größtes Element von \(S\) ist, gilt \(q \preceq p\).  Weil
+  \(q\) ein maximales Element in \(S\) ist und
+  \(q \preceq p\) gilt, gilt \(q \succeq p\).  Wegen
+  Antisymmetrie folgt dann \(p = q\).  Das größten Element
+  ist dann eindeutig bestimmt.
+\item Ein kleinstes Element von \(S\) ist ein
+  minimales Element in \(S\).
+
+  Analog wie oben.
+
+  Weil \(p\) ein kleinstes Element von \(S\) ist, gilt für
+  alle \(y \in S\) dass \(y \succeq p\).  Insbesondere, es
+  gilt für alle \(y \in S\) mit \(y \preceq p\) dass
+  \(y \succeq p\).  Wegen Antisymmetrie folgt dann
+  \(y = p\).  Die Definition eines minimalen Elements ist
+  erfüllt.
+\item Es gibt kein anderes minimale Element in \(S\).
+
+  Analog wie oben.
+
+  Sei \(q\) ein minimales Element in \(S\).  Weil \(p\) ein
+  kleinstes Element von \(S\) ist, gilt \(q \succeq p\).
+  Weil \(q\) ein minimales Element in \(S\) ist und
+  \(q \succeq p\) gilt, gilt \(q \preceq p\).  Wegen
+  Antisymmetrie folgt dann \(p = q\).  Das kleinsten
+  Element ist dann eindeutig bestimmt.
+\end{itemize}
+\end{proof}
+
+\aufgn{1.b}
+\begin{proof}
+  Angenommen, ein minimales Element \(x\) in \(S\) mit
+  \(x \preceq y\) existiert nicht, d.h., zu jedem
+  \(x \in S\) mit \(x \preceq y\) existiert ein \(z \in S\)
+  mit \(z \preceq x\) und \(z \ne x\).
+
+  Dann ist die Menge \(S\) unendlich, denn für jedes
+  Element \(x \in S\) können wir mindestens ein weitere
+  Element \(z \in S\) mit \(z \preceq x\) und \(z \ne x\)
+  finden.  Beispiel: aus \(y \preceq y\) folgt die
+  Existenz von \(z_1 \preceq y\) und \(z_1 \ne y\); aus
+  \(z_1 \preceq y\) folgt die Existenz von
+  \(z_2 \preceq z_1\) mit \(z_1 \ne z_2\).
+\end{proof}
+
+\aufgn{1.c}
+\begin{proof}
+  Angenommen, die endliche Menge \(S\) mit
+  \(\left| S \right| = n\) besitzt keine topologische
+  Sortierung bzgl. \(\preceq\), d.h., zu jeder Bijektion
+  \(\pi_k \colon \mg{N}_{\le n} \to S\) gibt es ein Paar
+  \(i_k < j_k\) sodass \(\pi_k(j_k) \preceq \pi_k(i_k)\).
+  Daraus folgt,
+\begin{align*}
+  \pi_1(j_1) &\preceq \pi_1(i_1) \\
+  & \mathrel{\:\vdots} \\
+  \pi_{n!}(j_{n!}) &\preceq \pi_{n!}(i_{n!})
+\end{align*}
+Insbesondere gilt \(\pi(i) \preceq \pi(j)\) und
+\(\pi(j) \preceq \pi(i)\) für alle
+\(i, j \in \mg{N}_{\le n}\) und damit \(n = 1\).  Wegen
+\(n=1\) existiert ein solche Paar \(i < j\) nicht.
+\end{proof}
+
+\aufgn{2.a}
+\begin{proof}
+Wir zeigen, dass \(P'\) eine Quasiordnung ist, indem wir
+zeigen, dass \(P'\) die folgende Eigenschaften erfüllt.
+
+\begin{itemize}
+\item \(P' + P' \subset P'\)
+
+  Sei \(x, y \in P'\) beliebig gewählt. Dann gilt
+  wegen \(P' := P + hP\) dass
+  \(x:=a + hb, y:=c + hd \in P'\) mit \(a, b, c, d \in P\).
+  Es gilt \(x+y = (a + c) + h(b+d)\).  Wegen $P + P
+  \subset P$ gilt \(a+c \in P\) und \(b+d \in P\).  Daraus
+  folgt, \(x+y \in P'\) und \(P' + P' \subset P'\).
+\item \(P' \cdot P' \subset P'\)
+
+  Sei \(x, y \in P'\) beliebig gewählt. Dann gilt wegen
+  \(P' := P + hP\) dass \(x:=a + hb, y:=c + hd \in P'\) mit
+  \(a, b, c, d \in P\).  Es gilt
+  \(xy = ac + h(ad + bc) + h^2bd\).  Wegen \(h \in \mg{Q}\)
+  gilt \(h^2 \in P\).  Wegen \(P \cdot P \subset P\) gilt
+  \(ac, h^2bd \in P\).  Wegen \(P + P \subset P\) gilt $ac +
+  h^2bd, ad + bc \in P$.  Daraus folgt, \(xy \in P'\) und
+  \(P' \cdot P' \subset P'\).
+\item \(\forall x \in \mg{Q} \colon x^2 \in P'\)
+
+  Es gilt insbesondere \(0^2 = 0 \in P\) und
+  \(0 + h0 = 0 \in P'\).  Daraus folgt, dass wegen $x^2
+  \in P\( gilt \(x^2 + 0h \in P'\), also \)\forall x \in
+  \mg{Q} \colon x^2 \in P'$.
+\end{itemize}
+Angenommen, es gilt \(-1 \in P'\).  Dann existiert solche
+\(a,b \in P\) mit \(a + hb = -1\).  Dann gilt
+\(-h = \frac{a+1}{b}\).
+\begin{itemize}
+\item Falls \(b=0\), dann gilt \(a=-1\) und \(a \in P\) im
+  Widerspruch zur Voraussetzung dass \(-1 \notin P\).
+\item Falls \(\frac{1}{b} \in P\), dann gilt wegen $1^2 =
+  1 \in P$ und \(P + P \subset P\) dass \(-h \in P\) im
+  Widerspruch zur Voraussetzung dass \(h \notin -P\).
+\item Falls \(\frac{1}{b} \notin P\).  Solche
+  \(\frac{1}{b}\) existiert nicht, denn, wegen \(b \in P\)
+  und \(h \in \mg{Q}\) gilt für alle \(\frac{1}{b}\) dass
+\begin{align*}
+  \frac{1}{b} =  \frac{1}{b^2} \cdot b \in P.
+\end{align*}
+\end{itemize}
+Daraus folgt, dass \(-1 \notin P'\).
+\end{proof}
+\aufgn{2.b.1}
+
+\begin{proof}
+  Sei \(P' := P\).  Weil \(P\) iene quadratische
+  Quasiordnung ist, folgt unmittelbar
+  \(P' + P' \subset P'\) und \(P' \cdot P' \subset P'\).  Es
+  gilt wegen \(P' = P\) dass \(P \subseteq P'\).
+\end{proof}
+
+\aufgn{2.b.2}
+
+\begin{proof}
+  Sei \(P' := (P \cap \mg{Q}_{\ge 0})\).  Es gilt dann
+  \(P' \subseteq P\) und \(P'\) ist auch eine Quasiordnung.
+  Zu zeigen: \(P' \cap -P' = \left\{ 0 \right\}\).
+
+  Wegen \(P' \subseteq \mg{Q}_{\ge 0}\) und $P' := \left\{
+    -x \in \mg{Q} \mid x \in P' \right\}\( gilt \)-P'
+  \subseteq \mg{Q}_{\le 0}\(.  Es gilt auch, dass \)0 \in
+  P'$ wegen \(0 \in \mg{Q}\) und \(0^2 = 0 \in P\).  Daraus
+  folgt, dass \(P' \cap -P' = \left\{ 0 \right\}\).
+\end{proof}
+
+\newpage
+\aufgn{2.b.3}
+
+\aufgn{2.c}
+
+\aufgn{3}
+
+\newpage
+\aufgn{4}
+
+\aufgn{4.a}
+\begin{lstlisting}[language=Python]
+######## Aufruf 0
+def findMissingNumber([6, 4], 4):
+    if len(A) == 0:              # len(A) = 4 != 0
+        return a
+    else:
+        m = a + len(A) // 2      # m = 5 = 4 + 1
+        l = []
+        L = []
+        for i in A:              # i = 6
+            if i > m:            # i > 5
+                L.append(i)      # L = [6]
+            else:
+                l.append(i)
+        for i in A:              # i = 4
+            if i > m:            # i !> 5
+                L.append(i)
+            else:
+                l.append(i)      # l = [4]
+        if len(L) >= len(l):     # len([6]) == len([4])
+            return findMissingNumber(l, a)
+                                 # return findMissingNumber([4], 4)
+        else:
+            return findMissingNumber(L, m+1)
+
+######## Aufruf 1
+def findMissingNumber([4], 4):
+    if len(A) == 0:              # len(A) = 1 != 0
+        return a
+    else:
+        m = a + len(A) // 2      # m = 4 + 0
+        l = []
+        L = []
+        for i in A:              # i = 4
+            if i > m:            # i !> 4
+                L.append(i)
+            else:
+                l.append(i)      # l = [4]
+        if len(L) >= len(l):     # len(L) == 0 !> len(l) == 1
+            return findMissingNumber(l, a)
+
+        else:
+            return findMissingNumber(L, m+1)
+                                 # return findMissingNumber([], 5)
+
+######## Aufruf 2
+def findMissingNumber([], 5):
+    if len(A) == 0:              # len(A) = 0 == 0
+        return 5
+\end{lstlisting}
+\newpage
+\aufgn{4.b}
+\begin{lstlisting}[language=Python]
+def findMissingNumber(A, a):
+    if len(A) == 0:
+        return a
+    else:
+        m = a + len(A) // 2
+        l = []
+        L = []
+        for i in A:
+            if i > m:
+                L.append(i)
+            else:
+                l.append(i)
+        if len(L) >= len(l):
+            return findMissingNumber(l, a)
+        else:
+            return findMissingNumber(L, m+1)
+\end{lstlisting}
+\beh Der Algorithmus ist korrekt.
+\begin{proof}
+Wir zeigen, dass der Algorithmus korrekt ist, indem wir
+zeigen, dass der Algorithmus eine Zahl \(x\) ausgibt, die
+nicht in \texttt{A} liegt und \(a \le x \le b\) erfüllt.
+\begin{itemize}
+\item Die Zahl \(x\) liegt nicht in \texttt{A}.
+
+  Angenommen, die Zahl \(x\) liegt in \texttt{A}.  Der
+  letzte Aufruf ist wegen Voraussetzung
+\begin{center}
+\texttt{findMissingNumber([], x)}. \\
+\end{center}
+Es gibt zwei Möglichkeiten zu betrachten.
+
+Zuerst bemerken wir, dass in allen Aufrufe außer den
+letzten Aufruf gilt
+\begin{center}
+\texttt{a == min(A)}. \\
+\end{center} Also das zweite Argument \texttt{a} ist das
+kleinste Element der List \texttt{A}.
+
+Beim letzten Aufruf gilt
+\begin{center}
+\texttt{A == []}. \\
+\end{center}
+
+Fall 1.  Der letzte Aufruf ist
+\begin{center}
+\texttt{findMissingNumber(l, a)}. \\
+\end{center}
+Weil die Zahl \texttt{x} in der List \texttt{A} liegt
+und \texttt{x} gleich \texttt{a} gilt, wird insbesondere
+während der \texttt{for}-Schleife (wegen \texttt{a}
+bzw. \texttt{x} kleiner gleich \texttt{m}) die Zahl
+\texttt{x} der List \texttt{l} hinzugefügt.  Die List
+\texttt{l} ist im Widerspruch zur voraussetzung nicht
+leer.
+
+Fall 2.  Der letzte Aufruf ist
+\begin{center}
+\texttt{findMissingNumber(L, m+1)}. \\
+\end{center}
+Weil die Zahl \texttt{x} in der List \texttt{A} liegt
+und \texttt{x} gleich \texttt{m+1} gilt, wird insbesondere
+während der \texttt{for}-Schleife (wegen \texttt{m+1}
+bzw. \texttt{x} größer gleich \texttt{m}) die Zahl
+\texttt{x} der List \texttt{L} hinzugefügt.  Die List
+\texttt{L} ist im Widerspruch zur voraussetzung nicht
+leer.
+
+\item Die Zahl \(x\) erfüllt die Bedingung $a \le x \le
+  b$.
+
+  Es gilt \(a \le x \le b\).  Denn, \texttt{x} ist durch
+  endlich vieler Anwendungen von
+\begin{center}
+\texttt{x} \(\leftarrow\) \texttt{a + len(A) // 2 + 1} \\
+\end{center}
+erzeugt und der Algorithmus terminiert genau dann, wenn
+\texttt{len(A) == 0} gilt.  Daraus folgt \(a \le x\).
+
+Es gilt auch \(x \le b\).  Angenommen, \(x > b\).  Dann gilt
+\begin{center}
+\texttt{ x - 1 == a + len(A) // 2} \(\ge\) \texttt{b}. \\
+\end{center}
+Dies ist im Widerspruch zur Voraussetzung dass
+\begin{center}
+\texttt{a + len(A) // 2 < b}. \\
+\end{center}
+\end{itemize}
+\end{proof}
+\aufgn{4.c}
+
+\beh Sei Laufzeitfunktion dieses Funktions \(g\).  Es gilt
+\(g \in \Theta(n\log n)\).
+
+\begin{proof}
+
+  Wir bemerken, dass nur die \texttt{for}-Schleife und deren rekursive
+  Aufrufe eine nicht konstante Laufzeit haben.
+
+  Die Funktion terminiert genau dann, wenn
+  \texttt{len(A) == 0} gilt.  Dann benötigt die
+  Funktion
+\begin{align*}
+n + \left \lfloor \frac{n}{2}  \right \rfloor + \left \lfloor
+  \frac{n}{4} \right \rfloor + \left \lfloor \frac{n}{8}
+  \right \rfloor + \ldots + 0
+\end{align*}
+Schritte zu terminieren.  Die Laufzeitfunktion ist dann
+\begin{align*}
+\frac{n\log_2{n}}{2}.
+\end{align*}
+Damit folgt  \(g \in \Theta(n \log n)\).
+\end{proof}
+\end{document}

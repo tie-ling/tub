@@ -1,0 +1,352 @@
+% !TeX program = lualatex
+%%% TeX-engine: luatex
+
+\documentclass[draft,a5paper]{article}
+\usepackage[margin=2cm]{geometry}
+\linespread{1.2}
+
+% set language to german
+\usepackage[ngerman]{babel}
+
+% load math packages and unicode support
+% must in this order
+\usepackage{amsmath,mathtools,fontspec}
+\usepackage{amsthm}
+\usepackage{unicode-math,luatex85}
+
+% used for integral with respect to a variable x
+% like \int \dd{x}
+% \usepackage{physics}
+
+% set fonts
+\setmainfont{STIX Two Text}
+
+% theorem environment used in this document
+\theoremstyle{remark}
+\newtheorem*{beh}{Behauptung}
+\newtheorem*{lem}{Lemma}
+
+% \interval is used to provide better spacing after a [ that
+% is used as a closing delimiter.
+\newcommand{\interval}[1]{\mathinner{#1}}
+
+% Enclose the argument in vert-bar delimiters:
+\newcommand{\envert}[1]{\left\lvert#1\right\rvert}
+\let\abs=\envert
+
+% Enclose the argument in double-vert-bar delimiters:
+\newcommand{\enVert}[1]{\left\lVert#1\right\rVert}
+\let\norm=\enVert
+
+\author{Yiwen Yang 466096, Yuchen Guo 480788, Meng Zhang 484981}
+\date{\today}
+\title{HA 4, Ana 2 -- Gruppe TiBu 2, Tilman Burghoff}
+
+\begin{document}
+\maketitle
+
+\newpage
+
+\subsection*{H 4.1}
+
+Wir bestimmen alle kompakten Teilmengen der Menge
+\begin{align*}
+  M \coloneq \{0\} \cup \{1/n \mid n \in \mathbb{N} \setminus \{0\}\}
+\end{align*}
+bezüglich der von \(\envert{\cdot}\) induzierten Metrik.  Sei \(A \subseteq M\)
+eine Teilmenge von \(M\).  Wir betrachten vier Fällen.
+
+\begin{beh}
+  Endliche Teilmengen von \(M\) und unendliche Teilmengen, die \(0\)
+  enthält, sind kompakt.  Unendliche Teilmengen ohne \(0\) ist nicht
+  kompakt.
+\end{beh}
+
+\subsubsection*{H 4.1, Teil 1}
+
+\begin{beh}
+  Falls \(\envert{A} = 0\).  Dann ist \(A\) kompakt.
+\end{beh}
+
+\begin{proof}
+  Es ist \(A = \emptyset\).  Sei die Indexmenge
+  \(I\) und die Familie offener Mengen \((U_{i})_{i \in I}\) eine
+  beliebige offene Überdeckung von \(A\).  Wir zeigen, dass \(A\)
+  kompakt ist, indem wir zeigen, dass eine endliche Menge
+  \(J \subseteq I\) existiert, sodass \((U_{i})_{i \in J}\) eine offene
+  Überdeckung von \(A\) ist.
+
+  Wir wählen \(p \in I\) beliebig und definieren \(J \coloneq \{p\}\).  Dann
+  gilt \(A = \emptyset \in U_{p}\).  Damit haben wir eine endliche
+  Teilüberdeckung von \(A\) aus eine beliebige offene Überdeckung von
+  \(A\) konstruiert. Daraus folgt, dass \(A\) kompakt ist.
+\end{proof}
+
+\subsubsection*{H 4.1, Teil 2}
+
+\begin{beh}
+  Falls \(\envert{A} \in \mathbb{N}_{\ge 1}\), dann ist \(A\) kompakt.
+\end{beh}
+
+\begin{proof}
+  Die Menge \(A\) ist endlich. Sei die Indexmenge \(I\) und die
+  Familie offener Mengen \((U_{i})_{i \in I}\) eine beliebige offene
+  Überdeckung von \(A\).
+
+  Wir zeigen, dass \(A\) kompakt ist, indem
+  wir zeigen, dass eine endliche Menge \(J \subseteq I\) existiert, sodass
+  \((U_{i})_{i \in J}\) eine offene Überdeckung von \(A\) ist.  Weil
+  \((U_{i})_{i \in I}\) eine offene Überdeckung von \(A\) ist, existiert
+  zu jedem Element \(x_{k} \in A\) eine offene Menge \(U_{i_{k}}\),
+  \(i_{k} \in I\) sodass \(x_{k} \in U_{i_{k}}\).
+
+  In dieser Art und Weise wählen wir zu jedem Element
+  \(x_{1}, \ldots, x_{n} \in A\) die Indizes
+  \(i_{1}, \ldots, i_{n} \in I\) und definieren
+  \(J \coloneq \{i_{1}, \ldots, i_{n}\}\).  Dann ist die Indexmenge
+  \(J \subseteq I\) endlich und gilt
+  \begin{align*}
+    A \subseteq \bigcup_{k \in J}{U_{k}}.
+  \end{align*}
+  Damit haben wir eine endliche Teilüberdeckung von
+  \(A\) aus eine beliebige offene Überdeckung von \(A\)
+  konstruiert. Daraus folgt, dass \(A\) kompakt ist.
+\end{proof}
+
+\subsubsection*{H 4.1, Teil 3}
+
+\begin{lem}
+  Sei \(\varepsilon > 0\).  Dann ist die Menge \(M \setminus U_{\varepsilon}(0)\) endlich.
+\end{lem}
+
+\begin{proof}
+  Es gilt \(\lim_{n \to \infty}{1/n} = 0\).  Dann existiert zu jedem
+  \(\varepsilon > 0\) ein \(N \in \mathbb{N}\) sodass für alle
+  \(n \ge N\) dass \(1/n \in U_{\varepsilon}(0)\).  Daraus folgt, dass \(\envert{M \setminus
+    U_{\varepsilon}(0)} = N - 1\).  Die Menge \(M \setminus U_{\varepsilon}(0)\) ist endlich.
+\end{proof}
+
+\begin{beh}
+  Falls \(\envert{A} = \infty\) und \(0 \in A\).  Dann ist \(A\) kompakt.
+\end{beh}
+
+\begin{proof}
+  Sei \(\varepsilon > 0\). Zuerst bemerken wir, dass die Menge \(A\) unendlich
+  viele Elemente von die Menge \(U_{\varepsilon}(0)\) enthalten muss, denn sonst
+  wäre \(A\) endlich, wegen [Lemma].
+
+  Sei die Indexmenge \(I\) und die Familie offener Mengen
+  \((U_{i})_{i \in I}\) eine beliebige offene Überdeckung von \(A\).
+  Wir zeigen, dass \(A\) kompakt ist, indem wir zeigen, dass eine
+  endliche Menge \(J \subseteq I\) existiert, sodass
+  \((U_{i})_{i \in J}\) eine offene Überdeckung von \(A\) ist.  Es
+  existiert ein \(j \in I\) mit \(0 \in U_{j}\).  Es gilt auch, dass die
+  Menge \(U_{j}\) offen ist.  Dann ist unendlich viele Elemente von
+  \(A\) in \(U_{j}\) enthalten.  Die Menge \(A \setminus U_{j}\) ist analog zu
+  [Lemma] endlich. Zu jedem Element \(x_{k} \in (A \setminus U_{j})\) existiert
+  eine offene Menge \(U_{i_{k}}\), \(i_{k} \in I\) sodass
+  \(x_{k} \in U_{i_{k}}\).
+
+  In dieser Art und Weise wählen wir zu jedem Element
+  \(x_{1}, \ldots, x_{n} \in A \setminus U_{j}\) die Indizes
+  \(i_{1}, \ldots, i_{n} \in I\) und definieren
+  \(J \coloneq \{i_{1}, \ldots, i_{n}\} \cup \{j\}\).  Dann ist die Indexmenge
+  \(J \subseteq I\) endlich und gilt
+  \begin{align*}
+    A \subseteq \bigcup_{k \in J}{U_{k}}.
+  \end{align*}
+  Damit haben wir eine endliche Teilüberdeckung von
+  \(A\) aus eine beliebige offene Überdeckung von \(A\)
+  konstruiert. Daraus folgt, dass \(A\) kompakt ist.
+\end{proof}
+
+\subsubsection*{H 4.1, Teil 4}
+
+\begin{beh}
+  Falls \(\envert{A} = \infty\) und \(0 \notin A\).  Dann ist \(A\) nicht kompakt.
+\end{beh}
+
+\begin{proof}
+  Sei \(\varepsilon > 0\). Zuerst bemerken wir, dass die Menge \(A\) unendlich
+  viele Elemente von die Menge \(U_{\varepsilon}(0)\) enthalten muss, denn sonst
+  wäre \(A\) endlich, wegen [Lemma].
+
+  Wir nummerieren die Elemente in \(A\) monoton fallend durch.  Das
+  heißt,
+  \begin{align*}
+    a_{1} > a_{2} >  \ldots > a_{n} > a_{n+1} > \ldots  \in A
+  \end{align*}
+  und setzen \(I = \mathbb{N}_{\ge 1}\),
+  \begin{align*}
+    U_{i} =
+    \begin{cases}
+      ~ \interval{]a_{2}, a_{1} + 1[}, & \text{falls } i = 1, \\
+      ~ \interval{]a_{i + 1}, a_{i - 1}[}, & \text{sonst.}
+    \end{cases}
+  \end{align*}
+  \(U_{i}\) ist offen, also \((U_{i})_{i \ge 1}\) eine offene
+  Überdeckung von \(A\).  Jedes \(U_{i}\) enthält genau einen Punkt
+  von \(A\), nämlich \(a_{i}\).  Deshalb wird \(A\) von keinem
+  endlichen Teilsystem \((U_{1}, U_{2}, \ldots, U_{k})\) überdeckt.  Die
+  Menge \(A\) ist nicht kompakt.
+\end{proof}
+
+\subsection*{H 4.2}
+
+Sei \((X, d)\) ein metrischer Raum.  Eine Menge \(A \subseteq X\) heißt
+\textit{total beschränkt}, falls zu jedem \(\varepsilon > 0\) ein \(n \in \mathbb{N} \setminus
+\{0\}\) sowie gewisse \(x_{1}, \ldots, x_{n} \in X\) existieren, mit
+\begin{align*}
+  A \subseteq \bigcup_{i = 1}^{n}{U_{\varepsilon}(x_{i})}.
+\end{align*}
+
+\begin{beh}
+  Sei nun der metrische Raum \((X, d)\) vollständig.  Eine Menge
+  \(A \subseteq X\) ist genau dann kompakt, wenn sie abgeschlossen und total
+  beschränkt ist. Wir beweisen diese Behauptung in drei Schritte.
+\end{beh}
+
+\begin{lem}
+  Aus Kompaktheit von \(A\) folgt die totale Beschränktheit von \(A\).
+\end{lem}
+
+\begin{proof}
+  Falls \(A\) leer ist, ist die Behauptung trivial.  Sei
+  \(\varepsilon > 0\) beliebig und sei die Familie von Mengen definiert durch
+  \begin{align*}
+    M_{1} \coloneq \bigcup_{x \in \partial A} U_{\varepsilon/2}(x), \quad
+    M_{n} \coloneq \bigcup_{x \in \partial M_{n - 1}}U_{\varepsilon/2}(x).
+  \end{align*}
+  Dann ist die Vereinigung von \((M_{n})_{n \in \mathbb{N}}\) eine offene
+  Überdeckung von \(A\).  Weil \(A\) kompakt ist, existiert eine
+  endliche Teilmenge \(I \subseteq \mathbb{N}\) sodass
+  \begin{align*}
+    A \subseteq \bigcup_{i \in I}{M_{i}}.
+  \end{align*}
+  Wir wählen \(x_{i} \in M_{i}\) beliebig, dann ist
+  \begin{align*}
+    A \subseteq \bigcup_{i \in I}{U_{\varepsilon}(x_{i})}.
+  \end{align*}
+  Damit gilt die Behauptung.
+\end{proof}
+
+\begin{lem}
+  Aus Kompaktheit von \(A\) folgt die Abgeschlossenheit von \(A\).
+\end{lem}
+
+\begin{proof}
+  Wir zeigen, dass \(A\) abgeschlossen ist, indem wir zeigen, dass \(X
+  \setminus A\) offen ist.  Sei \(b \in X \setminus A\) ein vorgegebener Punkt.  Da
+  \(X\) ein metrischer Raum ist, gilt das Hausdorffsche Trennungsaxiom
+  und gibt es zu jedem Punkt \(a \in A\) offene Umgebungen \(U_{a} \coloneq
+  U_{\varepsilon}(a)\) und \(V_{a} \coloneq U_{\varepsilon}(b)\) mit \(\varepsilon \coloneq \frac{1}{3}d(a, b)\)
+  sodass \(U_{a} \cap V_{a} = \emptyset\).  Da
+  \begin{align*}
+    A \subseteq \bigcup_{a \in A}{U_{a}},
+  \end{align*}
+  und \(A\) kompakt ist, gibt es endlich viele Punkte \(a_{1},\ldots, a_{s}
+  \in A\) mit
+  \begin{align*}
+    A \subseteq U_{a_{1}} \cup U_{a_{2}} \cup \ldots \cup U_{a_{s}}.
+  \end{align*}
+  Dann ist
+  \begin{align*}
+    V \coloneq V_{a_{1}} \cup V_{a_{2}} \cup \ldots \cup V_{a_{s}}
+  \end{align*}
+  eine offene Umgebung von \(b\) mit \(V \cap \bigcup_{i=1}^{s}{U_{a_{i}}} =
+  \emptyset\), also \(V \subseteq X \setminus A\).  Da \(b \in X \setminus A\) beliebig war, ist \(X \setminus
+  A\) Umgebung jedes seiner Punkte, also offen.
+\end{proof}
+
+\begin{beh}
+  Aus die Abgeschlossenheit und totale Beschränktheit von \(A\) folgt
+  Kompaktheit von \(A\).
+\end{beh}
+\begin{proof}
+  Angenommen, \(A\) nicht kompakt, d.h., sei
+  \((U_{i})_{i \in \mathbb{N}}\) eine offene Überdeckung von \(A\), die keine
+  endliche Teilüberdeckung besitzt.
+\end{proof}
+
+\subsection*{H 4.3}
+
+Sei \((X, d)\) ein metrischer Raum und \(A, B \subseteq X\) nicht leer.  Wir
+definieren \(d(A, B)\) mit
+
+\begin{align*}
+  d(A, B) \coloneq \inf \{d(x, y) \mid x \in A, y \in B \}.
+\end{align*}
+
+\subsubsection*{H 4.3, Teil i}
+
+\begin{beh}
+  Falls \(A\) kompakt und \(B\) abgeschlossen ist mit \(A \cap B \ne \emptyset\),
+  dann gilt \(d(A, B) > 0\).
+\end{beh}
+
+\begin{proof}
+  Wir bemerken, dass aus \(A \cap B = \emptyset\) folgt,
+  \begin{align*}
+    d(A, B) =
+    \inf~\{d(x, y) \mid
+    x \in A, y \in B\} = \min~\{d(x, y) \mid x \in \partial A, y \in \partial B\}.
+  \end{align*}
+  Wir bemühen uns um einen Widerspruchsbeweis.  Angenommen, es gilt
+  \(d(A, B) = 0\).  Dann existiert mindestens ein paar Punkte
+  \(x \in \partial A, y \in \partial B\) mit \(d(x, y) = 0\).  Aus der Definition von
+  Metrik folgt, dass \(x = y\).  Aus der Kompaktheit von \(A\) folgt,
+  dass \(A\) abgeschlossen ist.  Aus der Abgeschlossenheit von \(A\)
+  und \(B\) folgt, dass \(\partial A \subseteq A\) und
+  \(\partial B \subseteq B\).  Daraus folgt, dass \(x \in A\) und
+  \(y \in B\).  Wegen \(x = y\) gilt
+  \(\{x, y\} \subseteq A \cap B \ne \emptyset\).  Diese ist ein Widerspruch.
+\end{proof}
+
+
+\subsubsection*{H 4.3, Teil ii}
+
+\begin{beh}
+  Falls \(A\) und \(B\) abgeschlossen ist mit
+  \(A \cap B \ne \emptyset\), dann gilt \(d(A, B) > 0\) nicht.
+\end{beh}
+
+\begin{proof}
+  ???
+\end{proof}
+
+\subsection*{H 4.4}
+
+Sei \((X, d)\) ein metrischer Raum, der kompakt ist. Wegen [Korollar
+1.73] ist \(X\) vollständig. Sei \(f\colon X \to X\) eine schwache
+Kontraktion, d.h., für alle \(x, y \in X\) mit \(x \ne y\) gilt
+\begin{align*}
+  d(f(x), f(y)) < d(x, y).
+\end{align*}
+Diese Voraussetzung ist anders als die Voraussetzung des Banach'schen
+Fixpunktsatzes, denn die Ungleichung gilt nur für \(x \ne y\), wobei in
+Banach'schen Fixpunktsatz gilt die Ungleichung für alle \(x \in X\).
+
+\begin{beh}
+  Die Funktion \(f\) hat genau einen Fixpunkt.
+\end{beh}
+
+\begin{proof}
+  Beweis der Eindeutigkeit. Wir zeigen zunächst die Eindeutigkeit des
+  Fixpunkts.  Angenommen, es existiert zwei Fixpunkte \(a, b\) von
+  \(f\) mit \(a \ne b\), d.h., es gilt \(f(a) = a\), \(f(b) = b\) und
+  \(f(a) \ne f(b)\).  Dann gilt
+  \begin{align*}
+    d(a, b) = d(f(a), f(b)) < d(a, b).
+  \end{align*}
+  Diese ist im Widerspruch zur \(d(a, b) = d(a, b)\).  Daraus folgt
+  die Eindeutigkeit des Fixpunkts.
+
+  Beweis der Existenz.  Wir definieren die Folge \((x_{n})\) mit
+  \(x_{0} \in X\) beliebig gewählt und \(x_{n+1} = f(x_{n})\), \(n \in
+  \mathbb{N}\).  Dann gilt für alle \(n \in \mathbb{N} \setminus \{0\}\) dass
+  \begin{align*}
+    d(x_{n}, x_{n+1}) = d(f(x_{n-1}), f(x_{n})) < d(x_{n-1}, x_{n}).
+  \end{align*}
+\end{proof}
+
+\end{document}

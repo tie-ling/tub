@@ -1,0 +1,203 @@
+\documentclass[draft,a5paper]{article}
+\usepackage[ngerman]{babel}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath,mathtools,fontspec,amssymb,mathtools}
+
+% for theorems and lemma
+\usepackage{amsthm}
+\newtheorem*{beh}{Behauptung}
+\newtheorem*{lem}{Lemma}
+
+% times new roman font
+\usepackage{newtx}
+
+% for pics
+\usepackage{graphicx}
+\graphicspath{{./}}
+
+\linespread{1.2}
+
+% \author{Yuchen Guo 480788, Meng Zhang 484981}
+
+\author{Ruihao Luan 479823, Yuchen Guo 480788}
+
+\date{\today}
+
+\title{HA 1, LinA 2 -- Francesco Patrick Nowell}
+
+% fuctions exclusive to this HA
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\id}{id}
+
+\begin{document}
+\maketitle
+
+\newpage
+
+\subsection*{Aufgabe 1.1}
+
+\includegraphics[width=\textwidth]{aufgabe1}
+
+\newpage
+
+\subsection*{Aufgabe 1.2}
+
+Sei \(\sigma \in \mathcal{S}_{n}\) eine Permutation.  Die zugehörige Permutationsmatrix
+wird spaltenweise durch \(P_{\sigma} = (\mathbf{e}_{\sigma(i)})_{i = 1, \ldots, n} \in
+\mathbb{K}^{n \times n}\) definiert.  \(\mathbf{e}_{i} \in \mathbb{K}^{n}\)
+ist der \(i\)-ten Standardeinheitsvektor.
+
+\subsubsection*{Aufgabe 1.2, Teil i}
+
+\begin{lem}
+  Seien \(A, B, C\) Matrizen in \( \mathbb{K}^{n \times n}\).  Dann gilt \(
+  A(BC) = (AB)C \).
+\end{lem}
+
+\begin{proof}
+  Es gilt \((BC)_{i,j} = \sum_{h = 1}^{n}{B_{i,h} C_{h,j}}\) und
+  \((AM)_{k,l} = \sum_{q = 1}^{n}{A_{k,q} M_{q,l}}\).  Daraus folgt,
+  \begin{align*}
+    [A(BC)]_{k,l}
+    &= \sum_{q=1}^{n}{A_{k,q}(BC)_{q,l}} \\
+    &= \sum_{q=1}^{n}{A_{k,q}\sum_{p=1}^{n}{B_{q,p}C_{p,l}}} \\
+    &= \sum_{p=1}^{n}{\left(\sum_{q=1}^{n}{A_{k,q}B_{q,p}}\right)C_{p,l}} \\
+    &= \sum_{p=1}^{n}{(AB)_{k,p}C_{p,l}} \\
+    &= [(AB)C]_{k,l}.
+  \end{align*}
+  Damit gilt die Behauptung.
+\end{proof}
+
+\begin{beh}
+  Die Menge aller Permutationsmatrizen \(\mathcal{P} = \{ P_{\sigma} \mid \sigma \in
+  \mathcal{S}_{n}\}\) bildet eine Gruppe zusammen mit der Matrixmultiplikation.
+\end{beh}
+
+\begin{proof}
+  Wir zeigen, dass die Menge \(\mathcal{P} \) mit diese Verknüpfung eine Gruppe
+  bildet, indem wir zeigen, dass die Gruppenaxiome erfüllt sind.
+
+  \begin{itemize}
+  \item Für alle \(A, B, C \in \mathcal{P} \) gilt \( A(BC) = (AB)C \).  Diese
+    Aussage folgt direkt aus dem Lemma.
+  \item Es gibt ein \( E \in \mathcal{P} \), sodass für alle \( A \in \mathcal{P} \) gilt \(
+    EA = A\).
+
+    Sei \( E \coloneq (\mathbf{e}_{\id (i)}) =
+    (\mathbf{e}_{i}) \). Dann ist \(E\) die \(n \times n\)
+    Einheitsmatrix und es gilt \(EA=A\) für alle \(A \in \mathbb{K}^{n
+    \times n}\).
+  \item Zu jedem \( A \in \mathcal{P} \) gibt es ein \( B \in \mathcal{P} \) mit \( B A = E \).
+
+    Seien \( A \coloneq (\mathbf{e}_{\sigma(i)}) \) und \( B \coloneq
+    (\mathbf{e}_{\sigma^{-1}(i)})\), weil eine Permutation \(\sigma\colon \mathbb{N} \to
+    \mathbb{N} \) bijektiv ist. Dann ist \( B A = E\), denn
+    \begin{align*}
+      (BA)_{i,j}
+      = \sum_{k=1}^{n}{B_{i,k}A_{k,j}}.
+    \end{align*}
+    Wegen Voraussetzung ist \(B_{i,k} = \delta_{i, \sigma^{-1}(i)}\) und \(A_{k,j} =
+    \delta_{\sigma(j), j}\).  Dann ist \(BA_{i,j}\) genau \(1\), falls \(i =
+    \sigma^{-1}(i)\) und \(\sigma(j) = j\).  D.h.,
+    \begin{align*}
+      \sigma(i) = \sigma(\sigma^{-1}(i)) &= i, \\
+      \sigma(j) &= j.
+    \end{align*}
+  \end{itemize}
+  Das heißt, \((BA)_{i,j}\) ist genau dann \(1\), wenn \(i = j\) gilt.
+  Damit ist \(BA = E\).
+\end{proof}
+
+\subsubsection*{Aufgabe 1.2, Teil ii}
+
+\begin{beh}
+  Die Gruppen \((\mathcal{S}_{n}, \circ)\) und \((\mathcal{P}, \cdot)\) sind isomorph.
+\end{beh}
+
+\begin{proof}
+  Wegen Satz von Cayley (Jede Gruppe \(G\) mit \(n\) Elementen ist
+  isomorph zu einer Untergruppe von \(\mathcal{S}_{n}\)), zeigen wir, dass es
+  genau \(n!\) Elementen in \(\mathcal{P} \) gibt.
+  Diese folgt aber sofort aus der bijektivität von Permutationen,
+  d.h., eine Permutationsmatrix ist durch eine Permutation eindeutig
+  bestimmt und umgekehrt.
+\end{proof}
+
+\subsubsection*{Aufgabe 1.3}
+
+\begin{beh}
+  Die Relation \(R\) auf der Menge \(\mathbb{K}^{n \times n}\) mit
+  \begin{align*}
+    (A, B) \in R \quad \iff  \quad \text{es existiert eine Permutationsmatrix }
+    P_{\sigma} \in \mathcal{P} \text{ mit } A = P_{\sigma}^{T}BP_{\sigma}
+  \end{align*}
+  ist eine Äquivalenzrelation.
+\end{beh}
+
+\begin{proof}
+  Wir zeigen, dass diese Relation reflexiv, symmetrisch und transitiv
+  ist.  Es gilt \(P^{-1} = P^{T}\).
+  \begin{itemize}
+  \item   Diese Relation ist reflexiv, denn sei \(\sigma \coloneq \id\).
+
+    Dann ist \(P_{\sigma}^{T} = P_{\sigma} \) die Einheitsmatrix und es gilt
+    \(A = P_{\sigma}^{T}BP_{\sigma}\) für alle \(A \in \mathbb{K}^{n \times n}\).
+
+  \item   Diese Relation ist symmetrisch, denn sei \(A, B \in
+    \mathbb{K}^{n \times n}\) mit \((A, B) \in R\).  Wir zeigen, dass \((B,
+    A) \in R\) gilt, d.h., es existiert eine Permutationsmatrix \(P_{\sigma^{-1}}
+    \in \mathcal{P} \) mit \(B = P_{\sigma^{-1}}^{T}AP_{\sigma^{-1}}\).  Diese gilt wegen
+    \begin{align*}
+      B &= P_{\sigma^{-1}}^{T}AP_{\sigma^{-1}} \\
+        &= P_{\sigma^{-1}}^{T}(P_{\sigma}^{T}BP_{\sigma})P_{\sigma^{-1}} \\
+        &= EBE \\
+        &= B.
+    \end{align*}
+  \item Diese Relation ist transitiv, denn sei \((A, B) \in R\) und
+    \((B, C) \in R\) mit
+    \begin{align*}
+      A &= P_{\sigma_{1}}^{T} B P_{\sigma_{1}}, \\
+      B &= P_{\sigma_{2}}^{T} C P_{\sigma_{2}}.
+    \end{align*}
+    Wir zeigen \((A, C) \in R\).  Das heißt, es existiert ein \(\sigma_{3} \in
+    \mathcal{S}_{n}\) mit \(A = P_{\sigma_{3}}^{T} C P_{\sigma_{3}}\).  Es gilt
+    \begin{align*}
+      A &= P_{\sigma_{1}}^{T} B P_{\sigma_{1}} \\
+        &= P_{\sigma_{1}}^{T} \left(P_{\sigma_{2}}^{T} C P_{\sigma_{2}}\right) P_{\sigma_{1}}.
+    \end{align*}
+  \end{itemize}
+  Daraus folgt, dass \(\sigma_{3}\) existiert und es gilt \(\sigma_{3} \coloneq \sigma_{2} \circ \sigma_{1}\).
+\end{proof}
+
+\subsection*{Aufgabe 1.4}
+
+Sei \(n \ge 2\) und \(\sigma \in \mathcal{S}_{n}\).
+
+\subsubsection*{Aufgabe 1.4, Teil i}
+
+\begin{beh}
+  Falls \(\sigma \ne \id\), dann existieren \(i, j \in \{1, \ldots, n\}\) mit \(\sigma(i)
+  > i\) und \(\sigma(j) < j\).
+\end{beh}
+
+\begin{proof}
+  Wir bemühen uns um einen Widerspruchsbeweis.  Angenommen, es gilt
+  für alle \(i, j \in \{1, \ldots, n\}\) dass \(\sigma(i) \le i\) und
+  \(\sigma(j) \ge j\).  Dann ist insbesondere \(\sigma(i) = i\) und
+  \(\sigma(j) = j\) für alle \(i, j \in \{1, \ldots, n\}\).  Dann gilt im
+  Widerspruch zur Voraussetzung dass \(\sigma = \id\).
+\end{proof}
+
+\subsubsection*{Aufgabe 1.4, Teil ii}
+
+\begin{beh}
+  Es existieren \(i_{1}, \ldots, i_{k} \in \{1, \ldots, n - 1\}\), sodass \(\sigma =
+  \tau_{i_{k}} \circ \cdots \circ \tau_{i_{1}}\) gilt, wobei \(\tau_{i_{j}} = (i_{j}, i_{j}
+  + 1)\) ist.  Diese Aussage ist falsch.
+\end{beh}
+
+\begin{proof}
+  ???
+\end{proof}
+
+\end{document}

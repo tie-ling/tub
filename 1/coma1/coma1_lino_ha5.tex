@@ -1,0 +1,166 @@
+\documentclass[12pt]{extarticle}
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,fancyhdr,color,graphicx,}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{tikz}
+\usetikzlibrary{calc,positioning,shapes.misc}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{parskip}
+\pagestyle{fancy}
+\setlength{\parindent}{0pt}
+\lhead{Yiwen Yang 466096, Qing Wang 458040, Yuchen Guo 480788}
+\rhead{CoMa 5. Übungsblatt\\Tutor: Lino Mo 4-5.30pm}
+\author{HA Gruppe 103: \\Yiwen Yang 466096\\Qing Wang 458040\\Yuchen Guo 480788\\Tutor: Lino Mo 4-5.30pm}
+\title{5. Übungsblatt\\\small CoMa I WS 22/23}
+\date{}
+\begin{document}
+\maketitle
+\newpage
+\textbf{3. Aufgabe}
+\begin{itemize}
+\item \((0, 2, 2, 2, 4, 4, 6)\)
+
+  Ein Graph mit den obigen Graden existiert nicht.  Wir betrachten
+  insbesondere der Knoten \(6\).  Dieser Knoten hat ingesamt \(6\) Kanten,
+  aber es existiert nur \(5\) andere Knoten mit Kanten.  Also es gibt
+  eine Kante, die keine Knoten verbindet.
+\item \((2, 2, 1, 3, 2, 3)\)
+
+  Ein Graph mit den obigen Graden existiert nicht.
+
+  Falls es existert keine Kante zwischen den Knoten mit \(3\) Grade,
+  dann es gibt nur eine Möglichkeit, nämlich ein Knoten \(3\)-Grades
+  verbindet \((2,2,1)\) und die andere verbindet \((2,2,2)\) .  In diesem
+  Fall gibt es eine Kante, die keine Knoten verbindet.
+  \begin{center}
+\begin{tikzpicture}
+  \begin{scope}[every node/.style={circle,thick,draw}]
+    \node (a2) at (2.5,2) {2};
+    \node (b2) at (2.5,1) {2};
+    \node (c1) at (2.5,0) {1};
+    \node (d3) at (0,1.5) {3};
+    \node (e2) at (2.5,-1) {2};
+    \node (f3) at (0,-0.5) {3};
+    \node (q)  at (0,-1.5) {?};
+\end{scope}
+\begin{scope}
+  \path [-] (d3) edge (a2);
+  \path [-] (d3) edge (b2);
+  \path [-] (d3) edge (c1);
+  \path [-] (f3) edge (e2);
+  \path [-] (f3) edge (a2);
+  \path [-] (f3) edge (b2);
+  \path [-] (q) edge (e2);
+\end{scope}
+\end{tikzpicture}
+  \end{center}
+  Falls es existert eine Kante zwischen den Knoten mit \(3\) Grade, also
+  prüfen wir, ob es ein Graph mit den Graden \((2, 2, 1, 2, 2, 2)\)
+  existiert. Dieser Graph existiert ebenfalls nicht, denn, eine der
+  Knoten \(2\)-Grades muss \((1)\) verbinden, also erhalten wir
+  \((1,2,0,2,2,2)\).  Wiederholen wir noch vier Mal, dann erhalten wir
+  \((0,0,0,0,0,1)\), also in diesem Fall gibt es eine Kante, die keine
+  Knoten verbindet.
+  \begin{center}
+\begin{tikzpicture}
+  \begin{scope}[every node/.style={circle,thick,draw}]
+    \node (a2) at (2.5,2) {2};
+    \node (b2) at (2.5,1) {2};
+    \node (c1) at (2.5,0) {1};
+    \node (d3) at (0,1.5) {3};
+    \node (e2) at (2.5,-1) {2};
+    \node (f3) at (0,-0.5) {3};
+    \node (q)  at (0,-1.5) {?};
+\end{scope}
+\begin{scope}
+  \path [-] (d3) edge (f3);
+  \path [-] (a2) edge (b2);
+  \path [-] (a2) edge[bend left=60] (c1);
+  \path [-] (b2) edge (d3);
+  \path [-] (d3) edge (e2);
+  \path [-] (e2) edge (f3);
+  \path [-] (q) edge (f3);
+\end{scope}
+\end{tikzpicture}
+  \end{center}
+\item \((2,5,1,2,2,2)\)
+  \begin{center}
+\begin{tikzpicture}
+  \begin{scope}[every node/.style={circle,thick,draw}]
+    \node (a5) at (0,0) {5};
+    \node (b2) at (0,1) {2};
+    \node (c2) at (1,0) {2};
+    \node (d2) at (0.7,-1) {2};
+    \node (e2) at (-0.7,-1) {2};
+    \node (f1) at (-1,0) {1};
+\end{scope}
+\begin{scope}
+\path [-] (a5) edge (b2);
+\path [-] (a5) edge (c2);
+\path [-] (a5) edge (d2);
+\path [-] (a5) edge (e2);
+\path [-] (a5) edge (f1);
+\path [-] (b2) edge (c2);
+\path [-] (d2) edge (e2);
+\end{scope}
+\end{tikzpicture}
+  \end{center}
+\end{itemize}
+
+\textbf{4. Aufgabe, Teil (a)}
+\begin{proof}
+  Wir beweisen diese Aussage mittels Kontraposition.
+
+  Es gelte die folgende Aussage:
+  \begin{quote}
+    Es gibt nur \(0\) oder \(1\) oder \(2\) Personen die sich alle
+    gegenseitig die Hand geschüttelt haben, \textbf{und},
+    es gibt nur \(0\) oder \(1\) oder \(2\) Personen, die sich alle
+    gegenseitig nicht die Hand geschüttelt haben.
+  \end{quote}
+
+  Der Fall mit nur \(1\) Person macht kein Sinn, deshalb erhalten wir
+  die folgende Aussage:
+  \begin{quote}
+    Es gibt nur \(0\) oder \(2\) (ein Paar) Personen die sich alle
+    gegenseitig die Hand geschüttelt haben, \textbf{und}, es gibt nur
+    \(0\) oder \(2\) (ein Paar) Personen, die sich alle gegenseitig nicht
+    die Hand geschüttelt haben.
+  \end{quote}
+
+  Es gibt nun vier Fällen zu betrachten, nämlich, \(0\) und \(0\); \(0\) und
+  \(2\); \(2\) und \(0\); \(2\) und \(2\).  In allen vier Fällen ist im
+  Widerspruch zur Voraussetzung die Anzahl der Coma-Betreuer weniger
+  als \(6\).
+\end{proof}
+
+\textbf{4. Aufgabe, Teil (b)}
+\begin{proof}
+  Wir beweisen diese Aussage mittels Kontraposition.
+
+  Wir durchnummerieren die Betreuern mit natürliche Zahlen von \(1\) bis
+  \(n\) und sei die Menge der Anzahl von Handschütteln
+\begin{align*}
+M:= \left\{ a_1, a_2, \ldots, a_n \right\}.
+\end{align*}
+
+Angenommen, es gilt für alle \(p,q \in \mathbb{N}_{\leq n}\) mit $p \neq
+q$ dass \(a_p \neq a_q\).
+
+O.B.d.A sei auch \(a_1 < a_2 < \ldots < a_n\).  Es gilt nun $a_n \leq n
+- 1$, denn ein Person kann höchstens alle andere \(n-1\) Personen die
+Hand schütteln.  Wegen Transitivität gilt \(a_{n-1} < n - 1\).  Wegen
+\(a_{n-1} \in \mathbb{N}\) gilt \(a_{n-1} \leq n-2\), und so weiter.
+Damit erhalten wir \(a_1 \leq 0\), also \(a_1 = 0\).
+
+Wir bemerken, dass die Menge der Anzahl von Handschütteln ist dann
+durch die im oben genannten Beschränkungen eindeutig bestimmt, also
+wegen \(a_1=0\) und \(a_1 < a_2\) und \(a_2 \leq 1\) muss \(a_2 = 1\) sein.
+Also die Menge ist \(\left\{ 0, 1, 2, 3, \ldots, n-1 \right\}\).  Aber
+der letzter Betreuer hat eine Anzahl von \(n-1\), also alle andere
+Personen die Hand geschüttelt, im Widerspruch zur \(a_1=0\).
+\end{proof}
+\end{document}

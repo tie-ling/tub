@@ -1,0 +1,169 @@
+%% page style
+\documentclass[12pt]{extarticle}
+\usepackage[margin=2cm]{geometry}
+\usepackage{fancyhdr,parskip}
+\pagestyle{fancy}
+\usepackage[onehalfspacing]{setspace}
+\setlength{\parindent}{0pt}
+\lhead{\myAuthor}
+\rhead{\mySubject \ \myHausaufgaben. Übungsblatt \\ \myTutor}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+
+%% language
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+
+%% default packages
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,
+  stmaryrd, % for the lightning symbol used in proof by contraction
+  tikz,     % used to draw diagrams
+}
+
+%% metadata
+\newcommand{\myAuthor}{Yuchen Guo 480788 | Meng Zhang 484981}
+\newcommand{\myHausaufgaben}{10}
+\newcommand{\mySubject}{LinA}
+\newcommand{\myTutor}{Saskia}
+
+
+%% custom commands
+\newcommand{\mg}[1]{\mathbb{#1}}
+\newcommand{\lin}{\operatorname{lin}}
+\newcommand{\aufgn}[1]{\textbf{Aufgabe #1.}}
+\newcommand{\beh}{\textit{Behauptung.}\ }
+\newcommand{\Bild}{\operatorname{Bild}}
+
+\begin{document}
+\aufgn{10.1.i}
+
+\beh Wenn \(\dim(U) = \dim(W) = n - 1\) gilt, dann gilt
+\(\dim(U \cap W) \ge n - 2\).
+
+\begin{proof}
+Es gilt wegen (Satz 9.4) dass
+\begin{align*}
+  \dim(U + W)
+  &= \dim U + \dim W - \dim (U \cap W) \\
+  &= 2n - 2 - \dim (U \cap W)
+\end{align*}
+Wegen \(U, W \subseteq V\) gilt \(\dim(U + W) \le n\).
+Daraus folgt, dass
+\begin{align*}
+\dim(U \cap W) \ge n - 2.
+\end{align*}
+\end{proof}
+
+\aufgn{10.1.ii}
+
+\beh Wenn \(\dim(U) + \dim(W) > n\) gilt, dann gilt $U
+\cap W \ne \left\{ 0 \right\}$.
+
+\begin{proof}
+  Wir beweisen diese Aussage mittels Kontraposition.  Zu
+  zeigen: $U \cap W \ne \left\{ 0 \right\} \implies \dim
+  U + \dim W \le n$.
+
+  Angenommen, \(U \cap W = \left\{ 0 \right\}\).  Dann
+  gilt \(\dim(U \cap W) = 0\).
+
+Daraus folgt, dass
+\begin{align*}
+  \dim(U + W)
+  &= \dim U + \dim W - \dim (U \cap W) \\
+  &= \dim U + \dim W \\
+  &\le n
+\end{align*}
+\end{proof}
+
+\aufgn{10.1.iii}
+
+\beh Sei \(V = \mg{R}^3\) und \(\dim U = \dim W = 2\).  Dann
+gilt \(U = W\) genau dann, wenn \(\dim (U \cap W) = 2\)
+gilt.
+
+\begin{proof}
+\textit{Hinrichtung.} Es gilt \(U = W\).  Daraus folgt, $U
++ U = U + W = U$.  Wegen (Satz 9.3) gilt
+\begin{align*}
+  \dim(U+W)
+  &= \dim U = 2 \\
+  &= \dim U + \dim W - \dim (U \cap W) \\
+  &= 2 + 2 - \dim (U \cap W).
+\end{align*}
+Daraus folgt \(\dim (U \cap W) = 2\).
+
+\beh Rückrichtung Lemma.  Sei \(V = \mg{R}^3\) und
+\(\dim U = \dim W = 2\) und \(U\), \(W\) Untervektorräume von
+\(V\) mit \(U \ne W\).  Dann gilt \(V = U + W\).
+
+\begin{proof}
+Angenommen, \(V \ne U + W\).  Weil \(U\), \(W\)
+Untervektorräume von \(V\) sind, gilt \((U + W) \subset V\)
+und \(\dim (U+W) < 3\).
+
+Falls \(\dim (U+W) = 2\).  Dann gilt im Widerspruch zur
+Voraussetzung dass \(U = W\).  (Hinrichtung.)
+
+Falls \(\dim (U+W) \le 1\).  Dann gilt
+\begin{align*}
+\dim(U \cap W) = \dim U + \dim W - \dim(U+W) \ge 3.
+\end{align*}
+Aber es gilt \(U \cap W \subseteq U\) und \(\dim U = 2\).
+Diese ist daher ein Widerspruch zur \(\dim U = 2\).
+\end{proof}
+
+\textit{Rückrichtung.}  Wir beweisen diese Aussage
+mittels Kontraposition.  Angenommen, \(U \ne W\).  Zu
+zeigen: \(\dim(U \cap W) \ne 2\).  Wegen $\dim U = \dim W
+= 2$ und \(\dim V = 3\) und \(U\), \(W\) Untervektorräume von
+\(V\), gilt \(U + W = V\).  Daraus folgt,
+\begin{align*}
+  \dim V
+  &= \dim (U + W) = 3\\
+  &= \dim U + \dim W - \dim (U \cap W) \\
+  &= 2 + 2 - \dim (U \cap W)
+\end{align*}
+Daraus folgt \(\dim (U \cap W) = 1 \ne 2\).
+\end{proof}
+
+\newpage
+\aufgn{10.2.i}
+
+\beh \(V^V = U \oplus W\).
+
+\begin{proof}
+Sei \(f \in V^V\) beliebig gewählt.
+
+Es gilt \(U \cap W = \left\{ 0 \right\}\).  Denn, sei $f
+\in U \cap W$ beliebig gewählt.  Die Funktionen
+erfüllen die folgenden Eigenschaften.  Für alle $v \in
+V$ gilt
+\begin{align*}
+  f(v) &= - f(-v) \\
+  f(v) &= f(-v).
+\end{align*}
+Addieren wir die beide Gleichungen erhalten wir $f(v) =
+0$.  Also \(U \cap W = \left\{ 0 \right\}\).
+\end{proof}
+
+\newpage
+\aufgn{10.4}
+
+\beh Die Aussagen (i) und (ii) sind äquivalent.
+
+\begin{proof}
+\textit{Hinrichtung.}  Für alle \(v \in V\) mit
+\(\phi(\phi(v)) = 0\) folgt \(\phi(v) \in \Bild(\phi)\) und
+\(\phi(v) \in \ker(\phi)\).  Wegen Voraussetzung dass
+\(\ker(\phi) \cap \Bild(\phi) = \left\{ 0 \right\}\) folgt
+dann \(\phi(v) = 0\).
+
+\textit{Rückrichtung.}  Sei $u \in \ker(\phi) \cap
+\Bild(\phi)\( beliebig gewählt.  Dann existiert ein \)w
+\in V$ mit \(\phi(w) = u\) und es gilt \(\phi(u) = 0\).  Es
+gilt dann \(\phi(\phi(w)) = 0\).  Wegen Voraussetzung gilt
+dann \(\phi(w) = 0 = u\).  Also, es gilt \(u = 0\).
+\end{proof}
+
+\end{document}

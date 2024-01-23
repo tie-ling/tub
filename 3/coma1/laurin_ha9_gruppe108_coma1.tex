@@ -1,0 +1,436 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+\documentclass[fleqn,draft,a5paper]{article}
+
+% 让每个章节 subsection 在新的一页上开始
+% 而不是紧接着上一章节
+\AddToHook{cmd/subsection/before}{\clearpage}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+
+\geometry{left=1cm,
+ right=1cm,
+ top=1cm,
+ bottom=2cm}
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+
+% 调整 Emacs 预览字体大小
+% (setq preview-scale-function 1.5)
+
+\usepackage{amsmath,mathtools,fontspec,amsthm,parskip,interval,unicode-math}
+\usepackage{xcharter-otf}
+
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\skp}[1]{\langle#1\rangle}
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\providecommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\providecommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+% 定义新函数，依赖于AMSmath
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\sspan}{span}
+
+\newcommand{\wt}{\widetilde}
+\newcommand{\dd}{\,\mathrm{d}}
+
+% 标题与作者
+\title{HA 9, CoMa 1, Laurin, Gruppe 108}
+\author{Kuan 480169, Yu 478912, Guo 480788}
+
+\begin{document}
+\maketitle
+\begin{center}
+Ting Yu Kuan 480169, Shilong Yu 478912, Yuchen Guo 480788
+\end{center}
+\newpage
+\subsection{1. Aufgabe}
+\subsubsection{Teil a}
+Seien
+\begin{align*}
+  \begin{bmatrix}
+    3 & -4 & 8 \\
+    4 & 3 & -6 \\
+    0 & 2 & 25
+  \end{bmatrix},
+  \quad
+  b =
+  \begin{bmatrix}
+    3 \\ 4 \\ 1
+  \end{bmatrix}.
+\end{align*}
+Sei \(Q \in \mathbb{R}^{3 \times 3}\) definiernt durch die Spalten \(u_{1}, u_{2},
+u_{3}\).  Wir bestimmen \(Q\) mit
+\begin{align*}
+  b_{i} = a_{i} - \sum_{j=1}^{i-1}{\skp{u_{j}, a_{i}}u_{j}}, \quad u_{i} \coloneq \frac{b_{i}}{\skp{b_{i}}}.
+\end{align*}
+Dann gilt
+\begin{multline*}
+  b_{1} = a_{1} - \sum_{j=1}^{0}\skp{u_{j}, a_{1}} \cdot u_{j} = a_{1} =
+  \begin{bmatrix}
+    3 \\ 4 \\ 0
+  \end{bmatrix}. \\
+  u_{1} \coloneq \frac{b_{1}}{\skp{b_{1}}} =
+  \begin{bmatrix}
+    \frac35 \\ \frac45 \\ 0
+  \end{bmatrix}
+  \text{ wobei } \skp{b_{1}} = \sqrt{3^{2} + 4^{2}} = 5. \\
+  b_{2} = a_{2} - \sum_{j=1}^{1}\skp{u_{j}, a_{2}}u_{j} = a_{2} -
+  \skp{u_{1}, a_{2}} u_{1} = a_{2} - 0 \cdot u_{1} =
+  \begin{bmatrix}
+    -4 \\ 3\\ 2
+  \end{bmatrix}. \\
+  u_{2} = \frac{b_{2}}{\skp{b_{2}}} =
+  \frac{1}{\sqrt{29}}
+  \begin{bmatrix}
+    -4 \\ 3 \\ 2
+  \end{bmatrix}. \\
+  b_{3} = a_{3} - \skp{u_{1}, a_{3}}u_{1} - \skp{u_{2}, a_{3}}u_{2} =
+  a_{3} - 0 =
+  \begin{bmatrix}
+    8 \\ -6 \\ 25
+  \end{bmatrix}. \\
+  u_{3} = \frac{b_{3}}{\skp{b_{3}}} =
+  \begin{bmatrix}
+    8 \\ -6 \\ 25
+  \end{bmatrix} \cdot \frac{1}{5\sqrt{29}} \text{ wobei } \skp{b_{3}} =
+    \sqrt{64 + 36 + 625} = 5 \sqrt{29}. \\
+  \end{multline*}
+  Dann gilt
+  \begin{align*}
+    Q =
+    \begin{bmatrix}
+      \frac35 & - \frac{4}{\sqrt{29}} & \frac{8}{5\sqrt{29}} \\
+      \frac45 & \frac{3}{\sqrt{29}} & - \frac{6}{5\sqrt{29}} \\
+      0 & \frac{2}{\sqrt{29}} & \frac{25}{5\sqrt{29}}
+    \end{bmatrix},
+    \quad
+    Q^{T} =
+    \begin{bmatrix}
+      \frac35 & \frac45 & 0 \\
+      -\frac{4}{\sqrt{29}} & \frac{3}{\sqrt{29}} & \frac{2}{\sqrt{29}}
+      \\
+      \frac{8}{5\sqrt{29}} & -\frac{6}{5\sqrt{29}} & \frac{25}{5\sqrt{29}}.
+    \end{bmatrix}
+  \end{align*}
+  Dann gilt
+  \begin{multline*}
+    Q^{T} \cdot Q =     \begin{bmatrix}
+      \frac35 & \frac45 & 0 \\
+      -\frac{4}{\sqrt{29}} & \frac{3}{\sqrt{29}} & \frac{2}{\sqrt{29}}
+      \\
+      \frac{8}{5\sqrt{29}} & -\frac{6}{5\sqrt{29}} & \frac{25}{5\sqrt{29}}.
+    \end{bmatrix} \cdot     \begin{bmatrix}
+      \frac35 & - \frac{4}{\sqrt{29}} & \frac{8}{5\sqrt{29}} \\
+      \frac45 & \frac{3}{\sqrt{29}} & - \frac{6}{5\sqrt{29}} \\
+      0 & \frac{2}{\sqrt{29}} & \frac{25}{5\sqrt{29}}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1
+    \end{bmatrix}
+    = I_{3}.
+  \end{multline*}
+  \subsubsection{Teil b}
+  Wir berechnen \(R\).
+  \begin{multline*}
+    R[1,1] = \skp{u_{1}, a_{1}} = \frac{9}{5} + \frac{16}{5} = 5. \\
+    R[1,2] = R[1,3] = R[2,1] = R[3,1] = R[3,2] = 0. \\
+    R[2,2] = \skp{u_{2}, a_{2}} = \frac{1}{\sqrt{29}}
+    \begin{bmatrix}
+      -4 & 3 & 2
+    \end{bmatrix}\cdot
+    \begin{bmatrix}
+      -4 \\ 3 \\ 2
+    \end{bmatrix} = \sqrt{29}. \\
+    R[3,3] = \skp{u_{3}, a_{3}} = 5\sqrt{29}. \\
+  \end{multline*}
+  Also gilt
+  \begin{multline*}
+    R =
+    \begin{bmatrix}
+      5 & 0 & 0 \\ 0 & \sqrt{29} & 0 \\ 0 & 0 & 5\sqrt{29}
+    \end{bmatrix}. \\
+    Q \cdot R =     \begin{bmatrix}
+      \frac35 & - \frac{4}{\sqrt{29}} & \frac{8}{5\sqrt{29}} \\
+      \frac45 & \frac{3}{\sqrt{29}} & - \frac{6}{5\sqrt{29}} \\
+      0 & \frac{2}{\sqrt{29}} & \frac{25}{5\sqrt{29}}
+    \end{bmatrix} \cdot R =
+    \begin{bmatrix}
+    3 & -4 & 8 \\
+    4 & 3 & -6 \\
+    0 & 2 & 25
+    \end{bmatrix} = A. \\
+  \end{multline*}
+  \subsubsection{Teil c}
+  Wir lösen das lineare Gleichungssystem \(A x = b\) mithilfe der
+  \(QR\)-Zerlegung.
+  Wegen \(A x = QRx = b\) setzen wir \(Rx = y \in \mathbb{R}^{3 \times 1}\).  Wir
+  berechnen \(y\) mittels
+  \begin{align*}
+     y = Q^{T} b =  \begin{bmatrix}
+      \frac35 & \frac45 & 0 \\
+      -\frac{4}{\sqrt{29}} & \frac{3}{\sqrt{29}} & \frac{2}{\sqrt{29}}
+      \\
+      \frac{8}{5\sqrt{29}} & -\frac{6}{5\sqrt{29}} & \frac{25}{5\sqrt{29}}.
+    \end{bmatrix} \cdot
+    \begin{bmatrix}
+      3 \\ 4 \\ 1
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      5 \\ \frac{2}{\sqrt{29}} \\ \frac{5}{\sqrt{29}}.
+    \end{bmatrix}
+  \end{align*}
+  Dann gilt \(R x = y \) mit
+  \begin{align*}
+    \begin{bmatrix}
+      5 & 0 & 0 \\ 0 & \sqrt{29} & 0 \\ 0 & 0& 5\sqrt{29}
+    \end{bmatrix}\cdot
+    \begin{bmatrix}
+      x_{1} \\ x_{2} \\ x_{3}
+    \end{bmatrix} =
+    \begin{bmatrix}
+      5  \\ \frac{2}{\sqrt{29}} \\ \frac{5}{\sqrt{29}}
+    \end{bmatrix}. \quad
+        x =
+    \begin{bmatrix}
+      1 \\ \frac{2}{29} \\ \frac{1}{29}
+    \end{bmatrix}
+  \end{align*}
+  \subsection{2. Aufgabe}
+  \subsubsection{Teil a}
+  Wir berechnen die \(LU\)-Zerlegung von \(A\) mittels
+  Gauß-Jordan-Elimination.
+  \begin{align*}
+  \begin{bmatrix}
+    1 & 2 & 3 \\ 4 & 6 & 6 \\ 4 & 2 & 2
+  \end{bmatrix}
+    \to
+    \begin{bmatrix}
+      1 & 2 & 3 \\ 0 & -2 & -6 \\ 0 & -6 & -10
+    \end{bmatrix}
+    \to
+    \begin{bmatrix}
+      1 & 2 & 3 \\ 0 & -2 & -6 \\ 0 & 0 & 8
+    \end{bmatrix}
+  \end{align*}
+  also die oberen Matrix ist
+  \begin{align*}
+    U = 
+    \begin{bmatrix}
+      1 & 2 & 3 \\ 0 & -2 & -6 \\ 0 & 0 & 8
+    \end{bmatrix}
+  \end{align*}
+  normierte untere Dreieicksmatrix
+  \begin{align*}
+    L =
+    \begin{bmatrix}
+      1 & 0 & 0 \\ 4 & 1 & 0 \\ 4 & 3 & 1
+    \end{bmatrix}.
+  \end{align*}
+  \subsubsection{Teil b}
+  Wir verwenden die \(LU\)-Zerlegung, um die Lösung der linearen
+  Gleichungssysteme
+  \begin{align*}
+    Ax = b =
+    \begin{bmatrix}
+      8 \\ 16 \\ 24
+    \end{bmatrix},
+    \quad
+    Ax = c =
+    \begin{bmatrix}
+      3 \\ -2 \\ 2
+    \end{bmatrix}
+  \end{align*}
+  zu berechnen.
+
+  Wegen \(Ax = LUx = b\) sei \(y = Ux =
+  \begin{bmatrix}
+    y_{1} \\ y _{2} \\ y_{3}
+  \end{bmatrix}
+  \).  Dann gilt
+  \begin{align*}
+    Ly = b =
+    \begin{bmatrix}
+      1 & 0 & 0 \\ 4&1&0 \\ 4&3&1
+    \end{bmatrix}\cdot
+    \begin{bmatrix}
+      y_{1} \\ y_{2} \\ y_{3}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      8 \\ 16 \\ 24
+    \end{bmatrix}
+  \end{align*}
+  erhalten wir
+  \begin{align*}
+    y =
+    \begin{bmatrix}
+      8 \\ -16 \\ 40
+    \end{bmatrix}.
+  \end{align*}
+  Also
+  \begin{align*}
+    y = Ux =
+    \begin{bmatrix}
+      8 \\ -16 \\ 40
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      1 & 2 & 3 \\ 0&-2&-6\\0&0&8
+    \end{bmatrix}
+    \begin{bmatrix}
+      x_{1}\\ x_{2} \\ x_{3}
+    \end{bmatrix}
+  \end{align*}
+  erhalten wir \(x =
+  \begin{bmatrix}
+    7 \\ -7 \\ 5
+  \end{bmatrix}.
+  \)  Sei
+  \begin{align*}
+    Ax = c =
+    \begin{bmatrix}
+      3 \\ -2 \\ 2
+    \end{bmatrix}
+    = LUx, \quad y = Ux =
+    \begin{bmatrix}
+      y_{1} \\ y_{2} \\ y_{3}
+    \end{bmatrix}
+  \end{align*} dann gilt
+  \begin{align*}
+    Ly = c =
+    \begin{bmatrix}
+      1 & 0 & 0 \\ 4&1&0 \\ 4&3&1
+    \end{bmatrix}
+    \begin{bmatrix}
+      y_{1} \\ y_{2} \\ y_{3}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      3 \\ -2 \\ 2
+    \end{bmatrix}
+  \end{align*}
+  erhalten wir
+  \begin{align*}
+    y =
+    \begin{bmatrix}
+      3 \\ -14 \\ 32
+    \end{bmatrix}.
+  \end{align*}
+  Dann gilt
+  \begin{align*}
+    Ux =
+    \begin{bmatrix}
+      1&2&3\\0&-2&-6\\0&0&8
+    \end{bmatrix}
+    \begin{bmatrix}
+      x_{1} \\ x_{2} \\ x_{3}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      3 \\ -14 \\ 32
+    \end{bmatrix}.
+  \end{align*}
+  Erhalten wir
+  \begin{align*}
+    x =
+    \begin{bmatrix}
+      1 \\ -5 \\ 4
+    \end{bmatrix}.
+  \end{align*}
+  \subsection{3. Aufgabe}
+  Sei
+  \begin{align*}
+    \begin{bmatrix}
+      9 & 2 & 4 \\ 3 & 0 & -3 \\ \lambda & 2 & 9
+    \end{bmatrix}
+    \begin{bmatrix}
+      x_{1} \\ x_{2} \\ x_{3}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      \mu \\ 8 \\ 6
+    \end{bmatrix}
+  \end{align*}
+  also
+  \begin{gather*}
+    \left[
+    \begin{array}{ccc|c}
+      9 & 2  & 4 & \mu \\
+      3 & 0 & -3 & 8 \\
+      \lambda & 2 & 9 & 6
+    \end{array}
+    \right]
+    \to
+    \left[
+    \begin{array}{ccc|c}
+      3 & 0 & -3 & 8 \\
+      0 & 2 & 13 & \mu - 24 \\
+      0 & 0 & \lambda -4 & 30 - \frac83\lambda - \mu
+    \end{array}\right].
+\end{gather*}
+Daraus folgt
+\begin{align*}
+  x_{1} &= \frac{58-3\mu}{3\lambda-12} \\
+  x_{2} &= \frac{3\mu\lambda+27\mu+32\lambda-882}{6\lambda-24} \\
+  x_{3} &= \frac{90-3\mu-8\lambda}{3\lambda-12}
+\end{align*}
+Die Lösungsmenge des linearen Gleichungssystems ist
+\begin{align*}
+  \left\{\left(\frac{58-3\mu}{3\lambda-12}, \frac{3\mu\lambda+27\mu+32\lambda-882}{6\lambda-24}, \frac{90-3\mu-8\lambda}{3\lambda-12}\right)\right\}.
+\end{align*}
+Falls \(\lambda = 4\) oder \(\mu=\frac{58}{3}\) ist, besitzt die System keine
+Lösung.
+\subsection{4. Aufgabe}
+Seien \(A \in \mathbb{R}^{m\times n}\) und für \(J \subseteq \{1, \ldots, n\}\) sei \(A_{\cdot,J} \in \mathbb{R}^{m \times
+  \abs{J}}\) die Teilmatrix mit alle Spalten, deren Indizes in \(J\)
+enthält.
+\begin{Behauptung}
+  Für alle \(J_{1}, J_{2} \subseteq \{1, \ldots, n\}\) gilt
+  \[\rg(A_{\cdot,J_{1} \cup J_{2}}) + \rg(A_{\cdot,J_{1} \cap J_{2}}) \le
+    \rg(A_{\cdot,J_{1}}) + \rg(A_{\cdot,J_{2}}).\]
+\end{Behauptung}
+\begin{proof}
+  Wir bemerken zuerst, dass die Zeilenrang und die Spaltenrang
+  übereinstimmen.  Seien die von Spalten in \(J_{1}\) aufgespannte
+  Unterraum \(W_{1}\) und die von Spalten in \(J_{2}\) aufgespannte
+  Unterraum \(W_{2}\).  Wegen Dimensionsformel gilt
+  \begin{align*}
+    \dim \sspan{(W_{1} \cup W_{2})} = \dim W_{1} + \dim W_{2} - \dim(W_{1} \cap W_{2}).
+  \end{align*}
+  Wegen \(A_{J_{1}\cup J_{2}} \in \sspan(W_{1} \cup W_{2})\) und \(A_{J_{1}\cap
+    J_{2}} \in W_{1} \cap W_{2}\) folgt, dass
+  \begin{align*}
+    \rg A_{J_{1}\cup J_{2}} \le \dim \sspan(W_{1} \cup W_{2}), \quad \rg A_{J_{1}\cap
+    J_{2}} \le  \dim W_{1} \cap W_{2}.
+  \end{align*}
+  Summieren wir die beide Seite, erhalten wir
+  \begin{align*}
+    \rg A_{J_{1}\cup J_{2}} + \rg A_{J_{1}\cap J_{2}}
+    &\le \sspan(W_{1} \cup W_{2}) +  \dim W_{1} \cap W_{2} \\
+    &= \dim W_{1} + \dim W_{2} = \rg(A_{\cdot,J_{1}}) + \rg(A_{\cdot,J_{2}})
+  \end{align*}
+  wie behauptet.
+\end{proof}
+\end{document}
+

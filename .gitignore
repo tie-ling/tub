@@ -16,3 +16,6 @@ auto
 examples/answers.tex
 examples/index.tex
 *.el
+*.top
+*.tuc
+*.synctex

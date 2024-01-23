@@ -1,0 +1,266 @@
+\documentclass[draft,a5paper]{article}
+\usepackage[ngerman]{babel}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath,mathtools,fontspec,amssymb,mathtools}
+
+% for theorems and lemma
+\usepackage{amsthm}
+\newtheorem*{beh}{Behauptung}
+\newtheorem*{lem}{Lemma}
+
+% times new roman font
+\usepackage{newtx}
+
+\linespread{1.2}
+
+% use var* variants
+% can be entered with auctex "` v *" prefix
+\let\phi\undefined
+\newcommand{\phi}{\varphi}
+
+\author{Yuchen Guo 480788, Meng Zhang 484981}
+
+\date{\today}
+
+\title{HA 2, LinA 2 -- Francesco Patrick Nowell}
+
+% fuctions exclusive to this HA
+\DeclareMathOperator{\sign}{sign}
+
+\begin{document}
+\maketitle
+
+\newpage
+
+\subsection*{Aufgabe 2.1}
+
+\subsubsection*{Aufgabe 2.1, Teil i}
+
+\begin{beh}
+  Die Abbildung
+  \(\phi \colon \mathbb{R}_{\le 2}[t] \times \mathbb{R}_{\le 2}[t] \to \mathbb{R}, (p, q) \mapsto \sum_{i =
+    0}^{2}{p(i)q(i)}\).  ist multilinear und nicht alternierend.
+\end{beh}
+
+\begin{proof}
+  Wir zeigen, dass \(\phi(cp+r,q)=c\phi(p,q) + \phi(r,q)\) für alle
+  \(p, r, q \in \mathbb{R}_{\le 2}[t]\) und alle \(c \in \mathbb{R}\) gilt.  Der Beweis für
+  \(\phi(p,cq+r) = c\phi(p,q)+\phi(p,r)\) folgt analog.
+
+  Wir bemerken, dass \(\mathbb{R}_{\le 2}[t] = \{\sum_{i=0}^{2}{a_{i}t^{i}}, a_{i} \in
+  \mathbb{R}, i \in \mathbb{N}_{\le 2}\}\) ein \(\mathbb{R}\)-Vektorraum bzgl. Addition von Polynome
+  und Multiplikation von Skalaren ist.  Daraus folgt,
+  \begin{align*}
+    \phi(cp+r,q)
+    = \sum_{i=0}^{2}{(cp+r)(i)q(i)}
+    = c \cdot \sum_{i=0}^{2}{p(i)q(i)} + \sum_{i=0}^{2}{r(i)q(i)}
+    = c \phi(p,q) + \phi(r,q).
+  \end{align*}
+  Diese ist jedoch nicht alterniernend, denn sei \(p = q \coloneq 1 + t +
+  t^{2}\).  Wir erhalten
+  \(\phi(p,q) = \sum_{i=0}^{2}{p(i)q(i)} = 1 + 3 + 7 = 11 \ne 0\).
+  Damit ist \(\phi\) nicht alternierend.
+\end{proof}
+
+\subsubsection*{Aufgabe 2.1, Teil ii}
+
+\begin{beh}
+  Die Abbildung
+  \(\phi \colon \mathbb{C}^{3} \times \mathbb{C}^{3} \to \mathbb{C}, (x, y) \mapsto x_{1} \bar{y}_{2} - 2x_{2}
+  \bar{y}_{3} + x_{3} \bar{y}_{1}\) ist multilinear und nicht
+  alternierend.
+\end{beh}
+
+\begin{proof}
+  Wir zeigen, dass \(\phi(cx+z,y) = c\phi(x,y) + \phi(z,y)\) für alle \(x, y, z
+  \in \mathbb{C}^{3} \times \mathbb{C}^{3} \) und alle \(c \in \mathbb{C}\) gilt. Es gilt,
+  \begin{align*}
+    \phi(cx+z,y)
+    &= (cx+z)_{1}\bar{y}_{2} - 2(cx+z)_{2}\bar{y}_{3} + (cx+z)_{3}
+      \bar{y}_{1} \\
+    &= c[x_{1}\bar{y}_{2} - 2x_{2}\bar{y}_{3} + x_{3}\bar{y}_{1}]
+      + [z_{1}\bar{y}_{2} - 2z_{2}\bar{y}_{3} + z_{3}\bar{y}_{1}] \\
+    &= c\phi(x, y) + \phi(z, y).
+  \end{align*}
+  Diese ist jedoch nicht alterniernend, denn sei
+  \(x = y \coloneq (1, 2, 1) \in \mathbb{C}^{3}\).  Wir erhalten
+  \(\phi(x,y) = 2 - 4 + 1 = -1 \ne 0\).  Damit ist \(\phi\) nicht
+  alternierend.
+\end{proof}
+
+\subsubsection*{Aufgabe 2.1, Teil iii}
+
+\begin{beh}
+  Die Abbildung \(\phi \colon \mathbb{C}^{3} \times \mathbb{C}^{3} \times \mathbb{C}^{3} \to \mathbb{C}^{2}, (x, y, z) \mapsto f(x) +
+  f(y) + f(z)\) ist keine multilineare Abbildung für \(f \in
+  L(\mathbb{C}^{3}, \mathbb{C}^{2})\).
+\end{beh}
+
+\begin{proof}
+  Wir zeigen, dass \(\phi(cx+p, y, z) \ne c\phi(x,y,z) + \phi(p,y,z)\) für
+  \(x, y, z, p \in \mathbb{C}^{3} \times \mathbb{C}^{3} \times \mathbb{C}^{3} \).
+  Denn, es gilt,
+  \begin{align*}
+    \phi(cx+p, y, z)
+    &= f(cx+p) + f(y) + f(z) \\
+    &= cf(x) + f(p) + f(y) + f(z) \tag*{Weil \(f \in L(\mathbb{C}^{3}, \mathbb{C}^{2})\) linear ist.} \\
+    &\ne c[f(x) + f(y) + f(z)] + [f(p) + f(y) + f(z)] \\
+    &= c\phi(x, y, z) + \phi(p, y, z).
+  \end{align*}
+  Damit haben wir gezeigt, dass \(\phi\) keine multilineare Abbildung ist.
+\end{proof}
+
+\subsection*{Aufgabe 2.2}
+
+\subsubsection*{Aufgabe 2.2, Teil i}
+
+\begin{beh}
+  Die Determinante von \(f \colon \mathbb{R}_{\le 2}[t] \to \mathbb{R}_{\le 2}[t], p \mapsto [t \mapsto p(2t+2)
+  - 2p(t)]\) ist \(0\).
+\end{beh}
+
+\begin{proof}
+  Sei \(B \coloneq \{p_{1}, p_{2}, p_{3}\}\) mit \(p_{i} = t^{i - 1}\) eine
+  Basis von \(\mathbb{R}_{\le 2}[t]\).  Wir berechnen die Matrixdarstellung von
+  \(f\) bzgl. der Basis \(B\).  Sei \(p \in \mathbb{R}_{\le 2}[t], p = a + bt +
+  ct^{2}\) und \(a, b, c \in \mathbb{R}\). Es gilt,
+  \begin{align*}
+    f(p)
+    = a + b(2t+2) + c(2t+2)^{2} - 2(a+bt+ct^{2})
+    = (-a + 4b + 4c) + 4ct + 2ct^{2}.
+  \end{align*}
+  Daraus folgt, für ein \(M(f) \in \mathbb{R}^{3 \times 3}\)
+  \begin{align*}
+    M(f(p))
+    &= M(f) \times M(p) \\
+     \begin{bmatrix}
+        -a + 4b + 4c \\
+        4c \\
+        2c
+      \end{bmatrix}
+    &=
+     M(f) \times
+      \begin{bmatrix}
+        a \\
+        b \\
+        c
+      \end{bmatrix}
+  \end{align*}
+  Daraus folgt, dass
+  \begin{align*}
+    M(f)
+    &=
+      \begin{bmatrix}
+        -1 & 4 & 4 \\
+        0 & 0 & 4 \\
+        0 & 0 & 2
+      \end{bmatrix}.
+  \end{align*}
+  Damit gibt es zwei Zeilen in \(M(f)\), die linear abhängig sind.
+  Wegen Proposition 17.10, Teil ii ist dann
+  \(\det(f) = \det(M(f)) = 0\).
+\end{proof}
+
+\subsubsection*{Aufgabe 2.2, Teil ii}
+
+\begin{beh}
+  Die Determinante von \(\phi_{\sigma} \colon \mathbb{R}^{n} \to \mathbb{R}^{n}\) mit \(\sigma \in \mathcal{S}_{n}\) und
+  \(\phi_{\sigma}(e_{i}) = e_{\sigma(i)}\) für \(i = 1, \ldots, n\) ist \(1\), falls
+  \(\sigma\) eine gerade Permutation ist und \(-1\), falls \(\sigma\) eine
+  ungerade Permutation ist.
+\end{beh}
+
+\begin{proof}
+  Wir bemerken, dass die Spalten der Permutationsmatrix \(M(\phi_{\sigma})\)
+  durch \(\phi_{\sigma}(e_{i}) = e_{\sigma(i)}\) eindeutig definiert ist.  Weiter
+  gilt
+  \begin{align*}
+    \det(\phi_{\sigma}) = \sum_{\sigma' \in \mathcal{S}_{n}}{\sign(\sigma')a_{\sigma'(1),1} \cdot \ldots \cdot a_{\sigma'(n),n}}.
+  \end{align*}
+  Aus der Definition von \(\phi\) folgt, dass für alle
+  \(\sigma' \ne \sigma\) die Gleichung \(a_{\sigma'(i),i} = 0\) gilt.  Falls
+  \(\sigma' = \sigma\), dann gilt \(a_{\sigma'} = 1\). Daraus folgt,
+  \begin{align*}
+    \det(\phi_{\sigma}) = \sign(\sigma)a_{\sigma(1),1} \cdot \ldots \cdot a_{\sigma(n),n} = \sign(\sigma) \cdot 1.
+  \end{align*}
+  Damit gilt die Behauptung.
+\end{proof}
+
+\subsection*{Aufgabe 2.3}
+
+\begin{beh}
+  Die Abbildung
+  \begin{align*}
+    \Phi \colon \mathbb{K}^{n \times n} \to \{\phi \colon \mathbb{K}^{n} \times \mathbb{K}^{n} \to \mathbb{K} \mid \phi \text{ ist eine
+    Bilinearform}\}
+  \end{align*}
+  mit \(\Phi(A)(x,y) \coloneq x^{T}Ay, (x, y) \in \mathbb{K}^{n} \times \mathbb{K}^{n}\)
+  ist ein Isomorphismus.
+\end{beh}
+
+\begin{proof}
+  Wir zeigen, dass die Abbildung \(\Phi\) ein Isomorphismus ist, indem
+  wir zeigen, dass für alle \(A, B \in \mathbb{K}^{n \times n}\) die Gleichung
+  \(\Phi(AB) = \Phi(A) \cdot \Phi(B)\) gilt und \(\Phi\) bijektiv ist.
+
+  Es gilt \(\Phi(AB) = \Phi(A) \cdot \Phi(B)\).  Denn, sei \(A, B \in \mathbb{K}^{n \times n}\) und
+  \((x, y) \in \mathbb{K}^{n} \times \mathbb{K}^{n}\) beliebig gewählt. Es gilt,
+  \begin{align*}
+    \Phi(AB)(x,y)
+    &= x^{T}(AB)y \\
+    &= \sum_{g=1}^{n}{(x^{T})_{1,g}\left[(AB)y\right]_{g,1}} \\
+    &= \sum_{g=1}^{n}{(x^{T})_{1,g}\left[\sum_{h=1}^{n}{(AB)_{g,h} \cdot y_{h,1}}\right]} \\
+    &=
+      \sum_{g=1}^{n}{(x^{T})_{1,g}\left[\sum_{h=1}^{n}{\left(\sum_{i=1}^{n}{A_{g,i}B_{i,h}}\right)
+      \cdot y_{h,1}}\right]} \\
+    &= \sum_{g=1}^{n}\sum_{h=1}^{n}\sum_{i=1}^{n} (x^{T})_{1,g} A_{g,i}B_{i,h}
+      y_{h,1} \\
+    &= \left(\sum_{g=1}^{n}\sum_{h=1}^{n}(x^{T})_{1,g}A_{g,h}y_{h,1}\right)
+      \cdot \left(\sum_{g=1}^{n}\sum_{h=1}^{n}(x^{T})_{1,g}B_{g,h}y_{h,1}\right) \\
+    &= \left(\sum_{g=1}^{n}{(x^{T})_{1,g}\left[\sum_{h=1}^{n}{(A)_{g,h} \cdot
+      y_{h,1}}\right]}\right) \cdot \left(\sum_{g=1}^{n}{(x^{T})_{1,g}\left[\sum_{h=1}^{n}{(B)_{g,h} \cdot
+      y_{h,1}}\right]}\right) \\
+    &= (x^{T}Ay) \cdot (x^{T}By) \\
+    &= \Phi(A)(x,y) \cdot \Phi(B)(x,y).
+  \end{align*}
+  Damit ist \(\Phi\) eine Morphismus.  Wir zeigen, dass die Abbildung
+  \(\Phi\) bijektiv ist, indem wir zeigen, dass zu jedem \(\phi\) genau ein
+  Urbild \(A \in \mathbb{K}^{n \times n}\) mit \(\Phi(A) = \phi\) gibt.  Sei
+  \(\phi \in \{\phi \colon \mathbb{K}^{n} \times \mathbb{K}^{n} \to \mathbb{K} \mid \phi \text{ ist eine Bilinearform}\}\),
+  \(x,y,z \in \mathbb{K}^{n}\) und \(c, d \in \mathbb{K}\) beliebig gewählt mit
+  \(\phi(cx+z,y) = d\).  Weil \(\phi\) bilinear ist, gilt
+  \begin{align*}
+    \phi(cx+z,y)
+    &= c\phi(x,y) +  \phi(z,y) \\
+    &= c(x^{T}Ay) + (z^{T}Ay) \\
+    &= d.
+  \end{align*}
+  Das heißt, die Matrix \(A\) ist durch den Wahl von Matrizen \(x, y,
+  z\) und Skalaren \(c, d\) eindeutig bestimmt.  Damit ist die
+  Abbildung bijektiv und \(\Phi\) ein Isomorphismus.
+\end{proof}
+
+\subsection*{Aufgabe 2.4}
+
+\begin{beh}
+  Sei \(V\) ein \(n\)-dimensionaler \(\mathbb{K}\)-Vektorraum.  Die Abbildung
+  \(f \colon V^{n} \to \mathbb{K} \) ist genau dann eine alternierende
+  \(n\)-Linearform, falls \(f\) homogen und scherungsinvariant ist.
+\end{beh}
+
+\begin{proof}
+  Hinrichtung. Angenommen, \(f\) ist eine alterniernede
+  \(n\)-Linearform.  Aus der Definition von \(n\)-Linearform folgt,
+  dass \(f\) homogen ist und die folgende Gleichung gilt
+  \begin{align*}
+    f(v_{1}, \ldots, v_{i-1}, v_{i} + \lambda v_{j}, v_{i+1}, \ldots, v_{n})
+    &= f(v_{1}, \ldots, v_{i-1}, v_{i}, v_{i+1}, \ldots, v_{n}) \\
+    &\quad + f(v_{1}, \ldots, v_{i-1}, \lambda v_{j}, v_{i+1}, \ldots, v_{n})
+  \end{align*}
+  wobei der letztere Skalar wegen lineare Abhängigkeit gleich Null
+  ist.  Damit ist \(f\) scherungsinvariant.
+
+  Rückrichtung.  Angenommen, \(f\) ist homogen und scherungsinvariant.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,236 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+\documentclass[draft,a5paper]{article}
+
+% 让每个章节 subsection 在新的一页上开始
+% 而不是紧接着上一章节
+\AddToHook{cmd/subsection/before}{\clearpage}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+\geometry{a5paper,
+ left=1cm,
+ right=1cm,
+ top=1cm,
+ bottom=2cm
+}
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+
+% 调整 Emacs 预览字体大小
+% (setq preview-scale-function 1.5)
+
+% TeX Gyre Schola and unicode-math
+% which in turn loads amsmath,mathtools,fontspec and friends
+\usepackage{xcharter-otf}
+
+
+% 加载数学相关的包
+\usepackage{
+  % 自然段间留空
+  parskip,
+  % 区间排版
+  interval
+}
+
+% 中文支持，暂时不需要
+% \usepackage[UTF8]{ctex}
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\usepackage{amsthm}
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+\title{HA 2, CoMa 1, Melanie, Gruppe 10}
+\author{Erkan 381318, Wernicke 492703, Guo 480788}
+
+\begin{document}
+\maketitle
+\begin{center}
+Tolga Erkan 381318,  Moritz Karl Wernicke 492703, Yuchen Guo 480788
+\end{center}
+\subsection{1. Aufgabe}
+\begin{enumerate}
+\item Behauptung.  \(5^{n} - 2^{n}\) ist für alle natürlichen Zahlen \(n\)
+  durch \(3\) teilbar.
+  \begin{proof}
+    Wir beweisen die Behauptung mittels vollständigen Induktion.
+
+    Induktionsanfang.  \(n=0\).  Dann ist \(5^{0} - 1^{0} = 1 - 1 = 0\)
+    durch \(3\) teilbar.
+
+    Induktionsvorausssetzung.  Angenommen, die Behauptung gelte für
+    ein fest gewähltes \(n \in \mathbb{N}\).
+
+    Induktionsschritt.  \(n \to n+1\).  Dann gilt
+    \[5^{n+1} - 2^{n+1} = 5^{n} \cdot 5 - 2^{n} \cdot 2 = 5^{n} \cdot 5 - 2^{n}\cdot
+      (5-3) = 5(5^{n} - 2^{n}) + 2^{n} \cdot 3\]
+    indem wegen Induktionsvoraussetzung \(5^{n} - 2^{n}\) durch \(3\)
+    teilbar ist.  Daraus folgt, dass \(5^{n+1} - 2^{n+1}\) durch \(3\)
+    teilbar ist.  Damit gilt die Behauptung.
+  \end{proof}
+\item Es gilt
+  \[5 \log_{2}(n) \prec 3\sqrt{n} \prec 2^{n}\log_{2}(n) \prec 3^{n} \prec n! \]
+\item Behauptung.  Für alle natürlichen Zahlen \(m \ge 2\) und \(n \ge 1\)
+  gilt \(F_{m+n} = F_{m-1}F_{n} + F_{m}F_{n+1}\).
+  \begin{proof}
+    durch vollständigen Induktion über \(n\).
+
+    Induktionsanfang.  Sei \(n = 1\).  Dann gilt
+    \[F_{m+1} = F_{m-1} + F_{m} = F_{m-1} F_{1} + F_{m} F_{2}.\]
+    Sei \(n = 2\).  Dann gilt
+    \[F_{m+2} = F_{m+1} + F_{m} = F_{m-1} + F_{m} + F_{m} = F_{m-1}
+      F_{2} + F_{m} F_{3}.\]
+
+    Induktionsvoraussetzung. Angenommen, die Behauptung gelte für
+    ein fest gewähltes \(n \in \mathbb{N}\) und \(n+1\).
+
+    Induktionsschritt.  Wir zeigen, dass für \(n+2\) gilt
+    \[F_{m+n+2} = F_{m-1}F_{n+2} + F_{m}F_{n+3}.\]
+    Dies gilt, wegen
+    \begin{align*}
+      F_{m+n+2} &= F_{m+n} + F_{m+n+1} \\
+                &= (F_{m-1}F_{n} + F_{m}F_{n+1}) + (F_{m-1}F_{n+1} +
+                  F_{m}F_{n+2}) \\
+                &= F_{m-1}(F_{n} + F_{n+1}) + F_{m}(F_{n+1}+F_{n+2}) \\
+                &= F_{m-1}F_{n+2} + F_{m}F_{n+3}.
+    \end{align*}
+  \end{proof}
+\end{enumerate}
+\subsection{2. Aufgabe}
+\begin{enumerate}
+\item Behauptung.  Sei \(f, g \in O(h)\) und \(a, b \in \mathbb{R}_{>0}\).  Dann folgt
+  \(af + bg \in O(h)\).
+
+  \begin{proof}
+    Wegen Definition enhält die Menge \(O(h)\) alle
+    \(f\colon \mathbb{N} \to \mathbb{R}\), falls eine \(\alpha > 0\) existiert sodass
+    \(0 \le f(n) \le \alpha h(n)\) für alle \(n \ge n_{0}, n \in \mathbb{N}\).
+
+    Sei \(\alpha > 0\) und \(n_{0} \in \mathbb{N}\) sodass \(0 \le f(n) \le \alpha h(n_{0})\) für
+    alle \(n \ge n_{0}\).  Sei \(\beta > 0\) und \(n_{1} \in \mathbb{N}\) sodass \(0 \le g(n)
+    \le \beta h(n_{1})\) für alle \(n \ge n_{1}\).  Sei \(\gamma \coloneq \alpha \cdot a + \beta \cdot b\) und
+    \(n_{3} \coloneq \max{(n_{0}, n_{1})}\).  Dann folgt
+    \[0 \le af(n) + bg(n) \le \gamma h(n); \quad n \ge n_{3}.\]
+    Damit gilt die Behauptung.
+  \end{proof}
+
+\item Behauptung.  \(f \in O(g)\) genau dann, falls \(g \in \Omega(f)\).
+  \begin{proof}
+    Hinrichtung.  Angenommen, \(f \in O(g)\).  Dann existiert \(\alpha > 0\) und
+    \(n_{0} \in \mathbb{N}\) sodass \(0 \le f(n) \le \alpha g(n)\) für alle \(n \ge n_{0}\).  Dann
+    gilt
+    \[ 0 \le \frac{1}{\alpha}f(n) \le g(n); \quad n \ge n_{0}.\]
+    Daraus folgt, dass \(g \in \Omega(f)\).
+
+    Rückrichtung.  Angenommen, \(g \in \Omega(f)\).  Dann existiert \(\beta > 0\) und
+    \(n_{0} \in \mathbb{N}\) sodass \(0 \le \beta f(n) \le g(n)\) für alle \(n \ge n_{0}\).  Dann
+    gilt
+    \[ 0 \le f(n) \le \frac{1}{\beta}g(n); \quad n \ge n_{0}.\]
+    Daraus folgt, dass \(f \in O(g)\).
+  \end{proof}
+\item Behauptung.  Aus \(f \in O(g)\) und \(g \in O(h)\) folgt \(f \in O(h)\).
+  \begin{proof}
+    Wegen Voraussetzung existiert \(\alpha, \beta >0\) und \(n_{0}, n_{1} \in \mathbb{N}\)
+    sodass gilt
+    \[0 \le f(n) \le \alpha g(n), \quad 0 \le g(m) \le\beta h(m), \quad n \ge n_{0}, m \ge n_{1}.\]
+    Dann gilt
+    \[0 \le f(n) \le \alpha \beta h(n), \quad n \ge \max(n_{0}, n_{1}).\]
+    Daraus folgt, dass \(f\in O(h)\) gilt.
+  \end{proof}
+\item Behauptung.  Aus \(f \in \Omega(g)\) und \(g \in \Omega(h)\) folgt \(f \in \Omega(h)\).
+  \begin{proof}
+    Wegen Voraussetzung existiert \(\alpha, \beta >0\) und \(n_{0}, n_{1} \in \mathbb{N}\)
+    sodass gilt
+    \[0 \le \alpha g(n) \le f(n), \quad 0 \le \beta h(m) \le g(m), \quad n \ge n_{0}, m \ge n_{1}.\]
+    Dann gilt
+    \[0 \le \alpha \beta h(n) \le f(n), \quad n \ge \max(n_{0}, n_{1}).\]
+    Daraus folgt, dass \(f\in \Omega(h)\) gilt.
+  \end{proof}
+\end{enumerate}
+\subsection{3. Aufgabe}
+\subsubsection{3. Aufgabe, Teil a}
+\begin{Behauptung}
+  Man kann die Ebene mit \(n \in \mathbb{N}\) Geraden in höchstens \(\frac{n^{2} + n
+    + 2}{2}\) Gebiete zerlegen.
+\end{Behauptung}
+\begin{proof}
+  Wir bemühen einen Beweis mittels vollständigen Induktion.
+  \begin{itemize}
+  \item   Induktionsanfang \(n = 0\).  Wenn es keine Gerade gibt, bleibt die
+    Ebene ganz.  Also es gibt genau ein Gebiet.  Andereseits gilt
+    \(\frac{0^2+0+2}{2}=1\).  Daher gilt die Aussage für \(n = 0\).
+
+
+  \item Induktionsvoraussetzung.  Es gelte die Aussage, dass man mit
+    \(n \in \mathbb{N}\) Geraden die Ebene in höchstens
+    \(\frac{n^2+n+2}{2}\) Gebiete zerlegen kann.
+
+  \item   Induktionsschritt \(n \rightarrow n+1\).  Ohne Beschränkung der Allgemeinheit
+    betrachten wir den Fall, wo die Ebene mit \(n\) Geraden genau in
+    \(\frac{n^2+n+2}{2}\) Gebiete geteilt wird.
+
+  \item   Nun fügen wir eine \((n+1)\)-ten Gerade hinzu, sodass die \((n+1)\)-ten
+    Gerade alle \(n\) Geraden schneidet, und alle Schnittpunkte der
+    \((n+1)\)-ten Gerade von bereits existierenden Schnittpunkte
+    verschieden sind.  Weil jedes Gebiet konvex ist, kann am meisten
+    \(n+1\) neue Gebiete von der Teilung durch \((n+1)\)-ten Gerade
+    entstehen.  Damit gilt,
+    \[f(n+1)=f(n)+n+1=\frac{n^2+n+2}{2}+n+1=\frac{(n+1)(n+2)+2}{2}.\]
+  \end{itemize}
+\end{proof}
+\subsubsection{3. Aufgabe, Teil b}
+\begin{Behauptung}
+  Es gibt unendlich viele Primzahlen.
+\end{Behauptung}
+\begin{proof}
+  durch Widerspruch.  Angenommen, es gibt endlich viele Primzahlen:
+  \[M= \left\{ p_1, p_2, p_3, \ldots, p_n \right\}.\]  Wir betrachten die
+  Zahl \(a=p_1\cdot p_2 \cdot p_3 \cdots \cdot p_n+1\).  Weil \(a\) größer als alle
+  Primzahlen ist, kann \(a\) nicht prim sein.  Also, \(p \notin M\).  Es gilt
+  aber, dass \(a\) geteilt durch alle Primzahlen \(p \in M\) immer einen
+  Rest von \(1\) hat.  Es gilt, \(a\) ist eine Primzahl.  Diese ist im
+  Widerspruch zur Voraussetzung, dass die Menge \(M\) alle Primzahl
+  enthält.
+\end{proof}
+\newpage
+\subsection{4. Aufgabe}
+\subsubsection{4. Aufgabe, Teil a}
+\begin{Behauptung}
+  Für natürliche Zahlen \(b \ge 2\) und \(k \ge 1\) gilt
+  \[\sum_{i=0}^{k-1}{b^{i}} = \frac{b^{k}-1}{b-1}.\]
+\end{Behauptung}
+\begin{proof}
+  Denn multiplizieren wir die linke Seite mit \((b-1)\) dann erhalten
+  wir
+  \[b - 1 + b^{2} - b + \cdots + b^{k} - b^{k-1} = b^{k} - 1.\]
+\end{proof}
+\subsubsection{4. Aufgabe, Teil b}
+Sei \(a \in \mathbb{N}\) gegeben.  Dann ist \(a\) in der \(b\)-adischen Darstellung
+durch
+\begin{align*}
+  a &= a_{0}b^{0} + a_{1}b^{1} + \cdots + a_{n}b^{n} \\
+    &= a_{0}(b^{0} - 1) +  a_{0} + a^{1}(b^{1} - 1) + a^{1} + \cdots +
+      a_{n}(b^{n} - 1) + a_{n} \\
+    &= (a_{0} + \cdots + a_{n}) + a_{0}(b^{0} - 1) + \cdots + a_{n}(b^{n} - 1) \\
+  &= (a_{0} + \cdots + a_{n}) + a_{0}(b^{0})(b-1) + \cdots + a_{n}(b^{0} +
+    \cdots + b^{n-1})(b-1) \tag*{(*)}
+\end{align*}
+gegeben.  Also ist \(a\) genau dann durch \((b-1)\) teilbar, falls ihre
+Quersumme \((a_{0}+ \cdots +a_{n})\) durch \((b-1)\) teilbar ist, wie man in
+der Gleichung (*) sofort sehen kann.
+\end{document}

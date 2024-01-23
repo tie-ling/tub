@@ -1,0 +1,95 @@
+\setuppapersize[A5]
+\mainlanguage[de]
+\setupbodyfont[times,9pt]
+\define[1]\abs{\lvert#1\rvert}
+\defineenumeration[Satz]
+                  [text=Satz.,number=no,headstyle=italic,title=no,style=normal]
+\defineenumeration[Def]
+                  [text=Definition.,number=no,headstyle=italic,title=no,style=normal]
+\definemathmatrix
+[pmatrix]
+[left={\left(},right={\right)}]
+\starttext
+\startDef
+  Die Gesamtheit aller möglichen Ausgänge heißt Ergebnisraum $\Omega$.  Ein
+  Element $\omega \in \Omega $ heißt Ergebnis.
+  Teilmengen $A \subseteq \Omega$ heißen Ereignisse.  Die Gesamtheit aller
+  Ereignisse ist die Potenzmenge $\mathcal{P}(\Omega)$.  Unter den Ereignissen sind
+  das sichere Ereignis $\Omega$, das unmögliche Ereignis $\emptyset$, die
+  Elementarereignisse $\{\omega\}$ für $\omega \in \Omega$.
+\stopDef
+\startDef
+  Es sei $\Omega \ne \emptyset$.  Ein Mengensystem $\mathcal{A} \subseteq \mathcal{P}(\Omega)$ heißt $\sigma$-Algebra in
+  $\Omega$, falls gilt: $\Omega \in \mathcal{A}$, komplementärstabil aus $A \in \mathcal{A}$ folgt
+  $A^{c} \in \mathcal{A}$, vereinigungsstabil bzgl. abzählbar viele Vereinigungen.
+\stopDef
+\startDef
+  $(\Omega, \mathcal{A})$ ist messbarer Raum. $A \subseteq \Omega$ mit $A \in \mathcal{A}$ ist $\mathcal{A}$-messbar.
+\stopDef
+\startSatz
+  Sei $C \subseteq \mathcal{P}(\Omega)$ beliebig.  Dann ist der Durchschnitt aller
+  $\sigma$-Algebra $A_{i}$, der $C$ enthält, eine $\sigma$-Algebra, die von $C$
+  erzeugte $\sigma$-Algebra.
+\stopSatz
+\startDef
+  Sei $(\Omega, \mathcal{A})$ ein messbarer Raum.  Eine Abbildung $P\colon \mathcal{A} \to \left[0,
+    1\right]$ heißt Wahrscheinlichkeitsmaß auf $\mathcal{A}$, falls gilt:
+  normiert $P(\Omega)=1$; $\sigma$-additiv: für jede Folge paarweiser disjunkter
+  Ereignisse in $\mathcal{A}$ gilt $P(\bigcup A_{n})=\sum P(A_{n})$.
+\stopDef
+\startDef
+  Sei $\Omega \ne \emptyset$, $\mathcal{A}$ eine $\sigma$-Algebra in
+  $\Omega$ und $P$ ein Wahrscheinlichkeitsmaß auf $\mathcal{A}$.  Dann heißt das
+  Tripel $(\Omega, \mathcal{A}, P)$ Wahrscheinlichkeitsraum.
+\stopDef
+\startSatz
+  Sei $(\Omega, \mathcal{A}, P)$ ein Waahrscheinlichkeitsraum.  Dann gilt für $A_{1},
+  \ldots, A_{n} \in \mathcal{A}$ dass
+  \startformula
+    P(A_{1} \cup \ldots \cup A_{n}) = \sum_{j=1}^{n}{(-1)^{j-1} \sum_{1\le i_{1}< \cdots <
+        i_{j} \le n} P(A_{i_{1}} \cap \ldots \cap A_{i_{j}}).}
+  \stopformula
+\stopSatz
+\startDef
+  Der Ergebnisraum $\Omega$ heißt diskret, falls die Menge $\Omega$ höchstens
+  abzählbar unendlich ist.
+\stopDef
+\startDef
+  Sei $\Omega \ne \emptyset$ höchstens abzählbar.  Eine Funktion $p\colon \Omega \to \left[0,
+    1\right]$ mit $\sum_{\omega \in \Omega}p(\omega)=1$ heißt Zähldichte oder Wahrscheinlichkeitsfunktion.
+\stopDef
+\startSatz
+  Sei $\Omega$ abzahelbar und $p$ eine Zähldichte.  Dann wird durch $P(A)
+  \colonequals \sum_{\omega \in A}p(\omega), A \subseteq \Omega$ ein Wahrscheinlichkeitsmaß definiert.
+\stopSatz
+\startDef
+  Laplacescher Wahrscheinlichkeitsraum.  Ist $\Omega$ eine endliche Menge,
+  so definiert $p(\omega) \colonequals \frac{1}{\abs{\Omega}}, \omega \in \Omega$ eine
+  Zähldichte auf $\Omega$.  Für eine beliebige Ereignis $A$ folgt, $P(A) =
+  \frac{\abs{A}}{\abs{\Omega}}$.  Dann heißt $P(A)$
+  Laplace-Wahrscheinlichkeit von $A$. Weil jedes Elementarereignis
+  gleichwahrscheinlich ist, spricht man von $P$ auch als der
+  Gleichverteilung auf $\Omega$.
+\stopDef
+
+\startSatz
+  Es ist $\frac{n!}{(n-k)! k!} \equalscolon
+  \startpmatrix
+    \NC n \NR \NC k \NR
+  \stoppmatrix
+  $.  Dann ist
+Mit Zurücklegen, in Reihenfolge $n^{k}$, Mit Zurücklegen, ohne
+Reihenfolge $
+\startpmatrix
+  \NC n+k-1 \NR \NC k \NR
+\stoppmatrix
+$, ohne Zurücklegen, in Reihenfolge $
+  \frac{n!}{(n-k)!}
+  $ , ohne Zurücklegen ohne Reihenfolge
+  $
+  \startpmatrix
+    \NC n \NR \NC k \NR
+  \stoppmatrix
+  $
+\stopSatz
+\stoptext

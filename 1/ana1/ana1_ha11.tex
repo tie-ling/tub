@@ -1,0 +1,237 @@
+%% page style
+\documentclass[12pt]{extarticle}
+\usepackage[margin=2cm]{geometry}
+\usepackage{fancyhdr,parskip}
+\pagestyle{fancy}
+\usepackage[onehalfspacing]{setspace}
+\setlength{\parindent}{0pt}
+\lhead{\myAuthor}
+\rhead{\mySubject \ \myHausaufgaben. Übungsblatt \\ \myTutor}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+
+%% language
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+
+%% default packages
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,
+  stmaryrd, % for the lightning symbol used in proof by contraction
+  tikz,     % used to draw diagrams
+}
+
+
+%% metadata
+\newcommand{\myAuthor}{Yuchen Guo 480788 | Meng Zhang 484981 | TB9}
+\newcommand{\myHausaufgaben}{11}
+\newcommand{\mySubject}{Analysis}
+\newcommand{\myTutor}{Tilman}
+
+
+%% custom commands
+\newcommand{\beh}{\textit{Behauptung.}\ }
+\newcommand{\aufgn}[1]{\textbf{Aufgabe #1.}}
+\newcommand{\mg}[1]{\mathbb{#1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\Real}{\operatorname{Re}}
+\newcommand{\Imag}{\operatorname{Im}}
+\begin{document}
+\fbox{%
+  \begin{minipage}{\textwidth}
+\begin{itemize}
+\item \textbf{Definition 3.41.3.}
+
+Sei \(X\) eine Menge.  \(X\)
+heißt abzählbar, falls es eine Surjektion \(\mg{N} \to X\)
+gibt.
+\item \textbf{Beispiel 1.15.}
+
+Seien \(a, b \in \mg{R}\), $a <
+b\(.  Die Intervalle \(\left[ a, b \right]\), \)\left[ a,
+  -\infty \right[$, \(\left] -\infty, b \right]\) sind
+abgeschlossene Intervalle.
+
+Die Intervalle $\left]a,
+  b\right[$, \(\left] a, \infty\right[\) und
+\(\left]-\infty, b\right[\) sind offene Intervalle.
+
+\item \textbf{\(\mg{Q}\) liegt dicht in \(\mg{R}\).}
+
+Sei \(a, b \in \mg{R}\) mit \(a < b\) beliebig gewählt.  Dann
+existiert ein \(q \in \mg{Q}\) sodass \(a < q < b\).
+
+\item \textbf{H 3.4.iv}
+
+  Zu jedem \(a \in \mg{R}\) existiert eine Folge $(q_n)_{n
+  \in \mg{N}} \subseteq \mg{Q}$ mit \(\lim_{n \to \infty}{q_n}=a\).
+\end{itemize}
+  \end{minipage}
+}
+
+\aufgn{11.1.1}
+
+\beh Jedes offene Intervall lässt sich als abzählbare
+Vereinigung offener Intervalle mit rationale Randpunkten
+darstellen.  Diese Aussage ist wahr.
+
+\begin{proof}
+Sei \(a, b \in \mg{R}\) mit \(a < b\) beliebig gewählt.  Dann ist
+\(\left] a, b \right[ \subseteq \mg{R}\) ein offenes
+Intervall.  Es existiert wegen (H 3.4.iv) zwei Folgen rationaler
+Zahlen \((p_n), (q_n)\) mit der Eigenschaften dass (i)
+\(p_n \in \left] a, b \right[\) und $q_n \in \left] a, b
+\right[\( für alle \(n \in \mg{N}\) und (ii) \)\lim_{n \to
+  \infty}{p_n} = a$ und \(\lim_{n \to \infty}{q_n} = b\).
+Damit gilt
+$\bigcup_{i \in \mg{N}}{\left]p_i, q_i\right[} \subseteq
+\left] a, b \right[$.
+
+Zu zeigen: $\left] a, b \right[ \subseteq \bigcup_{i \in
+  \mg{N}}{\left]p_i, q_i\right[}$.  Diese ist auch wahr,
+denn sei \(x \in \left] a, b \right[\) beliebig gewählt.
+Angenommen, es gilt $x \notin \bigcup_{i \in
+  \mg{N}}{\left]p_i, q_i\right[}$.  Dann es gilt
+entweder \(x \le p_i\) oder \(x \ge q_i\) für alle $i \in
+\mg{N}\(.  Wegen \)\lim_{n \to
+  \infty}{p_n} = a$ und \(\lim_{n \to \infty}{q_n} = b\)
+ist dann \(x \le a\) oder \(x \ge b\), im Widerspruch zur
+Voraussetzung dass \(x \in \left] a, b \right[\).  Damit
+gilt $\left] a, b \right[ = \bigcup_{i \in
+  \mg{N}}{\left]p_i, q_i\right[}$.
+
+Falls eine Randpunkt des ursprünglichen Intervalls
+Unendlich ist, können wir dann
+\(\bigcup_{i \in \mg{N}}{\left]p_i, i\right[}\) oder
+\(\bigcup_{i \in \mg{N}}{\left]-i, q_i\right[}\) wählen.
+\end{proof}
+
+\aufgn{11.1.ii}
+
+\beh Jedes abgeschlossene Intervall lässt sich als
+abzählbare Vereinigung abgeschlossener Intervalle mit
+rationalen Randpunkten darstellen.  Diese Aussage ist
+falsch.
+
+\begin{proof}
+  Wir widerlegen diese Aussage mit einem Gegenbeispiel.
+  Das Intervall \(\left[0, e\right]\) ist ein
+  abgeschlossenes Intervall.  Angenommen, \((p_n), (q_n)\)
+  sind Folgen rationaler Zahlen mit
+  $\bigcup_{i \in \mg{N}}{\left[p_n,
+      q_n\right]}=\left[0, e\right]$.  Insbesondere, es
+  gilt
+  \(e \in \bigcup_{i \in \mg{N}}{\left[p_n, q_n\right]}\)
+  und
+  $x \notin \bigcup_{i \in \mg{N}}{\left[p_n,
+      q_n\right]}$ für alle \(x > e\).  Also,
+  $e = \max \left(\bigcup_{i \in \mg{N}}{\left[p_n,
+        q_n\right]}\right)$.  Daraus folgt, \(e = q_i\)
+  für ein \(i \in \mg{N}\) im Widerspruch zur
+  Voraussetzung dass \((q_n) \in \mg{Q}\).
+\end{proof}
+
+\aufgn{11.1.iii}
+
+\beh Jedes offene Intervall lässt sich als abzählbare
+Vereinigung abgeschlossener Intervalle mit rationalen
+Randpunkten darstellen.    Diese Aussage ist wahr.
+
+\begin{proof}
+Sei \(a, b \in \mg{R}\) mit \(a < b\) beliebig gewählt.  Dann ist
+\(\left[ a, b \right] \subseteq \mg{R}\) ein abgeschlossenes
+Intervall.  Es existiert wegen (H 3.4.iv) zwei Folgen rationaler
+Zahlen \((p_n), (q_n)\) mit der Eigenschaften dass (i)
+\(p_n \in \left[ a, b \right]\) und $q_n \in \left[ a, b
+\right]\( für alle \(n \in \mg{N}\) und (ii) \)\lim_{n \to
+  \infty}{p_n} = a$ und \(\lim_{n \to \infty}{q_n} = b\).
+Damit gilt
+$\bigcup_{i \in \mg{N}}{\left[p_i, q_i\right]} \subseteq
+\left[ a, b \right]$.
+
+Zu zeigen: $\left[ a, b \right] \subseteq \bigcup_{i \in
+  \mg{N}}{\left[p_i, q_i\right]}$.  Diese ist auch wahr,
+denn sei \(x \in \left[ a, b \right]\) beliebig gewählt.
+Angenommen, es gilt $x \notin \bigcup_{i \in
+  \mg{N}}{\left[p_i, q_i\right]}$.  Dann es gilt
+entweder \(x < p_i\) oder \(x > q_i\) für alle $i \in
+\mg{N}\(.  Wegen \)\lim_{n \to
+  \infty}{p_n} = a$ und \(\lim_{n \to \infty}{q_n} = b\)
+ist dann \(x < a\) oder \(x > b\), im Widerspruch zur
+Voraussetzung dass \(x \in \left[ a, b \right]\).  Damit
+gilt $\left[ a, b \right] = \bigcup_{i \in
+  \mg{N}}{\left[p_i, q_i\right]}$.
+
+Falls eine Randpunkt des ursprünglichen Intervalls
+Unendlich ist, können wir dann
+\(\bigcup_{i \in \mg{N}}{\left[p_i, i\right]}\) oder
+\(\bigcup_{i \in \mg{N}}{\left[-i, q_i\right]}\) wählen.
+\end{proof}
+
+\fbox{%
+  \begin{minipage}{\textwidth}
+    \textbf{Definition von offenen Mengen.}
+
+    Eine Menge \(M \subseteq \mg{R}\) heißt offen, falls
+    zu jedem \(x_0 \in M\) ein \(\varepsilon > 0\) existiert
+    mit
+    $\left] x_0 - \varepsilon, x_0 + \varepsilon \right[
+    \subseteq M$.  Eine Menge heißt abgeschlossen, falls
+    \(\mg{R} \setminus M\) offen ist.
+  \end{minipage}
+}
+
+\aufgn{11.2.i}
+
+\beh Sei \(A\) eine Teilmenge von \(\mg{R}\).  Die Menge \(A\)
+ist genau dann abgeschlossen, falls für jede in \(\mg{R}\)
+konvergente Folge \((a_n)\) deren Glieder ausschließlich
+in \(A\) liegen auch ihr Grenzwert in \(A\) liegt.  Zur
+Abkürzung setzen wir \(A^c := \mg{R} \setminus A\).
+
+\begin{proof}
+  Hinrichtung.  Abgeschlossen \(\to\)
+  Folgenabgeschlossen. Angenommen, die Menge \(A\) ist
+  abgeschlossen.  Wegen Definition ist dann \(A^c\) offen.
+  Zu zeigen: zu jeder Folge \((a_n)\), deren Glieder
+  ausschließlich in \(A\) liegen, ihr Grenzwert in \(A\)
+  liegen muss.
+
+  Wir bemühen uns um einen Widerspruchsbeweis.
+  Angenommen, ihr Grenzwert \(a \in A^c\).  Weil die Menge
+  \(A^c\) offen ist, existiert ein \(\varepsilon > 0\) mit
+  $\left] a - \varepsilon, a + \varepsilon\right[
+  \subseteq A^c$.  Weil die Folge \((a_n)\) gegen \(a\)
+  konvergiert und \(\varepsilon > 0\), existiert ein
+  \(N_{\varepsilon} \in \mg{N}\) sodass für alle
+  \(n \ge N_{\varepsilon}\) gilt
+  \(\left| a_n - a \right| < \varepsilon\).  Also, es
+  existiert im Widerspruch zur (Voraussetzung dass
+  \(a_n \in A\) für alle \(n \in \mg{N}\)) solche
+  \(a_n \in A^c\).
+
+  Rückrichtung.  Folgenabgeschlossen \(\to\)
+  Abgeschlossen.  ???
+\end{proof}
+
+\aufgn{11.2.ii}
+
+\beh Die Menge $\left\{ \frac{1}{n+1} \mid n \in \mg{N}
+\right\} \cup \left\{ 0 \right\}$ ist abgeschlossen.
+
+\newpage
+
+\aufgn{11.3.i}
+
+Es gilt wegen \(\sin(2x) = 2\sin(x)\cos(x)\) dass $f: x
+\mapsto \frac{1}{2}\sin(2\sqrt{x})$.  Daraus folgt mit
+der Kettenregel dass $f'(x) =
+\frac{1}{2\sqrt{x}}\cos(2\sqrt{x})$.
+
+\aufgn{11.3.ii}
+
+Wir berechnen zuerst die Ableitung von $p \colon x
+\mapsto x + \sqrt{1+x^2}\(.  Es gilt dann \)p' \colon x
+\mapsto 1 + x(1+x^2)^{\frac{1}{2}}\(.  Insgesamt ist dann also \)g'
+\colon x \mapsto \frac{1+x(1+x^2)^{-\frac{1}{2}}}{x + \sqrt{1+x^2}}$.
+
+\end{document}

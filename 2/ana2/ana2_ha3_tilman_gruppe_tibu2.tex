@@ -1,0 +1,191 @@
+% !TeX program = lualatex
+%%% TeX-engine: luatex
+
+\documentclass[draft,a5paper]{article}
+\usepackage[margin=2cm]{geometry}
+\linespread{1.2}
+
+% set language to german
+\usepackage[ngerman]{babel}
+
+% load math packages and unicode support
+% must in this order
+\usepackage{amsmath,mathtools,fontspec}
+\usepackage{amsthm}
+\usepackage{unicode-math,luatex85}
+
+% used for integral with respect to a variable x
+% like \int \dd{x}
+%\usepackage{physics}
+
+% set fonts
+\setmainfont{STIX Two Text}
+
+% theorem environment used in this document
+\theoremstyle{remark}
+\newtheorem*{beh}{Behauptung}
+\newtheorem*{lem}{Lemma}
+
+%    \interval is used to provide better spacing after a [ that
+%    is used as a closing delimiter.
+\newcommand{\interval}[1]{\mathinner{#1}}
+
+%    Enclose the argument in vert-bar delimiters:
+\newcommand{\envert}[1]{\left\lvert#1\right\rvert}
+\let\abs=\envert
+
+%    Enclose the argument in double-vert-bar delimiters:
+\newcommand{\enVert}[1]{\left\lVert#1\right\rVert}
+\let\norm=\enVert
+
+\author{Yiwen Yang 466096, Yuchen Guo 480788, Meng Zhang 484981}
+\date{\today}
+\title{HA 3, Ana 2 -- Gruppe TiBu 2, Tilman Burghoff}
+
+\begin{document}
+\maketitle
+
+\newpage
+
+\subsection*{H 3.1}
+
+\subsubsection*{H 3.1, Teil i}
+
+\begin{beh}
+  Die Abbildung \(f\colon \interval{]0, 1]} \to \mathbb{R}, f(x) = x + 1/x\) ist keine
+  Kontraktion bzgl. der Standardmetrik.
+\end{beh}
+
+\begin{proof}
+  Denn \(f\) ist keine Selbstabbildung wegen \(f(1/2) = 5/2 \notin \interval{]0,
+  1]}\).
+\end{proof}
+
+\subsubsection*{H 3.1, Teil ii}
+
+\begin{beh}
+  Die Funktion \(g\colon \mathbb{R}^{2} \to \mathbb{R}^{2},~ (x, y) \mapsto \frac{1}{2}(x+y, y)\) ist
+  eine Kontraktion bzgl. der Standardmetrik.
+\end{beh}
+
+\begin{proof}
+  Die Funktion \(g\) ist eine Selbstabbildung wegen der Definition von
+  \(g\).  Wir zeigen, dass die Funktion eine Kontraktion ist, indem
+  wir zeigen, dass die Funktion Lipschitz-stetig mit
+  Lipschitz-Konstante \(L < 1\) ist.
+
+  Angenommen, die Funktion ist nicht Lipschitz-stetig mit \(L < 1\).
+  Dann existiert zu jedem \(0 \le L < 1\) ein Paar \((a, b), (c, d) \in
+  \mathbb{R}^{2}\) mit \(d(g(a, b), g(c, d)) > L \cdot d((a, b), (c, d))\).  Zur
+  Abkürzung setzen wir \(m \coloneq a - c\) und \(n \coloneq b - d\).  Dann gilt
+  \begin{align*}
+    d(g(a, b), g(c, d))
+    &> L \cdot d((a, b), (c, d)) \\
+    d\left(\frac{1}{2}(a+b, b), \frac{1}{2}(c+d, d)\right)
+    &> L \cdot d((a,b), (c, d)) \\
+    \frac{1}{2} \sqrt{(m+n)^{2} + n^{2}} &> L \cdot \sqrt{(m^{2} + n^{2})} \\
+    \frac{1}{4} [(m + n)^{2} + n^{2}]
+    &> L \cdot (m^{2} + n^{2}) \\
+    (1 - 4L)m^{2} + (2 - 4L)n^{2} + 2mn
+    &> 0 \tag{1}
+  \end{align*}
+  Aber die letzte Ungleichung (1) ist nicht gültig, wenn \(L \in
+  \interval{[1/2, 1[}\). Denn wegen \(L \in \interval{[1/2, 1[}\) gilt
+  \(-4L \in \interval{]-4, -2]}\), \(1-4L \in \interval{]-3, -1]}\) und
+  \(2-4L \in \interval{]-2, 0]}\).  Insbesondere, wenn \(L \to 1\) ist,
+  gilt
+  \begin{align*}
+    -3m^{2} - 2n^{2} + 2mn &> 0 \\
+    2m^{2} + n^{2} + (m-n)^{2} &< 0.
+  \end{align*}
+  Diese letzte Ungleichung ist nicht gültig.  Daraus folgt, dass nicht
+  zu jedem \(0 \le L < 1\) die Paare \((a,b), (c,d)\) existiert. Die
+  Annahme ist falsch und die Funktion ist eine Kontraktion.
+\end{proof}
+
+\subsubsection*{H 3.1, Teil iii}
+
+\begin{beh}
+  Die Funktion \(g\) wie in (ii) bzgl. \(d_{\infty}\) ist keine Kontraktion.
+\end{beh}
+
+\begin{proof}
+  Wir zeigen, dass \(g\) bzgl. \(d_{\infty}\) keine Kontraktion ist, indem
+  wir zeigen, dass \(g\) nicht Lipschitz-stetig mit \(0 \le L < 1\) ist,
+  also zu jedem \(L \in \interval{[0, 1[}\) existiert ein Paar \((a, b),
+  (c, d) \in \mathbb{R}^{2}\) mit
+  \[
+    d(g(a, b), g(c, d)) > L \cdot d((a, b), (c, d)).
+  \]
+  Zuerst bemerken wir, dass \(d_{\infty}\) für
+  \(x = (x_{1}, \ldots, x_{n}) \in \mathbb{R}^{n}\) durch [Beispiel 1.2], also
+  \( \enVert{x}_{\infty} \coloneq \max\{\envert{x_{i}} \mid i = 1, \ldots, n \} \)
+  definiert ist. Es ist
+  \[
+    d(g(a, b), g(c, d))
+    = d\left(\frac{1}{2}(a+b, b), \frac{1}{2}(c+d, d)\right)
+    = \max\{\envert{a-c + b-d}/2, \envert{b-d}/2 \}
+  \]
+  und
+  \[
+    L \cdot d((a, b), (c, d))
+    = L \cdot \max\{\envert{a-c}, \envert{b-d} \}.
+  \]
+  Wir betrachten den Fall
+  \begin{align*}
+    d(g(a, b), g(c, d)) &= \envert{a-c + b-d}/2, \\
+    L \cdot d((a, b), (c, d)) &= L \cdot \envert{a-c}.
+  \end{align*}
+  Es folgt wegen Dreiecksungleichung dass???
+  \begin{align*}
+    \envert{a-c}/2 + \envert{a-c}/2 \ge \envert{a-c}/2 + \envert{b-d}/2
+    \ge \envert{a-c+b-d}/2.
+  \end{align*}
+\end{proof}
+
+\subsection*{H 3.2}
+
+\begin{beh}
+  Seien \(X, d_{X}\) und \(Y, d_{Y}\) metrische Räume.  Die Funktion
+  \(f\colon X \to Y\) ist genau dann stetig, wenn für alle Mengen \(M \subseteq X\)
+  die Relation \(f(\overline{M}) \subseteq \overline{f(M)}\) gilt.
+\end{beh}
+
+\begin{proof}
+  Wir zeigen, dass die Behauptung gilt, indem wir zeigen, dass die
+  Hinrichtung und die Rückrichtung gilt.
+
+  Hinrichtung.  Sei \(M \subseteq X\) beliebig.  Wir zeigen, dass aus der
+  Stetigkeit von \(f\) folgt
+  \(f(\overline{M}) \subseteq \overline{f(M)}\).  Zuerst bemerken wir, dass
+  wegen [Korollar 1.24] gilt \(\overline{M} = M \cup \partial M\) und
+  \(\overline{f(M)} = f(M) \cup \partial f(M)\).  Daraus folgt, dass
+  \(f(M) \subseteq \overline{f(M)}\).  Danach zeigen wir, dass
+  \(f(\partial M) \subseteq \overline{f(M)}\) gilt.
+
+  Sei \(a \in \partial M\) beliebig.  Wegen [Satz 1.23] gilt für alle
+  \(\varepsilon > 0\) dass
+  \(U_{\varepsilon}(a) \cap M \ne \emptyset\).  Sei
+  \((x_{n})_{n \in \mathbb{N}}\) eine Folge in
+  \(U_{\varepsilon}(a) \cap M\) mit
+  \(\lim_{n \to \infty}{x_{n}} = a\).  Wegen der Stetigkeit von \(f\) folgt
+  \(\lim_{n \to \infty}{f(x_{n})} = f(a)\).  Es ist
+  \(f(x_{n}) \in \overline{f(M)}\) für alle \(n \in \mathbb{N}\) wegen
+  \(x_{n} \in M\) für alle \(n \in \mathbb{N}\). Nun ist die Menge
+  \(\overline{f(M)}\) abgeschlossen und insbesondere
+  folgenabgeschlossen.  Daraus folgt, dass
+  \(f(a) \in \overline{f(M)}\).  Weil \(a \in \partial M\) beliebig gewählt war,
+  folgt die Behauptung dass
+  \(f(\partial M) \subseteq \overline{f(M)}\). Es gilt
+  \(M \cup \partial M = \overline{M}\).  Es gilt auch, dass
+  \(f(\overline{M}) = f(M \cup \partial M) = f(M) \cup f(\partial M)\).  Wir haben
+  gezeigt, dass \(f(M) \subseteq \overline{f(M)}\) und
+  \(f(\partial M) \subseteq \overline{f(M)}\).  Daraus folgt, dass
+  \begin{align*}
+    f(\overline{M}) = f(M) \cup f(\partial M) \subseteq \overline{f(M)}.
+  \end{align*}
+
+  Rückrichtung.
+\end{proof}
+
+\end{document}

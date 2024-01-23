@@ -1,0 +1,131 @@
+\documentclass[12pt]{extarticle}
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,fancyhdr,color,graphicx,}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{tikz}
+\renewcommand{\familydefault}{\sfdefault}
+\pagestyle{fancy}
+\setlength{\parindent}{0pt}
+\lhead{Yiwen Yang 466096, Qing Wang 458040, Yuchen Guo 480788}
+\rhead{CoMa 1. Übungsblatt\\Tutor: Tino Mo 4-5.30pm}
+\author{HA Gruppe 103: \\Yiwen Yang 466096\\Qing Wang 458040\\Yuchen Guo 480788\\Tutor: Tino Mo 4-5.30pm}
+\title{1. Übungsblatt\\\small CoMa I WS 22/23}
+\date{}
+\begin{document}
+\maketitle
+\newpage
+\textbf{1. Aufgabe (a)}
+Siehe oben.
+\textbf{1. Aufgabe (b)}
+\begin{itemize}
+\item \([4]_{R}=\{4,-4\}\)
+\item \([3]_{R}=\{3,-3\}\)
+\item \([-2]_{R}=\{-2,2\}\)
+\item \([1]_{R}=\{1,-1\}\)
+\item \([0]_{R}=\{0\}\)
+\end{itemize}
+\textbf{2. Aufgabe}
+\begin{enumerate}
+\item Diese Relation ist eine Abbildung, weil es für jedes \(a\) genau
+  ein \(b=|a|\) gibt.
+
+  Diese Relation ist nicht injektiv, weil es für \(b>0\) zwei Lösungen,
+  nämlich \(b=|a|\) und \(b=|-a|\) gibt.
+
+  Diese Relation ist nicht bijektiv, weil es für \(b<0\) keine Lösung
+  gibt.
+
+  Diese Relation ist nicht bijektiv, weil diese nicht injektiv und
+  nicht bijektiv ist.
+\item Diese Relation ist keine Abbildung, weil es für jedes \(a>0\) zwei
+  Werte gibt, nämlich \(b=a\) und \(b=-a\).
+\item Diese Relation ist keine Abbildung, denn für alle ungerade \(a\)
+  ist keine \(b\) in \(\mathbb{Z}\) zugeordnet.
+\item Siehe unten.
+\end{enumerate}
+\textbf{Aufgabe 3.(a)}
+\begin{proof}
+  Seien \(x_1,x_2 \in X\) mit \((g \circ f)(x_1)=(g \circ f)(x_2)\).
+  Aus der Injektivität von \(g\) folgt \(f(x_1)=f(x_2)\).
+  Aus der Injektivität von \(f\) folgt \(x_1=x_2\).
+
+  D.h., dass  \((g \circ f)(x_1)=(g \circ f)(x_2) \implies x_1=x_2\) und
+  damit  \((g \circ f)\) injektiv ist.
+\end{proof}
+
+\textbf{Aufgabe 3.(b)}
+
+
+\(A\): \(g \circ f\) bijektiv.
+
+\(B\): \(g\) surjektiv.
+
+\(C\): \(f\) injektiv.
+
+Diese Aussage enthält zwei Aussagen.  Nämlich: \(A \implies B\) und $A
+\implies C$.  Wir beweisen die Aussagen mit Kontraposition.
+
+\(\neg B \implies \neg A\)
+\begin{proof}
+  Sei \(g\) nicht surjektiv.  Dann existiert ein Element \(z \in Z\), für
+  dieses Element es kein Urbild \(y \in Y\) mit \(g(y)=z\) gibt.
+
+  D.h., für alle \(x \in X\) gilt \(g(f(x)) \neq z\) mit \(z \in Z\).  Deshalb
+  ist \(g \circ f\) nicht bijektiv.
+
+  Damit ist \(\neg B \implies \neg A\) bewiesen. Deshalb gilt \(A \implies B\).
+\end{proof}
+
+\(\neg C \implies \neg A\)
+\begin{proof}
+  Sei \(f\) nicht injektiv.  Dann existiert zwei Elemente \(x_1,x_2 \in X\)
+  mit \(x_1 \neq x_2\) und \(f(x_1)=f(x_2)\).
+
+  D.h., für \(x_1 \neq x_2\) gilt es \((g \circ f)(x_1)=(g \circ f)(x_2)\),
+  also \(g \circ f\) ist nicht bijektiv.
+
+  Damit ist \(\neg C \implies \neg A\) bewiesen. Deshalb gilt \(A \implies C\).
+\end{proof}
+
+\textbf{Aufgabe 3.(c)}
+
+Diese Aussage ist falsch, denn die Abbildung \(f\) muss nicht
+unbedingt surjektiv sein, um die Voraussetzung zu erfüllen.
+
+Wir widerlegen diese Aussage mit einem Gegenbeispiel.
+
+Seien Funktionen \(f(x)= \left| x \right|\),
+\(f: \mathbb{R} \rightarrow \mathbb{R}\) und \(g(x) = x^2\),
+\(g: \mathbb{R} \rightarrow \mathbb{R}_{\geq 0}\).
+
+Die Funktion \(f\) ist nicht injektiv und nicht surjektiv, denn für alle
+\(y \in \mathbb{R}, y < 0\) gibt es keine Lösung und für alle
+\(y \in \mathbb{R}, y > 0\) gibt es genau zwei Lösungen.
+
+Die Funktion \(g\) ist surjektiv, denn für alle
+\(y \in \mathbb{R}_{\geq 0}\) gibt es mindestens eine Lösung
+\(x \in \mathbb{R}\), nämlich \(x=\pm \sqrt{y}\).
+
+Die Funktion \(g \circ f\) ist surjektiv, denn für alle
+\(y \in \mathbb{R}_{\geq 0}\) gibt es mindestens eine
+Lösung \(x \in \mathbb{R}\) mit
+\((g \circ f)(x)= y\).
+
+Deshalb ist die Behauptung, dass \(f\) surjektiv wenn \(g \circ f\) und
+\(g\) surjektiv sind, falsch.
+
+\textbf{Aufgabe 4.(a)}
+
+
+Siehe unten.
+
+\textbf{Aufgabe 4.(b)}
+
+
+Für die Mengen \(D:=\left\{ x | x \in \mathbb{Z}, x \leq -2 \right\}\)
+und \(D:=\left\{ x| x \in \mathbb{Z}, x \geq -2 \right\}\) ist $f: D
+\rightarrow \mathbb{N}$ genau dann bijektiv.
+\end{document}

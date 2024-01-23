@@ -1,0 +1,205 @@
+\documentclass[12pt]{extarticle}
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,fancyhdr,color,graphicx,}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+\usepackage[onehalfspacing]{setspace}
+\newcommand{\mg}[1]{\mathbb{#1}}
+\newcommand{\lin}{\operatorname{lin}}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{parskip}
+\pagestyle{fancy}
+\setlength{\parindent}{0pt}
+\lhead{Yuchen Guo 480788, Meng Zhang 484981}
+\rhead{7. Hausaufgabenblatt, LinA I\\Tutorin: Saskia, Mi 2-4 p.m.}
+\begin{document}
+\textbf{Aufgabe 7.1.i}
+
+\textit{Behauptung.}  $v \in \lin (\left\{ v_1, \ldots, v_n \right\})
+\iff \lin (\left\{ v, v_1, \ldots, v_n \right\}) = \lin(\left\{ v_1,
+  \ldots, v_n \right\})$.
+
+\begin{proof}
+  Wir beweisen diese Aussage als wahr, indem wir zeigen, dass die
+  Hinrichtung und Rückrichtung wahr sind.
+
+  \textbf{Hinrichtung.}
+
+  Sei \(x \in \lin (\left\{ v, v_1, \ldots, v_n \right\})\) beliebig
+  gewählt.  Es gilt,
+\begin{align*}
+x = \lambda_0v+\sum_{i=1}^n{\lambda_iv_i} \text{ mit } n \in
+  \mg{N}_{\geq 1}, 1 \leq i \leq n, \lambda_i \in \mg{K}, \lambda_0
+  \in \mg{K}, v_i \in \left\{ v_1, \ldots, v_n \right\}. \tag{1}
+\end{align*}
+
+Wegen \(v \in \lin (\left\{ v_1, \ldots, v_n \right\})\), es gilt
+\begin{align*}
+  v = \sum_{i=1}^n{\lambda_iv_i} \text{ mit } n \in
+  \mg{N}_{\geq 1}, 1 \leq i \leq n, \lambda_i \in \mg{K},
+  v_i \in \left\{ v_1, \ldots, v_n \right\}. \tag{2}
+\end{align*}
+
+Wir setzen (2) in (1) ein, erhalten wir
+\begin{align*}
+  x &= \lambda_0\sum_{i=1}^n{\lambda_iv_i}+\sum_{i=1}^n{\lambda_iv_i}\\
+  &= \sum_{i=1}^n{\underbrace{(\lambda_i+\lambda_0\lambda_i)}_{\text{(3)}}v_i}.
+\end{align*}
+
+Weil \(\mg{K}\) ein Körper ist, gilt (3) \(\in \mg{K}\).  Es gilt dann
+\(x \in \lin(\left\{ v_1, \ldots, v_n \right\})\).  Daraus folgt,
+$ \lin (\left\{ v, v_1, \ldots, v_n \right\}) \subseteq \lin(\left\{
+  v_1, \ldots, v_n \right\})$.
+
+Es gilt auch
+$ \lin(\left\{ v_1, \ldots, v_n \right\}) \subseteq \lin (\left\{ v,
+  v_1, \ldots, v_n \right\})$, denn sei
+\(x \in \lin(\left\{ v_1, \ldots, v_n \right\}) \) beliebig gewählt, es
+gilt
+$x = 0v_0 + \sum_{i=1}^n{\lambda_iv_i} \in \lin (\left\{ v, v_1,
+  \ldots, v_n \right\})$.  Daraus folgt
+$\lin (\left\{ v, v_1, \ldots, v_n \right\}) = \lin(\left\{ v_1,
+  \ldots, v_n \right\})$.
+
+\textbf{Rückrichtung.}
+
+Es gilt $ \lin (\left\{ v, v_1, \ldots, v_n \right\}) = \lin(\left\{ v_1,
+  \ldots, v_n \right\})\( und \)v \in \lin (\left\{ v, v_1, \ldots, v_n
+\right\}) \(, daraus folgt, \)v \in \lin(\left\{ v_1,
+  \ldots, v_n \right\})$.
+\end{proof}
+
+\textbf{Aufgabe 7.1.ii}
+
+\textit{Behauptung.}
+$v \notin \lin (\left\{ v_1, \ldots, v_n \right\}) \iff \lin (\left\{
+  v_1, \ldots, v_n \right\}) \subsetneq \lin(\left\{ v, v_1, \ldots,
+  v_n \right\})$.
+\begin{proof}
+    Wir beweisen diese Aussage als wahr, indem wir zeigen, dass die
+  Hinrichtung und Rückrichtung wahr sind.
+
+  Zur Abkürzung setzen wir $A=\lin (\left\{
+  v_1, \ldots, v_n \right\})\( und \)B= \lin(\left\{ v, v_1, \ldots,
+  v_n \right\})$.
+
+  \textbf{Hinrichtung.}
+
+  Wir zeigen, dass \( A \subseteq B\) und
+  \( B \setminus A \neq \emptyset\) gilt.
+
+  Sei \(x \in A \) beliebig gewählt.  Dann gilt
+  \(x = 0v+\sum_{i=1}^n{\lambda_iv_i}\) und damit \(x \in B\) und
+  \( A \subseteq B\).
+
+Wir zeigen, dass
+\(B \setminus A \neq \emptyset\) gilt, mittels
+Widerspruchsbeweis.  Angenommen,
+\(B \setminus A = \emptyset\).  Dann gilt wegen
+\( A \subseteq B\) dass \(A = B\).  Aus (i) folgt aber im Widerspruch zur
+Voraussetzung, dass \(v \in A\) gilt.  Daraus folgt, dass $A \subsetneq
+B$ muss.
+
+\textbf{Rückrichtung.}
+
+Die Negation von (i) ist, \(v \notin A \iff B \neq A\).  Wir haben
+bewiesen, dass \(A \subseteq B\).  Daraus folgt, dass
+\(v \notin A \iff A \subsetneq B\).
+\end{proof}
+
+\textbf{Aufgabe 7.1.iii}
+
+\textit{Behauptung.} \(\lin(M \cap N) = \lin(M) \cap \lin(N)\).
+\begin{proof}
+  Wir zeigen, dass diese Aussage wahr ist, indem wir zeigen, dass
+  \(\lin(M \cap N) \subseteq \lin(M) \cap \lin(N)\) und
+  \(\lin(M) \cap \lin(N) \subseteq \lin(M \cap N)\) gilt.
+
+  \begin{itemize}
+
+  \item Falls \(M = \emptyset\) oder \(N = \emptyset\), dann gilt
+    $\lin(\emptyset \cap N) = \lin(\emptyset) = \left\{ 0 \right\} =
+    \left\{ 0 \right\} \cap \lin(N)$.
+  \item \(\lin(M \cap N) \subseteq \lin(M) \cap \lin(N)\).
+
+    Sei \(M \cap N = \left\{ v_1, \ldots, v_n \right\}\) und $x \in
+    \lin(M \cap N)\( beliebig gewählt.  Dann gilt \)x =
+    \sum_{i=1}^n{\lambda_iv_i}$.  Es gilt, \(\lambda_i \in \mg{K}\),
+    \(v_i \in M\) und \(v_i \in N\).  Daraus folgt, dass \(x \in \lin(M)\)
+    und \(x \in \lin(N)\).  Damit gilt \(x \in \lin(M) \cap \lin(N)\).
+
+  \item   \(\lin(M) \cap \lin(N) \subseteq \lin(M \cap N)\)
+
+???
+  \end{itemize}
+\end{proof}
+
+\textbf{Aufgabe 7.1.iv}
+
+\textit{Behauptung.} \(\lin(M + N) \subseteq \lin(M) + \lin(N)\).
+\begin{proof}
+  Sei \(x \in \lin(M+N)\) beliebig gewählt.  Dann gilt
+\begin{align*}
+  x &= \sum_{i=1}^n{\lambda_i(m_i+n_i)} \text{ mit } n \in
+  \mg{N}_{\geq 1}, 1 \leq i \leq n, \lambda_i \in \mg{K}, m_i \in M,
+      n_i \in N.\\
+  &= \underbrace{\sum_{i=1}^n{\lambda_im_i}}_{\text{(1)}}+\underbrace{\sum_{i=1}^n{\lambda_in_i}}_{\text{(2)}}
+\end{align*}
+
+Es gilt (1) \(\in \lin{M}\) und (2) \(\in \lin{N}\).  Daraus folgt, $x \in
+\lin(M)+\lin(N)$.
+\end{proof}
+
+\textbf{Aufgabe 7.2.i}
+
+\textit{Behauptung.}  \(U/T\) ist ein Unterraum von \(V/T\).
+
+\begin{proof}
+  Wegen \(U \subseteq V\) gilt \(U/T \subseteq V/T\).  Sei $\overline{a},
+  \overline{b} \in U/T$ und \(\lambda \in \mg{K}\) beliebig gewählt.  Wir
+  zeigen, dass \(\overline{a} + \overline{b} \in U/T\) und $\lambda
+  \overline{a} \in U/T$ gilt.
+
+  \begin{itemize}
+  \item \(\overline{a} + \overline{b} \in U/T\).
+
+    Es gilt $\overline{a} = \left\{ v \in U \colon a - v \in T
+    \right\}\( und \)\overline{b} = \left\{ w \in U \colon b - w \in T
+    \right\}\(.  Daraus folgt, \)\overline{a} + \overline{b} = \left\{ v
+      + w \colon v \in \overline{a}, w \in \overline{b}\right\}$.
+
+    Weil \(T\) ein Unterraum ist, gilt wegen \(a-v\in T\) und \(b-w \in T\)
+    dass \((a-v)+(b-w) \in T\).  Daraus folgt, \((a+b)-(v+w) \in T\) und
+    $\overline{a} + \overline{b} = \left\{ v + w \colon (a+b)-(v+w)
+      \in T \right\}$.  Wegen \(a+b \in U\) und \(v+w \in U\) gilt dann
+    \(\overline{a} + \overline{b} \in U/T\).
+  \item \(\lambda \overline{a} \in U/T\).
+
+    Es gilt wegen (Definition 5.15) dass $\lambda \overline{a} =
+    \overline{\lambda a}\(.  Weiter gilt \)\overline{\lambda a}= \left\{
+      v \in U \colon \lambda a - v \in T  \right\}\(.  Es gilt \)\lambda
+    a  \in U$, weil \(U\) ein Unterraum ist.  Daraus folgt, dass
+    \(\lambda \overline{a} \in U/T\).
+  \end{itemize}
+\end{proof}
+
+\textbf{Aufgabe 7.2.ii}
+
+\textbf{Aufgabe 7.3.i}
+
+Sei \(U:=V\) und \(W:=V\).  Dann gilt \(V=U+W\), weil \(V\) abelsch ist.
+
+\textbf{Aufgabe 7.3.ii}
+
+Sei \(U:= \left\{ 0 \right\}\) und \(W:= \left\{ 0 \right\}\).  Dann gilt
+\(U \cap W = \left\{ 0 \right\}\).
+
+\textbf{Aufgabe 7.3.iii}
+
+\textbf{Aufgabe 7.3.iv}
+
+\textbf{Aufgabe 7.4.i}
+
+\textbf{Aufgabe 7.4.ii}
+\end{document}

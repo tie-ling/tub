@@ -1,0 +1,124 @@
+% !TeX program = lualatex
+%%% TeX-engine: luatex
+
+\documentclass[draft,a5paper]{article}
+\usepackage[margin=2cm]{geometry}
+\linespread{1.2}
+
+\setlength{\headheight}{15pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Yiwen Yang 466096, Yuchen Guo 480788, Meng Zhang 484981}
+\rhead{Zusatz, Ana 2, TiBu 2}
+
+% set language to german
+\usepackage[ngerman]{babel}
+
+\usepackage[amsthm,vvarbb,varg]{newtx}
+
+% used for integral with respect to a variable x
+% like \int \dd{x}
+% \usepackage{physics}
+
+% theorem environment used in this document
+\theoremstyle{remark}
+\newtheorem*{beh}{Behauptung}
+\newtheorem*{lem}{Lemma}
+
+% \interval is used to provide better spacing after a [ that
+% is used as a closing delimiter.
+\newcommand{\interval}[1]{\mathinner{#1}}
+
+% Enclose the argument in vert-bar delimiters:
+\newcommand{\envert}[1]{\left\lvert#1\right\rvert}
+\let\abs=\envert
+
+% Enclose the argument in double-vert-bar delimiters:
+\newcommand{\enVert}[1]{\left\lVert#1\right\rVert}
+\let\norm=\enVert
+
+\newcommand{\enAngle}[1]{\left\langle#1\right\rangle}
+\let\scp=\enAngle
+
+\begin{document}
+\subsection*{Aufgabe Z.1}
+Es sei \(f\colon \mathbb{R}^{3} \to \mathbb{R}\) mit \(f(x, y, z) \coloneq \sin (x) \cos(y) e^{z}\).
+\subsubsection*{Aufgabe Z.1, Teil i}
+Wir bestimmen zuerst
+\[[Df(x, y, z)] = [\cos(x) \cos(y) e^{z}, - \sin(x) \sin(y) e^{z},
+  \sin(x) \cos(y) e^{z}]\]
+und
+\[H_{f}(x, y, z) =
+  \begin{bmatrix}
+    - \sin(x) \cos(y) e^{z}
+    & - \cos(x) \sin(y) e^{z}
+    & \cos(x) \cos(y) e^{z} \\
+    - \cos(x) \sin(y) e^{z}
+    & - \sin(x) \cos(y) e^{z}
+    & - \sin(x) \sin(y) e^{z} \\
+    \cos(x) \cos(y) e^{z}
+    & - \sin(x) \sin(y) e^{z}
+    & \sin(x) \cos(y) e^{z}
+  \end{bmatrix}
+\]
+Demnach ist
+\begin{align*}
+  T_{2}((0,0,0);(x,y,z))
+  &= f(0,0,0) + \scp{\nabla f(0,0,0),
+  [x, y, z]
+  } + \frac{1}{2} \scp{
+  [x, y, z],
+  H_{f}(0,0,0)
+    [x, y, z]} \\
+  &= 0 + \scp{[1,0,0], [x, y, z]} + \frac{1}{2}
+    \scp{[x, y, z],
+    \begin{bmatrix}
+      0 & 0 & 1 \\
+      0 & 0 & 0 \\
+      1 & 0 & 0
+    \end{bmatrix}
+    [x, y, z]
+    } \\
+  &= x + \frac{1}{2} \scp{[x, y, z], [z, 0, x]} \\
+  &= x + xz.
+\end{align*}
+\subsubsection*{Aufgabe Z.1, Teil ii}
+
+\newpage
+
+\subsection*{Aufgabe Z.2}
+Sei \(f\colon \mathbb{R}^{n} \to \mathbb{R}\), \(f \in \mathrm{C}^{2}(\mathbb{R})\).
+\begin{beh}
+  Falls \(x' \in \mathbb{R}^{n}\) ein Minimierer von \(f\) ist, und \(D^{2}f\)
+  stetig in \(x'\) ist, so gilt für alle \(v \in \mathbb{R}^{n}\) dass
+  \(D^{2}f(x')(v, v) \ge 0\).
+\end{beh}
+\begin{proof}
+
+\end{proof}
+
+\subsection*{Aufgabe Z.3}
+\subsubsection*{Aufgabe Z.3, Teil i}
+\begin{proof}
+  Es gilt wegen Quotientenkriterium dass
+  \begin{align*}
+    \partial_{i}f(x) = \underbrace{(x_{1} \cdot \ldots \cdot x_{n})^{\frac{1}{n+1}}}_{(1)}
+    \underbrace{\frac{\frac{1}{n+1}\frac{1}{x_{i}}(1+x_{1}+\ldots+x_{n}) - 1}{(1+x_{1}+\ldots+x_{n})^{2}}}_{(2)}.
+  \end{align*}
+  \(\partial_{i}f(x)\) ist für alle \(x_{i} > 0\) wohldefiniert und stetig.
+  Daraus folgt, dass \(f\) auf \(\interval{]0, \infty[}^{n}\) diffbar ist.
+  Wir bemerken, dass der Faktor (1) und der Nenner des Faktors (2)
+  stets größer als Null sind.  Die einzige Möglichkeit, die Gleichung
+  \(\partial_{i}f(x) = 0\) für alle \(i\) zu erfüllen, ist der Zähler von (2)
+  gleich Null.
+
+  Wir suchen nach einer kritische Punkt \(x\), sodass für alle \(i\)
+  der Zähler gleich Null ist, nämlich
+  \[ 1 = \frac{1}{n+1}\frac{1}{x_{i}}(1+x_{1}+\ldots+x_{n}). \]
+  Diese ist nur dann erfüllt, falls \(x_{i} = x_{0}\) für ein
+  \(x_{0}\) und für alle \(i\) gilt.  Also
+  \[n + 1 = \frac{1}{x_{0}}(1+nx_{0}).\]
+  Daraus folgt, dass \(x_{0} = 1 = x_{i}\) für alle \(i\) und \(x =
+  (1, \ldots, 1)\) ist der einzige kritische Punkt.
+\end{proof}
+\end{document}

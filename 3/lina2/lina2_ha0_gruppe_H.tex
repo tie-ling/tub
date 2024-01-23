@@ -1,0 +1,495 @@
+% !TeX program = LuaLaTeX
+% 使用 LuaLaTeX，支持所有 Unicode 符号
+
+% !TeX spellcheck = de_DE
+% 用德语词典检查拼写
+
+% settings for chktex
+% chktex-file 3
+
+% metadata, for compliance with PDF/A
+% for more options, see document of pdfx package on ctan
+\begin{filecontents*}{\jobname.xmpdata}
+\Title{Hausaufgabe}
+\Author{Guo 宇琛\sep Kuan \sep Yu}
+\Language{de-DE}
+\Keywords{math\sep assignment}
+\Publisher{铁岭人民出版社}
+\end{filecontents*}
+
+% 使用 KOMA-Script 模板
+\documentclass[12pt]{scrartcl}
+
+% pdf-archive, must be the first package loaded, lowest version of
+% PDF/A standard is recommended for maximum compatibility.
+%
+% this also loads hyperref, later configure hyperref with hypersetup
+% command instead
+% emacs preview-latex also depends on this package
+%\usepackage[a-1b]{pdfx}
+%\hypersetup{bookmarksnumbered,colorlinks=true}
+
+% adjust emacs scaling
+% (setq preview-scale-function 2)
+% run C-x C-e here
+
+% 使用德语标点
+\usepackage[ngerman]{babel}
+
+% 加载数学相关的包
+\usepackage{amsmath,mathtools,fontspec,amsthm,interval,mathtools}
+
+% 字体，使用便于阅读的 TeX Gyre Schola 字体，
+% 基于 Century Schoolbook 设计。
+\usepackage[libertinus]{fontsetup}
+
+% theorems
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+
+\title{HA 0, LinA 2, Gruppe H}
+\author{Kuan 480169, Yu 478912, Guo 480788}
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Img}{Im}
+
+\begin{document}
+\maketitle
+\begin{center}
+  Ting Yu Kuan 480169, Shilong Yu 478912, Yuchen Guo 480788
+\end{center}
+
+\newpage
+
+\section*{Injektiv, Surjektiv, Bijektiv}
+\subsection*{Aufgabe 0.1}
+Es gilt \(\sin(\mathbb{R}) = \interval{-1}{1}\), wegen [Amann, Analysis I,
+Theorem III.6.16.vi].
+
+\begin{enumerate}
+\item \(f\colon \mathbb{R} \to \mathbb{R}, x \mapsto \sin(x)\) ist nicht injektiv, wegen
+  \(f(0) = f(2\pi) = 0\).
+  Die ist auch nicht surjektiv, denn es existiert kein
+  \(a \in \mathbb{R}\) sodass \(f(a) >1\) gilt.
+\item \(f\colon \mathbb{R} \to \interval{-1}{1}, x \mapsto \sin(x)\) ist nicht injektiv, wegen
+  \(f(0) = f(2\pi) = 0\).
+  Die ist surjektiv, wie oben erwähnt.
+\item Es gilt
+  \begin{align*}
+    f\colon \ointerval{0}{\infty} \to \mathbb{R}, x \mapsto
+  \log(x) = \frac{\log(x)}{\log(2)}
+  \end{align*}
+  und
+  \begin{align*}
+    \log(x)\coloneq\exp^{-1}(x).
+  \end{align*}
+  Es gilt auch, dass
+  \(\exp(x)\colon \mathbb{R} \to \ointerval{0}{\infty}\) strikt monoton steigend ist.
+  Daraus folgt, dass
+  \(\log(x)\colon \ointerval{0}{\infty} \to \mathbb{R}\) strikt monoton steigend ist.  Daraus
+  folgt, dass \(f\) bijektiv.
+\item \(f\colon \mathbb{N} \to \mathbb{N}, n \mapsto 2n\) ist injektiv, denn aus
+  \begin{align*}
+    f(a) = f(b) = 2a = 2b, \quad a, b \in \mathbb{N}
+  \end{align*}
+  folgt, dass \(a = b\). Die ist nicht surjektiv, denn für ungerade
+  \(a \in \mathbb{N}\) gibt es kein Urbild \(a/2 \in \mathbb{N}\).
+\item \(f\colon \mathbb{R}^{2} \to \mathbb{R}, (x, y) \mapsto \frac{x}{y^{2}+1}\) ist nicht
+  injektiv, denn es gilt \(f(0, 1) = f(0, -1) = 0\). Die ist
+  surjektiv, denn für alle \(a \in \mathbb{R}\) gilt \(f(a, 0) = a\).
+\end{enumerate}
+\subsection*{Aufgabe 0.2}
+\begin{enumerate}
+\item \(f\colon \mathbb{R} \to \mathbb{R}, f(x) = x^{2}\) nicht injektiv, wegen \(f(x) =
+  f(-x)\) für alle \(x \in \mathbb{R}\).  Nicht surjektiv, wegen \(f(\mathbb{R}) =
+  \rinterval{0}{\infty}\).
+\item
+  \(g\colon (\mathbb{N} \setminus \{0\})^{2} \to \mathbb{N} \setminus \{0\}, g((a, b)) = kgv(a, b)\) nicht
+  injektiv, wegen \(g((a, b)) = g((b, a))\) für alle
+  \((a, b) \in (\mathbb{N} \setminus \{0\})^{2}\).  Surjektiv, denn sei \(b \in \mathbb{N}\setminus\{0\}\)
+  beliebig.  Dann gilt \(g((1, b)) = b\).
+\end{enumerate}
+\begin{Behauptung}
+  Eine bijektive Funktion hat ein eindeutiges Inverses.
+\end{Behauptung}
+\begin{proof}
+  Sei \(A, B\) Mengen, \(f\colon A \to B\) bijektiv.  Dann existiert zu jedem
+  \(y \in B\) genau ein \(x \in A\) mit \(f(x) = y\).  Wir definieren
+  \(f^{-1}(y) = x\).  Damit ist \((f \circ f^{-1})(y) = y\) und \((f^{-1}
+  \circ f)(x) = x\).  Damit haben wir die Existenz von dem Inverses
+  gezeigt.
+
+  Wir zeigen die Eindeutigkeit.  Angenommen, es existiert ein \(g\colon B
+  \to A\) mit \(g \ne f^{-1}\), also es existiert mindestens ein \(y \in B\)
+  sodass \(g(y) \ne f^{-1}(y)\).  Damit gilt \(g(y) \ne x\) und \((f \circ
+  g)(y) \ne x \).  Also ist \(g\) kein Inverse von \(f\).
+\end{proof}
+\section*{Gruppen}
+\subsection*{Aufgabe 0.3}
+\begin{enumerate}
+\item Definition von Gruppe.  Sei \(G\) eine Menge und \(+\colon G \times G \to G,
+  (a, b) \mapsto (a + b)\) eine Funktion.  Dann ist \((G, +)\) eine Gruppe,
+  falls gilt:
+  \begin{itemize}
+  \item Assoziativ, also \((a+b)+c = a+(b+c)\).
+  \item Existenz des neutralen Elements.  Existiert \(e \in G\) mit \(e
+    + a = a\) für alle \(a \in G\).
+  \item Existenz des Inverses.  Zu jedem \(a \in G\) existiert \((-a) \in
+    G\) mit \((-a) + a = e\).
+  \item Falls \(+\) kommutativ ist, dann heißt die Gruppe abelsch.
+  \end{itemize}
+\item Behauptung.  \((\mathbb{Z}, +)\) ist eine Gruppe.
+  \begin{proof}
+    Für alle \(a, b, c \in \mathbb{Z}\) gilt
+    \((a+b)+c=a+(b+c)=a+b+c\), also ist die Addition auf
+    \(\mathbb{Z}\) kommutativ.  Es gilt für alle \(a\in \mathbb{Z}\) dass
+    \(0+a=a\). Zu jedem \(a \in \mathbb{Z}\) existiert \((-a) \in \mathbb{Z}\) mit \((-a) +
+    a = 0\).  Damit ist \((\mathbb{Z}, +)\) eine Gruppe.
+  \end{proof}
+
+\item Behauptung.  Für jedes \(k \in \mathbb{N}\) ist \(k\mathbb{Z} \coloneq \{kz \mid z \in \mathbb{Z}\}\)
+  eine Untergruppe von \((\mathbb{Z}, +)\).
+  \begin{proof}
+    Sei \(k \in \mathbb{N}\) beliebig.  Zuerst gilt \(k\mathbb{Z} \subsetneq \mathbb{Z}\).  Sei \(a, b, c \in
+    k\mathbb{Z}\).  Dann existiert \(p, q, r \in \mathbb{Z}\) mit \(a = kp, b = kq, c =
+    kr\).
+
+    Es gilt \((a+b)+c = a+(b+c) = k(p+q+r) \in k\mathbb{Z}\).  Es gilt
+    \(0 \in k\mathbb{Z}\) und \(0+a = a\).  Es gilt
+    \(-a = k(-p) \in k\mathbb{Z}\).  Damit gilt die Behauptung.
+  \end{proof}
+\item Sei \(k \in \mathbb{N}\).  Sei
+  \(f\colon \mathbb{Z} \to k\mathbb{Z}\) eine Homomorphismus.  Also gilt
+  \(f(a + b) = f(a) \oplus f(b)\) für alle \(a, b \in \mathbb{Z}\).  Sei
+  \(f(1) = m\), dann existiert \(p \in \mathbb{Z}\) mit
+  \(f(1) = m = kp\).  Weil wir alle \(a \in \mathbb{Z}\) durch einen Vielfach der
+  Anwendung von Addition oder Subtraktion (Addition der additiven
+  Inverses) von Eins erhalten kann, gilt
+  \begin{align*}
+    f(a+b) = f(a) \oplus f(b)
+    = \underbrace{(f(1) \oplus \cdots \oplus f(1))}_{a\text{-mal}} \oplus \underbrace{(f(1) \oplus \cdots \oplus f(1))}_{b\text{-mal}}
+   = (a+b) \cdot kp.
+  \end{align*}
+\end{enumerate}
+\subsection*{Aufgabe 0.4}
+Quotientengruppe?
+\subsection*{Aufgabe 0.5}
+Sei \((G, \oplus)\) eine Gruppe und \(U \subseteq G, U \ne \emptyset\).
+\begin{Behauptung}
+  \((U, \oplus)\) ist genau dann eine Untergruppe von \(G\), wenn \[R \coloneq
+  \{(a, b) \in G^{2} \mid a \oplus b^{-1} \in U\}\] eine Äquivalenzrelation ist.
+\end{Behauptung}
+\begin{proof}
+  Hinrichtung.  Sei \((U, \oplus)\) eine Untergruppe von \(G\).  Sei nun
+  \((a, b) \in R\).  Wir betrachten die drei Kriterien von
+  Äquivalenzrelation.
+
+  \(R\) ist reflexiv.  Weil \(U\) eine Untergruppe ist, existiert für
+  \(a \oplus b^{-1} \in U\) ein Inverse \((a \oplus b^{-1})^{-1} = b \oplus a^{-1} \in
+  U\).  Damit gilt \((b, a) \in R\).
+
+  \(R\) ist symmetrisch.   Weil \(U\) eine Untergruppe ist, gilt \(e \in
+  U\).  Daraus folgt, dass \(a \oplus a^{-1} = e \in U\) für alle \(a \in G\).
+  Damit gilt \((a, a) \in R\).
+
+  \(R\) ist transitiv.  Sei \((a, b), (b, c) \in R\).  Wir zeigen, dass
+  \((a, c) \in R\) gilt.  Wegen \((a, b) \in R\) gilt \(a \oplus b^{-1} \in U\).
+  Wegen \((b, c) \in R\) gilt \(b \oplus c^{-1} \in U\).  Es gilt \(b^{-1} \oplus b
+  \in U\).  Daraus folgt, dass
+  \begin{align*}
+    a \oplus c^{-1} = (a \oplus b^{-1}) \oplus (b \oplus c^{-1}) \in U.
+  \end{align*}
+
+  Rückrichtung.  Wir zeigen, dass die drei Kriterien von Gruppen
+  erfüllt sind.  Dann gilt für alle \(a, b, c \in U \subseteq G\) dass
+  \((a \oplus b) \oplus c = a \oplus (b \oplus c)\), weil \(G\) bereits eine Gruppe ist.
+  Wegen der Symmetrie existiert \(e \in U\) dass \(e \oplus a = a\).  Wegen
+  Reflexivität existiert \(a^{-1} \in U\) mit \(a \oplus a^{-1} = e\).
+\end{proof}
+
+\section*{Kern und Bild}
+\subsection*{Aufgabe 0.6}
+\begin{enumerate}
+\item In Treppennormalform.
+  \begin{align*}
+    \begin{bmatrix}
+      1 & 0 & 0 & -5/11 \\
+      0 & 1 & 0 & 5/11 \\
+      0 & 0 & 1 & 14/11 \\
+      0 & 0 & 0 & 0
+    \end{bmatrix}
+  \end{align*}
+  Der Bildraum einer Matrix ist der Spaltenraum.  Also, \[\Span([1, 0,
+  0, 0], [0, 1, 0, 0], [0, 0, 1, 0]).\] Der Kern ist der Lösungsraum
+  von \(A x = o\).  Dies gilt genau dann, wenn \[x \in \Span([5/11,
+  -5/11, -14/11, 1])\] ist.
+\item In Treppennormalform.
+  \begin{align*}
+    \begin{bmatrix}
+      1 & 0 & -1 \\
+      0 & 1 & 2 \\
+      0 & 0 & 0
+    \end{bmatrix}
+  \end{align*}
+  Der Bildraum einer Matrix ist der Spaltenraum.  Also,
+  \(\Span([1, 0, 0], [0, 1, 0])\). Der Kern ist der Lösungsraum von
+  \(A x = o\).  Dies gilt genau dann, wenn
+  \(x \in \Span([1, -2, 1])\) ist.
+\end{enumerate}
+\subsection*{Aufgabe 0.7}
+Sei \(A \in \mathbb{R}^{n \times n}\) eine Matrix, \(n \in \mathbb{N}\).
+\begin{enumerate}
+\item Sei \(B \in \mathbb{R}^{n \times n}\) invertierbar.
+  \begin{Behauptung}
+    Dann gilt
+    \[\dim \Ker B A = \dim \Ker A = \dim \Ker A B.\]
+  \end{Behauptung}
+  \begin{proof}
+    Sei \(x \in \Ker A\).  Weil \(B\) invertierbar ist, ist \(\Ker B =
+    \{o\}\).  Also ist \(x \in \Ker B A\) genau dann, wenn \(x \in \Ker
+    A\) gilt.  Damit ist die erste Gleichheit bewiesen.
+
+    Wir zeigen, dass die zweite Gleichheit gilt.  Zuerst bemerken wir,
+    dass \[\dim \Ker A B = \dim \Ker B^{-1} A.\]  Wegen \(B^{-1} \in
+    \mathbb{R}^{n \times n}\) invertierbar, folgt die zweite Gleichheit aus der
+    ersten Gleichheit.
+  \end{proof}
+
+\item Sei \(\tilde{A}\) eine Matrix, die aus \(A\) durch elementare
+  Umformungen entsteht.
+  \begin{Behauptung}
+    Es gilt \(\dim \Ker A = \dim \Ker \tilde{A}\).
+  \end{Behauptung}
+  \begin{proof}
+    Jede elementare Umformung ist invertierbar.  Dann ist die
+    Komposition von alle solche Umformungen invertierbar.  Das heißt,
+    es existiert \(B \in \mathbb{R}^{n \times n}\) invertierbar mit \(\tilde{A} = B
+    A\).  Nun folgt die Behauptung aus Teil Eins dieses Aufgabes.
+  \end{proof}
+\item Sei \(\tilde{A}\) in Zeilenstufenform.  Bestimme \(\dim \Ker
+  \tilde{A}\).
+\item Beschreibe Algorithmus zur Berechnung von \(\dim \Ker A\).
+\end{enumerate}
+\section*{Vektorräume und Basen}
+\subsection*{Aufgabe 0.8}
+Ein Vektorraum \(V\) über dem Körper \(K\) ist eine Menge von Vektoren
+mit zwei Abbildungen, Addition und skalare Multiplikation, für die die
+folgende Regeln erfüllt sind: (i) \((V, +)\) kommutative Gruppe. (ii)
+Für die skalaren Multiplikation gilt die distributiv Gesetze. (iii)
+Die skalaren Multiplikation ist assoziativ. (iv) Existiert Einsvektor
+\(1\) sodass \(1v=v\) für alle \(v \in V\).
+\begin{enumerate}
+\item \(V \coloneq \{(x, y) \in \mathbb{R}^{2} \mid 2x+y=0\}\) ist ein Vektorraum.
+\item Gruppe \(\mathbb{Z}_{10}\) mit Skalierung durch Zahlen in \(\mathbb{Z}_{5}\)?
+\item
+  \(V \coloneq \{f \colon \mathbb{R} \to \mathbb{R} \mid f \text{ bijektiv}\}\) über Körper
+  \(\mathbb{R}\), mit Komposition als Vektoraddition, ist kein Vektorraum. (Tut
+  05 L).
+\item Die Gruppe \((\mathbb{R}, +)\) mit Skalierung durch Zahlen in \(\mathbb{Q}\)?
+\end{enumerate}
+\subsection*{Aufgabe 0.9}
+\begin{enumerate}
+\item Basen für \(\{f \in \mathbb{R}[x] \mid \deg(f) \le 4\}\) über \(\mathbb{R}\): \[\{1, x,
+    x^{2}, x^{3}, x^{4}\}, \{3, x-1, x^{2}+2, 3x^{3} - 5, 4x^{4}\}\]
+\item Basen für \(\mathbb{R}^{2}\) über \(\mathbb{R}\): \[\{(1, 0), (0, 1)\}, \{(\pi, e),
+    (e, \pi)\}\]
+\item Basen für \(\{(x, y, z) \in \mathbb{R}^{3} \mid x + 2y - z = 0\}\) über \(\mathbb{R}\).
+  Wegen \(\dim \Ker A = \dim \mathbb{R}^{3} - \dim \Img A = 2\), sind die
+  Basen:
+  \[\{(1, 0, 1), (0, 1, 2)\}, \{(2, -1, 0), (0, 1, 2)\}\]
+\end{enumerate}
+\subsection*{Aufgabe 0.10}
+Sei \(V\) ein \(\mathbb{C}\)-Vektorraum mit Basis \([b_{1}, \ldots, b_{n}]\).  Indem
+wir die Skalarmultiplikation auf Zahlen in \(\mathbb{R}\) einschränken, wird
+\(V\) zu einem \(\mathbb{R}\)-Vektorraum.  Finde eine Basis von \(V\) als
+\(\mathbb{R}\)-Vektorraum.
+
+\section*{Dimensionsformeln}
+\subsection*{Aufgabe 0.11}
+\begin{Behauptung}
+  Sei \(V\) ein endlich dimensionaler \(K\)-Vektorraum und sei \(U\)
+  ein Unterraum von \(V\).  Angenommen, \(\dim U = \dim V\), dann
+  folgt \(U = V\).
+\end{Behauptung}
+\begin{proof}
+  Beweis durch Widerspruch.  Wir nehmen an, dass \(U \ne V\) gilt.  Sei
+  \(B_{V}\) eine Basis von \(V\).  Wegen \(U \subsetneq V\), existiert eine echte
+  Teilmenge \(B_{U}\) von \(B_{V}\), sodass \(B_{U}\) eine Basis von
+  \(U\) ist.  Daraus folgt, dass \(\dim U < \dim V\).  Widerspruch.
+\end{proof}
+\begin{proof}
+  Alternativer Beweis.
+\end{proof}
+\subsection*{Aufgabe 0.12}
+\begin{enumerate}
+\item Bestimme alle lienaren Abbildungen von \(\mathbb{R}\) nach \(\mathbb{R}\).
+
+  Behauptung.  Sei \(f\colon \mathbb{R} \to \mathbb{R}\) linear.  Dann muss \(f\colon x \mapsto px, p \in
+  \mathbb{R}\) sein.
+
+  Beweis?  Denn nur Matrizen mit einer Eintrag ist linear.
+  \[
+    \begin{bmatrix}
+      p
+    \end{bmatrix}
+    \cdot x =
+    \begin{bmatrix}
+      px
+    \end{bmatrix}.
+  \]
+\item Wir suchen nach eine lineare Abbildung \(f\colon \mathbb{R}^{2} \to \mathbb{R}^{2}\) mit
+  \(\Img f = \Ker f\).  Wegen \[\dim \Ker f + \dim \Img f = \dim
+    \mathbb{R}^{2} = 2 \]
+  folgt, dass \(\dim \Ker f = \dim \Img f = 1\).  Wir betrachten die
+  Abbildung
+  \[
+    f\colon
+    \begin{bmatrix}
+      1 & 0 \\
+      0 & 0
+    \end{bmatrix}
+    \times
+    \begin{bmatrix}
+      a \\ b
+    \end{bmatrix}
+  \]
+  dann gilt \(\Ker f = \Span\{(0, 1)\}\) und \(\Img f = \Span\{(1,
+  0)\}\).  Damit folgt die Behauptung.
+
+\item Wir können eine lineare Abbildung \(\mathbb{R}^{3} \to \mathbb{R}^{3}\) mit oben
+  genannten Eigenschaften nicht finden.
+\end{enumerate}
+\section*{Matrizen und Koordinatentransformation}
+\subsection*{Aufgabe 0.13}
+\begin{align*}
+  T_{A \to B} =
+  \begin{bmatrix}
+    0 & 1 & 1 & 0 \\
+    1 & 0 & 0 & 1 \\
+    1 & 0 & 1 & 1 \\
+    0 & 0 & 1 & 1
+  \end{bmatrix},
+  \quad
+  T_{B \to A} =
+  \begin{bmatrix}
+    0 & 2 & -1 & -1 \\
+    1 & 1 & -1 & 0 \\
+    0 & -1 & 1 & 0 \\
+    0 & 1 & -1 & 1
+  \end{bmatrix}.
+\end{align*}
+\subsection*{Aufgabe 0.14}
+Bestimmen bezügilch der Standardbasis \(\{(1, 0), (0, 1)\}\) im
+\(\mathbb{R}^{2}\) die Matrix der linearen Abbildung
+\(f\colon \mathbb{R}^{2} \to \mathbb{R}^{2}\), die jedes \(u \in \mathbb{R}^{2}\)
+\begin{enumerate}
+\item an der \(x\)-Achse spiegelt, \((x, y) \mapsto (x, -y)\),
+
+  um \(\pi/2\) im Uhrzeigersinn dreht, \((x, -y) \mapsto (-y, -x)\),
+
+  in Richtung der \(y\)-Achse um den Faktor \(a\) streckt, \((-y, -x)
+  \mapsto (-y, -ax)\)
+
+  und dann erneut an der \(x\)-Achse spiegelt, \((-y, -ax) \mapsto (-y,
+  ax)\).
+  \[
+    \begin{bmatrix}
+      0 & -1 \\
+      a & 0
+    \end{bmatrix}
+  \]
+\item um \(\pi\) dreht, \((x, y) \mapsto (-x, -y)\),
+
+  in Richtung der \(x\)-Achse um den Faktor \(a\), \((-x, -y) \mapsto (-ax,
+  -y)\)
+
+  in Richtung der \(y\)-Achse um den Faktor \(b\) streckt, \((-ax,
+  -y) \mapsto (-ax, -by)\).
+  \[
+    \begin{bmatrix}
+      -a & 0 \\
+      0 & -b
+    \end{bmatrix}
+  \]
+\end{enumerate}
+\subsection*{Aufgabe 0.15}
+\begin{enumerate}
+\item \(f: \mathbb{R}^{4} \to \mathbb{R}^{4}, f(a, b, c, d) = (4a+b, -c-3d, 6a-d,
+  a+b+c+d)^{\top}\)
+  \[
+    \begin{bmatrix}
+      4 & 1 & 0 & 0 \\
+      0 & 0 & -1 & -3 \\
+      6 & 0 & 0 & -1 \\
+      1 & 1 & 1 & 1
+    \end{bmatrix}
+  \]
+\item \(f\colon \mathbb{R}^{3} \to \mathbb{R}^{5}, f(x, y, z) = (x, z, y, x + z, x + y)^{\top}\)
+  \[
+    \begin{bmatrix}
+      1 & 0 & 0 \\
+      0 & 0 & 1 \\
+      0 & 1 & 0 \\
+      1 & 0 & 1 \\
+      1 & 1 & 0
+    \end{bmatrix}
+  \]
+\item \(f\colon \mathbb{R}[x]_{n} \to \mathbb{R}[x]_{n}, n \in \mathbb{N}\),
+  \[f\left(\sum_{i = 0}^{n}{p_{i}x^{i}}\right) =
+    \sum_{i=1}^{n}(p_{i}+p_{i-1})x^{i} + (p_{0} + p_{n})\]
+  mit Basis \([1, x, x^{2}, \ldots, x^{n}]\).
+  \[
+    \begin{bmatrix}
+      1 & 0 & 0 & 0 & \cdots & 0 & 1 \\
+      1 & 1 & 0 & 0 & \cdots & 0 & 0 \\
+      0 & 1 & 1 & 0 & \cdots & 0 & 0 \\
+      \vdots \\
+      0 & 0 & 0 & 0 & \cdots & 1 & 1
+    \end{bmatrix}
+    \in \{0, 1\}^{(n+1) \times (n+1)}.
+  \]
+\item \(f\colon \mathbb{R}[x]_{n} \to \mathbb{R}[x]_{n}, n \in \mathbb{N}\),
+  \[f\left(\sum_{i=0}^{n}p_{i}x^{i}\right) = p_{0} + \cdots + p_{n}\]
+  mit Basis \([1-x, x-x^{2}, x^{2} - x^{3}, \ldots, x^{n-1} - x^{n},
+  x^{n}]\).
+  [Tut 09].
+\end{enumerate}
+\section*{Determinanten}
+\subsection*{Aufgabe 0.16}
+\begin{enumerate}
+\item \(2\).
+\item Nicht invertierbar. \(0\).
+\item \(ad-bc\).
+\end{enumerate}
+\subsection*{Aufgabe 0.17}
+Berechnung des Determinants mittels elementaren Umformungen:
+\begin{align*}
+  \begin{bmatrix}
+    1 & 2 & 1 \\
+    0 & 2 & 1 \\
+    -1 & 0 & 1
+  \end{bmatrix} \to
+  \begin{bmatrix}
+    1 & 2 & 1 \\
+    0 & 2 & 1 \\
+    0 & 2 & 2
+  \end{bmatrix} \to
+  \begin{bmatrix}
+    1 & 2 & 1 \\
+    0 & 2 & 1 \\
+    0 & 0 & 1
+  \end{bmatrix}
+\end{align*}
+Wegen [Kowalsky, Satz 5.4.5] gilt \(\det A = 1 \times 2 \times 1 = 2\).
+Mittels Laplace-Entwicklung an der zweiten Spalte:
+\begin{align*}
+  \det A = 2 \cdot (-1)^{1+2}\cdot 1 + 2 \cdot (-1)^{2+2} \cdot 2 = 2.
+\end{align*}
+\subsection*{Aufgabe 0.18}
+Eine lineare Abbildung ist genau dann invertierbar, falls der Kern nur
+aus Nullvektor besteht, genau dann, falls der Determinant ungleich
+Null ist.
+\end{document}

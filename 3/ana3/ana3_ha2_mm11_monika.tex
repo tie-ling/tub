@@ -1,0 +1,320 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+\documentclass[draft,a5paper]{article}
+
+% 让每个章节 subsection 在新的一页上开始
+% 而不是紧接着上一章节
+\AddToHook{cmd/subsection/before}{\clearpage}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+\geometry{a5paper,
+ left=1cm,
+ right=1cm,
+ top=1cm,
+ bottom=2cm
+}
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+
+% 调整 Emacs 预览字体大小
+% (setq preview-scale-function 1.5)
+
+% TeX Gyre Schola and unicode-math
+% which in turn loads amsmath,mathtools,fontspec and friends
+\usepackage{amsmath,mathtools,fontspec,amsthm,parskip,interval,unicode-math}
+\setmainfont{texgyreschola}%
+ [
+  Extension = .otf ,
+  UprightFont = *-regular,
+  ItalicFont = *-italic,
+  BoldFont = *-bold,
+  BoldItalicFont = *-bolditalic,
+  Ligatures=TeX,
+ ]
+\setmathfont{texgyreschola-math.otf}
+
+
+% 加载数学相关的包
+\usepackage{
+  % 自然段间留空
+  parskip,
+  % 区间排版
+  interval
+}
+
+% 中文支持，暂时不需要
+% \usepackage[UTF8]{ctex}
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\usepackage{amsthm}
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+% 定义新函数，依赖于AMSmath
+\DeclareMathOperator{\card}{card}
+
+\providecommand{\cardi}[1]{\card\left(#1\right)}
+\providecommand{\olA}{\overline{\mathcal{A}}}
+\providecommand{\olm}{\overline{\mu}}
+
+
+\title{HA 2, Ana 3, Monika, MM 11}
+\author{Zhang 484981, Yang 466096, Guo 480788}
+
+\begin{document}
+\maketitle
+\begin{center}
+  Meng Zhang 484981, Yiwen Yang 466096, Yuchen Guo 480788
+\end{center}
+\subsection{H 2.1}
+\subsubsection{Definitionen}
+\begin{Definition}
+  Sei \(\Omega\) eine Menge.  \(\mathcal{A} \subseteq \mathcal{P}(\Omega)\) ist eine \(\sigma\)-Algebra,  falls (i)
+  \(\Omega \in \mathcal{A}\); (ii) komplementstabil; (iii)  stabil bzgl.  abzählbaren Vereinigungen.
+\end{Definition}
+\begin{Satz}
+  Eine \(\sigma\)-Algebra \(\mathcal{A}\) über \(\Omega\) ist stabil bzgl. abzählbaren
+  Durchschnitten. (Bem. 1.5)
+\end{Satz}
+\begin{Definition}
+  Die von den elementargeom. Mengen \(\mathcal{R}_{\mathrm{EG}}^{n}\) erzeugte
+  \(\sigma\)-Algebra über \(\mathbb{R}^{n}\) heißt Borelsche \(\sigma\)-Algebra \(\mathcal{B}^{n}\).
+\end{Definition}
+\subsubsection{Aufgabe}
+\begin{Behauptung}
+  Seien \(A \in \mathcal{B}^{n}, x \in \mathbb{R}^{n}\), dann gilt \(x + A \in \mathcal{B}^{n}\).
+\end{Behauptung}
+\begin{proof}
+  Wir betrachten die Menge
+  \[ C(x) \coloneq \{A \in \mathcal{B}^{n} \mid x + A \in \mathcal{B}^{n}\} \subseteq \mathcal{B}^{n}.\]
+  Zuerst bemerken wir, dass
+  \(\mathcal{R}_{\text{EG}}^{n} \subseteq C(x)\) gilt, denn jede verschobene endliche
+  Vereinigung von Quadern ist natürlich wieder eine endliche
+  Vereinigung von verschobenen Quadern.
+  Danach zeigen wir, dass \(C(x)\) eine \(\sigma\)-Algebra über \(\mathbb{R}^{n}\) ist.
+  \begin{itemize}
+  \item Es gilt \(\mathbb{R}^{n} \in C(x)\).  Weil \(\mathcal{B}^{n}\) eine
+    \(\sigma\)-Algebra ist, gilt
+    \(\mathbb{R}^{n} \in \mathcal{B}^{n}\).  Es gilt auch, dass für alle
+    \(x \in \mathbb{R}^{n}\) die Gleichheit
+    \(x + \mathbb{R}^{n} = \{x\} \cup \mathbb{R}^{n} = \mathbb{R}^{n} \in \mathcal{B}^{n}\) gilt.  Daraus folgt,
+    dass \(\mathbb{R}^{n} \in C(x)\).
+  \item \(C(x)\) ist komplementstabil.  Denn sei \(A \in C(x)\) beliebig.  Wir
+    zeigen, dass \(A^{c} \in C(x)\) gilt.  Sei \(x \in \mathbb{R}^{n}\) beliebig.  Es gibt
+    zwei Fälle.
+    \begin{itemize}
+    \item Falls \(x \in A\).  Dann folgt, wegen \(A \in \mathcal{B}^{n}\) dass \(x \notin
+      A^{c} \in \mathcal{B}^{n}\).  Weil \(\mathcal{B}^{n}\) bzgl. abzählbaren Vereinigungen
+      stabil ist, gilt \(x + A^{c} = \{x\} \cup A^{c} \in \mathcal{B}^{n} \).  Daraus
+      folgt, dass  \(A^{c} \in C(x)\).
+    \item Falls \(x \in A^{c}\).  Dann folgt, dass \(x + A^{c} = \{x\} \cup
+      A^{c} = A^{c}\) und wegen \(A \in \mathcal{B}^{n}\) dass \(A^{c} \in \mathcal{B}^{n}\).
+      Daraus folgt, dass \(A^{c} \in C(x)\).
+    \end{itemize}
+  \item \(C(x)\) ist bzgl. abzählbaren Vereinigungen stabil.  Denn sei
+    die Folge \((A_{n}) \subseteq C(x)\) beliebig.  Wir zeigen, dass
+    \(\bigcup_{n\in\mathbb{N}}{A_{n}}\in C(x)\) gilt. Sei
+    \(x \in \mathbb{R}^{n}\) beliebig.  Es gibt zwei Fälle.
+    \begin{itemize}
+    \item Falls \(x \in A_{n}\) für mindestens ein
+      \(n \in \mathbb{N}\).  Dann gilt
+      \[x + \bigcup_{n \in \mathbb{N}}{A_{n}} = \{x\} \cup \bigcup_{n \in \mathbb{N}}{A_{n}} = \bigcup_{n \in
+          \mathbb{N}}{A_{n}} \in C(x).\]
+    \item Falls \(x \in A^{c}_{n}\) für alle \(n \in \mathbb{N}\).  Wegen Voraussetzung
+      dass \(A_{n} \in \mathcal{B}^{n}\) und \(x + A_{n} \in \mathcal{B}^{n}\) für alle \(n \in \mathbb{N}\)
+      und \(\mathcal{B}^{n}\) bzgl. abzählbare Vereinigung stabil ist, gilt
+      \[x + \bigcup_{n\in \mathbb{N}}{A_{n}} = \{x\} \cup \bigcup_{n\in \mathbb{N}}{A_{n}} = \bigcup_{n \in
+          \mathbb{N}}{\left(\{x\} \cup A_{n}\right)} \in \mathcal{B}^{n}.\]
+    \end{itemize}
+    Damit ist \(C(x)\) bzgl. abzählbare Vereinigungen stabil.
+  \end{itemize}
+  Weil \(\mathcal{B}^{n}\) die von \(\mathcal{R}_{\text{EG}}^{n}\) erzeugte, kleinste
+  \(\sigma\)-Algebra ist, gilt \(\mathcal{B}^{n} \subseteq C(x)\).  Damit gilt
+  \[\mathcal{B}^{n} = \sigma(\mathcal{R}_{\text{EG}}^{n}) \subseteq C(x) \subseteq \mathcal{B}^{n}\]
+  also \(C(x) = \mathcal{B}^{n}\) und daraus folgt die Behauptung.
+\end{proof}
+\subsection{H 2.2}
+\subsubsection{Definitionen}
+\begin{Definition}
+  Sei \(\Omega\) eine Menge, \(\mathcal{R}\) eine Ring über \(\Omega\) und
+  \(A \subseteq \Omega\).  \(A\) heißt \textbf{endlich messbar} bzgl.
+  \(\mu^{*}\), falls (i) \(\mu^{*}(A) < \infty\) und (ii) existiert eine Folge
+  \((E_{n})_{n \in \mathbb{N}} \subseteq \mathcal{R}\) sodass
+  \(\lim_{n \to \infty}{d(E_{n}, A)}=0\) gilt.  Die Mengensystem aller endlich
+  messbaren Teilmengen von \(\Omega\) ist mit \(\mathcal{M}_{\mu^{*}}\) bezeichnet.
+\end{Definition}
+\begin{Definition}
+  Sei Voraussetzungen wie oben.  Die Menge \(A\) heißt \textbf{messbar}
+  bzgl. \(\mu^{*}\), falls es existiert \((A_{n})_{n \in \mathbb{N}} \subseteq \mathcal{M}_{\mu^{*}}\)
+  sodass \(A = \bigcup_{n \in \mathbb{N}}{A_{n}}\) gilt.  Die Mengensystem aller
+  messbaren Teilmengen von \(\Omega\) ist mit \(\mathcal{A}_{\mu^{*}}\) bezeichnet.
+\end{Definition}
+\begin{Satz}
+  Sei \(\lambda\) die elemetargeom. Inhalt und sei \(\lambda^{*}\) das von
+  \(\lambda\) induzierte äußere Maß.  Die Mengensystem
+  \(\mathcal{L} \coloneq \mathcal{A}_{\lambda^{*}}\) aller bzgl.
+  \(\lambda^{*}\) messbaren Mengen heißt die \textbf{Lebesgue}
+  \(\sigma\)\textbf{-Algebra}. (Korollar 1.31)
+\end{Satz}
+\subsubsection{Aufgabe}
+\begin{Behauptung}
+  Es gilt \(\cardi{\mathcal{L}} = \cardi{\mathcal{P}(\mathbb{R})}\).
+\end{Behauptung}
+\begin{proof}
+  Wir zeigen, dass die Behauptung gilt, indem wir zeigen, dass
+  \(\cardi{\mathcal{L}} \le \cardi{\mathcal{P}(\mathbb{R})}\) und \(\cardi{\mathcal{L}} \ge \cardi{\mathcal{P}(\mathbb{R})}\) gelten.
+  Die Ungleichung \(\cardi{\mathcal{L}} \le \cardi{\mathcal{P}(\mathbb{R})}\) gilt wegen \(\mathcal{L} \subseteq \mathcal{P}(\mathbb{R})\).
+  Sei
+  \[C = \{ x \in \interval{0}{1} \colon x = \sum_{k \in \mathbb{N}}{x_{k} \cdot 3^{-k}}, x_{k}
+    \in \{0, 2\}\}\] das Cantor'sche Diskontinuum.  Wegen Übung enthält
+  \(C\) kein Intervall positiver Länge und ist nirgends dicht sowie
+  total unzusammenhängend. Daraus folgt, dass jeder Teilmenge von
+  \(C\) eine Nullmenge ist.  Daraus folgt, dass \(\mathcal{P}(C) \subseteq \mathcal{L}\).
+
+  Weiter existiert eine bijektive Abbildung zwischen den Intervall
+  \(\interval{0}{1}\) und die Menge der reellen Zahlen \(\mathbb{R}\).  Damit ist
+  der Intervall und die Menge der reellen Zahlen gleichmächtig.  
+  Außerdem ist jede Zahl \(a \in \interval{0}{1}\) binär darstellbar, das
+  heißt, dass
+  \[\interval{0}{1} = \{ x \in \interval{0}{1}\colon x = \sum_{k\in \mathbb{N}}{x_{k} \cdot
+      2^{-k}}, x_{k} \in \{0, 1\}\}\]
+  Damit gilt
+  \[\cardi{C} = \cardi{\interval{0}{1}} = \cardi{\mathbb{R}}, \quad \mathcal{P}(C) \subseteq \mathcal{L}, \quad
+    \cardi{\mathcal{P}(C)} = 2^{\cardi{C}}.\]
+  Damit gilt
+  \[\card(\mathcal{L}) \ge \card(\mathcal{P}(\mathbb{R})). \]
+  Damit gilt die Behauptung.
+\end{proof}
+\subsection{H 2.3}
+\subsubsection{Definitionen}
+\begin{Definition}
+  Ein \textbf{Maßraum} ist ein Tripel \((\Omega, \mathcal{A}, \mu)\) bestehend aus einer
+  Menge \(\Omega\), einer \(\sigma\)-Algebra \(\mathcal{A}\) über \(\Omega\) und einem Maß \(\mu\) auf \(\mathcal{A}\).
+\end{Definition}
+\begin{Definition}
+  Sei \((\Omega, \mathcal{A}, \mu)\) ein Maßraum.  Eine Menge \(N \in \mathcal{A}\) heißt Nullmenge,
+  falls \(\mu(N) = 0\).  Eine Menge \(T \subseteq \Omega\) heißt vernachlässigbar, falls
+  es eine Nullmenge \(N \in \mathcal{A}\) gibt, sodass \(T \subseteq N\) gilt.
+  \(\mu\) bzw. \((\Omega, \mathcal{A}, \mu)\) heißt vollständig, falls jede vernachlässigbare
+  Menge eine Nullmenge ist.
+\end{Definition}
+\subsubsection{Aufgabe}
+Sei \((\Omega, \mathcal{A}, \mu)\) ein Maßraum.  Weiter definieren wir
+\[\olA \coloneq \{A \cup N \mid A \in \mathcal{A}, N \text{ ist
+  }\mu\text{-vernachlässigbar}\}, \quad \olm\colon \olA \to
+  \interval{0}{\infty}, \quad \olm(A \cup N) \coloneq \mu(A).\]
+\subsubsection{Teil i}
+\begin{Behauptung}
+  \(\olA\) ist eine \(\sigma\)-Algebra über \(\Omega\).
+\end{Behauptung}
+\begin{proof}
+  Wir zeigen, dass \(\olA\) die drei Eigenschaften einer
+  \(\sigma\)-Algebra besitzt.
+  \begin{itemize}
+  \item Es gilt \(\Omega \in \olA\).  Denn, es gilt
+    \(\emptyset \in \mathcal{A}, \emptyset \subseteq \Omega, \mu(\emptyset) = 0, \emptyset \subseteq \emptyset\).  Daraus folgt, dass
+    \(\emptyset\) ist \(\mu\)-vernachlässigbare Nullmenge.  Es gilt auch, dass
+    \(\Omega \in \mathcal{A}\).  Wegen der Definition von \(\olA\) gilt
+    \(\Omega \cup \emptyset = \Omega \in \olA\).  
+  \item Wir bemerken, dass auch
+    \(\mathcal{A} \subseteq \olA\) gilt.  Die Begründung ist dieselbe.
+  \item \(\olA\) ist komplementstabil.  Denn sei
+    \((A \cup N) \in \olA\) beliebig.  Dann gilt
+    \((A \cup N)^{c} = (A^{c}\cap N^{c}) \).
+
+    Es gibt zwei Fälle.  Falls \(N^{c} \in \mathcal{A}\).  Dann ist wegen
+    \(A^{c} \in \mathcal{A}\) dass
+    \(A^{c} \cap N^{c} \in \mathcal{A} \subseteq \olA\).  (Stabil bzgl. abzählbare
+    Durchschnitten, Bemerkung 1.5.)
+
+    Falls \(N^{c} \notin \mathcal{A}\). Weil \(N \subseteq \Omega\) eine
+    \(\mu\)-vernachlässigbare Menge ist, existiert eine Menge
+    \(M \in \mathcal{A}\) mit \(\mu(M) = 0\) und \(N \subseteq M\).  Daraus folgt, dass \(M^{c} \subseteq
+    N^{c}\).  Dann gilt
+    \[A^{c} \cap N^{c} = (A^{c} \cap M^{c}) \cup (A^{c} \cap (N^{c} \setminus M^{c})) =
+      (A^{c} \cap M^{c}) \cup (A^{c} \cap (M \setminus N))\]
+    indem \(A, M \in \mathcal{A}, N \subseteq M\) und \(\mu(M) = 0\) gelten.  Daraus folgt, dass
+    \[(A^{c} \cap M^{c}) \in \mathcal{A}, \quad (A^{c} \cap (M \setminus N)) \subseteq M\] also ist
+    \((A^{c} \cap (M \setminus N))\) vernachlässigbar.  Damit ist
+    \[(A^{c} \cap M^{c}) \cup (A^{c} \cap (M \setminus N)) \in \olA\]
+    und die Behauptung gilt.
+  \item \(\olA\) ist stabil bzgl. abzählbar viele Vereinigungen.  Sei
+    die Folge von Mengen \((A_{i} \cup N_{i})_{i \in \mathbb{N}} \subseteq \olA\) beliebig.
+    Wir zeigen, dass
+    \[\bigcup_{i \in \mathbb{N}}(A_{i} \cup N_{i}) \in \olA\]
+    gilt.  Dies gilt, wegen
+    \[\bigcup_{i\in\mathbb{N}}(A_{i} \cup N_{i}) = \left(\bigcup_{i\in\mathbb{N}}A_{i}\right) \cup
+      \left(\bigcup_{i\in\mathbb{N}}N_{i}\right)\]
+    wobei existiert die Folge von Nullmengen \((M_{i})\) sodass \(N_{i} \subseteq
+    M_{i}\) und \(\mu(M_{i}) = 0\) für alle \(i \in \mathbb{N}\) dass
+    \begin{align*}
+      \bigcup_{i \in \mathbb{N}}A_{i} \in \mathcal{A} , \quad \bigcup_{i\in\mathbb{N}}N_{i} \subseteq \bigcup_{i \in \mathbb{N}}M_{i}
+    \end{align*}
+    also ist \(\bigcup_{i\in\mathbb{N}}N_{i}\) eine Teilmenge von eine Vereinigung von
+    abzählbar viele Nullmengen. Wegen [Beispiel 1.33] ist eine
+    abzählbare Vereinigung von Nullmengen wieder eine Nullmenge.
+    Daraus folgt, dass \(\bigcup_{i\in\mathbb{N}}N_{i}\) vernachlässigbar ist.  Daraus
+    folgt
+  \[\bigcup_{i\in\mathbb{N}}(A_{i} \cup N_{i}) = \left(\bigcup_{i\in\mathbb{N}}A_{i}\right) \cup
+      \left(\bigcup_{i\in\mathbb{N}}N_{i}\right) \in \olA.\]
+  \end{itemize}
+  Damit ist \(\olA\) eine \(\sigma\)-Algebra.
+\end{proof}
+\subsubsection{Teil ii}
+\begin{Behauptung}
+  \(\olm\) ist eine wohldefinierte Maß auf \((\Omega, \olA)\) mit
+  \[\olm\colon \olA \to
+  \interval{0}{\infty}, \quad \olm(A \cup N) \coloneq \mu(A).\]
+\end{Behauptung}
+\begin{proof}
+  Wir zeigen Wohldefiniertheit.  Seien die vier Mengen
+  \[A_{1}, A_{2} \in \mathcal{A}; \quad N_{1}, N_{2} \text{ sind } \mu\text{-vernachlässigbar}\]
+  beliebig mit
+  \[B = A_{1} \cup N_{1} = A_{2} \cup N_{2}.\]
+  Wir zeigen, dass
+  \[B = \olm(A_{1} \cup N_{1}) = \olm(A_{2} \cup N_{2})\]
+  gelten.  O.B.d.A. seien
+  \[A_{2} \setminus A_{1} \ne \emptyset, \quad N_{1} = N_{2} \cup (A_{2} \setminus A_{1}).\]
+\end{proof}
+\subsection{H 2.4}
+\begin{Behauptung}
+  Es existiert kein translationsinvariantes Maß auf \(\mathcal{P}(\mathbb{R})\) mit
+  \(\mu(\linterval{0}{1}) = 1\).
+\end{Behauptung}
+\begin{proof}
+  Wir definieren die Relation
+  \(x \sim y \Leftrightarrow x - y \in \mathbb{Q}\) mit
+  \(x, y \in \mathbb{R}\).  Wegen [Übung 2] ist diese Relation eine
+  Äquivalenzrelation.  Wegen der Auswahlaxiom existiert
+  \(K \subseteq \rinterval{0}{1}\) mit
+  \[\cardi{K \cap (x+\mathbb{Q})} = 1\] für alle \(x \in \mathbb{R}\).   Es folgt dann, auch wegen [Übung 2],
+  \[\mathbb{R} = \dot{\bigcup_{q \in \mathbb{Q}}} (K+q).\]
+  Wir definieren \(Q \coloneq \mathbb{Q} \cap \rinterval{0}{1} \), dann ist \(Q\) abzählbar. Daraus folgt, dass
+  \[\linterval{0}{1} \subset \bigcup_{q \in Q} (K+q) \subset
+    \interval{0}{2}.\]
+  Angenommen, es existiert ein translationsinvariantes Maß auf \(\mathcal{P}(\mathbb{R})\) mit
+  \(\mu(\linterval{0}{1}) = 1\).  Falls \(\mu(K) = 0\).  Dann folgt,
+  \[1 = \mu(\linterval{0}{1}) \le \mu(\bigcup_{q \in Q} (K+q)) = \sum_{q \in Q}\mu(K+q)
+    = \sum_{q \in Q}\mu(K) = 0.\]
+  Widerspruch!  Falls \(\mu(K) > 0\).  Dann folgt,
+  \[2 = \mu(\linterval{0}{1}) + {\mu(\linterval{1}{2})}
+     = \mu(\linterval{0}{2}) \ge \mu(\bigcup_{q \in Q} (K+q)) = \sum_{q \in Q}\mu(K+q)
+     = \sum_{q \in Q}\mu(K) = \infty. \]
+   Widerspruch!
+ \end{proof}
+\end{document}

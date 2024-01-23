@@ -1,0 +1,281 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+\documentclass[fleqn,draft,a5paper]{article}
+
+% 让每个章节 subsection 在新的一页上开始
+% 而不是紧接着上一章节
+\AddToHook{cmd/subsection/before}{\clearpage}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+\geometry{a5paper,
+ left=1cm,
+ right=1cm,
+ top=1cm,
+ bottom=2cm
+}
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+
+% 调整 Emacs 预览字体大小
+% (setq preview-scale-function 1.5)
+
+% TeX Gyre Schola and unicode-math
+% which in turn loads amsmath,mathtools,fontspec and friends
+
+% 让每个章节 subsection 在新的一页上开始
+% 而不是紧接着上一章节
+\AddToHook{cmd/subsection/before}{\clearpage}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+
+\geometry{left=1cm,
+ right=1cm,
+ top=1cm,
+ bottom=2cm}
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+
+\usepackage{amsmath,mathtools,fontspec,amsthm,parskip,interval,unicode-math}
+\setmainfont{texgyreschola}%
+ [
+  Extension = .otf ,
+  UprightFont = *-regular,
+  ItalicFont = *-italic,
+  BoldFont = *-bold,
+  BoldItalicFont = *-bolditalic,
+  Ligatures=TeX,
+ ]
+\setmathfont{texgyreschola-math.otf}
+
+
+% 加载数学相关的包
+\usepackage{
+  % 自然段间留空
+  parskip,
+  % 区间排版
+  interval
+}
+
+% 中文支持，暂时不需要
+% \usepackage[UTF8]{ctex}
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\usepackage{amsthm}
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+% 定义新函数，依赖于AMSmath
+\DeclareMathOperator{\card}{card}
+
+% 标题与作者
+\title{HA 3, Ana 3, Monika, MM 11}
+\author{Zhang 484981, Yang 466096, Guo 480788}
+
+\begin{document}
+\maketitle
+\begin{center}
+  Meng Zhang 484981, Yiwen Yang 466096, Yuchen Guo 480788
+\end{center}
+\subsection{H 3.1}
+\subsubsection{Definitionen}
+\begin{Definition}[Messbarer Raum]
+  Ein messbarer Raum ist ein Tupel \((\Omega, \mathcal{A})\) bestehend aus einer
+  Menge \(\Omega\) und einer \(\sigma\)-Algebra \(\mathcal{A}\) über \(\Omega\).
+\end{Definition}
+\begin{Definition}[Maßraum]
+  Ein Maßraum ist ein Tripel \((\Omega, \mathcal{A}, \mu)\) bestehend aus einer
+  Menge \(\Omega\), einer \(\sigma\)-Algebra \(\mathcal{A}\) über \(\Omega\) und einem Maß \(\mu\) auf \(\mathcal{A}\).
+\end{Definition}
+\begin{Definition}[Messbare Abbildung]
+  Seien \((\Omega_{i}, \mathcal{A}_{i}), i = 1, 2\) messbare Räume.  Eine Abbildung
+  \(f\colon \Omega_{1} \to \Omega_{2}\) heißt \(\mathcal{A}_{1}\)-\(\mathcal{A}_{2}\)-messbar, falls
+  \[
+    f^{-1}(\mathcal{A}_{2}) = \{f^{-1}(A_{2}) \mid A_{2} \in \mathcal{A}_{2}\} \subseteq \mathcal{A}_{1}
+  \]
+  gilt.
+\end{Definition}
+\subsubsection{Aufgabe}
+  Seien \(\Omega\) eine nicht-leere Menge, \((\Omega', \mathcal{A}')\) ein messbarer Raum.
+  Wir definieren
+  \[f\colon \Omega \to \Omega', \quad g\colon \Omega \to \mathbb{R}, \quad \varphi\colon \Omega' \to \mathbb{R}, \quad \sigma(f) \coloneq f^{-1}(\mathcal{A}')\] indem
+  \(\sigma(f)\) die von \(f\) auf \(\Omega\) erzeugte \(\sigma\)-Algebra ist.
+\begin{Behauptung}
+  Die Abbildung \(g\) ist genau dann \(\sigma(f)\)-\(\mathcal{B}\)-messbar, d.h.,
+  \[g^{-1}(\mathcal{B}) = \{g^{-1}(M) \mid M \in \mathcal{B}\} \subseteq \sigma(f) = f^{-1}(\mathcal{A}')\] wenn eine
+  \(\mathcal{A}'\)-\(\mathcal{B}\)-messbare Abbildung \(\varphi\) existiert mit \(g = \varphi \circ f\).
+\end{Behauptung}
+\begin{proof}
+  Wir beweisen Hinrichtung mit Widerspruch.  Angenommen, die Abbildung
+  \(g\) ist \(\sigma(f)\)-\(\mathcal{B}\)-messbar und es existiert keine solche Abbildung
+  \(\varphi\), die \(\mathcal{A}'\)-\(\mathcal{B}\)-messbar ist.  Das heißt, für alle Abbildung
+  \(\varphi\colon \Omega' \to \mathbb{R}\) gilt
+  \[\varphi^{-1}(\mathcal{B}) = \{\varphi^{-1}(M) \mid M \in \mathcal{B}\} \nsubseteq \mathcal{A}'\]
+  also für alle Abbildung \(\varphi\) existiert mindestens eine
+  elementargeometrische Menge \(M \in \mathcal{B}\) sodass gilt
+  \[\varphi^{-1}(M) \notin \mathcal{A}'.\]
+  Wegen \(g = \varphi \circ f\) gilt \(g^{-1} = f^{-1} \circ \varphi^{-1}\).  Wir betrachten
+  \(g^{-1}(M)\).  Es gilt
+  \[M \in \mathcal{B}, \quad g^{-1}(M) = (f^{-1} \circ \varphi^{-1})(M) \notin f^{-1}(\mathcal{A}') = \sigma(f)\]
+  im Widerspruch zur Voraussetzung dass \(g^{-1}(M) \in f^{-1}(\mathcal{A}')\) für alle \(M \in
+  \mathcal{B}\).
+
+  Rückrichtung.  Angenommen, es existiert solche \(\mathcal{A}'\)-\(\mathcal{B}\)-messbare
+  Abbildung \(\varphi\) mit \(g = \varphi \circ f\).  Dann gilt wegen Definition von
+  messbaren Abbildungen dass
+  \[\varphi^{-1}(\mathcal{B}) = \{\varphi^{-1}(M) \mid M \in \mathcal{B}\} \subseteq \mathcal{A}'\]
+  sowie
+  \[g^{-1}(\mathcal{B}) = (f^{-1} \circ \varphi^{-1})(\mathcal{B}) \subseteq f^{-1}(\mathcal{A}').\]
+  Damit ist \(g\)  eine \(\sigma(f)\)-\(\mathcal{B}\)-messbare Abbildung und die Behauptung
+  gilt.
+\end{proof}
+\subsection{H 3.2}
+Sei \((\Omega, \mathcal{A})\) ein messbarer Raum mit der bekannten \(\sigma\)-Algebra
+\[\mathcal{A} = \{A \subseteq \Omega \mid A \text{ ist abzählbar oder } A^{c} \text{ ist
+    abzählbar} \}.\]
+und sei die Funktion \(f \colon \Omega \to \mathbb{R}\).  Wir charakterisieren alle
+\(\mathcal{A}\)-\(\mathcal{B}\)-messbaren Funktionen, d.h., Funktionen mit
+\[f^{-1}(\mathcal{B}) = \{f^{-1}(M) \mid M \in \mathcal{B}\} \subseteq \mathcal{A}.\]
+\begin{proof}
+Wir zeigen die Charakterisierung: Für alle \(A \in \mathcal{A}\) gilt:
+\[f(A) \text{ konstant oder } f(A^{c}) \text{ konstant.}\]
+
+ Falls \(\Omega\) abzählbar ist, dann ist \(\mathcal{A} = \Omega\) und alle Funktionen \(f\colon \Omega
+    \to \mathbb{R}\) ist \(\mathcal{A}\)-\(\mathcal{B}\)-messbar.
+
+ Falls \(\Omega\) überabzählbar ist. Wir betrachten den Bild \(I \coloneq f(\Omega)\).
+
+ Falls \(I\) überabzählbar
+    ist, dann existiert ein \(a \in \mathbb{R}\) sodass die beide Mengen
+    \(I \cap \ointerval{-\infty}{a}\) und
+    \(I \cap \rinterval{a}{\infty}\) überabzählbare Mengen sind.  Daraus folgt,
+    dass
+\[ \Omega = \left(f^{-1}(I \cap \ointerval{-\infty}{a}) \sqcup f^{-1}(I \cap
+    \rinterval{a}{\infty})\right) \notin \mathcal{A}\] denn es gilt
+\(f^{-1}(I) = \Omega\).  Damit ist \(f\) keine
+\(\mathcal{A}\)-\(\mathcal{B}\)-messbaren Funktion, falls \(I\) überabzählbar ist.
+
+ Falls \(I\) abzählbar.  Dann ist die disjunkte
+Mengen der Urbild abzählbar, das heißt,
+\[\bigsqcup_{y \in I}{f^{-1}(\{y\})} = \Omega, \quad \card(I) = \mathbb{N}.\]
+Weil \(\Omega\) überabzählbar ist, existiert mindestens ein \(y \in I\) sodass
+\(f^{-1}(\{y\}) \subseteq \Omega\) überabzählbar ist.
+
+ Falls \(I\) abzählbar. Falls es mindestens zwei  \(y_{1}, y_{2} \in I\) mit disjunkte, überabzählbare
+Urbild \(f^{-1}(\{y_{1}\}), f^{-1}(\{y_{2}\})\) existieren, dann
+ist insbesondere
+\[f^{-1}(\{y_{1}\}) \text{ überabzählbar und } f^{-1}(\{y_{2}\}) \subseteq
+  \left(f^{-1}(\{y_{1}\})\right)^{c} \text{ überabzählbar.}\] Daraus
+folgt, dass \(f\)
+keine \(\mathcal{A}\)-\(\mathcal{B}\)-messbaren Funktion ist.
+
+ Falls \(I\) abzählbar. Wir haben gezeigt, dass es genau ein
+  \(y \in I\) mit überabzählbare Urbild \(f^{-1}(\{y\})\) existiert. Für
+  deren Komplement gilt
+\[\left(f^{-1}(\{y\}\right)^{c} = \bigsqcup_{k \in I \setminus
+    \{y\}}{f^{-1}(\{k\})}\] indem alle Menge
+\(f^{-1}(\{k\}), k \in I \setminus \{y\}\) abzählbar sind.  Abzählbare Vereinigung
+von abzählbaren Mengen sind abzählbar.  Daraus folgt, dass
+\[ \forall k \in I \setminus \{y\}, \quad f^{-1}(\{k\}) \in \mathcal{A} \text{ abzählbar} \]
+sowie
+\[ k = y, \quad \left(f^{-1}(\{k\})\right)^{c} \in \mathcal{A} \text{ abzählbar}\] Damit
+ist \(f\) eine \(\mathcal{A}\)-\(\mathcal{B}\)-messbare Funktion.  Damit folgt die Charakterisierung.
+\end{proof}
+
+\subsection{H 3.3}
+\begin{Behauptung}
+  % 黑板粗体 \mathbb{R} \mathbb{C}
+  % 花体 \mathcal{A} \mathcal{B}
+    Jede monotone Funktion \(f: \mathbb{R} \to \mathbb{R}\) ist messbar.
+\end{Behauptung}
+
+\begin{proof}
+    Sei \(f\) monoton wachsend, andernfalls betrachten wir \(-f\).
+    Sei \( a \in \mathbb{R}\) beliebig. Wir zeigen, dass \( A \coloneq \{ x \in \mathbb{R} \mid f(x) \leq a \} \in \mathcal{B}\).
+    \begin{itemize} 
+    \item Falls \(A = \emptyset \) oder \(A = \mathbb{R}\), ist die Behauptung richtig.
+      % 这么写interval::
+      % \interval{a}{b} = [a, b]
+      % \ointerval{a}{b} = ]a, b[
+      % \linterval{a}{b} = ]a, b]
+      % \rinterval{a}{b} = [a, b[
+    \item Falls \(A \neq \emptyset \) und \(A \neq \mathbb{R}\), ist \(A\) nach oben beschränkt. In
+      diesem Fall setzen wir \(s = \sup A\). Da \(f\) monoton wachsend,
+      gilt \[ A = \ointerval{-\infty}{s} \] oder
+        \[ A = \linterval{-\infty}{s} \]
+    \end{itemize}
+    In beiden Fällen ist \(A \in \mathcal{B}\) nach Hausaufgaben 2.1.
+\end{proof}
+
+\subsection{H 3.4}
+\begin{Behauptung}
+  Sei \(\mu\) ein endliches Maß auf \((\mathbb{R}, \mathcal{B})\).  Es existiert eine monoton
+  wachsende und rechtsseitig stetige Funktion
+  \(F\colon \mathbb{R} \to \mathbb{R}\) sodass
+  \[\mu(\linterval{a}{b}) = F(b) - F(a)\]
+  für alle \(a, b \in \mathbb{R}, a \le b\).
+\end{Behauptung}
+\begin{proof}
+  Weil \(F\) auf ganze \(\mathbb{R}\) definiert ist, wählen wir ein \(a \in \mathbb{R}\) fest
+  und definiere
+  \[F(x) \coloneq \mu(\linterval{a}{x}) + F(a).\]
+  Wir zeigen, dass \(F(x)\) monoton wachsend ist und rechtsseitig stetig
+  ist.  Sei \(p, q \in \mathbb{R}, p \le q\).  Dann folgt
+  \begin{align*}
+    F(q) - F(p) &= \mu(\linterval{a}{q}) - \mu(\linterval{a}{p}) \\
+    \intertext{weil die Funktion \(\mu\) eine \(\sigma\)-additive Funktion ist,}
+    &= \mu(\linterval{a}{p}) + \mu(\linterval{p}{q}) - \mu(\linterval{a}{p})
+    \\
+    &= \mu(\linterval{p}{q}) \ge 0.
+  \end{align*}
+  Wir bemerken, dass wegen
+  \[\mu(\emptyset) = \mu(\linterval{0}{0}) = 0 = F(0) - F(0)\] folgt \(F(0) = 0\)
+  und
+  \[F(x) \coloneq \mu(\linterval{0}{x}) + F(0) = \mu(\linterval{0}{x}).\]
+
+
+  Wir zeigen, dass \(F(x)\) rechtsseitig stetig ist.  Falls \(x > 0\) und sei
+  \((x_{n}) \subseteq \mathbb{R}_{>x}\) eine monoton fallende Folge mit
+  \(\lim_{n \to \infty}{x_{n}} = x\).  Dann gilt
+  \(\linterval{0}{x_{n+1}} \subseteq \linterval{0}{x_{n}}\) und
+  \(\linterval{0}{x} = \bigcap_{n \in \mathbb{N}}{\linterval{0}{x_{n}}}\).  Daraus folgt,
+  dass
+  \[F(x) = \mu(\linterval{0}{x}) = \mu(\bigcap_{n \in \mathbb{N}}{\linterval{0}{x_{n}}}) =
+    \lim_{n \to \infty}\mu(\linterval{0}{x_{n}}) = \lim_{n \to \infty}F(x_{n}).\]
+  Falls \(x \le 0\), dann betrachten wir die eine monoton fallende Folge   \((x_{n}) \subseteq \mathbb{R}_{>x}\)  mit
+  \(\lim_{n \to \infty}{x_{n}} = x\).  Dann gilt analog, dass
+  \begin{align*}
+    F(x) - F(x-1) &= \mu(\linterval{x-1}{x}) \\
+                  &= \mu(\bigcap_{n\in \mathbb{N}}\linterval{x-1}{x_{n}}) \\
+                  &= \lim_{n \to \infty}\mu(\linterval{x-1}{x_{n}}) \\
+                  &= \lim_{n \to \infty}F(x_{n}) - F(x-1).  
+  \end{align*}
+  Damit ist \(F(x)\) rechtsseitig stetig auf \(\mathbb{R}\).
+\end{proof}
+\begin{Behauptung}
+  Die Aussage in (i) stimmt noch, wenn man auf die Endlichkeit von \(\mu\) verzichtet.
+\end{Behauptung}
+\begin{proof}
+  Denn nirgenwo haben wir diese Eigenschaft im obigen Beweis verwendet.
+\end{proof}
+\end{document}

@@ -1,0 +1,288 @@
+\documentclass{article}
+
+% formatting and layout
+\usepackage[left=2.5cm, right=2.5cm, bottom=2.5cm]{geometry}
+\usepackage[onehalfspacing]{setspace}
+\setlength{\parindent}{0pt}
+
+% input/output language
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+
+% math packages
+\usepackage{amsmath,mathtools,fontspec, amsfonts, amsthm}
+
+
+\begin{document}
+\begin{center}
+    \Huge \textbf{Hausaufgabenblatt 1} % hier die Aufgabennummer
+    % anpassen
+    \\
+    \tiny Lineare Algebra 1 WS 22/23
+\end{center}
+\begin{center}
+Eingereicht von Yuchen Guo (Matr.Nr. 480788) und Meng Zhang (Matr.Nr. 484981).\\
+Tutor*in: Name
+\end{center}
+
+\hrule
+\section*{Aufgabe 1.1}
+\subsection*{(i)}
+\begin{proof}
+  Wir setzen zur Abkürzung \(S(n)=\sum_{k=0}^n{k^3}\) und zeigen die
+  Gleichung \(S(n) = \frac{n^2(n+1)^2}{4}\) durch vollständige
+  Induktion.
+
+\begin{itemize}
+\item[(i)] Induktions-Anfang \(n=0\).
+
+  Es ist \(S(0)=0\) und \(\frac{0^2(0+1)^2}{4}=0\), also gilt die Formel für \(n=0\).
+\item[(ii)] Induktions-Schritt \(n \rightarrow n+1\).  Wir nehmen an,
+  dass \(S(n)=\frac{n^2(n+1)^2}{4}\) gilt für alle \(n \in \mathbb{N}\)
+  (Induktions-Voraussetzung) und müssen zeigen, dass daraus die Formel
+  \(S(n+1)=\frac{(n+1)^2(n+2)^2}{4}\) folgt.
+
+  Dies sieht man so:
+\begin{align*}
+  S(n+1) &= S(n) + (n+1)^3 \\
+         &= \frac{n^2(n+1)^2}{4} + (n+1)^3 \tag*{Induktions-Voraussetzung} \\
+         &= \frac{n^2(n+1)^2}{4} + \frac{4(n+1)^3}{4} \\
+         &= \frac{(n+1)^2(n^2+4(n+1))}{4} \\
+         &= \frac{(n+1)^2(n+2)^2}{4}.
+\end{align*}
+\end{itemize}
+\end{proof}
+
+\subsection*{(ii)}
+\begin{proof}
+  Wir setzen zur Abkürzung \(S(n)=\prod_{k=1}^n{k^k}\) und zeigen die
+  Ungleichheit \(S(n) \leq n^{\frac{n(n+1)}{2}}\) durch vollständige
+  Induktion.
+
+\begin{itemize}
+\item[(i)] Induktions-Anfang \(n=1\).
+
+  Es ist \(S(1)=1\) und \(n^{\frac{1(1+1)}{2}} = 1\), also gilt die Formel für \(n=1\).
+\item[(ii)] Induktions-Schritt \(n \rightarrow n+1\).
+
+  Wir nehmen an, dass \(S(n)\leq n^{\frac{n(n+1)}{2}}\) gilt für alle
+  \(n \in \mathbb{N}, n \geq 1\) (Induktions-Voraussetzung) und müssen
+  zeigen, dass daraus die Formel \(S(n+1) \leq (n+1)^{\frac{(n+1)(n+2)}{2}}\)
+  folgt.
+
+  Dies sieht man so:
+\begin{align*}
+  S(n+1) &= S(n) \cdot (n+1)^{(n+1)} \\
+         &\leq n^{\frac{n(n+1)}{2}} \cdot (n+1)^{(n+1)}
+           \tag*{Induktions-Voraussetzung} \\
+         &= n^{\frac{n^2+n}{2}}(n+1)^{(n+1)} \\
+  &= n^{\frac{n^2}{2}} \cdot n^{\frac{n}{2}} \cdot (n+1)^n \cdot (n+1)
+  \\
+  &< (n+1)^{\frac{n^2}{2}} \cdot (n+1)^{\frac{n}{2}} \cdot (n+1)^n
+    \cdot (n+1) \tag*{\text{Lemma Aufgabe 1.1.ii.1}}\\
+  &= (n+1)^{\frac{(n+1)(n+2)}{2}}
+\end{align*}
+\end{itemize}
+\end{proof}
+
+\textbf{\textit{Bemerkung}} \(n(n+1)\) und \((n+1)(n+2)\) sind durch \(2\)
+teilbar.
+
+\textbf{Lemma Aufgabe 1.1.ii.1} Für alle
+\(n, k \in \mathbb{N} \setminus \{0\}\) gilt
+\begin{align*}
+n^k < (n+1)^k.
+\end{align*}
+\begin{proof}
+  Diese Behauptung folgt aus der Anordnungs-Axiome, nämlich:
+\begin{align*}
+0 \leq x < y \quad \text{und} \quad 0 \leq a < b \implies ax < by.
+\end{align*}
+\begin{itemize}
+
+\item[(i)] Induktions-Anfang \(k=1\).
+
+  Es ist \(n^1 < (n+1)^1\), also gilt die Formel für \(k=1\).
+
+\item[(ii)] Induktions-Schritt \(k \rightarrow k+1\).
+
+  Wir nehmen an, dass \(n^k < (n+1)^k\) gilt für alle
+  \(k \in \mathbb{N}, k \geq 1\) (Induktions-Voraussetzung) und müssen
+  zeigen, dass daraus die Formel \(n^{k+1} < (n+1)^{k+1}\) folgt.
+\begin{align*}
+  n^{k+1} &= n^k \cdot n \\
+          &< n \cdot (n+1)^k \\
+          &< (n+1) \cdot (n+1)^k \\
+  &= (n+1)^{k+1}
+\end{align*}
+\end{itemize}
+\end{proof}
+
+\section*{Aufgabe 1.2}
+\subsection*{(i)}
+Zuerst formen wir die Aussage explizit in Form \(A \implies B\) um.
+
+\(A\): \(n\) ist eine natürliche Zahl.
+
+\(B\): \(n\) und \(n+1\) sind teilerfremd.
+
+\begin{proof}
+  Die Beweisführung erfolgt nach der Methode des Widerspruchsbeweises,
+  das heißt, es wird gezeigt, dass die Annahme, die natürliche Zahlen
+  \(n\) und \(n+1\) nicht teilerfremd sind, zu einem Widerspruch führt.
+
+  Angenommen, dass \(n\) und \(n+1\) nicht teilerfremd sind und es somit
+  einer Teiler \(k \in \mathbb{N}\) gibt.  Seien \(p, q \in \mathbb{N}\),
+  dann gilt \(n = p \cdot k\) und \(n+1 = q \cdot k\). Insbesondere,
+\begin{align*}
+  (n+1) - n = (p - q) \cdot k = 1
+\end{align*}
+Es existiert aber nur eine Lösung in der Menge der natürlichen Zahlen,
+die diese Gleichung erfüllt, nämlich
+\begin{align*}
+p - q = 1 \quad \wedge \quad k = 1.
+\end{align*}
+
+Daraus folgt, dass \(k = 1\) gilt und im Widerspruch zur Annahme \(n\) und
+\(n+1\) teilerfremd sind.
+\end{proof}
+
+\subsection*{(ii)}
+
+\(A\): Es gibt keine zwei natürliche Zahlen \(a, b \in \mathbb{N}\).
+
+\(B\): \(a^2 - b^2 = 10\).
+
+\begin{proof}
+  Es gilt für alle \(a, k \in \mathbb{N}, k \geq 2\), die Aussagen
+\begin{align}
+  (a+k)^2 - a^2 &>  (a+1)^2 - a^2\\
+  (a+1)^2-a^2 &> a^2 - (a-1)^2
+\end{align}
+
+Aus (1) folgt, dass \(a^2 - b^2\) ist genau dann minimum, wenn
+\(b = a - 1\) ist.  Aus (2) folgt, dass je größer \(a\) ist, desto größer
+\(a^2 - b^2\) ist.  Es gilt \(6^2 - 5^2 = 11\) und \(5^2 - 4^2 = 9\).  Wir
+wissen auch von (1) und (2), dass für alle andere Kombinationen von
+zwei natürlichen Zahlen, die Differenz ihrer Quadrate immer größer als
+\(11\) oder kleiner als \(9\) ist. Deshalb gibt es keine zwei natürlichen
+Zahlen, sodass die Differenz ihrer Quadrate gleich \(10\) ist.
+\end{proof}
+
+\subsection*{(iii)}
+\(A\): Für alle \(a, b, c \in \mathbb{R} \setminus \mathbb{Q}\)
+
+\(B\): $a + b  \in \mathbb{R} \setminus \mathbb{Q}
+\quad \lor \quad a + c \in \mathbb{R} \setminus \mathbb{Q}
+\quad \lor \quad b + c \in \mathbb{R} \setminus \mathbb{Q}$.
+
+  Die Beweisführung erfolgt nach der Methode des indirekten Beweises,
+  das heißt, es wird gezeigt, dass die Aussage
+  \(\neg B \implies \neg A\) gilt.
+
+\begin{proof}
+
+  \(\neg B\):  Es gibt \(a, b, c \in \mathbb{R}\).  Die Summen \(a+b\),
+  \(a+c\), \(b+c\) sind rational.
+
+  \(\neg A\):  \(a, b, c \in \mathbb{Q}\).
+
+  Angenommen, \(p_{1,2,3},q_{1,2,3}\) sind ganze Zahlen, \(p_{n}\) und
+  \(q_{n}\) sind teilerfremd.
+
+
+\begin{align*}
+  a+b &= \frac{p_1}{q_1}\\
+  a+c &= \frac{p_2}{q_2}\\
+  b+c &= \frac{p_3}{q_3}\\
+  b&= \frac{1}{2}(a+b)+(b+c)-(a+c)\\
+  &=\frac{p_1q_2q_3+p_3q_1q_2-p_2q_1q_3}{q_1q_2q_3}\\
+\end{align*}
+
+Damit sind \(a,b,c\) rational, also \(\neg A\) ist wahr.  $\neg B \implies
+\neg A$ ist bewiesen.
+\end{proof}
+\section*{Aufgabe 1.3}
+\subsection*{(i)}
+\begin{center}
+\begin{tabular}{ c  c c c ||c| c c | c|| }
+  \(A\) & \(B\) & \(C\) & \(A \lor B\) & \((A \lor B) \wedge C\) & \(A \wedge C\)
+  & \(B \wedge C\) & \((A \wedge C) \lor (B \wedge C)\)  \\
+  \hline
+  w & w & w & w & w & w & w & w \\
+  w & w & f & w & f & f & f & f \\
+  w & f & w & w & w & w & f & w \\
+  w & f & f & w & f & f & f & f \\
+  f & w & w & w & w & f & w & w \\
+  f & w & f & w & f & f & f & f \\
+  f & f & w & f & f & f & f & f \\
+  f & f & f & f & f & f & f & f \\
+\end{tabular}
+\end{center}
+\subsection*{(ii)}
+
+Aus Wahrheitstafel \(\ldots\)
+\begin{center}
+\begin{tabular}{ c  c c c c c c c }
+  \(A\) & \(B\) & \(A \lor B\) & \(\neg A \wedge B\) & \(A \lor \neg B\)
+  & \(A \wedge (A \lor B)\) & \(A \lor (\neg A \wedge B) \)
+  & \((A \lor B) \wedge (A \lor \neg B) \) \\
+  \hline
+  w & w & w & f & w & w & w & w \\
+  w & f & w & f & w & w & w & w \\
+  f & w & w & w & f & f & w & f \\
+  f & f & f & f & w & f & f & f \\
+\end{tabular}
+\end{center}
+
+\(\ldots\) folgt:
+\begin{align*}
+  A \wedge (A \lor B) &= A\\
+  A \lor (\neg A \wedge B) &= A \lor B\\
+  (A \lor B) \wedge (A \lor \neg B) &= A
+\end{align*}
+
+\section*{Aufgabe 1.4}
+\begin{center}
+  \begin{tabular}{ c c c c c }
+    A(n) & Daisy wohnt hier & Gustav schüchtern & Farbe des Autos &
+                                                                    Geschwindigkeit \\
+    Do & w & f & r & r\\
+    Ti & f & f & g & r\\
+    Tri & f & w & b & r\\
+    Tra & f & f & b & l\\
+    Nr. & m & n & p & q\\
+\end{tabular}
+\end{center}
+
+Angenommen, dass zwei Aussagen von Donald sind wahr, dann
+
+\begin{itemize}
+\item m, n wahr;
+
+  dann Aussagen p, q von Tri müssen wahr sein. also w,f,b,r ist wahr.
+  In diesem Fall hätte Don 3 wahre Aussagen gemacht.
+
+\item m, p wahr;
+
+  dann Aussagen n, q von Tri und Tra müssen gleichzeitig wahr sein,
+  nicht möglich.
+
+\item m, q wahr;
+
+  dann Aussagen n, p von Tra müssen wahr sein, Don hätte 3 wahre Aussagen.
+\item n, p wahr;
+
+  dann Aussagen m, q von Tri müssen wahr sein, Don hätte 3 wahre Aussagen.
+\item n, q wahr;
+
+  dann wäre f f g/b r wahr.  Dann hätte Ti  3 wahre Aussagen.
+\item p, q wahr;
+
+  dann hätte Tri 3 wahre Aussagen gemacht.
+\end{itemize}
+
+Alle Möglichkeiten werden ausgeschlossen.  Dagobert hat sich vertan.
+\end{document}
+

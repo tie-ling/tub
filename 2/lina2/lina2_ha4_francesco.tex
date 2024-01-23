@@ -1,0 +1,164 @@
+% !TeX program = lualatex
+%%% TeX-engine: luatex
+
+\documentclass[draft,a5paper]{article}
+\usepackage[margin=2cm]{geometry}
+\linespread{1.2}
+
+% set language to german
+\usepackage[ngerman]{babel}
+
+% load math packages and unicode support
+% must in this order
+\usepackage{amsmath,mathtools,fontspec}
+\usepackage{amsthm}
+\usepackage{unicode-math,luatex85}
+
+% set fonts
+\setmainfont{STIX Two Text}
+
+% theorem environment used in this document
+\theoremstyle{remark}
+\newtheorem*{beh}{Behauptung}
+\newtheorem*{lem}{Lemma}
+
+\author{Meng Zhang 484981, Yuchen Guo 480788}
+\date{\today}
+\title{HA 4, LinA 2 -- Francesco}
+
+% math operators
+\DeclareMathOperator{\Spek}{Spek}
+\DeclareMathOperator{\lin}{lin}
+\DeclareMathOperator{\Ker}{Ker}
+
+\begin{document}
+\maketitle
+
+\subsection*{Aufgabe 4.1}
+
+Definieren \(f\) mit
+\begin{align*}
+  f\colon \mathbb{C}_{\le 3}[t] \to \mathbb{C}_{\le 3}[t], \quad a + bt + ct^{2} + dt^{3} \mapsto 2a - b +
+  (b+c)t + ct^{2} + (c+d)t^{3}.
+\end{align*}
+Sei \(B \coloneq \{1, t, t^{2}, t^{3}\}\) eine Basis von \(\mathbb{C}_{\le 3}[t]\).  Dann
+ist
+\begin{align*}
+  M_{B,B}(f) =
+  \begin{bmatrix}
+    2 & -1 & 0 & 0\\
+    0 & 1 & 1 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 1 & 1
+  \end{bmatrix}
+\end{align*}
+Dann ist \(\Spek(f)\) die Lösungsmenge von \(\det(xI - M_{B,B}(f)) =
+(1-x)^{3}(2-x) \), also \(\Spek(f) = \{1, 2\}\). Die Eigenräume sind
+\begin{align*}
+  V(1) = \Ker(M_{B,B}(f) - 1I) &= \lin\{[1, -1, 0, 0], [0, 0, 1, 0],
+  [0, 0, 0, 1]\}, \\
+  V(2) = \Ker(M_{B,B}(f) - 2I) &= \lin\{[1, 0, 0, 0], [0, 1, -1, 0],
+  [0, 0, 1, -1], [0, 1, 0, -1]\}.
+\end{align*}
+
+\subsection*{Aufgabe 4.3}
+
+Sei \(A \in \mathbb{K}^{n \times n}\).
+
+\subsubsection*{Aufgabe 4.3, Teil i}
+
+Sei \(f_{A} \in L(\mathbb{K}^{n \times n}, \mathbb{K}^{n \times n})\) mit \(f_{A}(B) = AB\) für \(B
+\in \mathbb{K}^{n \times n}\).  Dann gilt \(\chi_{f_{A}} = (\chi_{A})^{n}\).
+
+\begin{proof}
+  Sei \(B \coloneq \{I_{1}, \ldots, I_{n}\}\) die Standardbasis von
+  \(\mathbb{K}^{n \times n}\).  Wegen [Definition 19.14] gilt
+  \(\chi_{f_{A}} = \chi_{M_{B,B}(f_{A})}\).  Wir zeigen, dass
+  \((\chi_{M_{B,B}(f_{A})})(t) = (\chi_{A})^{n}(t)\).  Es gilt wegen
+  \(f(I_{j}) = AI_{j} = \sum_{i = 1}^{n}{M_{i,j}I_{i}}\) dass
+  \begin{align*}
+    (M_{B,B}(f_{A}))_{i, j} =
+    \begin{cases}
+      A_{i, j}, & \text{falls } i=j; \\
+      0, & \text{sonst.}
+    \end{cases}
+  \end{align*}
+  Die Matrixdarstellung von \(M_{B,B}(f_{A}) - tI\) ist
+  \begin{align*}
+    \begin{bmatrix}
+      A_{1,1} - t & 0 & 0 & \cdots \\
+      0 & A_{2,2} - t & 0 & \cdots \\
+      0 & 0 & A_{3,3} - t & \cdots \\
+      0 & 0 & 0 & \ddots \\
+      \vdots & \vdots & \vdots
+    \end{bmatrix}
+  \end{align*}
+  Daraus folgt, dass \(\chi_{f_{A}}(t) = \det(M_{B,B}(f_{A}) - tI) =
+  1\).  Andereseits gilt \(\chi_{A} = \det(A - tI)\)
+\end{proof}
+
+\subsection*{Aufgabe 4.4}
+
+Sei \(V\) ein \(\mathbb{K}\)-Vektorraum und \(f \in L(V, V)\).
+
+\subsubsection*{Aufgabe 4.4, Teil i}
+
+\begin{beh}
+  Wenn \(f\) bijektiv ist und \(\lambda \in \Spek(f)\) ist, dann gilt \(\lambda^{-1}
+  \in \Spek(f^{-1})\) und \(V_{f}(\lambda) = V_{f^{-1}}(\lambda^{-1})\).
+\end{beh}
+
+\begin{proof}
+  Zu zeigen: \(\lambda^{-1} \in \Spek(f^{-1})\), also es existiert einen
+  Vektor \(w \in V\) mit \(f^{-1}(w) = \lambda^{-1} w\).
+
+  Es gilt \(\lambda \in \Spek(f)\).  Aus der Definition von Spektrum folgt,
+  dass es einen Vektor \(v \in V\) existiert, sodass
+  \(f(v) = \lambda v\) gilt.  Wegen \(f \in L(V, V)\) bijektiv, existiert
+  eine Funktion \(f^{-1} \in L(V, V)\). Durch Umformung erhalten wir
+  \begin{align*}
+    f(v) &= \lambda v \\
+    \lambda^{-1} (f(v)) &= \lambda^{-1} \lambda v \\
+    \lambda^{-1} (f(v)) &= v \\
+    f^{-1}(\lambda^{-1} (f(v))) &= f^{-1}(v) \\
+    \lambda^{-1} f^{-1}(f(v)) &= f^{-1}(v) \tag*{\(f^{-1}\) linear} \\
+    \lambda^{-1} v &= f^{-1}(v) \tag*{\(f^{-1}\) bijektiv}
+  \end{align*}
+  Damit gilt \(\lambda^{-1} \in \Spek(f^{-1})\).  Danach zeigen wir, dass
+  \(V_{f}(\lambda) = V_{f^{-1}}(\lambda^{-1})\).  Sei \(v \in V_{f}(\lambda)\) beliebig
+  gewählt.  Dann gilt wegen
+  \begin{align*}
+    f(v) = \lambda v \iff f^{-1}(v) = \lambda^{-1} v
+  \end{align*}
+  dass \(v \in V_{f^{-1}}(\lambda^{-1})\).  Sei \(v \in V_{f^{-1}}(\lambda^{-1})\) beliebig
+  gewählt, dann folgt analog dass \(v \in V_{f}(\lambda)\).
+\end{proof}
+
+\subsubsection*{Aufgabe 4.4, Teil ii}
+
+\begin{beh}
+  Sei \(f, g \in L(V, V)\) und \(\dim(V) < \infty\).  Es ist \(\Spek(f \circ g) =
+  \Spek(g \circ f)\).  Diese Aussage ist falsch.
+\end{beh}
+
+\begin{proof}
+  Sei \(B \coloneq \{v_{1}, \ldots, v_{n}\}\) eine Basis von \(V\) und
+  \(\lambda \in \Spek(f \circ g)\) beliebig.  Dann existieren Skalaren
+  \(\alpha_{1}, \ldots, \alpha_{n} \in \mathbb{K} \) und einen Vektor
+  \(v \in V \setminus \{ 0 \}\) mit \(v = \sum_{i=1}^{n}{\alpha_{i}v_{i}}\) und
+  \((f \circ g)(v) = \lambda v\).  Die Funktion \(f \circ g\) ist linear und es gilt
+  \begin{align*}
+    (f \circ g)(v) = \sum_{i=1}^{n}{\alpha_{i}(f \circ g)(v_{i})} = \lambda v =
+    \sum_{i=1}^{n}{\lambda \alpha_{i} v_{i}}.
+  \end{align*}
+  Angenommen, \(\lambda \in \Spek(g \circ f)\).  Das heißt, es existiert einen
+  Vektor \(w \in V \setminus \{0\}\) mit \((g \circ f)(w) = \lambda w\).  Analog folgt,
+  \begin{align*}
+    (g \circ f)(w) = \sum_{i=1}^{n}{\beta_{i}(g \circ f)(v_{i})} = \lambda w =
+    \sum_{i=1}^{n}{\lambda \beta_{i} v_{i}}.
+  \end{align*}
+  wobei \(\beta_{1}, \ldots, \beta_{n}\) Skalaren mit \(\sum_{i=1}^{n}{\beta_{i}v_{i}} =
+  w\) sind. ???
+\end{proof}
+
+\end{document}

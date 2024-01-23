@@ -1,0 +1,50 @@
+\documentclass[fontsize=11pt,version=last,ngerman,parskip]{scrlttr2}
+\usepackage[left=3cm,right=2cm,top=1cm,bottom=2cm]{geometry}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,mathtools,fontspec,amsthm,interval,unicode-math}
+\setmainfont{TeX Gyre Termes}
+\setmathfont{TeX Gyre Termes Math}
+\usepackage{array,csquotes}
+\setkomavar{fromname}{Yuchen Guo}
+\setkomavar{place}{Berlin}
+\setkomavar{fromaddress}{Postfach 20 03 22\\  13513   Berlin}
+\setkomavar{toname}{Gewobag}
+\setkomavar{toaddress}{Postfach 21 04 50\\ 10504 Berlin}
+\setkomavar{date}{\today}
+\setkomavar{subject}{Ungeklärte doppelte Abbuchung}
+\makeatletter
+  \setplength{backaddrheight}{0.5cm}
+  \setplength{toaddrhpos}{2.5cm}%distance from left
+  \setplength{toaddrvpos}{5cm}%distance from top
+  \setplength{toaddrheight}{3.5cm}%height of the addressbox
+  \setplength{toaddrwidth}{10cm}% width of the addressbox
+\makeatother
+\begin{document}
+\begin{letter}{}
+  \opening{Sehr geehrte Damen und Herren,} Mein Mietvertrag ist
+  0100/01903/0225/04.  Vertragsgemäß habe ich die monatliche Miete im
+  Höhe von 354,41 € an Ihnen per Dauerauftrag überwiesen.
+
+  Nun habe ich gerade erfahren, dass die Miete zum 05.2024 plus 307,15 € ungeklärte Überschuss per SEPA-Lastschrift erneut von meinem Konto
+  abgebucht wurde.  Daher bitte ich Ihnen, die Abbuchung zu erklären.
+  \begin{center}
+    \begin{tabular}{l | l | l | l | l}
+      Buchungstag & Vorgang & Empfänger & Buchungstext & Umsatz      \\
+      \hline
+      02.05.2024 & Lastschrift / Belastung & GEWOBAG & Miete 05/2024
+                                                       01903/0225/04     &
+                                                                       -661,56      \\
+      22.04.2024 & Übertrag / Überweisung & GEWOBAG &
+                                                      0100/01903/0225/04
+                                                       & -354,41 \\
+      02.04.2024 & Übertrag / Überweisung & GEWOBAG &
+                                                      0100/01903/0225/04
+                                                       & -354,41 \\
+      02.04.2024 & Übertrag / Überweisung & Kaution &
+                                                      0100/01903/0225K03
+                                                       & -742,23
+    \end{tabular}
+  \end{center}
+\closing{Mit freundlichen Grüßen}
+\end{letter}
+\end{document}

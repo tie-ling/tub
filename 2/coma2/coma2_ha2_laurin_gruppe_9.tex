@@ -1,0 +1,302 @@
+\documentclass[draft,a5paper]{article}
+\usepackage[ngerman]{babel}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath,mathtools,fontspec,amssymb,mathtools}
+
+% for theorems and lemma
+\usepackage{amsthm}
+\newtheorem*{beh}{Behauptung}
+\newtheorem*{lem}{Lemma}
+
+% times new roman font
+\usepackage{newtx}
+
+\linespread{1.2}
+
+% multicol
+\usepackage{multicol}
+
+\author{Yiwen Yang 466096, Yuchen Guo 480788, Qing Wang 458040}
+\date{\today}
+\title{HA 1, CoMa 2 -- Gruppe 9, Laurin Geyer}
+
+% syntax highlighting
+\usepackage{minted}
+
+% tikz pictures
+
+
+\begin{document}
+\maketitle
+
+\newpage
+
+\subsection*{1. Aufgabe. (Stack mit Queue)}
+Wir implementieren ein \texttt{julia}-Konstruktor \texttt{Stack} mit
+den Methoden \texttt{stack\textunderscore insert},
+\texttt{stack\textunderscore pop} und \texttt{stack\textunderscore
+  isEmpty}.  Wir nehmen an, dass ein Konstruktor \texttt{Queue} mit den
+folgenden Methoden existiert, vgl. Folie 25.
+
+\begin{minted}[frame=lines,fontsize=\footnotesize,linenos,]{julia}
+## Konstruktor Queue von Folie 25
+isEmpty(Q::Queue)
+insert(Q::Queue, x)
+pop(Q::Queue)
+peek(Q::Queue)
+## end of Konstruktor Queue von Folie 25
+
+struct Stack
+    q0::Queue
+    q1::Queue
+end
+
+stack_isEmpty(S::Stack) =
+    isEmpty(S.q0) && isEmpty(S.q1)
+
+function stack_insert(S::Stack, x)
+    insert(S.q1, x)
+end
+
+function move_to_other_queue(q0::Queue, q1::Queue)
+    result = pop(q0)
+    while ! isEmpty(q0)
+        insert(q1, result)
+        result = pop(q0)
+    end
+    return result
+end
+
+function stack_pop(S::Stack)
+    if stack_isEmpty(S)
+        return
+    end
+    if isEmpty(S.q1)
+        return move_to_other_queue(S.q0, S.q1)
+    else
+        return move_to_other_queue(S.q1, S.q0)
+    end
+end
+\end{minted}
+
+\newpage
+
+\begin{beh}
+  Für die Methode \texttt{stack\textunderscore insert} werden im
+  schlechtesten Fall bei \(n\) Elementen \(1\)-mal \texttt{insert}
+  Operation benötigt.
+
+  Für die Methode \texttt{stack\textunderscore pop} werden im
+  schlechtesten Fall \(n\)-mal \texttt{insert} und \(n\)-mal
+  \texttt{pop} Operationen
+  benötigt.
+\end{beh}
+
+\begin{proof}
+  Aus der Definition von der Methode \texttt{stack\textunderscore
+    insert} folgt, dass nur \(1\)-mal \texttt{insert} Operation
+  benötigt wird.
+
+  Andereseits wird bei jedem Aufruf von \texttt{stack\textunderscore
+    pop} im schlechtesten Fall \(n\)-mal \texttt{insert} und \(n\)-mal
+  \texttt{pop} benötigt.  Denn, wir müssen jeder Element einer
+  Queue \texttt{q0} "`poppen"' und das Element in die andere Queue \texttt{q1} einfügen.
+\end{proof}
+
+\subsection*{2. Aufgabe. (Catalan-Zahlen, Teil 1)}
+
+Die Catalan-Zahlen sind durch \(C_{0} \coloneq 1\) und die rekursive Regel
+\begin{align*}
+  C_{n} \coloneq \sum_{k=0}^{n-1}{C_{k} \cdot C_{n-1-k}}
+\end{align*}
+für alle \(n \ge 1\) definiert.
+
+\subsubsection*{2. Aufgabe, Teil i.}
+
+\begin{beh}
+  Es gilt für alle \(n \ge 1\) dass
+  \begin{align*}
+    2 \cdot \sum_{k=0}^{n-1}{3^{k}} = 3^{n} - 1.
+  \end{align*}
+\end{beh}
+
+\begin{proof}
+  Wir bemühen uns um einen Beweis mittels vollständigen Induktion.
+  Induktionsanfang: \(n = 1\).  Es gilt \(2 \cdot 3^{0} = 3^{1} - 1 = 2
+  \).  Induktionsvoraussetzung: sei \(n \ge 1\) festgewählt.  Es gelte die
+  Behauptung für \(n\).  Induktionsschritt: es gilt
+  \begin{align*}
+    2 \cdot \sum_{k=0}^{(n+1)-1}{3^{k}}
+    = \left[2 \cdot \sum_{k=0}^{n-1}{3^{k}}\right] + 2 \cdot 3^{n}
+    = \left[3^{n} - 1\right] + 2 \cdot 3^{n}
+    = 3^{n+1} -1.
+  \end{align*}
+  Damit gilt die Behauptung.
+\end{proof}
+
+\newpage
+
+\subsubsection*{2. Aufgabe, Teil ii.}
+
+\begin{minted}[frame=lines,fontsize=\footnotesize,linenos]{julia}
+function Catalan(n::Int)
+    if n == 0
+        return 1
+    end
+
+    result = 0
+    for x in 0:n-1
+        # Die Anzahl von Additionen und Multiplikationen
+        # sind gleich
+        result += Catalan(x) * Catalan(n-1-x)
+    end
+
+    return result
+end
+\end{minted}
+
+\begin{beh}
+  Es gilt für die Laufzeit des Codes \(T(n)\) dass
+  \(T(n) \in \Theta(3^{n})\).
+\end{beh}
+
+\begin{proof}
+  Wir berechnen die gesamte Anzahl und Additionen und
+  Multiplikationen.  Wir bemerken, dass die Anzahl von Additionen und
+  Multiplikationen gleich sind.  Daher betrachten wir nur die Anzahl
+  von Multiplikationen.
+
+  Wir zeigen, dass in der Berechnung von \(C_{n}\) genau
+  \(\sum_{i=1}^{n-1}{3^{i}}\)-mal Multiplikationen benötigt wird, mittels
+  vollständige Induktion.  Induktionsanfang, \(n=1\).  Dann gilt
+  \begin{align*}
+    C_{1} &= C_{0} \cdot C_{0}, &&\sum_{i=1}^{n-1}{3^{i}} = 3^{0} = 1.
+  \end{align*}
+  Induktionsvoraussetzung.  Sei \(n \in \mathbb{N}\) fest gewählt.  Es gelte die
+  Behauptung für alle \(i \le n - 1\).  Induktionsschritt, wir berechnen die
+  Anzahl von Multiplikationen für \(C_{n}\).  Es gilt
+  \begin{align*}
+    C_{n} &= \sum_{k=0}^{n-1}{C_{k} \cdot C_{n-1-k}},
+    &&n+2\sum_{i=1}^{n-1}{M_{C_{i}}} =
+       n+2\sum_{i=1}^{n-1}{\sum_{j=0}^{i-1}{3^{j}}}
+       = \sum_{i=1}^{n-1}{3^{i}}
+  \end{align*}
+  wo \(M_{C_{i}}\) für die Anzahl von Multiplikationen in der
+  Berechnung von \(C_{i}\) steht.
+
+  Damit haben wir gezeigt, dass die Anzahl von Multiplikationen bei
+  der Berechnung von \(C_{n}\) genau \(\sum_{i=1}^{n-1}{3^{i}}\)-mal ist,
+  und die gesamte Rechnungsoperationen genau zweimal dieser Anzahl
+  ist.  Wegen \textbf{Teil i} gilt \(T(n) = 3^{n} - 1\). Damit gilt
+  \(T(n) \in \Theta(3^{n})\).
+
+  Eine übersichtlichere Darstellung ist wie folgt.  Die Spalten rechts
+  sind die Anzahl von Multiplikationen.
+  \begin{align*}
+    C_{1} &= C_{0} \cdot C_{0}, &&3^{0}, &&1;\\
+    C_{2} &= C_{0} \cdot C_{1} + C_{1} \cdot C_{0},
+                            &&3^{0} + 3^{1},
+                                     &&2 + 2 \cdot 3^{0}_{C_{1}}; \\
+    C_{3} &= C_{0} \cdot C_{2} + C_{1} \cdot C_{1} + C_{2} \cdot C_{0},
+                            &&3^{0} + 3^{1} + 3^{2},
+                               &&3 + 2 \cdot 3^{0}_{C_{1}} + 2 \cdot
+                                  (3^{0}+3^{1})_{C_{2}};\\
+          & &&\vdots &&\\
+    C_{n} &= \sum_{k=0}^{n-1}{C_{k} \cdot C_{n-1-k}}, &&\sum_{i=1}^{n-1}{3^{i}}, &&n+2\sum_{i=1}^{n-1}{\sum_{j=0}^{i-1}{3^{j}}}.
+  \end{align*}
+\end{proof}
+
+\subsection*{3. Aufgabe (Standard-Young-Schema)}
+
+\subsubsection*{3. Aufgabe, Teil i.}
+
+\begin{align*}
+  \begin{bmatrix}
+    1 & 3 & 4 & \infty \\
+    5 & 8 & 10 & \infty \\
+    12 & 14 & 21 & \infty \\
+    \infty & \infty & \infty & \infty
+  \end{bmatrix}
+\end{align*}
+
+\subsubsection*{3. Aufgabe, Teil ii.}
+
+Wir entwerfen einen Algorithmus in \texttt{julia} mit Laufzeit
+\(O(n + m)\), der aus einem Standard-Young-Schema \(Y\) mit
+\(m \times n\) Einträge ein minimales Element löscht und anschließend durch
+Vertauschen von Einträgen die Monotonieeigenschaften wiederherstellt.
+
+\begin{minted}[frame=lines,fontsize=\footnotesize,linenos]{julia}
+function del_min_element(Y::Matrix)
+    m, n = size(Y)
+    x = 1
+    y = 1
+
+    while x < n && y < m
+        if Y[x, y+1] < Y[x+1, y]
+            Y[x, y] = Y[x, y+1]
+            y += 1
+            continue
+        end
+        if Y[x, y+1] > Y[x+1, y]
+            Y[x, y] = Y[x+1, y]
+            x += 1
+            continue
+        end
+    end
+    if x == n
+        while y < m
+            Y[x, y] = Y[x, y+1]
+            y += 1
+        end
+    else
+        while x < n
+            Y[x, y] = Y[x+1, y]
+            x += 1
+        end
+    end
+    return Y
+end
+\end{minted}
+
+\begin{beh}
+  Der Algorithmus ist korrekt und es gilt \(T(m \times n) \in O(n + m)\).
+\end{beh}
+
+\begin{proof}
+  Zuerst bemerken wir, dass das minimale Element sich wegen der
+  Monotonieeigenschaft zum Beginn in der Position \((1, 1)\) befindet.
+  Wir löschen dieser Eintrag, d.h., ersetzen durch \(\infty\).  Wir
+  bezeichnen die Koordinaten von \(\infty\) mit \((x, y) \leftarrow (1, 1)\).
+
+  Danach prüfen wir, welcher der zwei benachbarten Einträge in der
+  Position \((x, y + 1)\) und \((x + 1, y)\) kleiner ist und tauschen
+  den Wert dieses Eintrags mit den Wert des Eintrags \(\infty\) in der
+  Position \((x, y)\).  Damit wird die Monotonieeigenschaft in der
+  Position \((x, y)\) erfüllt.  Anschließend weisen wir die neue
+  Position von \(\infty\) zu.
+
+  Durch \((m - 1) + (n - 1)\)-mal Anwendung des obengenannten
+  Algorithmus mit einer \texttt{while}-Schleife befindet sich der
+  \(\infty\)-Eintrag nun entweder in der letzten Spalte oder in der letzten
+  Zeile der Matrix.  Wir müssen nur den \(\infty\)-Eintrag in der Position
+  \((m, n)\) bringen, um die Monotonieeigenschaft zu erfüllen.
+  Dieser Schritt benötigt im schlechtesten Fall \(\max(m, n)\)-mal
+  Zuweisungsoperationen.  Damit gilt
+  \begin{align*}
+    T(m \times n) = a[(m - 1) + (n - 1)] + \max(m, n) \in O(m + n).
+  \end{align*}
+  Damit gilt die Behauptung.
+\end{proof}
+
+\subsubsection*{3. Aufgabe, Teil iii.}
+
+Wir entwerfen einen Algorithmus in \texttt{julia} mit Laufzeit
+\(O(n + m)\), der in ein Standard-Young-Schema \(Y\) mit
+\(m \times n\) Einträge \textemdash{} darunter genau ein leerer Eintrag in
+der Position \((m, n)\) \textemdash{} ein Element (der leere Eintrag)
+durch ein Integer ersetzt und anschließend durch Vertauschen von
+Einträgen die Monotonieeigenschaften wiederherstellt.
+
+
+\end{document}

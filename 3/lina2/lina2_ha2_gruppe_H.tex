@@ -1,0 +1,310 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+\documentclass[draft,a5paper]{article}
+
+\input{../../preamble.tex}
+
+
+\usepackage{amsthm}
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+% 定义新函数，依赖于AMSmath
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Img}{Im}
+\DeclareMathOperator{\rg}{rg}
+
+% 画图软件
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+
+% 标题与作者
+\title{HA 2, LinA 2, Gruppe H}
+\author{Kuan 480169, Yu 478912, Guo 480788}
+
+\begin{document}
+\maketitle
+\begin{center}
+  Ting Yu Kuan 480169, Shilong Yu 478912, Yuchen Guo 480788
+\end{center}
+\subsection{Aufgabe 2.1}
+Wir zeigen, ob die Matrizen diagonalisierbar sind.  Falls nicht, dann
+trigonalisieren wir sie.  Eine Matrix ist genau dann diagonalisierbar,
+falls (1) das charakteristische Polynom \(\chi\) in Linearfaktoren zerfällt
+und (2) die geometrische Vielfachheit gleich der algebraischen
+Vielfachheit ist.
+
+\subsubsection{Aufgabe 2.1, Teil a}
+Sei die Matrix
+\begin{align*}
+  A \coloneq
+  \begin{bmatrix}
+    3 & 4 & 3 \\
+    -1 & 0 & -1 \\
+    1 & 2 & 3
+  \end{bmatrix}.
+\end{align*}
+Dann ist das charakteristische Polynom
+\[\chi_{A}(t) = \det(E \cdot t - A) =(t-2)^{3}. \] Damit zerfällt die
+Matrix in Linearfaktoren und \(\lambda = 2\) ist das einzigen Eigenwert von
+\(A\).  Wir zeigen, dass die geometrische Vielfachheit nicht gleich
+der algebraischen Vielfachheit ist.  Aus
+\begin{align*}
+  \begin{bmatrix}
+    -1 & -4 & -3 \\
+    1 & 2 & 1 \\
+    -1 & -2 & -1
+  \end{bmatrix}
+  \cdot
+  \begin{bmatrix}
+    x_{1} \\ x_{2} \\ x_{3}
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    0 \\ 0 \\ 0
+  \end{bmatrix}
+\end{align*}
+folgt der einzige Eigenvektor \([1, -1, 1]\).  Damit ist
+\[\dim \Ker (E \cdot 2 - A)  = 1 \ne 3\]
+und die Matrix \(A\) ist nicht diagonalisierbar.  Sie ist aber
+trigonalisierbar.
+
+Trigonalisierbarverfahren, erster Schritt.  Sei \[B_{1} \coloneq \{[1, 0,
+  0], [0, 1, 0], [0, 0, 1]\}\] eine Basis der Vektorraum \(\mathbb{R}^{3}\).
+Nach dem Austauschlemma tauschen wir der ersten Basisvektor gegen
+den einzigen Eigenvektor \([1, -1, 1]\), sodass
+\[B_{2} \coloneq \{[1, -1, 1], [0, 1, 0], [0, 0, 1]\}\]
+wieder eine Basis von \(\mathbb{R}^{3}\) ist.  Wir betrachten die
+Transformationsmatrix
+\[T_{1}^{-1} \coloneq T_{B_{1}}^{B_{2}}\]
+mit der Basis \(B_{2}\) als Spalten.  Dann ist
+\begin{equation*}
+  A_{2} \coloneq T_{1} \cdot A \cdot T_{1}^{-1} =  \begin{tikzpicture}[baseline={(m.center)}]
+    \matrix [matrix of math nodes,left delimiter={[},right delimiter={]}] (m)
+    {
+      2 & 4 & 3 \\
+      0 & 4 & 2 \\
+      0 & -2 & 0 \\
+    };
+    \draw (m-2-2.north west) rectangle (m-3-2.south east-|m-2-3.north east);
+  \end{tikzpicture}.
+\end{equation*}
+Trigonalisierbarverfahren, zweiter Schritt.  Wir bezeichnen die
+Matrix im Rechteck als \(A_{2}'\) und berechnen deren
+charakteristischen Polynom als
+\[\chi_{A_{2}} = (t-2)^{2}\]
+mit Eigenvektor \([-1,1]\).  Dann ist
+\[B_{3} \coloneq \{[1, -1, 1], [0, -1, 1], [0, 0, 1]\}\]
+wieder eine Basis von \(\mathbb{R}^{3}\) ist.  Wir betrachten die
+Transformationsmatrix
+\[T_{2}^{-1} \coloneq T_{B_{2}}^{B_{3}}\]
+mit der Basis \(B_{3}\) als Spalten.
+Damit erhalten wir
+\[ A_{3} \coloneq T_{2} \cdot A_{2} \cdot T_{2}^{-1}  =
+  \begin{bmatrix}
+    2 & 1 & 3 \\
+    0 & 2 & 2 \\
+    0 & 0 & 2
+  \end{bmatrix}.
+\]
+\subsubsection{Aufgabe 2.1, Teil b}
+Sei die Matrix
+\begin{align*}
+  B \coloneq
+  \begin{bmatrix}
+    0 & 0 & -1 \\
+    1 & 3 & 1 \\
+    2 & 0 & 2
+  \end{bmatrix}.
+\end{align*}
+Dann ist das charakteristische Polynom
+\[\chi_{B}(t) = \det(E \cdot t - B) =(t-3)(t^{2}-2t+2) \] mit
+Lösungen \[t= \frac{2\pm \sqrt{-4}}{2}\] und daher nicht trigonalisierbar
+oder diagonalisierbar.
+\subsection{Aufgabe 2.2}
+Sei die Matrix
+\begin{align*}
+  A_{x} =
+  \begin{bmatrix}
+    0 & 0 & 1 \\
+    0 & 0 & 1 \\
+    x & 1 & 1
+  \end{bmatrix}
+  \in \mathbb{R}^{3 \times 3}, \quad \chi_{A}(t) \coloneq t(t^{2}-t-x+1).
+\end{align*}
+Wir berechnen alle reelle Lösungen von \(\chi_{A}(t)=0\).  Der zweite
+Faktor
+\[t^{2}-t-x+1=0\] hat genau reelle Lösungen bzw. Eigenwerte
+\[p,q=\frac{1\pm\sqrt{1-4(-x+1)}}{2}\] falls \(1-4(-x+1) \ge 0\) gilt.
+In diesem Fall gilt \(x \ge 3/4\).
+Falls \(x < 3/4\) dann zerfällt das
+charakteristische Polynom nicht in Linearfaktoren und die Matrix ist
+nicht diagonalisierbar oder trigonalisierbar.
+
+Falls \(x \ge 3/4\).  Dann zerfällt das charakteristische Polynom in
+Linearfaktoren und die Matrix ist trigonalisierbar.  Wir untersuchen
+deren Diagonalisierbarkeit.
+
+Nun sei \(\chi_{A}(t)=t(t-p)(t-q)\).  Wir berechnen die algebraische und
+geometrische Vielfachheit.  Falls \(p \ne 0, q \ne 0, p \ne q\).  Dann
+\begin{align*}
+  \dim \Ker (E \cdot p - A_{x})
+  &= \dim \mathbb{R}^{3} - \dim \Img (E \cdot p - A_{x}) \\
+  &=3 - \rg
+    \begin{bmatrix}
+      p & 0 & -1 \\
+      0 & p & -1 \\
+      -x & -1 & p - 1
+    \end{bmatrix}.
+\end{align*}
+Wir zeigen, dass die dritte Zeile eine lineare Kombination von der
+anderen zwei Zeilen ist.  Denn sei
+\[a
+  \begin{bmatrix}
+    p & 0 & -1
+  \end{bmatrix}
+  + b
+  \begin{bmatrix}
+    0 & p & -1
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    -x & -1 & p-1
+  \end{bmatrix}.
+\]
+erhalten wir
+\[p^{2}-p-x-1=0; \quad p = \frac{1 \pm \sqrt{1-4(-x-1)}}{2}\] welche mit
+\(x \ge -5/4\) lösbar ist.  Wegen Voraussetzung dass \(x \ge 3/4\) ist diese
+Bedingung erfüllt.  Damit ist
+\[\dim \Ker (E \cdot p - A_{x}) = 3 - 2 = 1\]
+und die algebraische Vielfachheit und die geometrische Vielfachheit
+sind gleich.  Die Matrix ist diagonalisierbar.  Den Fall mit \(q \ne 0\)
+ist analog.
+
+Falls \(p = q = 1/2\).  Dann \(x = 3/4\) und
+\[\dim \Ker (E \cdot 1/2 - A_{3/4}) = \dim \mathbb{R}^{3} - \dim \Img (E \cdot 1/2 -
+  A_{3/4}) = 0 \ne 1.\]  Damit nicht diagonalisierbar.
+
+Falls \(p = 0, q = 1\). Dann \(x = 1\) und
+\[\dim \Ker (E \cdot 1 - A_{1}) = \dim \mathbb{R}^{3} - \dim \Img (E \cdot 1 -
+  A_{1}) = 0 \ne 1.\] Damit nicht diagonalisierbar.
+\subsection{Aufgabe 2.3}
+Satz.  Ähnliche Matrizen beschreibt dieselben lineare Abbildungen und
+daher besitzen die dieselben Eigenwerte.
+Seien
+\[A =
+  \begin{bmatrix}
+    1 & 2 & 2 \\
+    0 & 0 & 2 \\
+    0 & 2 & 0
+  \end{bmatrix},
+  \quad
+  B =
+  \begin{bmatrix}
+    2 & 2 & 1 \\
+    2 & 2 & 2 \\
+    2 & 1 & 0
+  \end{bmatrix}
+\]
+zwei Matrizen.
+\subsubsection{Aufgabe 2.3, Teil a}
+
+Seien \(A, B \in \mathbb{R}^{3\times3}\).  Die zwei Matrizen sind nicht ähnlich,
+denn ihre Eigenwerte stimmen nicht überein.  Es gilt
+\[\chi_{A} = (\lambda-2)(\lambda-1)(\lambda+2); \quad \chi_{B}= \lambda^{3}-4\lambda^{2}-4\lambda-2.\]
+Damit sind die Eigenwerte verschieden und die Matrizen \(A\) und \(B\)
+sind wie oben erwähnt nicht ähnlich.
+\subsection{Aufgabe 2.4}
+Sei \(V\) der \(\mathbb{R}\)-Vektorraum der auf \(\mathbb{R}\) unendlich oft diffbaren
+Funktionen.  Weiter sei
+\[\Phi\colon V \to V, \quad f(x) \mapsto Df(x)\]
+sowie
+\[U= \Span(\{1, x, x^{2}, x^{3}, \sin(x) - 1, 2\cos(x), x^{3} -
+  \sin(x) + 3 \cos(x)\}).\]
+\subsubsection{Aufgabe 2.4, Teil a}
+\begin{Behauptung}
+  Es gilt \(\Phi(U) \subseteq U\).
+\end{Behauptung}
+
+\begin{proof}
+  Sei \(v \in U\) beliebig.  Dann gilt
+  \begin{align*}
+    v = &~ \alpha_{0} \cdot 1 + \alpha_{1} x + \alpha_{2} x^{2} + \alpha_{3} x^{3} \\
+        &+ \alpha_{4} (\sin  x - 1) + \alpha_{5} (2 \cos x) + \alpha_{6} (x^{3} -
+          \sin x + 3 \cos x)
+  \end{align*}
+  sowie wegen Ergebnisse aus Analysis
+  \begin{align*}
+    \Phi(v) = &~ \alpha_{1} + 2 \alpha_{2} x + 3 \alpha_{3} x^{2} \\
+           &+ \alpha_{4} \cos x + \alpha_{5}  (-2 \sin x) + \alpha_{6} (3x^{2} - \cos
+             x + -3 \sin x).
+  \end{align*}
+  Damit ist \(\Phi(v)\) wieder eine lineare Kombination von Basisvektoren
+  von \(U\) und \(\Phi(v) \in U\).
+\end{proof}
+\subsubsection{Aufgabe 2.4, Teil b}
+Wir wählen Basis von \(U\)
+\[B \coloneq \{1, x, x^{2}, x^{3}, \sin x, \cos x\}\]
+\begin{proof}
+  Daraus folgt, dass
+  \begin{align*}
+    M(\Phi\vert_{U}) \coloneq
+    \begin{bmatrix}
+      0 & 0 & 0 & 0 & 0 & 0\\
+      0 & 1 & 0 & 0 & 0 & 0 \\
+      0 & 0 & 2 & 0 & 0 & 0\\
+      0 & 0 & 0 & 3 & 0 & 0\\
+      0 & 0 & 0 & 0 & 0 & -1 \\
+      0 & 0 & 0 & 0 & 1 &  0
+    \end{bmatrix}.
+  \end{align*}
+\end{proof}
+\subsubsection{Aufgabe 2.4, Teil c}
+Das charakteristische Polynom ist
+\begin{align*}
+  \chi(t) = t(t-3)(t-2)(t-1)(t^{2}+1)
+\end{align*}
+\subsection{Zusatzaufgabe 2.5}
+Seien \(a(0) = x, a(1) = y, a(2) = z, x,y,z \in \mathbb{R}\) und
+\[a(n) = 2a(n-1) + a(n-2) - 2a(n-3), \quad n \in \mathbb{N}, n \ge 2.\]
+\begin{Behauptung}
+  Es gilt
+  \[a(n) = 2^{n-1}(z-y) + 2y -z.\]
+\end{Behauptung}
+\begin{proof}
+  Wegen Voraussetzung gilt
+  \[a(n) - 2a(n-1) = a(n-2) - 2a(n-3) = \cdots = a(2) - 2a(1) = z - 2y.\]
+  Wir setzen \(p \coloneq (z - 2y)\).  Daraus folgt, dass
+  \[a(n) = p + 2a(n-1).\]
+  Es gilt
+  \begin{align*}
+    a(2) &= p + 2a(1) \\
+    a(3) &= p + 2a(2) = p + (p + 2a(1)) \\
+    a(4) &= p + 2a(3) = p + 2(p + 2a(2)) = p + 2(p + 2(p + 2a(1))) \\
+         &= 2^{4-1}a(1) + p(1+2(1+2)).
+  \end{align*}
+  Die Folge \((b_{n})\) mit \(b_{1} = 1, b_{n} = 1 + 2b_{n-1}\) hat die
+  folgende Formel
+  \[b_{n} = 2^{n} - 1.\]
+  Induktionsanfang \(n = 1\).  Die Behauptung gilt.
+  Induktionsvoraussetzung, die Behauptung gelte für ein festes \(n \in
+  \mathbb{N}\).  Induktionsschritt \(n \to n+1\).  Es gilt
+  \[b_{n+1} = 1 + 2b_{n} = 1 + 2(2^{n} - 1) = 2^{n+1} - 2 + 1.\] Damit
+  gilt die Formel.  Daraus folgt
+  \begin{align*}
+        a(n) &= p + 2a(n-1) \\
+         &= 2^{n-1}a(1) + p \cdot b_{n-1} \\
+         &= 2^{n-1}y + (2^{n-1} - 1)p \\
+         &= 2^{n-1}y + 2^{n-1}(z-2y) + 2y - z \\
+         &= 2^{n-1}(z-y) + 2y -z.
+  \end{align*}
+\end{proof}
+\end{document}

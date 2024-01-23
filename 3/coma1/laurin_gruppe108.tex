@@ -1,0 +1,143 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+% draft mode incompatible with tikz
+\documentclass[a5paper]{article}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+\geometry{a5paper,
+ left=1cm,
+ right=1cm,
+ top=1cm,
+ bottom=2cm
+}
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+
+% 调整 Emacs 预览字体大小
+% (setq preview-scale-function 1.5)
+
+% TeX Gyre Schola and unicode-math
+% which in turn loads amsmath,mathtools,fontspec and friends
+\usepackage{xcharter-otf}
+
+
+% 加载数学相关的包
+\usepackage{
+  % 自然段间留空
+  parskip,
+  % 区间排版
+  interval
+}
+
+% 中文支持，暂时不需要
+% \usepackage[UTF8]{ctex}
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\usepackage{amsthm}
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+% 标题与作者
+\title{HA 5, CoMa 1, Laurin, Gruppe 108}
+\author{Kuan 480169, Yu 478912, Guo 480788}
+
+% 画图工具
+\usepackage{tikz,pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{shapes.geometric}
+ \usepackage{graphicx}
+
+\begin{document}
+\maketitle
+\begin{center}
+Ting Yu Kuan 480169, Shilong Yu 478912, Yuchen Guo 480788
+\end{center}
+\newpage
+\subsection{1. Aufgabe}
+\begin{Behauptung}
+  Die Graphen \(G_{1}\) und \(G_{2}\) sind isomorph.  Die Graphen \(G_{3}\)
+  und \(G_{5}\) sind isomorph.  Der Graph \(G_{4}\) ist nicht isomorph zu
+  alle anderen Graphen.
+\end{Behauptung}
+\begin{proof}
+Wir zeigen zuerst, dass \(G_{4}\) nicht isomorph zu alle anderen Graphen
+ist.  Denn, es gilt zu jedem \(u \in V_{i}\), \(i \in \{1, 2, 3, 5\}\) dass
+\(\abs{\delta(u)} = 4\).  Es existiert aber eine Knote \(v \in V_{4}\), dass
+\(\abs{\delta(v)} = 3\) gilt.  Damit existiert keine bijektive Abbildung
+\(\varphi\colon V_{4} \to V_{i}, i \in \{1, 2, 3, 5\}\).
+
+Die Graphen \(G_{1}\) und \(G_{4}\) sind isomorph.  Die gesuchte Bijektion
+ist wie folgt definiert:
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.4\textwidth]{./g35.png}
+\end{figure}
+
+Wir zeigen, dass \(\varphi\) eine Bijektion mit \[\{u, v\} \in E_{1} \Leftrightarrow \{\varphi(u),
+  \varphi(v)\} \in E_{2}\]
+ist.  Wir nehmen der Knote (2) als Beispiel.  Es gilt
+\[\{2,1\}, \{2,7\}, \{2,4\}, \{2, 3\} \in E_{1} \quad \text{und} \quad
+  \{\varphi2,\varphi1\}, \{\varphi2,\varphi7\}, \{\varphi2,\varphi4\}, \{\varphi2, \varphi3\} \in E_{2}\]
+die andere Fälle sind analog.
+
+Die Graphen \(G_{3}\) und \(G_{5}\) sind isomorph.  Die gesuchte Bijektion
+ist wie folgt definiert:
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{./g12.png}
+\end{figure}
+
+Wir können analog nach oben zeigen, dass \(\varphi\) eine Bijektion mit \[\{u, v\} \in E_{1} \Leftrightarrow \{\varphi(u),
+  \varphi(v)\} \in E_{2}\]
+ist.
+\end{proof}
+\subsection{2. Aufgabe}
+\begin{Behauptung}
+  Es existiert ein Graph \(G\) mit \(\abs{V} = 5\) sodass \(\overline{G}\)
+  zu \(G\) isomorph ist.
+\end{Behauptung}
+\begin{proof}
+  Sei \(\varphi\) wie folgt definiert:
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{./ha5auf2.png}
+\end{figure}
+
+  Dann ist die zwei Graphen isomorph und komplementär.
+\end{proof}
+\begin{Behauptung}
+  Ist \(G = (V, E)\) mit \(\abs{V}> 2\) nicht zusammenhängend, dannist der
+  Komplementärgraph \(\overline{G}\) zusammenhängend.
+\end{Behauptung}
+\begin{proof}
+  Seien \(u, v \in V(G)\) beliebig.  Wir zeigen, dass es einen
+  \(u\)-\(v\)-Weg in \(\overline{G}\) existiert. Es gibt zwei Fälle.
+  \begin{itemize}
+  \item Falls \(u, v\) nicht adjazent in \(G\) ist, dann ist \(u, v\)
+    adjazent in \(\overline{G}\) und es existiert deswegen einen
+    \(u\)-\(v\)-Weg.
+  \item Falls \(u, v\) adjazent in \(G\) ist.  Dann existiert mindestens
+    einen Knoten \(w \in V(G)\) sodass es kein \(u\)-\(w\)-Weg und kein
+    \(v\)-\(w\)-Weg gibt.  (Da \(G\) unzusammenhangend ist.) Dann ist
+    insbesondere die Paare \(u\)-\(w\) und \(v\)-\(w\) nicht adjazent.  Damit
+    sind die Paare adjazent in \(\overline{G}\) und es existiert ein
+    \(u\)-\(v\)-Weg in \(\overline{G}\).
+  \end{itemize}
+  Weil \(u, v \in V(G)\)  beliebig war, folgt die Behauptung.
+\end{proof}
+\end{document}

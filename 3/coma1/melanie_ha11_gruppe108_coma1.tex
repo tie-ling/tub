@@ -1,0 +1,104 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+\documentclass[fleqn,draft,a4paper,11pt]{article}
+
+% 让每个章节 subsection 在新的一页上开始
+% 而不是紧接着上一章节
+\AddToHook{cmd/subsection/before}{\clearpage}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+
+\geometry{margin=3cm}
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+
+% 调整 Emacs 预览字体大小
+% (setq preview-scale-function 1.5)
+
+\usepackage{amsmath,mathtools,fontspec,amsthm,parskip,interval,unicode-math}
+\usepackage{xcharter-otf}
+
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\skp}[1]{\langle#1\rangle}
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\providecommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\providecommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+% 定义新函数，依赖于AMSmath
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\rg}{rg}
+
+\providecommand{\R}[1]{\mathrm{R#1}}
+
+\newcommand{\wt}{\widetilde}
+\newcommand{\dd}{\,\mathrm{d}}
+
+% 标题与作者
+\title{HA 11, CoMa 1, Melanie, Gruppe 108}
+\author{Kuan 480169, Yu 478912, Guo 480788}
+
+\begin{document}
+\maketitle
+\begin{center}
+Ting Yu Kuan 480169, Shilong Yu 478912, Yuchen Guo 480788
+\end{center}
+\newpage
+\subsection{1. Aufgabe}
+\subsubsection{Teil a}
+Die Menge der Kreise eines Matroids hat die Eigenschaft Eins bis Drei.
+
+\begin{proof}
+  Eigenschaft Eins folgt direkt aus Definition des
+  Unabhängigkeitssystem \(\emptyset \in \mathcal{F}\).
+
+  Eigenschaft Zwei folgt aus der Minimalität von \(C_{1}\) und \(C_{2}\).
+
+  Eigenschaft Drei.  Angenommen, es gibt keinen Kreis in \((C_{1} \cup
+  C_{2}) \setminus \{e\}\).  Dann muss \((C_{1} \cup C_{2} \setminus \{e\})\) eine
+  unabhängige Menge sein.  Sei \(a\) ein beliebiges Element aus der nach
+  (2) nichtleeren Menge \(C_{2} \setminus C_{1}\).  Da \(C_{2}\) als Kreis eine
+  minimale abhängige Menge ist, muss \(C_{2} \setminus \{a\}\) unabhängig sein.
+  Sei nun \(A \in \mathcal{F}\) maximal mit \(C_{2} \setminus \{a\} \subseteq A \subseteq C_{1} \cup C_{2}\).
+  Dann ist offenbar \(\{a\} \notin A\), da sonst \(C_{2} \subseteq A\) sei, im
+  Widerspruch zur Unabhängigkeit von \(A\).  Weil \(C_{1}\) abhängig ist,
+  und somit \(C_{1}\) keine Teilmenge von \(A\) ist, gibt es ein \(b \in
+  C_{1} \setminus A\), das wegen \(\{a\} \in C_{2} \setminus C_{1}\) von \(\{a\}\)
+  verschieden sein muss.  Dann folgt, dass
+  \[\abs{A} \le \abs{(C_{1} \cup C_{2}) \setminus \{a, b\}} = \abs{C_{1} \cup C_{2}}
+    - 2 < \abs{(C_{1} \cup C_{2}) \setminus \{e\}}.\]
+  Nach der Definition von Matroide gilt: existiert ein \(x \in (C_{1} \cup
+  C_{2}) \setminus \{e\}\) mit \(A \cup \{x\} \in \mathcal{F}\), und \(C_{2} \setminus \{a\} \subseteq A \cup \{x\}
+  \subseteq C_{1} \cup C_{2}\) im Widerspruch zu \(A\) maximal.
+\end{proof}
+\subsection{2. Aufgabe}
+Wir nummieren die Spalten von der Matrix
+\[ A =
+  \begin{bmatrix}
+    1 & 2 & 3 & 0 & 3 \\
+    0 & 0 & 1 & 1 & 1 \\
+    0 & 0 & 0 & 1 & 1
+  \end{bmatrix}
+\]
+mit \(\{a,b,c,d,e\}\) durch.  Dann sind die Basen
+\[\{a,c,d\}, \{b,c,d\}, \{c,d,e\}, \{a,c,e\}, \{b,c,e\}\]
+und die Kreise
+\[\{a,b\},\{a,d,e\},\{b,d,e\}\]
+\end{document}
+

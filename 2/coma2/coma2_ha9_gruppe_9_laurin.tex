@@ -1,0 +1,142 @@
+\documentclass[draft,a5paper]{article}
+\usepackage[margin=2cm]{geometry}
+\linespread{1.2}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Yiwen Yang 466096, Yuchen Guo 480788, Qing Wang 458040}
+\rhead{HA 9, CoMa 2, Laurin, Gruppe 9}
+
+% set language to german
+\usepackage[ngerman]{babel}
+
+\usepackage[amsthm,vvarbb,varg]{newtx}
+
+% used for integral with respect to a variable x
+% like \int \dd{x}
+% \usepackage{physics}
+
+% theorem environment used in this document
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{lem}{Lemma}
+
+\newcommand{\envert}[1]{\left\lvert#1\right\rvert}
+\let\abs=\envert
+
+\begin{document}
+\subsection*{2. Aufgabe}
+\subsubsection*{2. Aufgabe, Teil a}
+Es gilt
+\begin{alignat*}{3}
+  H(k, 0) \quad &i=0 \quad &j&=h(k) \\
+  H(k, 1) \quad &i=1 \quad &j&=(1+h(k)) \bmod m \\
+  H(k, m-1) \quad &i=m-1 \quad &j&=((m-1)+(m-2)+\cdots+2+1+h(k)) \bmod m
+\end{alignat*}
+Daraus folgt, dass
+\begin{align*}c_{1} \cdot i + c_{2} \cdot i^{2} = \frac{(1+i)\cdot i}{2}.\end{align*}
+Damit gilt
+\begin{align*}c_{1} = c_{2} = \frac{1}{2}.\end{align*}
+\subsubsection*{2. Aufgabe, Teil b}
+\begin{Behauptung}
+  Sei \(k \in U\) beliebig gewählt, \(l \in \mathbb{N}\) und \(h\) eine
+  Hash-Funktion wie in der Aufgabenstellung.  Die Funktion
+  \begin{align*}h'(i)\colon \{0, 1, \ldots, 2^{l} - 1\} \to \{0, 1, \ldots, 2^{l} - 1\}, \quad i \mapsto
+    \left[\frac{1}{2}i + \frac{1}{2}i^{2} + h(k)\right] \bmod 2^{l} \end{align*}
+  ist bijektiv.
+\end{Behauptung}
+\begin{proof}
+  Weil \(h(k)\) fest ist, betrachten wir nur
+  \begin{align*}f(i) \coloneq \left[\frac{1}{2}i + \frac{1}{2}i^{2}\right] \bmod
+    2^{l}. \end{align*} Zuerst ist \((i+i^{2})/2\) immer eine ganze Zahl wegen
+  gaußscher Summenformel.  Wir zeigen Injektivität. Wir nehmen
+  \(i, i+j\) aus Definitionsbereich \(\mathbb{N}_{< 2^{l}}\) sodass
+  \(f(i) = f(i+j)\) gilt.  Zur Abkürzung setzen wir \(d \coloneq f(i) =
+  f(i+j)\).  Wegen \(f(i) = f(i+j)\) existiert \(p, q \in \mathbb{N}\) sodass
+  \begin{align*}\frac{i(i+1)}{2} = 2^{l} \cdot p + d, \quad \frac{(i+j)(i+j+1)}{2} = 2^{l} \cdot q +
+    d.\end{align*} Daraus folgt, dass
+  \begin{align*}i(i+1) = 2^{l+1} \cdot p + 2d, \quad (i+j)(i+j+1) = 2^{l+1} \cdot q + 2d.\end{align*}
+  und
+  \begin{align*}i(i+1) - (i+j)(i+j+1) = (2i+j+1)j = 2^{l+1}(p-q).\end{align*} Wir bemerken,
+  dass
+  \begin{align*}0 \le i,~ i+j \le 2^{l} - 1\end{align*}
+  gilt.  ???
+
+  Wir zeigen Surjektivität. ???
+\end{proof}
+\newpage
+\subsection*{3. Aufgabe}
+Sei \(T\) eine Hash-Tabelle mit offener Addressierung und Addressraum
+\(\{0, \ldots, m - 1\}\). Die Menge der Schlüsselwerte \(U\) erfüllt
+\(\abs{U} \eqcolon n \le \frac{m}{2}\).  Für \(i = 1, \ldots, n \) sei
+\(X_{i}\) die Anzahl der Sondierungen beim \(i\)-ten Einfügen.
+Angenommen, die nächste Sondierung wählt immer zufällig und
+gleichverteilt eine der \(m\) Addressen.
+\subsubsection*{3. Aufgabe, Teil a}
+\begin{Behauptung}
+  Es gilt \begin{align*}\Pr[X_{i} > k] \le 2^{-k}.\end{align*}
+\end{Behauptung}
+\begin{proof}
+  Wegen [Voraussetzung] ist die Auslastung
+  \(\alpha = \frac{n}{m} \le \frac{1}{2}\).  Wir definieren das Ereignis
+  \(A_{i}\) mit "`Adresse bei \(i\)-ter Sondierung ist nicht frei"'.
+  Daraus folgt, dass
+  \begin{align*}\{X_{i} > k\} = A_{1} \cap A_{2} \cap \cdots \cap A_{k}. \end{align*}
+  Wir berechnen daher \begin{align*}\Pr\{A_{1} \cap A_{2} \cap \cdots \cap A_{k}\}.\end{align*}
+  Es folgt aus Wahrscheinlichkeitstheorie dass
+  \begin{align*}
+    \Pr\{A_{1} \cap A_{2} \cap \cdots \cap A_{k}\} = \Pr\{A_{1}\} \cdot \Pr\{A_{2} \mid
+    A_{1}\} \cdot \ldots \cdot\Pr\{A_{k} \mid A_{1} \cap A_{2} \cap \cdots \cap A_{k-1}\}.
+  \end{align*}
+  Es gibt insgesamt \(n\) Schlüsselwerte und \(m\) freie Plätze.
+  Daraus folgt, dass \(\Pr\{A_{1}\} = n/m\).  Für alle \(j > 1\), wir
+  suchen nach einer freie Platz für einer der \((n-(j-1))\)
+  Schlüsselwerte in die noch nicht betrachtete \((m-(j-1))\) Adresse.
+  Wegen Gleichverteilungsannahme gilt \begin{align*}\Pr\{A_{j}\} =
+    \frac{n-(j-1)}{m-(j-1)}.\end{align*}  Daraus folgt, dass
+  \begin{align*}
+    \Pr\{X_{i} > k\}
+    = \frac{n}{m} \cdot \frac{n-1}{m-1} \cdot \frac{n-2}{m-2} \cdot \ldots \cdot
+      \frac{n-k+2}{m-k+2} \cdot \frac{n-k+1}{m-k+1}
+    \le \left(\frac{n}{m}\right)^{k}
+    = \alpha^{k}
+    \le 2^{-k}.
+  \end{align*}
+\end{proof}
+\subsubsection*{3. Aufgabe, Teil b}
+\begin{Behauptung}
+  Es gilt \begin{align*}\Pr[X_{i} > 2 \log_{2}{n}] \in O(1/n^{2}).\end{align*}
+\end{Behauptung}
+\begin{proof}
+  Es folgt aus [Teil a] dass
+  \begin{align*}\Pr[X_{i} > 2\log_{2}{n}] \le 2^{-2\log_{2}{n}} =
+    \frac{1}{n^{2}}. \end{align*}
+  Daraus folgt, dass \(\Pr[X_{i} > 2 \log_{2}{n}]\) ist nach oben
+  durch \(1/n^{2}\) beschränkt.  Damit folgt die Behauptung.
+\end{proof}
+\subsection*{4. Aufgabe}
+Es gelten die Voraussetzungen von 3. Aufgabe.  Sei
+\begin{align*}X \coloneq \max{X_{i}},~ i = 1, \ldots, n.\end{align*}
+\subsubsection*{4. Aufgabe, Teil a}
+\begin{Behauptung}
+Es gilt \begin{align*}\Pr[X > 2 \log_{2}{n}] \in O(1/n).\end{align*}
+\end{Behauptung}
+\begin{proof}
+  Wegen [3. Aufgabe, Teil b] gilt
+  \begin{align*}\Pr[X_{i} > 2\log_{2}{n}] > \frac{1}{n^{2}} \end{align*}
+  für alle \(i = 1 , \ldots, n\). Insbesondere existiert wegen der
+  Definition von \(X\) ein \(i\) sodass \(X = X_{i}\).  Daraus folgt,
+  dass
+  \begin{align*}\Pr[X > 2\log_{2}{n}] \in O(1/n^{2}) \subseteq O(1/n).\end{align*}
+\end{proof}
+\subsubsection*{4. Aufgabe, Teil b}
+\begin{Behauptung}
+  Es gilt
+  \begin{align*}\mathrm{E}[X] \in O(\log_{2}{n}).\end{align*}
+\end{Behauptung}
+\begin{proof}
+  Es gilt wegen Definition von Erwartungswert dass \begin{align*}\mathrm{E}[X]
+    \coloneq \sum_{i=1}^{n}{x_{i} \cdot \Pr[X=x_{i}]}.\end{align*}
+  ???
+\end{proof}
+\end{document}

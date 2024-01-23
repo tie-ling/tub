@@ -1,0 +1,241 @@
+%% page style
+\documentclass[12pt]{extarticle}
+\usepackage[margin=2cm]{geometry}
+\usepackage{fancyhdr,parskip}
+\pagestyle{fancy}
+\usepackage[onehalfspacing]{setspace}
+\setlength{\parindent}{0pt}
+\lhead{\myAuthor}
+\rhead{\mySubject \ \myHausaufgaben. Übungsblatt \\ \myTutor}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+
+%% language
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+
+%% default packages
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,
+  stmaryrd, % for the lightning symbol used in proof by contraction
+  tikz,     % used to draw diagrams
+}
+
+%% metadata
+\newcommand{\myAuthor}{Yiwen Yang 466096 | Qing Wang 458040 | Yuchen Guo 480788}
+\newcommand{\myHausaufgaben}{9}
+\newcommand{\mySubject}{CoMa}
+\newcommand{\myTutor}{Lino}
+
+%% custom commands
+\newcommand{\aufgn}[1]{\textbf{Aufgabe #1.}}
+\newcommand{\mg}[1]{\mathbb{#1}}
+\newcommand{\lin}{\operatorname{lin}}
+\newcommand{\beh}{\textit{Behauptung.}\ }
+%% code listing options
+\usepackage{listings}
+\usepackage[lighttt]{lmodern}
+\lstset{
+  numbers=left,
+  basicstyle=\ttfamily,
+  keywordstyle=\ttfamily\bfseries,
+}
+\begin{document}
+\aufgn{1.a}
+
+\begin{lstlisting}[language=Python]
+def insertionSort(A):
+    n = len(A)
+    for i in range(1, n):
+        s = A[i]
+        k = i
+        while k > 0 and s < A[k-1]:
+            A[k] = A[k-1]
+            k -= 1
+        A[k] = s
+\end{lstlisting}
+
+\beh Für den List \texttt{[8, 7, 6, 5, 4, 3, 2, 1]}
+benötigt InsertionSort die größtmögliche Anzahl an
+Vergleichen.
+
+\begin{proof}
+InsertionSort benötigt für diesen List die größtmögliche
+Anzahl an Vergleichen, denn die List hat die
+Eigenschaft, dass die Zahl an der \(i\)-ten Stelle kleiner als
+alle Zahlen an der \(0 \le j \le i-1\)-ten Stelle und
+die innere \texttt{while}-Schleife benötigt jeweils
+\(i-1\)-mal Vergleichen zu terminieren.
+\end{proof}
+
+\aufgn{1.b}
+
+\begin{lstlisting}[language=Python]
+def mergeSort(A):
+    if len(A) <= 1:
+        return(A)
+    else:
+        return(merge(mergeSort(A[:len(A)//2]),
+                     mergeSort(A[len(A)//2:])))
+def merge(left, right):
+    merged = []
+    while left and right:
+        if left[-1] < right[0]:
+            return (left + right)
+        if left[0] < right[0]:
+            merged.append(left[0])
+            left = left[1:]
+        else:
+            merged.append(right[0])
+            right = right[1:]
+    merged.extend(left + right)
+    return merged
+\end{lstlisting}
+
+\beh Für den List \texttt{[8, 1, 7, 2, 6, 3, 5, 4]}
+benötigt MergeSort die größtmögliche Anzahl an
+Vergleichen.
+
+\begin{proof}
+MergeSort benötigt für diesen List die größtmögliche
+Anzahl an Vergleichen, denn die Bedingung
+\texttt{left[-1] < right[0]} ist niemals erfüllt und die
+Laufzeit wächst daher quadratisch.
+\end{proof}
+
+\aufgn{1.c}
+
+\begin{lstlisting}[language=Python]
+def quickSort(A):
+    if len(A) <= 1:
+        return A
+    else:
+        pivot = A[0]
+        B = []
+        C = []
+        for i in A[1:]:
+            if i <= pivot:
+                B.append(i)
+            else:
+                C.append(i)
+        return quickSort(B) + [pivot] + quickSort(C)
+\end{lstlisting}
+
+\beh Für den List \texttt{[1, 2, 3, 4, 5, 6, 7, 8]}
+benötigt QuickSort die größtmögliche Anzahl an
+Vergleichen mit \texttt{pivot = A[0]}.
+
+\begin{proof}
+QuickSort benötigt für diesen List die größtmögliche
+Anzahl an Vergleichen, denn die List ist bereits sortiert
+und wir nehmen jedes Mal das erste Element der List als
+Pivot-Element und der Algorithmus benötigt insgesamt
+\begin{align*}
+7+6+5+4+3+2+1 \text{ Mal Vergleichungen}
+\end{align*}
+um zu terminieren.  Die Länge der Liste reduziert jedes
+Mal um Eins und Eins ist die kleinstmögliche Zahl, mit
+der der Algorithmus noch terminieren kann.  Damit ist
+die Anzahl der Vergleichen am größten.
+\end{proof}
+
+\newpage
+
+\aufgn{2}
+
+\begin{lstlisting}[language=Python]
+def partition(A, left, right):
+    # always take the last element in the list as pivot
+    pivot = A[right]
+    stored_index = left
+    for i in range(left, right):
+        if A[i] <= pivot:
+            A[stored_index], A[i] = A[i], A[stored_index]
+            stored_index += 1
+    # the list is now partially sorted into two sides
+    # one side all smaller than pivot, the other all larger than pivot
+    # now move pivot to the place where it should be
+    A[stored_index], A[right] = A[right], A[stored_index]
+    # return the sorted position of pivot
+    return stored_index
+
+
+def kth_smallest(A, k, left, right):
+    # first, partition once and check if we can get the result
+    pivot_index = partition(A, left, right)
+    if pivot_index - left == k - 1:
+        return A[pivot_index]
+    # else, search the left side of the list if k is in the left
+    if pivot_index - left > k - 1:
+        return kth_smallest(A, k, left, pivot_index - 1)
+    # else, search the right side
+    return kth_smallest(A, k - pivot_index + left - 1,
+                        pivot_index + 1, right)
+
+def kth_smallest_start(A, k):
+    return kth_smallest(A, k, 0, len(A) - 1)
+
+def find_median(A):
+    return kth_smallest_start(A, (len(A) // 2) + 1)
+\end{lstlisting}
+
+\newpage
+\aufgn{3.a}
+\begin{lstlisting}[language=Python]
+def find_min_max(A: list[int]):
+    list_of_smaller_elements = []
+    list_of_larger_elements = []
+    for i in range(0, len(A) - 1, 2):
+        if A[i] < A[i+1]:
+            list_of_larger_elements.append(A[i+1])
+            list_of_smaller_elements.append(A[i])
+        else:
+            list_of_larger_elements.append(A[i])
+            list_of_smaller_elements.append(A[i+1])
+    max_element = list_of_larger_elements[0]
+    min_element = list_of_smaller_elements[0]
+    if len(A) % 2 == 1:
+        if A[-1] < min_element:
+            list_of_smaller_elements.append(A[-1])
+        else:
+            list_of_larger_elements.append(A[-1])
+    for i in list_of_larger_elements:
+        if i > max_element:
+            max_element = i
+    for i in list_of_smaller_elements:
+        if i < min_element:
+            min_element = i
+    return min_element, max_element
+\end{lstlisting}
+\aufgn{3.b}
+
+\beh Der Algorithmus ist korrekt und die
+Laufzeitfunktion \(g\) ist kleiner-gleich
+$\Theta\left(3 \left \lfloor \frac{n}{2} \right \rfloor
+\right)$.
+
+\begin{proof}
+  Im ersten Teil vergleichen wir paarweise die Elementen
+  in der ganzen Liste, zu jedem Element \(x\) der Liste
+  \texttt{list\_of\_smaller\_elements} existiert mindestens
+  ein Element \(y\) der Liste
+  \texttt{list\_of\_larger\_elements} mit der Eigenschaft
+  \(x < y\).  Insgesamnt wird höchstens
+  \(\left \lfloor \frac{n}{2} \right \rfloor + 1\)
+  Vergleichen benötigt.
+
+  Im nächsten Schritt wird jeweils das Minimum und das
+  Maximum in der beiden Listen mittels einem naiven
+  Algorithmus gefunden.  Dieses Schritt benötigt
+  höchstens
+  $\left \lfloor \frac{n}{2} \right \rfloor - 1 + \left
+    \lfloor \frac{n}{2} \right \rfloor$ Vergleichungen.
+  Insgesamt wird höchstens
+  \(3 \left \lfloor \frac{n}{2} \right \rfloor\) Schritten
+  benötigt.
+
+  Die Korrektheit ist klar, denn das Maximum und das
+  Minimum jeweils größer gleich und kleiner gleich alle
+  Elemente und deshalb in der zwei Teil-Liste enthalten sind.
+\end{proof}
+
+\end{document}

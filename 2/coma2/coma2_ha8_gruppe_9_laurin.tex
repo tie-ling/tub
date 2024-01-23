@@ -1,0 +1,88 @@
+% !TeX program = lualatex
+%%% TeX-engine: luatex
+
+\documentclass[draft,a5paper]{article}
+\usepackage[margin=2cm]{geometry}
+\linespread{1.2}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Yiwen Yang 466096, Yuchen Guo 480788, Qing Wang 458040}
+\rhead{HA 8, CoMa 2, Laurin, Gruppe 9}
+
+% set language to german
+\usepackage[ngerman]{babel}
+
+\usepackage[amsthm,vvarbb,varg]{newtx}
+
+% used for integral with respect to a variable x
+% like \int \dd{x}
+% \usepackage{physics}
+
+% theorem environment used in this document
+\theoremstyle{remark}
+\newtheorem*{beh}{Behauptung}
+\newtheorem*{lem}{Lemma}
+
+\newcommand{\envert}[1]{\left\lvert#1\right\rvert}
+\let\abs=\envert
+
+
+\usepackage{tikz}
+
+\begin{document}
+\subsection*{1. Aufgabe}
+\subsubsection*{1. Aufgabe, Teil a}
+\begin{center}
+  \usetikzlibrary {graphs,graphdrawing} \usegdlibrary {trees}
+  \tikz \graph [tree layout,
+  nodes={draw,circle}]
+  { a/"5" -> {b/"4" -> {d/"3" -> {h/"2" -> k/"B", i/"1" -> l/"B"},
+        e/"2" -> j/"A"}, c/"3" -> {f/"2" -> m/"A", g/"1" -> n/"A"}}};
+\end{center}
+In der zweiten Zeil sind die Ergebnisse nach person A entweder ein
+Streichholz oder zwei Streichhölzer genommen hat.  Die dritten und
+vierten Zeilen sind analog in der Reihenfolge A, B, A, B.
+
+\newpage
+\subsection*{4. Aufgabe}
+Seien \(h_{1}, h_{2}\colon U \to \{0, 1, \ldots, m - 1\}\) Hash-Funktionen und
+eine Doppel-Hash definiert mit
+\[h(k, i) \coloneq (h_{1}(k) + i\cdot h_{2}(k)) \bmod m.\]
+
+\begin{beh}
+  Sei \(k \in U\) beliebig gewählt.  Die Funktion
+  \[h'(i)\colon \{0, 1, \ldots, m - 1\} \to \{0, 1, \ldots, m - 1\}, \quad i \mapsto h(k, i) \]
+  ist genau dann bijektiv, falls \(m\) und \(h_{2}(k)\) teilerfremd
+  sind.
+\end{beh}
+
+\begin{proof}
+  Hinrichtung.  Beweis mit Kontraposition.  Angenommen, \(m\) und
+  \(h_{2}(k)\) sind nicht teilerfremd.  Wegen \(h_{2}(k) \le m - 1\)
+  existiert solche natürliche Zahlen \(n, p, q\) größer als Eins und
+  kleiner als \(m\) sodass \(np = m\) und \(nq = h_{2}(k)\).  Dann
+  gilt \[ \frac{mq}{p} = h_{2}(k) \] und insbesondere
+  \[ 0 \cdot h_{2}(k) \bmod m = [p \cdot h_{2}(k)] \bmod m = 0. \] Damit ist
+  \(h'(0) = h'(p)\) für \( p \ne 0\) und die Funktion \(h'(i)\) ist
+  nicht bijektiv.
+
+  Rückrichtung.  Angenommen, \(m\) und \(h_{2}(k)\) sind teilerfremd.
+  Wir betrachten die Paare
+  \[i, j \in \{0, 1, \ldots, m - 1\},~ i \ne j\] mit
+  \(h'(i) = h'(j)\).  Daraus folgt, dass
+  \begin{align*}
+    h'(i)
+    &= h'(j) \\
+    (h_{1}(k) + i\cdot h_{2}(k)) \bmod m
+    &= (h_{1}(k) + j \cdot h_{2}(k)) \bmod m \\
+    (i\cdot h_{2}(k)) \bmod m
+    &= (j \cdot h_{2}(k)) \bmod m \\
+    ((i - j) \cdot h_{2}(k)) \bmod m
+    &= 0.
+  \end{align*}
+  Weil \(m\) und \(h_{2}(k)\) teilerfremd sind, muss \(i - j = m\)
+  sein im Widerspruch zur Voraussetzung dass
+  \(i, j \in \{0, 1, \ldots, m - 1\}\).
+\end{proof}
+\end{document}

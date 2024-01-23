@@ -1,0 +1,195 @@
+%% page style
+\documentclass[12pt]{extarticle}
+\usepackage[margin=2cm]{geometry}
+\usepackage{fancyhdr,parskip}
+\pagestyle{fancy}
+\usepackage[onehalfspacing]{setspace}
+\setlength{\parindent}{0pt}
+\lhead{\myAuthor}
+\rhead{\mySubject \ \myHausaufgaben. Übungsblatt \\ \myTutor}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+
+%% language
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+
+%% default packages
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,
+  stmaryrd, % for the lightning symbol used in proof by contraction
+  tikz,     % used to draw diagrams
+}
+
+
+%% metadata
+\newcommand{\myAuthor}{Yuchen Guo 480788 | Meng Zhang 484981}
+\newcommand{\myHausaufgaben}{8}
+\newcommand{\mySubject}{LinA}
+\newcommand{\myTutor}{Saskia}
+
+
+%% custom commands
+\newcommand{\mg}[1]{\mathbb{#1}}
+\newcommand{\lin}{\operatorname{lin}}
+
+\begin{document}
+\textbf{Aufgabe 8.1}
+
+\textbf{Aufgabe 8.2}
+
+\textit{Behauptung.}  In dem \(\mg{Q}\)-Vektorraum
+\(\mg{R}\) sind die drei Vektoren \(1, \sqrt{2}, \sqrt{3}\)
+linear unabhängig.
+
+\begin{proof}
+  Wir bemühen uns um einen Widerspruchsbeweis.
+  Angenommen, die drei Vektoren sind linear abhängig.
+  Dann existiert $\alpha, \beta, \gamma \in \mg{Q}
+  \setminus \left\{ 0 \right\}$ dass
+\begin{align*}
+\alpha \cdot 1 + \beta \cdot \sqrt{2} + \gamma \cdot
+  \sqrt{3} = 0.
+\end{align*}
+Durch Umformungen erhalten wir dann
+\begin{align*}
+  \sqrt{6} =
+  -2 \cdot \frac{\beta}{\alpha} - 3 \cdot \frac{\gamma}{\alpha}
+\end{align*} mit \(\sqrt{6} \notin \mg{Q}\) und $-2 \cdot
+\frac{\beta}{\alpha} - 3 \cdot \frac{\gamma}{\alpha}
+\in \mg{Q}$.  Dies ist ein Widerspruch. \(\lightning\)
+
+Daraus folgt, dass solche  $\alpha, \beta, \gamma \in \mg{Q}
+\setminus \left\{ 0 \right\}$  existiert nicht und es
+gilt \(\alpha = \beta = \gamma = 0\).
+\end{proof}
+
+\textit{Behauptung.}  \(\sqrt{6}\) ist keine
+Linearkombination dieser drei Vektoren.
+
+\begin{proof}
+  Wir bemühen uns um einen Widerspruchsbeweis.
+  Angenommen, \(\sqrt{6}\) ist eine Linearkombination der
+  drei Vektoren \(1, \sqrt{2}, \sqrt{3}\). Dann existiert
+  \(\alpha, \beta, \gamma \in \mg{Q}\) sodass
+\begin{align*}
+\alpha \cdot 1 + \beta \cdot \sqrt{2} +
+  \gamma \cdot \sqrt{3} = \sqrt{6}.
+\end{align*}
+Falls \(\alpha=0\), dann gilt
+\(\beta=\frac{\sqrt{3}}{2}\) und
+\(\gamma=\frac{\sqrt{2}}{2}\) und damit $\beta,
+\gamma \notin \mg{Q}$.
+
+Falls \(\alpha \neq 0\), dann gilt
+\begin{align*}
+2 \sqrt{3} \frac{\beta}{\alpha} + 3 \sqrt{2}
+  \frac{\gamma}{\alpha} = \frac{6}{\alpha}
+\end{align*}
+mit \(\frac{6}{\alpha} \in \mg{Q}\) und
+$2 \sqrt{3} \frac{\beta}{\alpha} + 3 \sqrt{2}
+\frac{\gamma}{\alpha} \notin \mg{Q}$.
+Dies ist ein Widerspruch. \(\lightning\)
+
+Daraus folgt, dass solche  \(\alpha, \beta, \gamma \in \mg{Q}\)  existiert nicht.
+\end{proof}
+
+\textbf{Aufgabe 8.3.i}
+
+\textit{Behauptung.}  Wenn $U_i \neq \left\{ 0
+\right\}$ für \(i = 1,2,3\) paarweise verschieden sind,
+dann existieren drei linear unabhängige Vektoren $u_i
+\in U_i$ für \(i = 1,2,3\).
+
+\begin{proof}
+  Wir bemühen uns um einen Widerspruchsbeweis.
+  Angenommen, für alle \(u_1 \in U_1\), \(u_2 \in U_2\),
+  \(u_3 \in U_3\) gilt, dass \(u_1, u_2, u_3\) linear
+  unabhängig sind.  Dann existiert
+  $\alpha, \beta, \gamma \in \mg{K} \setminus \left\{ 0
+  \right\}$ sodass
+\begin{align*}
+\alpha u_1 + \beta u_2 + \gamma u_3 = 0
+\end{align*}
+für alle \(u_1 \in U_1\), \(u_2 \in U_2\), \(u_3 \in U_3\).
+Insbesondere, es existiert
+\(\alpha, \beta, \gamma \in \mg{K}\) für alle $u_1 \in
+U_1$, \(u_2 \in U_2\) sodass
+\begin{align*}
+\alpha u_1 + \beta u_2 + \gamma 0 = 0.
+\end{align*}
+
+Damit gilt \(u_1 = -\frac{\beta}{\alpha}u_2\) für alle
+\(u_1 \in U_1\), \(u_2 \in U_2\).  Das heißt, \(U_1 = U_2\)
+im Widerspruch zur Voraussetzung \(U_1 \neq U_2\). \(\lightning\)
+\end{proof}
+
+\textbf{Aufgabe 8.3.ii}
+
+\textit{Behauptung.} Wenn für alle
+\(u_1 \in U_1 \setminus \left\{ 0 \right\}\) und
+\(u_2 \in U_2 \setminus \left\{ 0 \right\}\) die Vektoren
+\(u_1, u_2\) linear unabhängig sind, dann gilt
+\(U_1 \cap U_2 = \left\{ 0 \right\}\).
+
+\begin{proof}
+  Wir bemühen uns um einen Beweis mittels
+  Kontraposition.
+
+  Angenommen, es gilt \(v \in U_1 \cap U_2\) mit
+  \(v \neq 0\).  Daraus folgt, \(v \in U_1\) und
+  \(v \in U_2\).  Es gilt dann insbesondere,
+\begin{align*}
+v + (-1) v = 0.
+\end{align*}
+Daraus folgt, dass nicht alle \(u_1 \in U_1\) und $u_2
+\in U_2$ linear unabhängig sind.
+\end{proof}
+
+\textbf{Aufgabe 8.3.iii}
+
+\textit{Behauptung.}  Seien $v_1, \ldots, v_n \in V
+\setminus \left\{ 0 \right\}$ linear abhängig, dann
+existieren zwei Vektornen \(v_i, v_j\) mit $i, j \in
+\left\{ 1, \ldots, n \right\}, i \neq j$, die sich
+jeweils als Linearkombination der restlichen \(n-1\)
+Vektoren darstellen lassen.
+
+\begin{proof}
+  Diese Aussage ist wahr.  Aus der lineare Abhängigkeit
+  folgt, dass es existiert
+  $\lambda_1, \ldots, \lambda_n \in \mg{K} \setminus
+  \left\{ 0 \right\}$ sodass
+\begin{align*}
+\sum_{i=1}^n{\lambda_iv_i}=0.
+\end{align*}
+
+Daraus folgt, dass zu jedem Vektor \(v_i\) mit $i \in
+\left\{ 1, \ldots, n \right\}$ gibt es eine
+Linearkombination der restlichen \(n-1\) Vektoren mit
+\begin{align*}
+v_i = \frac{1}{\lambda_i} \left(
+  \sum_{j=1}^{i-1}{\lambda_jv_j} + \sum_{k=i+1}^n{\lambda_kv_k} \right).
+\end{align*}
+\end{proof}
+
+\textbf{Aufgabe 8.4.i}
+
+\textit{Behauptung.}  Eine Basis von \(\mg{R}^4/U_0\) mit
+$U_0= \left\{ x \in \mg{R}^4 \colon x_1+2x_2 = 0 \wedge
+  x_3 + x_4 = 0\right\}$ ist
+\begin{align*}
+B := \left\{ \left( 1, 0, 0, 0
+  \right) + U_0, \left( 0, 1, 0, 0 \right) + U_0,
+  \left( 0, 0, 1, 0 \right) + U_0, \left( 0, 0, 0, 1
+  \right) + U_0 \right\}.
+\end{align*}
+
+\begin{proof}
+Wir beweisen, dass \(B\) eine Basis von \(\mg{R}^4/U_0\)
+ist, indem wir zeigen, dass \(B\) linear unabhängig ist,
+und \(\lin(B) = \mg{R}^4/U_0\) gilt.
+
+???
+\end{proof}
+
+\end{document}

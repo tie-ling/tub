@@ -1,0 +1,186 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+\documentclass[fleqn,draft,a5paper]{article}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+\geometry{left=1cm,
+  right=1cm,
+  top=1cm,
+  bottom=2cm}
+
+% (TeX-run-style-hooks "amsmath,mathtools,fontspec" "amsthm")
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,mathtools,fontspec,amssymb,mathtools,amsthm,parskip,interval,fontspec}
+\setmainfont{TeX Gyre Termes}
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\skp}[1]{\langle#1\rangle}
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\providecommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\providecommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+% 定义新函数，依赖于AMSmath
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\Rang}{Rang}
+
+\providecommand{\R}[1]{\mathrm{R#1}}
+\newcommand{\cP}{\mathbb{P}}
+\newcommand{\wt}{\widetilde}
+\newcommand{\dd}{\,\mathrm{d}}
+\title{WT1, HA3, Gruppe LS1, Leon}
+\author{Liu 503531, Zhang 484981, Guo 480788}
+
+\begin{document}
+\maketitle
+
+\subsection{Aufgabe 1}
+Aus der Aufgabe folgt, dass $3 \%$ der Klausuren sind
+Betrugsversuche
+\begin{align*}
+  P(K) = 0.03.
+\end{align*}
+Das Software zeigt bei $95 \%$ der
+Betrugsversuche ein positives Ergebnis
+\begin{align*}
+  P(\texttt{Test positiv} \mid K) = 0.95.
+\end{align*}
+Das besagter Software zeigt auch bei $a \cdot 100\%$ der Klausuren, die kein
+Betrugsversuche sind, ein positives Ergebnis
+\begin{align*}
+  P(\texttt{Test positiv} \mid K^{c}) = a.
+\end{align*}
+Wir berechnen die bedingte Wahrscheinlichkeit mit Formel von Bayes
+\begin{align*}
+  &\frac{P(\texttt{Test positiv} \mid K)P(K)}{P(\texttt{Test positiv} \mid K)P(K)+P(\texttt{Test
+    positiv} \mid K^{c})P(K^{c})} \\
+  &= \frac{0.95 \cdot 0.03}{0.95 \cdot 0.03 + a \cdot 0.97}
+\end{align*}
+\subsection{Aufgabe 2}
+\begin{Behauptung}
+  Sei $\Omega = \{a\}$.  Dann ist $\Omega$ abzählbar, und für jede
+  Zähldichte $p$ auf $\Omega$ gilt: jede Familie von Ereignissen ist
+  unabhängig bezüglich des von $p$ induzierten W-Maßes.
+\end{Behauptung}
+\begin{proof}
+  Zuerst ist $\Omega$ endlich, also abzählbar. Sei $p$ eine beliebige
+  Zähldichte auf $\Omega$.  Dann ist $p(a) = 1$ und der von $p$
+  induzierten W-Maß ist definiert durch Satz 1.11.
+
+  Sei $(A_{i})_{i \in I}$ eine Familie von Ereignissen in $\Omega$.  Für
+  jede nichtleere endliche Teilmenge $J \subseteq I$ ist
+  \begin{align*}
+    P\left(\bigcap_{j \in J} A_{j}\right) = \prod_{j \in J}P(A_{j})
+  \end{align*}
+  denn es gibt nur zwei Möglichkeiten: falls existiert $k \in J$ mit
+  $A_{k} = \emptyset$, dann ist die Gleichung gleich Null.  Falls keine $k
+  \in J$ mit $A_{k} = \emptyset$ existiert, dann ist $A_{j} = \{a\}$ für
+  alle $j \in J$ und die Gleichung ist gleich Eins.
+\end{proof}
+Sei $\Omega = \mathbb{N}_{0}$ und $p\colon \Omega \to \left[0, 1\right]$ eine
+Zähldichte.  Wir wählen $p$ derart, dass $p(\omega) > 0$ für jede
+gerade Zahl $\omega \in \Omega$ und $A, B $ unabhängig, falls $A \subseteq \Omega$ nur
+gerade Zahlen und $B \subseteq \Omega$ nur ungerade Zahlen enthält.
+\begin{Behauptung}
+  Wir wählen
+  \begin{align*}
+    p\colon \Omega \to \left[0, 1\right], \omega \mapsto
+    \begin{cases}
+      \frac{1}{k(k+1)}, & \text{falls $\omega > 0$ gerade;} \\
+      0, & \text{falls $\omega > 0$ ungerade;} \\
+      1 - \sum_{k \in 2 \mathbb{N}}{\frac{1}{k(k+1)}}, & \text{falls $\omega = 0$.}
+    \end{cases}
+  \end{align*}
+  Dann erfüllt $p\colon \Omega = \mathbb{N}_{0} \to \left[0, 1\right]$ die genannte Bedingungen.
+\end{Behauptung}
+\begin{proof}
+  Zuerst ist konvergiert die Reihe
+  \begin{align*}
+    \sum_{\omega \in \mathbb{N} \setminus \{0\}}\frac{1}{k(k+1)}
+  \end{align*}
+  absolut mit Grenzwert $1$ wegen HA2, Aufgabe 4.
+  Deshalb konvergiert ein Teil davon
+  \begin{align*}
+    \sum_{\omega \in 2 \mathbb{N} \setminus \{0\}}\frac{1}{k(k+1)}
+  \end{align*}
+  auch absolut mit einen Grenzwert $0 < a < 1$.  Wir setzen
+  $p(0) = 1 - a$ und $p(\omega)=0$ für alle $\omega$ ungerade, dann ist
+  $p$ normiert und $\sigma$-additiv.
+
+  Sei $A, B \subseteq \Omega$ beliebig sodass $A$ nur gerade Zahlen und
+  $B$ nur ungerade Zahlen enthält.  Dann gilt
+  \begin{align*}
+    P(A \cap B) = P(\emptyset) = 0 = P(A) \cdot P(B) = P(A) \cdot 0 = 0
+  \end{align*}
+  wie behauptet.
+\end{proof}
+\subsection{Aufgabe 3}
+\begin{Behauptung}
+Es sei $(\Omega, p)$ ein diskreter Wahrscheinlichkeitsraum mit induzierten
+W-Maß $\cP$.  Die Ereignisse $A_{1}, \ldots, A_{n}$ mit $\cP(A_{1} \cap \ldots \cap A_{n})
+>0 $ sind genau dann unabhängig, falls für jedes $k \in \{2, \ldots, n\}$,
+jede Auswahl $1 \le i_{1} < \ldots < i_{k} \le n$, und alle $j \in \{1, \ldots, k\}$
+dass
+\[ \cP(A_{i_{j}}\mid \bigcap_{\substack{m=1 \\ m \ne j}}^{k}A_{i_{m}}) =
+    \cP(A_{i_{j}})
+\]
+gilt.  
+\end{Behauptung}
+\begin{proof}
+  Hinrichtung.  Es folgt aus Definition von der bedingte
+  Wahrscheinlichkeit von $A$ unter der Bedingung $B$ dass
+  \begin{align*}
+    \cP(A_{i_{j}}\mid \bigcap_{\substack{m=1 \\ m \ne j}}^{k}A_{i_{m}}) =
+    \cP(A_{i_{j}}) 
+    = \frac{\cP(\bigcap_{m=1}^{k}A_{i_{m}})}{\cP(\bigcap_{\substack{m=1 \\ m \ne j}}^{k}A_{i_{m}})}
+  \end{align*}
+  Damit gilt
+  \[\cP(A_{i_{j}})  \cdot \cP(\bigcap_{\substack{m=1 \\ m \ne j}}^{k}A_{i_{m}}) =
+    \cP(\bigcap_{m=1}^{k}A_{i_{m}}). \tag{1}\]
+  Korollar.  Es gilt \[
+    \cP(\bigcap_{\substack{m=1 \\ m \ne j}}^{k}A_{i_{m}}) = \prod_{\substack{m=1 \\
+      m \ne j}}^{k} \cP(A_{i_{m}}).
+\]
+Beweis.  Induktion über $k$.
+Induktionsanfang. Wir betrachten den Fall $k = 2$.  Dann ist für alle $1
+  \le i_{1}  < i_{2} \le n$ und für alle $j \in \{1, 2\}$ dass
+  \[\cP(A_{i_{1}} \mid A_{i_{2}}) = \cP(A_{i_{1}}) = \frac{\cP(A_{i_{1}}
+      \cap A_{i_{2}})}{\cP(A_{i_{2}})}, \quad \cP(A_{i_{2}} \mid
+    A_{i_{1}}) = \cP(A_{i_{2}}) = \frac{\cP(A_{i_{1}}
+      \cap A_{i_{2}})}{\cP(A_{i_{1}})}.\]
+  Dann folgt $\cP(A_{i_{1}} \cap A_{i_{2}}) = \cP(A_{i_{1}})\cP(A_{i_{2}})$.
+
+  Induktionsschritt. Angenommen, das Korollar gelte für ein $k \coloneq a$, wir
+  betrachten $k \coloneq a+1$.  Dies gilt wegen (1).  Damit ist das Korollar
+  bewiesen.
+
+  Damit ist die Bedingung $P(\bigcap_{j \in J} A_{j}) = \prod_{j \in J}P(A_{j})$
+  erfüllt und die Ereignisse sind unabhängig.
+
+  Rückrichtung.
+\end{proof}
+\subsection{Aufgabe 4}
+\begin{Behauptung}
+  Seien $(\Omega, \mathcal{A}, \cP)$ ein W-Raum und $C_{1}, C_{2}, \ldots \in \mathcal{A}$ höchstens
+  abzählbar unendlich viele paarweise disjunkte Ereignisse mit
+  positiven Wahrscheinlichkeiten und $C \coloneq \bigcup_{k \ge 1}C_{k}$.  Weiter
+  sei $A \in \mathcal{A}$ gegeben.  Falls $\cP(A \mid C_{k})$ nicht von $k$ abhängt,
+  gilt stets $\cP(A \mid C) = \cP(A \mid C_{k})$.
+\end{Behauptung}
+\end{document}

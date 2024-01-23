@@ -1,0 +1,227 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+\documentclass[draft,a5paper]{article}
+
+% 让每个章节 subsection 在新的一页上开始
+% 而不是紧接着上一章节
+\AddToHook{cmd/subsection/before}{\clearpage}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+\geometry{a5paper,
+ left=1cm,
+ right=1cm,
+ top=1cm,
+ bottom=2cm
+}
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+
+% 调整 Emacs 预览字体大小
+% (setq preview-scale-function 1.5)
+
+% TeX Gyre Schola and unicode-math
+% which in turn loads amsmath,mathtools,fontspec and friends
+\usepackage{xcharter-otf}
+
+
+% 加载数学相关的包
+\usepackage{
+  % 自然段间留空
+  parskip,
+  % 区间排版
+  interval
+}
+
+% 中文支持，暂时不需要
+% \usepackage[UTF8]{ctex}
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\usepackage{amsthm}
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+% 定义新函数，依赖于AMSmath
+\DeclareMathOperator{\card}{card}
+
+\title{HA 1, Ana 3, Monika, MM 11}
+\author{Zhang 484981, Yang 466096, Guo 480788}
+
+\begin{document}
+\maketitle
+\begin{center}
+  Meng Zhang 484981, Yiwen Yang 466096, Yuchen Guo 480788
+\end{center}
+
+\newpage
+
+\subsection{H 1.1}
+Siehe nächste Seite.
+\newpage
+\subsection{H 1.2}
+Sei \(\Omega\) überabzählbar und sei die \(\sigma\)-Algebra
+\[\mathcal{A} \coloneq \{A \subseteq \Omega \mid A \text{ oder } A^{c} \text{ ist abzählbar}\}.\]
+\begin{enumerate}
+\item Behauptung.  \(\mathcal{E} \coloneq \{ \{\omega\} \mid \omega \in \Omega\}\) erzeugt \(\mathcal{A}\).
+
+  Beweis.  Wir zeigen, dass \(\sigma(\mathcal{E}) \subseteq \mathcal{A}\) und \(\mathcal{A} \subseteq \sigma(\mathcal{E})\) gelten.
+
+  Es gilt  \(\sigma(\mathcal{E}) \subseteq \mathcal{A}\).  Denn sei \(A \in \sigma(\mathcal{E})\) beliebig.  Falls \(A\) oder
+  \(A^{c}\) abzählbar ist, dann folgt \(A \in \mathcal{A}\).  Angenommen, \(A\) und
+  \(A^{c}\) sind beide überabzählbar.  Dann können wir eine kleinste
+  \(\sigma\)-Algebra \(\mathcal{A}'\) finden, die \(A\) und \(A^{c}\) nicht enthält, weil
+  \(\sigma\)-Algebra nur bezüglich abzählbaren Vereinigungen stabil ist.
+
+  Es gilt \(\mathcal{A} \subseteq \sigma(\mathcal{E})\).  Denn sei
+  \(A \in \mathcal{A}\) beliebig.  Dann ist entweder \(A\) abzählbar oder
+  \(A^{c}\) abzählbar.  Angenommen, \(A\) ist abzählbar, dann gilt
+  \(A \in \sigma(\mathcal{E})\), weil \(\sigma(\mathcal{E})\) alle abzählbare Vereinigung von
+  Einelementigen Mengen enthält.  Angenommen, \(A^{c}\) ist abzählbar.
+  Dann ist wegen \(\Omega\) überabzählbar dass \(A\) überabzählbar.  Aber
+  \(A\) ist trotzdem in \(\sigma(\mathcal{E})\) enthält, weil
+  \(A^{c} \in \sigma(\mathcal{E})\) gilt wegen Stabilität bzgl.\ abzählbaren
+  Vereinigungen, und \((A^{c})^{c} \in \sigma(\mathcal{E})\) gilt wegen Stabilität
+  bzgl. Komplementarmengen.  Damit gilt \(\sigma(\mathcal{E}) = \mathcal{A}\).
+\item Sei die Abbildung \(\mu\) definiert durch
+  \begin{align*}
+    \mu\colon \mathcal{A} \to \interval{0}{\infty}, \quad \mu(A) \coloneq
+    \begin{cases}
+      0, & \text{falls } A \text{ abzählbar ist;} \\
+      1, & \text{falls } A^{c} \text{ abzählbar ist.}
+    \end{cases}
+  \end{align*}
+  \begin{Behauptung}
+    \(\mu\) ist wohldefiniert.  \(\mu\) ist ein Maß auf \(\mathcal{A}\).
+  \end{Behauptung}
+  \begin{proof}
+    Wir zeigen wohldefiniertheit.  Das heißt, es existiert einen
+    eindeutigen Funktionswert zu jeder \(A \in \mathcal{A}\).  Sei nun \(A \in \mathcal{A}\)
+    beliebig.
+    \begin{enumerate}
+    \item Falls entweder \(A\) oder \(A^{c}\) abzählbar, dann ist \(\mu\)
+      wohldefiniert.
+    \item Falls beide Mengen \(A\) und \(A^{c}\) abzählbar sind, dann
+      folgt, \(\Omega = A \cup A^{c}\) abzählbar im Widerspruch zur
+      Voraussetzung dass \(\Omega\) überabzählbar ist.
+    \item Falls beide Mengen \(A\) und \(A^{c}\) überabzählbar sind, dann
+      folgt, dass \(A, A^{c} \notin \mathcal{A}\), also liegt nicht im Definitionsbereich.
+    \end{enumerate}
+    Damit ist die Abbildung \(\mu\colon \mathcal{A} \to \interval{0}{\infty}\) wohldefiniert.
+
+    Wir zeigen, dass die Abbildung \(\mu\) ein Maß auf die
+    \(\sigma\)-Algebra \(\mathcal{A}\) ist, indem wir zeigen, dass
+    \(\mu\) eine \(\sigma\)-additive Abbildung ist.  Zuerst gilt
+    \(\mu(\emptyset) = 0\), denn \(\emptyset\) ist abzählbar. Sei
+    \((A_{k})_{k \in \mathbb{N}} \) eine beliebig gewählte Folge in
+    \(\mathcal{A}\) mit \(A_{i} \cap A_{j} = \emptyset\) für
+    \(i \ne j\), also die Folgengliedern sind paarweise disjunkt.  Wir
+    betrachten zwei Fälle.
+    \begin{itemize}
+    \item Falls alle Folgenglieder abzählbar ist.  Die abzählbare
+      Vereinigung von abzählbare Mengen ist wieder abzählbar.
+
+      Daraus folgt, dass \(\mu(\cup_{k \in \mathbb{N}}A_{k}) = \sum_{k \in \mathbb{N}}\mu(A_{k}) = 0\).
+
+    \item Falls mindestens ein Folgenglieder überabzählbar ist.  Wir
+      nennen diese Folgenglieder \(A_{k}\).  Wegen
+      \(A_{k} \in \mathcal{A}\) ist \(A_{k}^{c}\) abzählbar.  Weil die Folgenglieder
+      paarweise disjunkt sind, gilt
+      \[A_{i} \subseteq A_{k}^{c}, \quad i \ne k\] wobei \(A_{k}^{c}\) abzählbar ist.
+      Daraus folgt, dass \(A_{i}\) abzählbar für alle \(i \ne k\) und
+      \(\mu(A_{i}) = 0\) für alle \(i \ne k\).  Es folgt wegen
+      \(A_{k}^{c}\) abzählbar dass \(\mu(A_{k}) = 1\).  Wir betrachten die
+      Vereinigung \(\bigcup_{i \in \mathbb{N}}{A_{i}}\).  Aus Regel von De Morgan folgt,
+      dass
+      \[\left(\bigcup_{i \in \mathbb{N}}A_{i}\right)^{c} = \bigcap_{i \in \mathbb{N}}A_{i}^{c}\]
+      wobei \(A_{k}^{c}\) im Durchschnitt abzählbar ist.  Daraus folgt,
+      dass die linke Seite abzählbar ist und
+      \(\mu\left(\bigcup_{i \in \mathbb{N}}A_{i}\right) = 1\).  Insgesamt folgt,
+      \[ \mu{\left(\bigcup_{i \in \mathbb{N}}{A_{i}}\right)} = 1 = 0 + 0 + \cdots + 1 + \cdots + 0
+        + 0 + \cdots = \sum_{i \in \mathbb{N}}{\mu(A_{i})}\] Damit ist
+      \(\mu\) eine \(\sigma\)-additive Maß.
+    \end{itemize}
+  \end{proof}
+\end{enumerate}
+\newpage
+\subsection{H 1.3}
+Sei \((\Omega, \mathcal{A}, \mu)\) ein Maßraum.  Sei \(A, A_{1}, A_{2}, \ldots, \in \mathcal{A}\) und
+definiere
+\[ A_{n} \uparrow A \coloneq A_{1} \subseteq A_{2} \subseteq \ldots \text{ und } A = \bigcup_{n \in \mathbb{N}}{A_{n}},\]
+sowie
+\[ A_{n} \downarrow A \coloneq A_{1} \supseteq A_{2} \supseteq \ldots \text{ und } A = \bigcap_{n \in \mathbb{N}}{A_{n}}.\]
+\begin{Behauptung}
+  Aus \(A_{n} \uparrow A\) folgt \(\lim_{n \to \infty}{\mu(A_{n})} = \mu(A)\).
+\end{Behauptung}
+\begin{proof}
+Wir konstruieren eine Folge von paarweisen disjunkte Mengen, sodass
+das Kriterium von \(\sigma\)-Additivität des Maß \(\mu\) anwendbar wird.
+
+Wir definieren
+\[ B_{1} = A_{1}, \quad B_{k} = A_{k} \setminus A_{k - 1}, \quad k \in \mathbb{N}.\]
+Wegen Voraussetzung dass \(A_{1} \subseteq A_{2} \subseteq \ldots\), gilt \(B_{i} \cap B_{j} = \emptyset
+\) für alle \(i, j \in \mathbb{N}\) mit \(i \ne j\).  Weil \(\mathcal{A}\) eine \(\sigma\)-Algebra ist,
+folgt
+\[\mu\left(\bigcup_{k = 2}^{\infty}{B_{k}}\right) = \sum_{k = 2}^{\infty}{\mu(B_{k})}\]
+sowie
+\begin{align*}
+  \mu(A) &= \mu(B_{1}) + \sum_{k = 2}^{\infty}{B_{k}}
+       = \lim_{n \to \infty}\left(\mu(B_{1}) + \sum_{k=2}^{n}{\mu(B_{k})}\right)
+       = \lim_{n \to \infty}\mu\left(B_{1} \cup \bigcup_{k = 2}^{n}{B_{k}}\right) \\
+       &= \lim_{n \to \infty}\mu\left({\bigcup_{k =1}^{n}B_{k}}\right)
+         = \lim_{n \to \infty}{\mu(A_{n})} \tag*{:wegen Def von \(B\)}
+\end{align*}
+damit ist die Behauptung bewiesen.
+\end{proof}
+\begin{Behauptung}
+  Sei \(A_{n} \downarrow A\).  Dann ist die Behauptung von (1) falsch.
+\end{Behauptung}
+\begin{proof}
+  Falls \(\mu(A_{i}) = \infty\) für alle \(i \in \mathbb{N}\) dann ist die Behauptung
+  falsch.  Sei die Mengen und Zählmaß definiert durch
+  \[A_{n} \coloneq \{k \in \mathbb{N} \mid k \ge n\}; \quad \mu(A_{n}) = \abs{A_{n}}\]
+  dann ist \(\mu(A_{n}) = \infty\) für alle \(n \in \mathbb{N}\).  Aber die Durchschnitt von
+  alle \(A_{n}\) ist die leere Menge \(A = \emptyset\).  Daraus folgt, dass
+  \[\lim_{n \to \infty}{\mu(A_{n})} = \infty \ne 0 = \mu(A).\]
+\end{proof}
+\newpage
+\subsection{H 1.4}
+Sei \((\Omega, \mathcal{A}, \mu)\) ein Maßraum.  Für \(A, B \in \mathcal{A}\) wird \(A \sim B\) definiert
+durch \(\mu(A \triangle B) = 0\).
+\begin{enumerate}
+\item Wir zeigen, dass \(A \sim B\) eine Äquivalenzrelation ist.  Die
+  Relation ist symmetrisch, denn es gilt \(\mu(A \triangle A) = 0\).  Die Relation
+  ist reflexiv, denn aus \(\mu(A \triangle B)  = 0\) folgt unmittelbar
+  \[\mu(A \triangle B) = \mu((A \setminus B) \cup (B \setminus A)) = \mu((B \setminus A) \cup (A \setminus B)) = \mu(B
+    \triangle A).\]
+  Die Relation ist transitiv.  Denn sei \(\mu(A \triangle B) = \mu(B \triangle C) = 0\).
+  Außerdem gilt
+  \begin{align*}
+    (A \cup B) \setminus (A \cap B) &= [A \setminus (B \cup C) \cup (A \cap C) \setminus B] \cup [B \setminus (A \cup C) \cup
+                        (B \cap C) \setminus A] \\
+    (B \cup C) \setminus (B \cap C) &= [B \setminus (C \cup A) \cup (B \cap A) \setminus C] \cup [C\setminus (B \cup A) \cap
+                        (C \cap A) \setminus B] \\
+    (A \cup C) \setminus (A \cap C) &= [A \setminus (C \cup B) \cup (A \cap B) \setminus C] \cup [C \setminus (A \cup B) \cup
+                        (C \cap B) \setminus A] \\
+                      &\text{ist Teilmenge von der Vereinigung der ersten zwei Mengen.}
+  \end{align*}
+  Nach [Bem 1.14] gilt dann \[\mu((A \cup C) \setminus (A \cap C)) \le \mu(((A \cup B) \setminus (A \cap B))
+  \cup ((B \cup C) \setminus (B \cap C)))\] wobei die beiden Mengen nicht disjunkt mit
+  \(\le \mu(A \triangle B) + \mu(B \triangle C) = 0\).  Wegen \(\mu\colon \mathcal{A} \to \interval{0}{\infty}\) ist die
+  Relation transitiv.
+\item Siehe nächste Seite.
+\end{enumerate}
+\end{document}

@@ -1,0 +1,127 @@
+\startenvironment *
+
+\setupbodyfont[heros, 12pt]
+
+\setupalign[hanging]
+\setupwhitespace[big]
+
+\setuppapersize [S4]
+
+\setuplayout
+    [
+      cutspace=3mm,
+      leftmargin=2mm,
+      leftmargindistance=1mm,
+      width=middle,
+      rightmargindistance=1mm,
+      rightmargin=2mm,
+      backspace=3mm,
+      %
+      topspace=2mm,
+      header=0mm,
+      headerdistance=0mm,
+      height=middle,
+      footerdistance=0.2\lineheight,
+      footer=0.8\lineheight,
+      bottomspace=1mm,
+    ]
+
+
+\definehead
+    [slide]
+    [subject]  
+    [
+      style=\ssbfc,
+      alternative=middle,
+      hidenumber=yes,
+      page=yes,
+    ]
+
+
+\setupitemize
+    [
+      headstyle=\ssa,
+      afterhead={\blank[none]},
+      inbetween={\blank[2*big]},
+    ]
+
+\startuseMPgraphic{itemize:main}
+  save p; path p;
+  p := fullsquare scaled 1.5ExHeight;
+  fill p withcolor \MPcolor{foreground:contrast};
+\stopuseMPgraphic
+
+\startuseMPgraphic{itemize:nested}
+  save p; path p;
+  p := ( (0,-0.5)--(0,0.5)--(0.866,0)--cycle ) scaled ExHeight;
+  fill p withcolor \MPcolor{foreground:contrast};
+\stopuseMPgraphic
+
+\definesymbol[itemize:main][\useMPgraphic{itemize:main}]
+\definesymbol[itemize:nested][\useMPgraphic{itemize:nested}]
+
+\setupitemize[1][symbol=itemize:main]
+\setupitemize[2][symbol=itemize:nested, width=1.5ex]
+\setupitemize[2][nowhite]
+
+\setuptagging[state=start]
+
+\setvariables
+    [metadata]
+    [
+      set={\setups{titlepage}},
+    ]
+
+\definestyle[titlestyle]   [style=\ssbfd]
+\definestyle[authorstyle]  [style=\ssb]
+\definestyle[datestyle]    [style=\tf,    color=]
+\definestyle[locationstyle][style=\tf,    color=]
+
+\startsetups titlepage
+  \startstandardmakeup[align=middle]
+    \titlestyle{\getvariable{metadata}{title}}
+    \blank[2*big]
+
+    \authorstyle{\getvariable{metadata}{author}}
+    \blank[big]
+
+    \locationstyle{\getvariable{metadata}{location}}
+    \blank[none]
+    \datestyle{\getvariable{metadata}{date}}
+  \stopstandardmakeup
+\stopsetups
+
+\setupformula
+    [spacebefore={nowhite,quarterline}, spaceafter={back,nowhite,quarterline}]
+
+
+\setupcaptions
+    [
+      number=no,
+    ]
+
+\setupfloats
+    [
+      spacebefore=nowhite,
+      spaceafter=small,
+    ]
+
+\definemeasure[page][\dimexpr\pagegoal-\pagetotal-\lineheight\relax]
+\definemeasure[shortpage][\dimexpr\pagegoal-\pagetotal-\lineheight-2\bigskipamount\relax]
+
+\defineexternalfigure
+    [horizontal]
+    [
+      width=\textwidth,
+      height=\measure{page},
+      factor=max,
+    ]
+
+\defineexternalfigure
+    [vertical]
+    [
+      width=0.5\textwidth,
+      height=\measure{shortpage},
+      factor=max,
+    ]
+\stopenvironment

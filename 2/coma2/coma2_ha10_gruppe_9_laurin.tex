@@ -1,0 +1,191 @@
+% !TeX program = lualatex
+%%% TeX-engine: luatex
+
+\documentclass[draft,a4paper]{article}
+\usepackage[margin=2cm]{geometry}
+\linespread{1.2}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Yiwen Yang 466096, Yuchen Guo 480788, Qing Wang 458040}
+\rhead{HA 10, CoMa 2, Laurin, Gruppe 9}
+
+% set language to german
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,mathtools,fontspec,amsthm,parskip,interval,unicode-math}
+\setmainfont{texgyretermes}%
+ [
+  Extension = .otf ,
+  UprightFont = *-regular,
+  ItalicFont = *-italic,
+  BoldFont = *-bold,
+  BoldItalicFont = *-bolditalic,
+  Ligatures=TeX,
+ ]
+\setmathfont{STIXTwoMath-Regular.otf}
+
+% used for integral with respect to a variable x
+% like \int \dd{x}
+% \usepackage{physics}
+
+% theorem environment used in this document
+\theoremstyle{remark}
+\newtheorem*{beh}{Behauptung}
+\newtheorem*{lem}{Lemma}
+
+\newcommand{\envert}[1]{\left\lvert#1\right\rvert}
+\let\abs=\envert
+
+\begin{document}
+\subsection*{3. Aufgabe}
+Sei \(\Sigma\) ein endliches Alphabet.
+\subsubsection*{3. Aufgabe, Teil a}
+\begin{beh}
+  Der Schnitt \(L \coloneq L_{1} \cap L_{2}\) zweier rekursiver Sprachen
+  \(L_{1}, L_{2} \subseteq \) ist rekursiv.
+\end{beh}
+\begin{proof}
+  Sei \(P_{L_{1}}, P_{L_{2}}\) die zur \(L_{1}, L_{2}\) gehörende
+  Entscheidungsproblem.  Wegen Voraussetzung sind beide
+  Entscheidungsproblem \(P_{L_{1}}, P_{L_{2}}\) berechenbar mit Output
+  \(\{\text{True}, \text{False}\}\).  Weil \(L\) Schnitt zwei Sprachen
+  ist, ist das zur \(L\) gehörende Entscheidungsproblem
+  \(P_{L} \coloneq (P_{L_{1}} \wedge P_{L_{2}})\).  Wegen Definition von
+  Berechenbarkeit terminiert \(P_{L_{1}}\) und \(P_{L_{2}}\) nach
+  endlich vielen Schritten für alle \(x \in \Sigma^{*}\).  Daraus folgt, dass
+  \(P_{L}\) terminiert nach endlich vielen Schritten für alle
+  \(x \in \Sigma^{*}\).  Daraus folgt, dass \(P_{L}\) berechenbar ist und \(L\)
+  rekursiv ist.  Damit gilt die Behauptung.
+\end{proof}
+\subsubsection*{3. Aufgabe, Teil b}
+\begin{beh}
+  Der Schnitt \(L \coloneq L_{1} \cap L_{2}\) zweier rekursiv aufzählbare
+  Sprachen \(L_{1}, L_{2} \subseteq \) ist rekursiv aufzählbar.
+\end{beh}
+\begin{proof}
+  Das zur \(L\) gehörige Entscheidungsproblem
+  terminiert für \(x \in \Sigma^{*}\) genau dann, falls \((x \in L_{1}) \wedge (x \in
+  L_{2})\) gilt.  Dann liefert \(P_{L} \coloneq (P_{L_{1}} \wedge P_{L_{2}})\) genau
+  dann nach endlich vielen Schritten den Output "`True"', wenn \(x \in
+  L\).  Damit ist \(L\) rekursiv aufzählbar.
+\end{proof}
+\subsubsection*{3. Aufgabe, Teil c}
+\begin{beh}
+  Die Vereinigung \(L \coloneq L_{1} \cup L_{2}\) zweier rekursiver Sprachen
+  \(L_{1}, L_{2}\) über \(\Sigma\) ist rekursiv.
+\end{beh}
+\begin{proof}
+  Die zur \(L_{1}, L_{2}\) gehörige Entscheidungsproblem
+  \(P_{L_{1}}, P_{L_{2}}\) ist berechenbar wegen Voraussetzung.  Wegen
+  Definition von Berechenbarkeit terminiert \(P_{L_{1}}\) und
+  \(P_{L_{2}}\) mit dem Output \(\{\text{True}, \text{False}\}\) nach
+  endlich vielen Schritten für alle \(x \in \Sigma^{*}\).  Für alle
+  \(x \in \Sigma^{*}\) gilt \(x \in L\) genau dann, falls
+  \((x \in L_{1}) \lor (x \in L_{2})\) gilt.  Damit ist das zur \(L\)
+  gehörige Entscheidungsproblem \(P_{L} \coloneq (P_{L_{1}} \lor P_{L_{2}})\)
+  berechenbar und \(L\) rekursiv.  Damit gilt die Behauptung.
+\end{proof}
+\subsubsection*{3. Aufgabe, Teil d}
+\begin{beh}
+  Die Vereinigung \(L \coloneq L_{1} \cup L_{2}\) zweier rekursiv aufzählbare Sprachen
+  \(L_{1}, L_{2}\) über \(\Sigma\) ist \textbf{nicht} rekursiv aufzählbar.
+\end{beh}
+\begin{proof}
+  O.B.d.A sei \(L_{1} \setminus L_{2} \ne \emptyset\) und
+  \(x \in L_{1} \setminus L_{2}\).  Wegen Voraussetzung gilt
+  \(x \in L\). Das Programm \(P_{L_{2}}\) terminiert vielleicht nicht
+  bei Input \(x\), denn ist nur die rekursive Aufzählbarkeit von
+  \(L_{2}\) vorausgesetzt.  Damit terminiert das Program
+  \(P_{L} \coloneq (P_{L_{1}} \lor P_{L_{2}})\) bei \(x \in L\) nicht und
+  \(L\) nicht rekursiv aufzählbar.
+\end{proof}
+\subsubsection*{3. Aufgabe, Teil e}
+\begin{beh}
+Das Kompletment \(\overline{L} \coloneq \Sigma^{*} \setminus L\) einer rekursiven Sprache
+\(L\) ist rekursiv.
+\end{beh}
+\begin{proof}
+  Sei \(P_{L}\) das zu \(L\) gehörige Entscheidungsproblem.  Dann ist
+  \(\neg P_{L}\) das zu \(\overline{L} \) gehörige Entscheidungsproblem.
+  Weil \(L\) rekursiv ist, ist \(P_{L}\) berechenbar.  Weil \(P_{L}\)
+  berechenbar ist, ist \(\neg P_{L}\) berechenbar.  Weil
+  \(\neg P_{L}\) berechenbar ist, ist \(\overline{L} \) rekursiv.  Damit
+  ist die Behauptung bewiesen.
+\end{proof}
+\subsubsection*{3. Aufgabe, Teil f}
+\begin{beh}
+  Falls \(L \subseteq \Sigma^{*}\) und
+  \(\overline{L} \coloneq \Sigma^{*} \setminus L\) rekursiv aufzählbar sind, so ist
+  \(L\) \textbf{nicht} rekursiv.
+\end{beh}
+\begin{proof}
+  Zentral zu unserer Argumentation ist die Tatsache, dass wir ohne
+  Weiteres nicht entscheiden können, ob ein Programm bei Input \(x\)
+  wirklich endlos ist oder das Programm lediglich eine lange Zeit
+  (z.B. \(10^{10^{10^{56}}}\) Jahre) braucht, um zu terminieren.
+
+  Wegen Voraussetzung terminiert das Programm \(P_{\overline{L}}\)
+  genau dann nach endlich vielen Schritten mit Output "`True"', wenn
+  \(x \in \overline{L}\). Das heißt, das Program \(P_{\overline{L}}\)
+  terminiert bei \(x \notin \overline{L}\) vielleicht nicht.  Zwar können
+  wir entscheiden bei Input \(x \in \Sigma^{*}\), ob
+  \(x \in \overline{L}\) gilt, wir können nie entscheiden, wegen unserer
+  vorherigen Argumentation, dass \(x \notin \overline{L}\) gilt.  Damit ist
+  \(L\) nicht rekursiv.
+\end{proof}
+\subsection*{4. Aufgabe}
+\subsubsection*{4. Aufgabe, Teil a}
+\begin{beh}
+  \(L_{1} \subseteq \{0, \ldots, 9\}^{*}\) besteht aus allen endlichen
+  Anfangssequenzen der Dezimaldarstellung von \(\pi\), ohne Komma.
+  \(L_{1}\) ist rekursiv.
+\end{beh}
+\begin{proof}
+  Wir zeigen, dass \(L_{1}\) rekursiv ist, indem wir zeigen, dass das
+  zugehörige Entscheidungsprogram \(P_{L_{1}}\) berechenbar ist.  Wir
+  schreiben \textsf{julia}-Funktion. \texttt{pi} ist ein \textsf{julia}-Built-in.
+\begin{verbatim}
+function floorInt(x)::Int
+    return convert(Int, floor(x))
+end
+
+function testSprache(word::Int)::Bool
+    exponent = floorInt(log10(word))
+    comparePi = floorInt(pi * 10 ^ exponent)
+    return (word == comparePi)
+end
+
+testSprache(314159) # true
+testSprache(4)      # false
+\end{verbatim}
+  Dieses Programm enthält keine Schleife und jede verwendete Funktion
+  ist endlich.  Daraus folgt, dass dieses Programm bei jeder Input
+  endlich ist.  Dieses Programm ist auch offenbar korrekt.  Damit gilt
+  die Behauptung.
+\end{proof}
+
+\subsubsection*{4. Aufgabe, Teil b}
+\begin{beh}
+  \(L_{2} \subseteq \{0, \ldots, 9\}^{*}\) besteht aus den Dezimaldarstellungen
+  aller Zahlen \(n \in \mathbb{N}\) mit der Eigenschaft, dass es in der
+  Dezimaldarstellung von \(\pi\) einen Block von mindestens \(n\)
+  aufeninadner folgenden Siebenen gibt.  Diese Sprache ist
+  \textbf{nicht} rekursiv.
+\end{beh}
+\begin{proof}
+  Zuerst bemerken wir, dass \(\pi\) irrational ist, d.h., sie ist eine
+  unendliche nichtperiodische Dezimalbrüche.  Es ist nicht bewiesen,
+  ob \(\pi\) eine \textit{normale Zahl} ist.  Falls ja, dann ist
+  \(\{0, \ldots, 9\}^{*}\) eine Teilmenge von der Menge der Blocks in der
+  Dezimaldarstellung von \(\pi\) und es gilt dann
+  \(L_{2} = \{0, \ldots, 9\}^{*}\).
+
+  Wir nehmen an, dass \(\pi\) nicht normal ist, und betrachten ein zur
+  \(L_{2}\) gehöriges Entscheidungsprogramm \(P_{L_{2}}\).  Sei
+  \(n \in \mathbb{N}\) mit \(n \notin L_{2}\), d.h., einer Block von mindestens
+  \(n\) aufeinander folgenden Sibenen gibt es in der
+  Dezimaldarstellung von \(\pi\) nicht.  Dann gerat das
+  Entscheidungsprogramm in einer endlose Schleife, denn \(\pi\) ist
+  endlos.  Damit ist \(L_{2}\) nicht rekursiv.
+\end{proof}
+\end{document}

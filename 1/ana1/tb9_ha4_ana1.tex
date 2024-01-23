@@ -1,0 +1,219 @@
+\documentclass[12pt]{extarticle}
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,fancyhdr,color,graphicx,}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{parskip}
+\usepackage{tikz}
+\renewcommand{\familydefault}{\sfdefault}
+\pagestyle{fancy}
+\setlength{\parindent}{0pt}
+\lhead{Yuchen Guo 480788, Meng Zhang 484981, Chaeyoung Hong 478363}
+\rhead{4. Hausaufgabenblatt, Ana I\\Tilman, Gruppe TB9}
+\begin{document}
+\textbf{H 4.1.1}
+
+\textit{Behauptung.}   Die Folge $a_n:= \sqrt{n}(\sqrt{n+1} -
+\sqrt{n})$ konvergiert gegen \(\frac{1}{2}\).
+
+
+\begin{proof}
+
+  Wir zeigen, dass diese Folge eine Grenzwert besitzt.
+  \begin{itemize}
+  \item \((a_n)\) ist monoton steigend.
+
+  Zuerst zeigen wir, dass \((a_n)\) monoton steigend ist.  Es gilt,
+\begin{align*}
+a_{n+1} - a_n &= \sqrt{n+1}(\sqrt{n+2}-\sqrt{n}) - 1.
+\end{align*}
+Wir lösen die Ungleichung \(a_{n+1} - a_n > 0\), dann erhalten wir
+\(\left( \frac{1}{2(n+1)} \right)^2 < 1\).  Diese Ungleichung gilt für
+alle \(n \in \mathbb{N}\).
+\item Die Zahl \(\frac{1}{2}\) ist eine obere Schranke von \((a_n)\).
+
+  Lösen die Ungleichung \(a_n < \frac{1}{2}\), dann erhalten wir
+  \(\frac{1}{4} > 0\).  Deshalb  gilt \(a_n < \frac{1}{2}\) für alle $n
+  \in \mathbb{N}$.
+\item Die Zahl \(\frac{1}{2}\) ist die kleinste obere Schranke von
+  \((a_n)\).
+
+  Sei \(a < \frac{1}{2}\) die kleinste obere Schranke von \((a_n)\).  Also
+  gilt \(a_n \leq a\) für alle \(n \in \mathbb{N}\).  Wir zeigen, dass
+  solche \(a\) nicht existiert.
+
+  Wir lösen die Ungleichung \(\sqrt{n(n+1)} - n \leq a\).  Es gilt,
+\begin{align*}
+  \sqrt{n(n+1)} - n &\leq a\\
+  n(n+1) &\leq (a+n)^2 \\
+  n(n+1) &\leq a^2+n^2+2an\\
+  0 &\leq a^2 + (2a -1)n\\
+  (1-2a)n &\leq a^2.
+\end{align*}
+
+Falls \(1-2a > 0\), dann gilt die Ungleichung \(\sqrt{n(n+1)} - n \leq a\)
+nur mit \(n \leq \frac{a^2}{1-2a}\).  Also gilt
+\(\sqrt{n(n+1)} - n \leq a\) nur für endlich viele \(n \in \mathbb{N}\).
+
+Falls \(1-2a \leq 0\), dann widerspricht die Voraussetzung $a <
+\frac{1}{2}$.
+
+  \end{itemize}
+
+Deshalb ist \((a_n)\) eine monoton steigende Folge mit \(\frac{1}{2}\) als
+deren kleinste obere Schranke.  Wegen (Skript Satz 2.22) konvergiert
+\((a_n)\) gegen \(\frac{1}{2}\).
+\end{proof}
+
+\textbf{H 4.1.2}
+
+\textit{Behauptung.}   Die Folge \(b_{n+1}:= 2b_n - c(b_n)^2\)
+konvergiert gegen \(\frac{1}{c}\).
+
+\begin{proof}
+
+Zuerst zeigen wir mittels vollständigen Induktion, dass \(0< cb_n<1\)
+gilt.
+
+\textbf{Induktionsanfang}: \(n=0\).
+Es gilt \(0 < b_0 < \frac{1}{c}\) und \(c > 0\).  Daraus folgt, $0 < c b_0
+< 1$.
+
+\textbf{Induktionsannahme}: Für ein festes \(n \in \mathbb{N}\) gilt $0
+< cb_n < 1$.
+
+\textbf{Induktionsschritt}: \(n \rightarrow n+1\).
+Es gilt \(cb_{n+1}=2cb_n-(cb_n)^2\).  Diese Polynom \(2x - x^2\) ist
+monoton steigend in der Intervall \(\left] 0, 1\right[\) mit den
+Wertbereich \(\left] 0, 1\right[\).  Daraus folgt, $0
+< cb_{n+1} < 1$.
+
+\vspace{3mm}
+
+Aus \(0 < cb_n < 1\) folgt, \(0 < b_n < \frac{1}{c}\).  Die Folge ist dann
+nach oben durch \(\frac{1}{c}\) beschränkt.  Es gilt auch, dass
+\(\frac{b_{n+1}}{b_n}=2-cb_n\) und \(1 < \frac{b_{n+1}}{b_n} < 2\).  Die
+Folge \((b_n)\) ist daher monoton steigend.  Daraus folgt, dass \((b_n)\)
+konvergiert.
+
+Wir können leider nicht zeigen, dass \(\frac{1}{c}\) die kleinste obere
+Schranke von \((b_n)\) ist.
+\end{proof}
+
+\textbf{H 4.2}
+
+\textit{Behauptung.}  Die Folge \((a_{\varphi(n)})_{n \in \mathbb{N}}\)
+konvergiert gegen \(a\).
+\begin{proof}
+  Sei \(\varepsilon > 0\) beliebig gewählt.
+
+  \begin{itemize}
+  \item   Weil \((a_n)\) gegen \(a\)
+  konvergiert, existiert ein \(N_{\varepsilon} \in \mathbb{N}\) sodass
+  \(|a_n - a| < \varepsilon\) für alle
+  \(n \in \left\{ x \in \mathbb{N} | x \geq N_{\varepsilon} \right\}\).
+\item   Weil \(\varphi: \mathbb{N} \rightarrow \mathbb{N}\) eine injektive
+  Abbildung ist, existiert zu jedem \(b \in \mathbb{N}\) ein
+  \(l \in \mathbb{N}\) sodass \(\varphi(n) > b\) für alle $n \in \left\{ x
+    \in \mathbb{N} | x > l\right\}$.
+
+  \textit{Beweis.}  Wir bemühen uns um einen Widerspruchsbeweis.
+  Angenommen, es existiert ein \(b \in \mathbb{N}\) sodass
+  \(\varphi(n) \leq b\) für alle \(l, n \in \mathbb{N}\).  Die
+  Definitionsbereich von \(\varphi\) ist \(\mathbb{N}\).  Es gilt
+  \(\left| \mathbb{N} \right| > b\).  Daraus folgt,
+  \(\varphi: \mathbb{N} \rightarrow \left\{ 0, \ldots, b \right\}\).
+  Die Abbildung ist im Widerspruch zur Voraussetzung nicht
+  injektiv. \qed
+\item Sei \(l_{N_{\varepsilon}} \in \mathbb{N}\) mit
+  \(\varphi(n) > N_{\varepsilon}\) für alle
+  \(n \in \left\{ x \in \mathbb{N} | x > l_{N_{\varepsilon}} \right\}\).
+  Dann gilt \(|a_{\varphi(n)} - a| < \varepsilon\) für alle
+  \(n \geq l_{N_{\varepsilon}} + 1\).  Die Folge \((a_{\varphi(n)})\)
+  konvergiert deshalb gegen \(a\).
+  \end{itemize}
+\end{proof}
+
+\textbf{H 4.3}
+
+\textit{Behauptung.} \((a_n)_{n\in \mathbb{N}}\) konvergiert gegen \(a\)
+\(\iff\) Jede Teilfolge von \((a_n)\) besitzt eine gegen \(a\) konvergente
+Teilfolge.
+
+\begin{proof}
+  Wir beweisen die zwei Aussagen als äquivalent, indem wir zeigen,
+  dass die Hinrichtung und Rückrichtung wahr sind.
+
+  \begin{itemize}
+  \item Hinrichtung.
+
+    Seien \((a_{n_k})\) eine Teilfolge von \((a_n)\) und \((a_{n_{k_j}})\)
+    eine Teilfolge von \((a_{n_k})\).  Wir benutzen (Satz Ü 4.2)
+    zweimal.  Nämlich, aus \(\lim_{n\rightarrow\infty}{a_n} = a\) folgt
+    \(\lim_{n\rightarrow\infty}{a_{n_k}} = a\).  Aus
+    \(\lim_{n\rightarrow\infty}{a_{n_k}} = a\) folgt
+    \(\lim_{n\rightarrow\infty}{a_{n_{k_l}}} = a\).
+  \item Rückrichtung.
+
+    Wir zeigen, dass \((a_n)\) eventuell keine Häufungspunkte anders als
+    \(a\) besitzen darf.  Wir bemühen uns dafür einen
+    Widerspruchsbeweis.
+
+    Angenommen, \(h \neq a\) sei eine Häufungspunkt von \((a_n)\).  Aus
+    der Definition von Häufungspunkt folgt, dass es eine Teilfolge
+    \((a_{n_k})\) von \((a_n)\) existiert mit
+    \(\lim_{n\rightarrow\infty}{a_{n_k}}=h\).
+
+    Wegen (Satz Ü 4.2), gilt, dass alle Teilfolge von \((a_{n_k})\)
+    konvergiert gegen \(h\).  Wir haben aber vorausgesetzt, dass
+    mindestens eine Teilfolge von \((a_{n_k})\) gegen \(a\) konvergieren
+    muss mit \(a \neq h\).  Dies ist daher ein Widerspruch, und solche
+    \(h\) existiert nicht.
+
+    Weil alle Teilfolgen von  \((a_n)\) konvergieren gegen \(a\), folgt
+    aus (Satz Ü 4.2) dass \((a_n)\) konvergiert gegen \(a\).
+  \end{itemize}
+\end{proof}
+
+\textbf{H 4.4.1}
+
+Seien \((a_n)\) und \((b_n)\) beschränkte Folgen reeller Zahlen.
+
+\textit{Behauptung.}  Es gilt
+\begin{align*}
+\limsup_{n\rightarrow\infty}{a_n} = -\liminf_{n\rightarrow\infty}{(-a_n)}.
+\end{align*}
+
+\begin{proof}
+  Wir verwenden die Bezeichnungen
+  \(A_n:= \left\{ a_k: k \geq n \right\}\) und \(s_n:= \sup A_n\).
+
+\vspace{3mm}
+
+  Weil \((a_n)\) beschränkt ist, ist die Folge \((s_n)\) monoton fallend.
+  Die Menge \(A_n\) ist nach oben durch \(s_n\) beschränkt.
+
+\vspace{3mm}
+
+  Nun definieren wir \(-A_n:= \left\{ -a_k: k \geq n \right\}\).  Die
+  Menge \(-A_n\) ist nach unten durch \(-s_n\) beschränkt.  Also gilt
+  \(\inf(-A_n)=-s_n\).  Daraus folgt, \(-\inf(-A_n)=s_n\) für alle
+  \(n \in \mathbb{N}\).
+
+\vspace{3mm}
+
+  Daraus folgt,
+  $\limsup_{n\rightarrow\infty}{a_n} =
+  -\liminf_{n\rightarrow\infty}{(-a_n)}$.
+\end{proof}
+
+\textbf{H 4.4.1}
+
+Seien \((a_n)\) und \((b_n)\) beschränkte Folgen reeller Zahlen.
+
+\textit{Behauptung.}
+???
+
+\end{document}

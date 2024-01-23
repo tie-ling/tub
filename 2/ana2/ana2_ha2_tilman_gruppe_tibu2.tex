@@ -1,0 +1,200 @@
+%%% TeX-engine: luatex
+% !TeX program = lualatex
+% !TeX encoding = UTF-8 Unicode
+
+\documentclass[draft,a5paper]{article}
+\usepackage[ngerman]{babel}
+\usepackage[margin=2cm]{geometry}
+\linespread{1.2}
+% let auctex detect environments
+\usepackage{amsmath,mathtools,fontspec,amsthm}
+\newtheorem*{beh}{Behauptung}
+\newtheorem*{lem}{Lemma}
+
+% use straight "d" in integrals
+% like \int\dd{x}
+\usepackage{physics}
+
+
+\usepackage{unicode-math,luatex85}
+\setmainfont{STIX Two Text}
+
+\author{Yiwen Yang 466096, Yuchen Guo 480788, Meng Zhang 484981}
+\date{\today}
+\title{HA 2, Ana 2 -- Gruppe TiBu 2, Tilman Burghoff}
+
+\begin{document}
+\maketitle
+
+\newpage
+
+\subsection*{H 2.1}
+
+Sei \((l_{\infty}, \| \cdot \|_{l_{\infty}})\) der metrischer Raum aller beschränkten
+Zahlenfolgen.
+
+\subsubsection*{H 2.1, Teil i}
+
+\begin{beh}
+  Die Menge \(A \coloneq \{x \in l_{\infty} \mid x \text{ konvergent in } \mathbb{R}\}\) ist
+  abgeschlossen und unbeschränkt.
+\end{beh}
+
+\begin{proof}
+  Wir zeigen, dass die Menge \(A\) abgeschlossen ist, indem wir
+  zeigen, dass \(A\) folgenabgeschlossen ist. D.h., für jede Folge
+  \((x^{(n)})\) in \(A\) mit \(\lim_{n \to \infty}{x^{(n)}} = a\) gilt, dass
+  \(a \in A\).
+
+  Sei \(\varepsilon > 0\) beliebig gewählt.  Weil \((x^{(n)})\) gegen
+  \(a\) konvergiert, existiert ein \(N \in \mathbb{N}\) sodass für alle \(n \ge N\)
+  gilt \(\sup_{k \in \mathbb{N}}{|x_{k}^{(n)} - a_{k}|} < \varepsilon\).  Dann gilt
+  \begin{align*}
+    |x_{k}^{(n)} - a_{k}| \le \sup_{k \in \mathbb{N}}{|x_{k}^{(n)} - a_{k}|} =
+    \|x^{(n)} - a\|_{l_{\infty}} \stackrel{n \to \infty}{\to} 0.
+  \end{align*}
+  Insbesondere existiert zu jedem \(\varepsilon > 0\) ein
+  \(N \in \mathbb{N}\) sodass \(|a_{k} - x_{k}^{(n)}| = \varepsilon\).  Daraus folgt, dass
+  \(a\) konvergiert gegen \(x^{(n)}\).  Da \(x^{(n)}\) konvergiert,
+  gilt \(a \in A\).
+
+  Die Menge \(A\) ist unbeschränkt.  Sei \(a\) die Nullfolge.  Wir
+  zeigen, dass \(A\) unbeschränkt ist, indem wir zeigen, dass es zu
+  jedem \(M \ge 0\) ein \(x \in A\) existiert mit \(\|x - a\| > M\).  Sei
+  dann die Folge \(x_{n} \coloneq 1/n\) mit
+  \(n \in \mathbb{N}_{> 0}\).  Die Folge \(x_{n}\) konvergiert gegen
+  \(0\) und es gilt
+  \(\|x - a\| = \sup_{n \in \mathbb{N}}{(x_{n} - a_{n})} = 1\).  Dann ist die Folge
+  \(x'\) mit
+  \begin{align*}
+    x'_{n} =
+    \begin{cases}
+      x_{n} + 1, & n = 1; \\
+      x_{n}, & \text{sonst.}
+    \end{cases}
+  \end{align*}
+  eine konvergente Folge mit Grenzwert \(0\) und
+  \(\|x' - a\| = \sup_{n \in \mathbb{N}}{(x'_{n} - a_{n})} = 2\).  Analog können wir
+  für ein beliebige \(M \in \mathbb{R}\) eine Folge konstruieren mit
+  \(\|x - a\| > M, x \in A, a \in l_{\infty}\).
+\end{proof}
+
+\subsubsection*{H 2.1, Teil ii}
+
+\begin{beh}
+  Die Menge \(B \coloneq \{x \in l_{\infty} \mid \exists n_{0} \in \mathbb{N}, \forall n \ge n_{0} \colon x_{n} =
+  0\}\) ist abgeschlossen und unbeschränkt.
+\end{beh}
+
+\begin{proof}
+  Wir bemerken, dass die Menge \(B\) die Menge alle Folgen, die gegen
+  \(0\) konvergiert ist.  Denn sei \(\varepsilon > 0\) beliebig gewählt, es
+  existiert wegen Voraussetzung ein \(n_{0} \in \mathbb{N}\), sodass für alle \(n
+  \ge n_{0}\) gilt \(|x_{n} - 0| < \varepsilon\).  Damit konvergiert alle Folgen in
+  \(B\) gegen \(0\) und die Behauptung von [Teil i] gilt.
+\end{proof}
+
+\newpage
+\subsection*{H 2.2}
+
+\subsubsection*{H 2.2, Teil i}
+
+\begin{beh}
+  Für \(\alpha \ge 2\) ist die Funktion \(f\colon \mathbb{R}^{2} \to \mathbb{R}, (0, 0) \mapsto 0\), sonst \((x, y) \mapsto
+  |xy|^{\alpha}/(x^{2}+y^{2})\)  stetig.
+\end{beh}
+
+\begin{proof}
+  Auf \(\mathbb{R}^{2} \setminus \{(0, 0)\}\) ist \(f\) als Komposition stetiger
+  Funktionen stetig bzgl. der Standardmetrik.  Es bleibt die
+  Stetigkeit in \((0, 0)\) zu untersuchen.  Es gilt für \(\alpha \ge 2\) und
+  alle Paare \((x, y) \in \mathbb{R}^{2} \setminus \{(0, 0)\}\) stets
+  \begin{align*}
+    0 \le |f(x, y)| = |x|^{\alpha} \cdot |y|^{\alpha-2} \cdot \underbrace{\frac{y^{2}}{x^{2} +
+    y^{2}}}_{< 1} \le |x|^{\alpha} \cdot |y|^{\alpha-2} \stackrel{(x, y) \to (0, 0)}{\to} 0.
+  \end{align*}
+  Damit haben wir die Stetigkeit gezeigt.
+\end{proof}
+
+\subsubsection*{H 2.2, Teil ii}
+
+\begin{beh}
+  Für \(\beta = 1\) ist die Funktion \(g\colon \mathbb{R}^{2} \to \mathbb{R}, (0, 0) \mapsto  \beta\), sonst
+  \((x, y) \mapsto  (x^{4} - y^{4})/(x^{4} + y^{4})\) stetig.
+\end{beh}
+
+\begin{proof}
+  Auf \(\mathbb{R}^{2} \setminus \{(0, 0)\}\) ist \(g\) als Komposition stetiger
+  Funktionen stetig bzgl. der Standardmetrik.  Es bleibt die
+  Stetigkeit in \((0, 0)\) zu untersuchen.  Es gilt für alle Paare
+  \((x, y) \in \mathbb{R}^{2} \setminus \{(0, 0)\}\) stets
+  \begin{align*}
+    \frac{x^{4} + y^{4} - 2y^{4}}{x^{4} + y^{4}} = 1 - 2 \cdot
+    \underbrace{\frac{y^{4}}{x^{4}+y^{4}}}_{< 1} \stackrel{(x, y) \to
+    (0, 0)}{\to} 1 = \beta.
+  \end{align*}
+  Damit haben wir die Stetigkeit gezeigt.
+\end{proof}
+
+\newpage
+\subsection*{H 2.4}
+Sei \((\mathcal{C} ([a, b], \mathbb{R}), \|\cdot\|)\) ein metrischer Raum und
+\(f \in \mathcal{C} (\mathbb{R}, \mathbb{R}) \).  Weiter sei die Funktion \(A\) definiert durch
+  \begin{align*}
+    A\colon \mathcal{C} ([a, b], \mathbb{R}) \to \mathcal{C} ([a, b], \mathbb{R}), \quad u \mapsto f \circ u.
+  \end{align*}
+
+\begin{beh}
+  Die Funktion \(A\) ist stetig.
+\end{beh}
+
+\begin{proof}
+  Wir zeigen, dass die Funktion
+  \(f \circ u\) stetig ist, indem wir zeigen, dass die folgende
+  Implikation gilt
+  \begin{align*}
+    \lim_{n \to \infty}{u_{n}} = u \implies \lim_{n \to \infty}{(f \circ u_{n})} =
+    (f \circ u).
+  \end{align*}
+  Sei \((u_{n})\) eine beliebige Folge in
+  \(\mathcal{C} ([a, b], \mathbb{R})\) mit dem Grenzwert
+  \(u \in \mathcal{C} ([a, b], \mathbb{R})\). Daraus folgt, dass
+  \begin{align*}
+    \forall \varepsilon > 0, \exists N \in \mathbb{N}, \forall n \ge N\colon \sup_{t \in [a, b]}{|u_{n}(t) - u(t)|} < \varepsilon.
+  \end{align*}
+  Wegen \(f\) stetig in \(\mathbb{R}\), gilt
+  \begin{align*}
+    \forall a \in \mathbb{R}, \forall \varepsilon > 0, \exists \delta > 0, \forall x \in \mathbb{R} \text{ mit } |x - a| < \delta
+    \implies |f(x) - f(a)| < \varepsilon.
+  \end{align*}
+  Wegen \(u_{n}(t), u(t) \in \mathbb{R}\) für alle \(n \in \mathbb{N}, t \in [a, b]\), gilt
+  dann
+  \begin{align*}
+    &\forall \varepsilon > 0, \exists \delta > 0, \forall u_{n}(t) \text{ mit } |u_{n}(t) - u(t)| < \delta
+    \text{ für alle } t \in [a, b] \\
+    &\implies |(f \circ u_{n})(t) - (f \circ
+    u)(t)| < \varepsilon \text{ für alle } t \in [a, b].
+  \end{align*}
+  Nun sei \(\varepsilon > 0\) beliebig.  Dann existiert wegen der Stetigkeit von
+  \(f\) ein \(\delta > 0\), die das obige Kriterium erfüllt.  Wir setzen
+  \(\delta\) in der Definition der Grenzwert von \(\lim_{n \to \infty}{u_{n}} =
+  u\).  Wir erhalten
+  \begin{align*}
+    \exists N \in \mathbb{N}, \forall n \ge N\colon \sup_{t \in [a, b]}{|u_{n}(t) - u(t)|} < \delta,
+  \end{align*}
+  woraus wir \(|u_{n}(t) - u(t)| < \delta\) für alle \(t \in [a, b]\)
+  erhalten kann.  Damit ist \(\varepsilon\) eine obere Schranke von
+  \(|(f \circ u_{n})(t) - (f \circ u)(t)|\) und es gilt
+  \begin{align*}
+    \sup_{t \in [a, b]}{|(f \circ u_{n})(t) - (f \circ
+    u)(t)|} < \varepsilon.
+  \end{align*}
+  Da \(\varepsilon > 0\) beliebig gewählt war, folgt
+  \begin{align*}
+    \forall \varepsilon > 0, \exists N \in \mathbb{N}, \forall n \ge N\colon \sup_{t \in [a, b]}{|(f \circ u_{n})(t) - (f \circ
+    u)(t)|} < \varepsilon.
+  \end{align*}
+  Damit gilt \(\lim_{n \to \infty}{(f \circ u_{n}) = f \circ u}\) und die
+  Stetigkeit von \(A\) ist bewiesen.
+\end{proof}
+\end{document}

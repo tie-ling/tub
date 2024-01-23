@@ -1,0 +1,94 @@
+% Datum 29.04.2024
+% Vorname Yuchen
+% Nachname Guo
+% Matrikelnummer 480788
+% E-Mail-Adresse gyuchen86@gmail.com
+
+% Beginn der Präambel
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{blindtext}
+\usepackage{array}
+\usepackage{amsmath,mathtools,fontspec}
+\title{Bärenstarker Titel}
+\author{Yuchen Guo, Eisbär}
+\date{\today}
+% Beginn der eigentlichen Text-Umgebung
+\begin{document}
+\maketitle
+\tableofcontents
+
+\begin{itemize}
+\item Für eine Folge $(x_{n})$ gilt:
+  \begin{align*}
+    \lim_{n \to \infty}(f \cdot g)(x_{n})
+    &= \lim_{n \to \infty} ( f(x_{n}) \cdot g(x_{n})) \\
+    &= \lim_{n \to \infty}f(x_{n}) \cdot \lim_{n \to \infty}g(x_{n}) \\
+    &= f(x_{0}) \cdot g(x_{0}) \\
+    &= (f \cdot g)(x_{0}).
+  \end{align*}
+  Somit ist $f \cdot g$ stetig.
+\item Wir berechnen den Folgenden Grenzwert:
+  \begin{align}
+    \lim_{k \to \infty}\frac{k^{3}-k^{2}+k-1}{k^{3}+k^{2}+k+1}
+    &= \lim_{k \to \infty} \frac{k^{3}}{k^{3}} \cdot \frac{1 -
+      \frac{k^{2}}{k^{3}} + \frac{k^{1}}{k^{3}} - \frac{1}{k^{3}}}{1 +
+      \frac{k^{2}}{k^{3}} + \frac{k}{k^{3}}+\frac{1}{k^{3}}} \\
+    &= \lim_{k \to \infty}\frac{1- \frac{1}{k} + \frac{1}{k^{2}} -
+      \frac{1}{k^{3}}}{1+\frac{1}{k} + \frac{1}{k^{2}} +
+      \frac{1}{k^{3}}} \\
+    &= 1
+  \end{align}
+\item Es seien $A, B$ zwei $n \times n$-Matrizen.  Mit Hilfe der
+  Teleskopsumme
+  \begin{align*}
+    A^{n+1} - B^{n+1} = \sum_{k=0}^{n}A^{k}(A - B)B^{n-k} \tag{TKS}
+  \end{align*}
+  erhalten wir das gesuchte Ergebnis.
+\end{itemize}
+\begin{enumerate}
+\item Es sei $R := \left[0, \pi\right] \times \left[0, \pi\right]$ und $f(x, y)
+  := \sin (x + y)$.  Wir berechnen das Integral:
+  \begin{align*}
+    \int_{R} f(x, y) dV
+    &= \int_{0}^{\pi}\left(\int_{0}^{\pi}\sin(x+y) dy \right) dx \\
+    &= \int_{0}^{\pi} - \cos (x+y)\bigg\vert_{y=0}^{y=\pi} dx \\
+    &= - \int_{0}^{\pi}(\cos (x+\pi) - \cos(x)) dx \\
+    &= -(\sin (x+\pi) - \sin(x)) \bigg\vert_{0}^{\pi} \\
+    &= -(\sin(2\pi) - \sin(\pi) -(\sin (\pi) - 0)) \\
+    &= 0
+  \end{align*}
+\item Der Eulersche Exponentialansatz $y(x) = e^{\lambda x}$ führt zu:
+  \begin{align*}
+    y''' - y' =
+    &\Leftrightarrow e^{\lambda x}(\lambda^{3} - \lambda) = 0 \\
+    &\Leftrightarrow \lambda^{3} - \lambda = 0 \\
+    &\Leftrightarrow \lambda(\lambda^{2} - 1) = 0 \\
+    &\Leftrightarrow \overbrace{\lambda(\lambda+1)(\lambda-1)}^{=: p(\lambda)} = 0
+  \end{align*}
+\item Wenden wir auf diese Gleichung die Norm an, erhalten wir:
+  \begin{align*}
+    \left\Vert \sum_{k=0}^{l}\frac{A^{k}}{k!} - \sum_{k=0}^{l}\frac{B^{k}}{k!}
+    \right\Vert_{2}
+    &= \left\Vert (A - B)
+      \sum_{k=0}^{l-1}\frac{1}{(k+1)!}\sum_{j=0}^{k}A^{j}B^{k-j}\right\Vert_{2}
+    \\
+    &\le \left\Vert A - B \right\Vert_{2} \cdot \sum_{k=0}^{l-1} \frac{1}{(k+1)!}
+    \sum_{j=0}^{k}\left\Vert A \right\Vert_{2}^{j} \cdot \left\Vert B \right\Vert_{2}^{k-j}
+    \\
+    &\le \ldots \\
+    &= \left\Vert A - B \right\Vert_{2} \cdot \sum_{k=0}^{l-1}\frac{1}{k!}
+      \max\{\left\Vert A \right\Vert_{2}, \left\Vert B \right\Vert_{2}\}^{k}
+  \end{align*}
+\item Das konjugiert-komplexe Paar $\lambda_{3/4} = 1 \pm 3i$ liefert die
+  Lösungen
+  \begin{align*}
+    y_{3}(x) &= \mathrm{Re}e^{\lambda_{3}x} = \mathrm{Re}e^{1+3i} =
+               \mathrm{Re}(\cos(3x) + i \sin(3x))  = e^{x} \cos(3x) \\
+    y_{4}(x) &= \mathrm{Im}e^{\lambda_{3}x} = \mathrm{Im}e^{1+3i} =
+               \mathrm{Im}(\cos(3x) + i \sin(3x))  = e^{x} \sin(3x) \\
+  \end{align*}
+\end{enumerate}
+\end{document}

@@ -1,0 +1,586 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+\documentclass[fleqn,draft,a5paper]{article}
+
+% 让每个章节 subsection 在新的一页上开始
+% 而不是紧接着上一章节
+\AddToHook{cmd/subsection/before}{\clearpage}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+\geometry{left=1cm,
+ right=1cm,
+ top=1cm,
+ bottom=2cm}
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,mathtools,fontspec,amssymb,amsthm,parskip,interval,mathtools,fontspec}
+\setmainfont{TeX Gyre Termes}
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\skp}[1]{\langle#1\rangle}
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\ang}[1]{\left\langle#1\right\rangle}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\providecommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\providecommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+% 定义新函数，依赖于AMSmath
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\grad}{grad}
+
+\providecommand{\R}[1]{\mathrm{R#1}}
+\newcommand{\wt}{\widetilde}
+\newcommand{\dd}{\,\mathrm{d}}
+
+% 标题与作者
+\title{Analysis, Klausurvorbreitung}
+\author{me}
+
+\begin{document}
+\maketitle
+\newpage
+
+Namenhafte Sätze zu beweisen.
+
+[Normen]
+
+Sei \(V\) ein \(K\)-Vektorraum.  \(\norm{\cdot}\colon V \to \mathbb{R}\) heißt Norm auf
+\(V\), falls für alle \(v, w \in V\) und \(\lambda \in K\) gilt
+
+\begin{itemize}
+\item \(\norm{v} \ge 0\)
+\item \(\norm{v} = 0\) genau dann \(v = 0\)
+\item \(\norm{\lambda v} = \abs{\lambda} \norm{v}\)
+\item \(\norm{v+w} \le \norm{v} + \norm{w}\)
+\end{itemize}
+
+[Stetigkeit]
+
+Sei \((X, d)\) ein metrischer Raum und \((x_{n})\) eine Folge in X.
+\((x_{n})\) heißt konvergent gegen \(a \in X\), falls
+\(\forall \varepsilon > 0, \exists N \in \mathbb{N}, \forall n \ge N\colon d(x_{n}, a) < \varepsilon\).
+
+Sei \((X, d)\) ein metrischer Raum.  Dann ist \(A\) abgeschlossen,
+genau dann, wenn \(A\) folgenabgeschlossen ist.
+
+Sei \((X, d)\) ein metrischer Raum.  Eine Folge \((x_{n})\) heißt
+Cauchy-Folge, falls
+\[\forall \varepsilon > 0, \exists N \in \mathbb{N}, \forall m, n \ge N\colon d(x_{n}, x_{m}) < \varepsilon.\]
+
+Sei \((X, d)\) ein metrischer Raum.  \((X, d)\) heißt vollständig,
+falls jede Cauchy-Folge konvergiert.
+
+Ein vollständiger normierter Raum heißt Banachraum.
+
+Seien \((X, d_{X})\) und \((Y, d_{Y})\) metrischer Vektorräume, \(f\colon X \to Y\)
+eine Abbildung.  \(f\) heißt stetig in \(a \in X\), falls
+\[\forall \varepsilon > 0, \exists \delta > 0, \forall a, b \in X, d_{X}(a, b) < \delta\colon
+  d_{Y}(f(a),f(b))< \varepsilon.\]
+
+Seien \(f\colon X \to Y\) stetig in \(a \in X\) und \(g\colon Y \to Z\) stetig in
+\(f(a) \in Y\).  Dann ist \(g \circ f\) stetig in \(a\).
+
+Stetige Abbildung: Urbilder offener Mengen sind offen.  Urbilder
+abgeschlossener Mengen sind abgeschlossen.
+
+[Kompaktheit]
+
+Sei \((X, d)\) ein metrischer Raum und \(A \subseteq X\).  \(A\) heißt
+kompakt, falls jede offene Überdeckung von \(A\) eine
+\textbf{endliche} Teilüberdeckung besitzt.
+
+Jede kompakte Teilmenge eines metrischen Raums ist beschränkt
+und abgeschlossen.
+
+Satz von Heine-Borel.  Eine Teilmenge von \(\mathbb{R}^{n}\) ist genau dann
+kompakt, wenn sie beschränkt und abgeschlossen ist.
+
+Sei \(f\colon X \to Y\) stetig und \(K \subseteq X\) kompakt.  Dann ist \(f(K)\)
+kompakt.
+
+Satz von Maximum und Minimum.  Sei \(X\) kompakt und \(f: X \to \mathbb{R}\)
+stetig.  Dann gilt \(\max f = \sup f\) und \(\min f = \inf f\).
+
+Satz von Heine.  Auf kompakte metrische Vektorräume stetige Abbildung
+ist gleichmäßig stetig.
+
+Satz von Bolzano-Weierstraß.  Sei \((X, d)\) ein metrischer Raum
+und \(A \subseteq X\) kompakt.  Dann hat jede Folge \((a_{n}) \subseteq A\) eine
+konvergente Teilfolge.
+
+[Zusammenhang]
+
+Definition.  Sei \((X, d)\) ein metrischer Raum.  \(X\) heißt
+zusammenhängend, falls für alle \(U, V \subseteq X\) mit (1) \(U, V\) offen,
+(2) \(U \cup V = X\), (3) \(U \cap V = \emptyset\) gilt: \(U = \emptyset\) oder \(V = \emptyset\).
+
+\((X, d)\) ist nicht zusammenhängend, genau dann, wenn
+\(C \subseteq X\) mit \(C \ne \emptyset\) und \(C \ne X\) existiert, sodass
+\(C\) offen und abgeschlossen ist; genau dann, wenn
+\(U, V \subseteq X\) existiert mit (1) \(U, V\) offen, (2)
+\(U \cup V = X\), (3) \(U \cap V = \emptyset\) und (4) beide Mengen nicht leer.
+
+Seien \((X, d_{X})\) und \((Y, d_{Y})\) metrische Vektorräumen und
+\(f\colon X \to Y\) stetig.  Falls \(X\) zusammenhängend ist, ist auch
+\(f(X)\) zusammenhängend.
+
+Zwischenwertsatz.  Sei \((X, d)\) zusammenhängend und \(f: X \to \mathbb{R}\)
+stetig.  Seien \(a, b \in X\) und \(c \in \mathbb{R}\) sodass \(f(a) < c < f(b)\).
+Dann existiert ein \(x \in X\) mit \(f(x) = c\).
+
+[Komponentenweise Konvergenz im \(\mathbb{R}^{n}\)]
+
+Sei \(\mathbb{R}^{n}\) mit der durch die \(p\)-Norm induzierten Metrik.  Seien der
+Punkt \(a \in \mathbb{R}^{n}\) und die Folge
+\((x_{k}) \in \mathbb{R}^{n}\) .  Dann konvergiert \((x_{k})\) gegen
+\(a\) genau dann, wenn die Folge komponentenweise gegen \(a\) konvergiert.
+
+[Lineare Abbildungen]
+
+Seien \(V, W\) normierte Vektorräume und \(f \in L(V, W)\).  Dann sind
+die folgende Aussagen äquivalent:
+\begin{itemize}
+\item \(f\) ist stetig in \(0\).
+\item \(f\) ist (Lipschitz-, gleichmäßig) stetig.
+\item Existiert \(c \ge 0\) mit \(\norm{f(v)} \le c \norm{v}\) für alle
+  \(v \in V\).
+\end{itemize}
+
+Seien \(V, W\) normierte Vektorräume und \(f \in L(V, W)\).  Falls
+\(\dim V\) endlich ist, dann ist \(f\) stetig.
+
+Seien \(V, W\) normierte Vektorräume und \(f \in L(V, W)\) stetig.
+Dann wird ihre Norm, die Operatornorm definiert durch
+\[\norm{f} \coloneq \sup \{\norm{f(v)}\colon v \in V, \norm{v} \le 1\}\]
+und es gilt für alle \(f \in L(V, W)\) und \(v \in V\) dass \(\norm{f(v)}
+\le \norm{f} \cdot \norm{v}\).
+
+[Richtungsableitung]
+
+Seien \(V, W\) end-dim Banachräume und \(U \subseteq V\) offen,
+\(f\colon U \to W\), \(a \in U\), \(v \in V\) und
+\(h \in \mathbb{R}\).  Die Richtungsableitung von \(f\) in \(a\) nach Richtung
+\(v\) ist definiert durch
+\[\partial_{v}f(a) = \lim_{h\to0}\frac{f(a+hv) - f(a)}{h} \in W\]
+
+Seien \(V, W\) end-dim Banachräume und \(U \subseteq V\) offen,
+\(f\colon U \to W\), \(a \in U\) und \(v \in V\).  \(f\) heißt total
+differenzierbar in \(a\) falls es eine \(L \in L(V, W)\) und
+\(R \colon U \to W\) mit \(\lim_{v\to0}\frac{R(a+v)}{\norm{v}}=0\) existiert
+sodass für alle \(a+v \in U\) gilt
+\[f(a+v) = f(a) + L(v) + R(a+v).\]
+
+Zusammenhang von Richtungsableitung und totaler Ableitung:  ist
+\(f\) diffbar in \(a\), so gilt für alle \(v \in V\) dass
+\[Df(a)(v)=\partial_{v}f(a).\]
+
+Seien \(V, W\) end-dim Banachräume und \(U \subseteq V\) offen, \(f\colon U \to W\)
+diffbar in \(x \in U\).  Dann ist \(f\) stetig in \(x\).
+
+Partielle Ableitung: Richtungsableitung in der Richtung der
+Einheitsvektoren.  Dies hilft bei der Bestimmung von
+Jacobi-Matrix.
+
+Seien \(U \subseteq \mathbb{R}^{n}\) offen und \(f\colon U \to \mathbb{R}^{m}\) eine Funktion.  Ist
+\(f\) stetig partiell diffbar, so ist \(f\) stetig total diffbar.
+
+\(f\) ist genau dann in \(x \in U\) diffbar, falls alle Komponentenfunktion
+\(f_{i}\) in \(x\) diffbar sind.
+
+[Jacobi-Matrix]
+
+Seien \(V, W\) end-dim Banachräume, \(U \subseteq V\) offen und \(f\colon U \to W\) mit
+\(\dim V = n\) und \(\dim W = m\).  Dann ist
+\begin{align*}
+  \begin{bmatrix}
+    Df(x)
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    \frac{\partial f}{\partial x_{1}}(x) & \cdots & \frac{\partial f}{\partial x_{n}}(x)
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    \frac{\partial f_{1}}{\partial x_{1}}(x) & \cdots & \frac{\partial f_{1}}{\partial x_{n}}(x) \\
+    \vdots &  & \vdots \\
+    \frac{\partial f_{m}}{\partial x_{1}}(x) & \cdots & \frac{\partial f_{m}}{\partial x_{n}}(x)
+  \end{bmatrix}
+\end{align*}
+
+[Kettenregel]
+\[D(g \circ f)(t) = Dg(f(t)) \circ Df(t).\]
+
+Ableitung bilinearer Abbildungen.  Sei \(U, V, W\) end-dim
+Banachräume. Sei \(f\colon U \times V \to W\) bilinear.  Dann ist \(f\) diffbar
+mit
+\[Df(v,w)(a,b) = f(v,b) + f(a,w).\]
+
+Sei \(A \in M(m \times n)\).  Definiere \(f\colon \mathbb{R}^{m} \times \mathbb{R}^{n} \to \mathbb{R}\) mit \(f(v,w) =
+v^{\top} A w\), dann gilt für die Ableitung von \(f\) dass
+\[Df(v,w)(a,b) = v^{\top}Ab + a^{\top} A w.\]
+
+[Der Schrankensatz]
+
+Sei \(V\) ein Vektorraum und \(a, b \in V\).  Dann heißt
+\[\overline{ab} = \{a+t(b-a)\mid t \in \interval{0}{1}\}\]
+die Verbindungsstrecke zwischen \(a, b\).
+
+Sei \(V, W\) end-dim Banachräume. \(U \subseteq V\) offen und \(f\colon U \to W\) diffbar.
+Seien \(a, b \in U\) mit \(\overline{ab} \subseteq U\).  Dann gilt
+\[\norm{f(b)-f(a)}\le \sup_{x \in \overline{ab}}\norm{Df(x)}\cdot\norm{b-a}.\]
+
+[Höhere Ableitungen]
+
+Definition \(k\)-mal stetig diffbar. \(f\) heißt \(k\)-mal stetig diffbar,
+falls \(f\) in alle \(x \in U\) \(k\)-mal diffbar ist und \(D^{k}f\) stetig ist.
+
+[Satz von Schwarz]
+
+Sei \(U \subseteq V\) offen und \(f\colon U \to W\) zweimal stetig partiell diffbar.  Sei
+\(\dim V = n\).  Dann gilt für alle \(a \in U\) und alle
+\(i,j=1,2,\ldots,n\) dass \(D_{j}D_{i}f(a) = D_{i}D_{j}f(a)\).  In diesem Fall
+ist Hesse-Matrix symmetrisch.
+
+[Hessesche Matrix]
+\[H_{f}(x) =
+  \begin{bmatrix}
+    D_{i}D_{j}f(x)
+  \end{bmatrix}, \quad
+  i , j = 1 \ldots, n.
+\]
+
+[Taylorformel]
+
+Seien \(V, W\) end-dim Banachräume, \(U \subseteq V\) offen und
+\(f\colon U \to W\) \(k\)-mal diffbar.  Sei \(x_{0} \in U\) und
+\(D^{0}f(x_{0})=f(x_{0})\).  Dann existiert \(R_{k}\colon U \to W\) sodass für
+alle \(x \in U\) gilt \(\lim_{x\to x_{0}}=\frac{R_{k}(x)}{\norm{x-x_{0}}^{k}}
+= 0\) und
+\[f(x) =
+  \left[\sum_{l=0}^{k}\frac{1}{l!}D^{l}f(x_{0})(x-x_{0})^{l}\right] +
+  R_{k}(x).\]
+
+[lokales Extremum]
+
+\(f\colon U \to \mathbb{R}\) hat ein lokales Maximum in \(x_{0}\), falls es eine Umgebung
+\(U_{\varepsilon}(x_{0})\) von \(x_{0}\) existiert sodass
+\(f(x_{0}) \ge f(x)\) für alle \(x \in U_{\varepsilon}(x_{0}) \cap U \).
+
+[Gradient]
+
+Sei \(U \subseteq V \) offen und \(f\colon U \to W\) partiell diffbar.  Dann heißt
+\[\grad  f =
+  \begin{bmatrix}
+    \frac{\partial f}{\partial x_{1}}(x) & \cdots & \frac{\partial f}{\partial x_{n}}(x)
+  \end{bmatrix}
+\]
+der Gradient von \(f\) im Punkt \(x \in U\).
+
+Der Gradient zeigt in die Richtung des stärksten Anstiegs von \(f\).
+
+Der Gradient steht senkrecht auf der jeweiligen Niveaumenge von \(f\).
+
+[lokales Extremum, notwendiges Bedingung]
+
+Sei \(U \subseteq V\) offen und \(f\colon U \to \mathbb{R}\) part diffbar Funktion.  Falls \(f\) in
+\(x \in U\) ein lokales Extremum besitzt, so gilt
+\[\grad  f(x) = 0.\]
+
+[Definitheit einer quadratischer Form]
+
+Sei \(A \in M(n \times n)\) eine symmetrische Matrix.  Dann heißt \(q(x) =
+x^{\top}Ax\) eine quadratische Form.
+
+\(A\) heißt positiv definit, falls \(\ang{x, Ax}>0\) für alle \(x \in V \setminus
+\{0\}\).
+
+\(A\) heißt positiv semidefinit, falls \(\ang{x, Ax} \ge 0\) für alle \(x \in
+V\).
+
+\(A\) heißt negativ (semi)definit, falls \(-A\) positiv (semi)definit ist.
+
+[Hinreichendes Kriterium für lokales Extremum]
+
+Sei \(V\) ein end-dim Banachraum, \(U \subseteq V\) offen und \(f\colon U \to \mathbb{R}\) \(k\)-mal
+diffbar und \(x_{0} \in U\), sodass
+\[Df(x_{0})= \ldots = D^{k-1}f(x_{0})=0 \quad \text{aber} \quad D^{k}f(x_{0}) \ne
+  0.\]
+
+Ist \(D^{k}f(x_{0})\) negativ definit, dann hat \(f\) in \(x_{0}\) ein
+striktes lokales Minimum.
+
+Ist positiv definit, dann hat \(f\) in \(x_{0}\) striktes lokales Maximum.
+
+Ist indefinit, dann kein lokales Extremum.
+
+[Umkehrsatz]
+
+Sei \(U \subseteq \mathbb{R}^{n}\) offen und
+\(f\colon U \to \mathbb{R}^{n}\) stetig diffbar.  Sei \(x_{0} \in U\), sodass
+\(Df(x_{0})\colon \mathbb{R}^{n} \to \mathbb{R}^{n}\) invertierbar ist.  Dann ist
+\(f\) um \(x_{0}\) lokal invertierbar mit stetig diffbarer Inverser.
+
+D.h., es existiert \(W \subseteq U\) offen mit \(x_{0} \in W\), sodass
+\(f\colon W \to f(W)\) bijektiv ist und die lokale Inverse
+\(g\colon f(W) \to W\) von \(f\) stetig diffbar ist.
+
+Weiter gilt für alle \(x \in V\) dass \(Df(x)\) invertierbar und es gilt
+\(Dg(f(x)) = (Df(x))^{-1}\).
+
+[Implizite Funktionen]
+
+Seien \(W \subseteq \mathbb{R}^{n} \times \mathbb{R}^{m}\) offen, \(F\colon W \to \mathbb{R}^{m}\) stetig diffbar, sowie
+\((x_{0}, y_{0}) \in W\) mit \(F(x_{0}, y_{0}) = 0\) und \(\frac{\partial F}{\partial
+  y}(x_{0}, y_{0}) \in \mathbb{R}^{m \times m}\) invertierbar.
+
+Wobei \(\frac{\partial F}{\partial y}(x_{0}, y_{0}) \) die rechte \(m\) Spalte von der
+Jacobi-Matrix \(DF(x_{0},y_{0})\) ist, also gilt
+\begin{align*}
+  DF(x_{0}, y_{0}) &=
+  \begin{bmatrix}
+    \frac{\partial F}{\partial x}(x_{0}, y_{0}) & \frac{\partial F}{\partial y}(x_{0}, y_{0})
+  \end{bmatrix} \\ &=
+  \begin{bmatrix}
+    \frac{\partial F_{1}}{\partial x_{1}}(x_{0}, y_{0})
+    & \ldots
+    & \frac{\partial F_{1}}{\partial x_{n}}(x_{0}, y_{0})
+    & \frac{\partial F_{1}}{\partial y_{1}}(x_{0}, y_{0})
+    & \ldots
+    & \frac{\partial F_{1}}{\partial y_{m}}(x_{0}, y_{0}) \\
+    \vdots & & & & & \vdots \\
+    \frac{\partial F_{m}}{\partial x_{1}}(x_{0}, y_{0})
+    & \ldots
+    & \frac{\partial F_{m}}{\partial x_{n}}(x_{0}, y_{0})
+    & \frac{\partial F_{m}}{\partial y_{1}}(x_{0}, y_{0})
+    & \ldots
+    & \frac{\partial F_{m}}{\partial y_{m}}(x_{0}, y_{0})
+  \end{bmatrix}  
+\end{align*}
+Dann existiert \(U \subseteq \mathbb{R}^{n}\) offene Umgebung von \(x_{0}\) und \(V \subseteq \mathbb{R}^{m}\)
+offene Umgebung von \(y_{0}\) mit \(U \times V \subseteq W\), sodass gilt:
+\begin{itemize}
+\item Es existiert \(f: U \to V, x \mapsto f(x)\) bijektiv sodass
+  \[F(x, f(x)) = 0.\]
+  In diesem Fall heißt \(x\) Parameter und \(y\) die von \(x\) eindeutig
+  bestimmten Unbekannte.
+
+\item Diese Funktion \(f\) ist stetig diffbar.
+\item Für alle \(x \in U\) ist \(A \coloneq \frac{\partial F}{\partial y}(x, f(x))\) invertierbar und
+  für alle \(x \in U\) ist
+  \[Df(x) = - A^{-1} \cdot A.\]
+\end{itemize}
+
+[Untermannigfaltigkeiten des \(\mathbb{R}^{n}\) (übersprungen)]
+
+Definition Homöomorphismus.  Seien \(X, Y\) metrische Räume.  \(X, Y\)
+sind homöomorph und \(\varphi\colon X \to Y\) ein Homömorphismus, falls \(\varphi\) bijektiv
+ist und \(\varphi\) und \(\varphi^{-1}\) beide stetig sind.
+
+Definition Diffeomorphismus.  Seien \(U, V \subseteq \mathbb{R}^{n}\) offen.  \(U, V\)
+sind diffeomorph und \(\varphi\colon U \to W\) ein Diffeomorphismus, falls \(\varphi\) bijektiv
+ist und \(\varphi\) und \(\varphi^{-1}\) beide stetig diffbar sind.
+
+Definition Immersion.  Sei \(T \subseteq \mathbb{R}^{k}\) offen.  Eine Abbildung \(\varphi\colon T
+\to \mathbb{R}^{n}\) heißt Immersion, falls \(\varphi\) stetig diffbar ist und für alle \(t
+\in T\) die Ableitung \(D\varphi(t)\) injektiv ist.  D.h., für alle \(t \in T\) dass
+\(\dim \ker D\varphi(t) = 0\).
+
+Satz.  Sei \(\varphi\colon T \to \mathbb{R}^{n}\) eine Immersion.  Dann gibt es zu jedem \(t \in
+T\), eine offene Umgebung \(W \subseteq T\) von \(t\), so dass die Einschränkung
+\(\varphi\vert_{W}\colon W \to \varphi(W)\) ein Homöomorphismus ist.
+
+Definition Untermannigfaltigkeit.  Sei \(M \subseteq \mathbb{R}^{n}\).  \(M\) heißt
+\(k\)-dimensionale Untermannigfaltigkeit des \(\mathbb{R}^{n}\), falls es zu jedem
+\(a \in M\) eine offene Umgebung \(U \subseteq \mathbb{R}^{n}\) von \(a\), sowie eine offene
+Menge \(T \subseteq \mathbb{R}^{k}\) und eine Immersion \(\varphi\colon T \to M\) gibt, sodass \(\varphi(T) =
+M \cap U\) gilt und \(\varphi\colon T \to \varphi(T)\) ein Homöomorphismus ist.
+
+\(\varphi\colon T \to M\) heißt Parameterdarstellung von \(M\) um \(a\).  Ist \((t_{1}, \ldots,
+t_{k}) \in T\) mit \(\varphi(t_{1}, \ldots, t_{k}) = a\), so heißen \(t_{1}, \ldots, t_{k}\)
+die lokalen Koordinaten von \(a\) bzgl. \(\varphi\).
+
+[Extremwertaufgaben unter Nebenbedingungen]
+
+Definition.  Sei \(U \subseteq \mathbb{R}^{n}\) offen und \(m \le n\), seien \(f\colon U \to \mathbb{R}\) und
+\(g\colon U \to \mathbb{R}^{m}\) stetig diffbar.  Wir nennen \(\min f(x)\) mit \(g(x) = 0\)
+eine Extremwertaufgabe mit Nebenbedingungen.
+
+\(\mathcal{F} \coloneq \{x \in U \mid g(x) = 0\}\) heißt zulässiger Bereich von der
+Extremwertaufgabe mit Nebenbedingungen.
+
+Ein Punkt \(x \in \mathcal{F}\) heißt regulär, falls \(\rg Dg(x) = m\).
+
+Ein Punkt \(x^{\ast} \in \mathcal{F}\) heißt lokale Lösung von der EmN oder Stelle
+eines lokalen Minimums von EmN, falls ein \(\varepsilon > 0\) existiert, sodass
+\(f(x^{\ast}) \le f(x)\) für alle \(x \in \mathcal{F}\) mit \(\norm{x - x^{\ast}} < \varepsilon\) gilt.
+
+Satz.    Sei \(U \subseteq \mathbb{R}^{n}\) offen und seien \(f\colon U \to \mathbb{R}, g = (g_{1}, \ldots,
+g_{m})\colon U \to \mathbb{R}^{m}\) stetig diffbar.  ferner sei \(x^{\ast} \in \{x \in U \mid g(x)
+= 0\}\) eine Stelle eines lokalen Minimums der Extremwertaufgabe unter
+Nebenbedingungen \(\min f(x)\) mit \(g(x) = 0\).  Falls \(x^{\ast}\) regulär
+ist, so gibt es Koeffizienten \(\lambda_{1}, \ldots, \lambda_{m} \in \mathbb{R}\) sodass
+\[\grad f(x^{\ast}) = \sum_{j=1}^{m}\lambda_{j} \grad g_{j}(x^{\ast}).\]
+
+[Gewöhnliche Differentialgleichungen]
+
+Definition.  Sei \(U \subseteq \mathbb{R} \times \mathbb{R}^{n}\) offen und \(f\colon U \to \mathbb{R}^{n}, (t, x)
+\mapsto f(t,x)\) eine Abbildung.  Die Gleichung \(x' = f(t, x)\) heißt
+gewöhnliche Differentialgleichung erster Ordnung.
+
+Sei \(I \subseteq \mathbb{R}\) ein Intervall mit \(I^{\circ} \ne \emptyset\).  Eine Funktion \(x \colon I \to
+\mathbb{R}^{n}\) heißt Lösung der Differentialgleichung \(x' = f(t, x)\), falls
+gilt: (1) für alle \(t \in I\) ist \((t, x(t)) \in U\);  (2) \(x\colon I \to \mathbb{R}^{n}\)
+ist diffbar; (3) für alle \(t \in I\) gilt \(x'(t) = f(t, x(t))\).
+
+Sei \((t_{0}, x_{0}) \in U\).  Dann heißt das Gleichungssystem \(x' = f(t,
+x)\) mit \(x(t_{0}) = x_{0}\) ein Anfangswertproblem.
+
+Eine Lösung \(x\) der Differentialgleichung heißt Lösung des
+Anfangswertproblems, falls \(x(t_{0}) = x_{0}\).
+
+Definition.  Seien \(G \subseteq \mathbb{R} \times \mathbb{R}^{n}\) und \(f\colon G \to \mathbb{R}^{n}\).  Wir sagen:
+\begin{itemize}
+\item \(f\) genügt in \(G\) einer Lipschitzbedingung mit
+  Lipschitz-Konstante \(L \ge 0\), falls für alle \((t, x), (t, \tilde{x})
+  \in G\) gilt, dass \(\norm{f(t,x) - f (t, \tilde{x})} \le L \cdot \norm{x -
+    \tilde{x}}\).
+\item \(f\) genügt in \(G\) lokal einer Lipschitzbedingung, falls es zu
+  jedem \((t, x) \in G\) eine offene Umgebung \(U \subseteq \mathbb{R} \times \mathbb{R}^{n}\) von \((t, x)\)
+  gibt, sodass \(f\) in \(G \cap U\) einer Lipschitzbedingung mit von \(U\)
+  abhängiger Lipschitz-Konstante \(L_{U} \ge 0\)genügt.
+\end{itemize}
+
+[Satz von Picard-Lindelöf]  Sei \(U \subseteq \mathbb{R} \times \mathbb{R}^{n}\) offen und sei \(f\colon U \to
+\mathbb{R}^{n}\) stetig und genüge lokal einer Lipschitzbedingung.  Dann gilt:
+\begin{itemize}
+\item Lokale Existenz.  Zu jedem \((t_{0}, x_{0}) \in U\) existiert ein
+  \(\varepsilon> 0\), sodass das Anfangswertproblem \(x' = f(t,x), x(t_{0}) =
+  x_{0}\) eine Lösung \(x\colon \interval{t_{0} - \varepsilon}{t_{0} + \varepsilon} \to \mathbb{R}^{n}\)
+  besitzt.
+\item Globale Eindeutigkeit.  Sei \(I \subseteq \mathbb{R}\) ein Intervall mit \(t_{0} \in
+  I\).  Sind \(x_{1}, x_{2} \colon I \to \mathbb{R}^{n}\) zwei Lösungen des
+  Anfangswertproblems, so gilt \(x_{1} = x_{2}\).
+\end{itemize}
+
+[Maßtheorie]
+
+[Ring]  Eine Menge \(R \subseteq P(\Omega)\) heißt Ring über \(\Omega\), falls gilt: (1) \(R
+\ne \emptyset\); (2) für alle \(A, B \in R\) gilt \(A \cup B \in R\); (3) für alle \(A, B \in
+R\) gilt \(A \setminus B \in R\).
+
+[\(\sigma\)-Algebra]  \(\mathcal{A} \subseteq P(\Omega)\) heißt \(\sigma\)-Algebra über \(\Omega\), falls (1) \(\Omega \in
+\mathcal{A}\); (2) aus \(A \in \mathcal{A}\) folgt \(A^{c} = \Omega \setminus A \in \mathcal{A}\); (3) für alle
+\((A_{k}) \in \mathcal{A}, k \in \mathbb{N}\) ist \(\bigcup_{k}A_{k} \in \mathcal{A}\).
+
+[von \(E\) erzeugte \(\sigma\)-Algebra] Sei \(E \subseteq P(\Omega)\).  Wir definieren
+die Durchschnitt von alle \(\mathcal{A}\) mit \(E \subseteq \mathcal{A}\) die von \(E\) erzeugte
+\(\sigma\)-Algebra, \(\sigma(E)\).
+
+[Elementargeometrische Menge] \(A \subseteq \mathbb{R}^{n}\) heißt elementargeometrisch,
+falls \(A\) endliche Vereinigung von Quadern \(Q\) ist, wobei
+\(Q = I_{1} \times \cdots \times I_{n}\) mit \(I_{j}\) Intervalle (offen, abgeschlossen,
+(links-, rechts-) halboffen) auf \(\mathbb{R}\).  Die Mengensystem
+\(\mathcal{R}^{n}\) von aller elementargeometrischen Mengen in
+\(\mathbb{R}^{n}\) ist ein Ring über \(\mathbb{R}^{n}\).
+
+[Borelsche \(\sigma\)-Algebra] Die von \(\mathcal{R}^{n}\) erzeugte \(\sigma\)-Algebra heißt
+Borelsche \(\sigma\)-Algebra \(\mathcal{B}^{n} = \sigma(\mathcal{R}^{n})\).  Ihre Elemente nennen wir
+Borel-Mengen.
+
+Sei \(A \subseteq \mathbb{R}^{n}\) offen oder abgeschlossen, dann gilt \(A \in \mathcal{B}^{n}\).
+
+[Inhalt, Prämaß, Maß, Maßraum]
+
+Sei \(R\) Ring über \(\Omega\) und \(\mu\colon R \to \interval{0}{\infty}\).  \(\mu\) ist additiv
+(Inhalt) auf \(R\), falls \(\mu(\emptyset) = 0\) und für alle disjunkte \(A, B \in R\)
+gilt \(\mu(A \cup B) = \mu(A) + \mu(B)\).
+
+\(\mu\) ist \(\sigma\)-additiv (Prämaß) auf \(R\), falls \(\mu(\emptyset) = 0\) und alle
+paarweise disjunkte \(A_{k} \in R, k \in \mathbb{N}\) gilt: falls \(\bigcup A_{k} \in R\) dann
+folgt \(\mu\left(\bigcup A_{k}\right) = \sum \mu(A_{k})\).
+
+Ein Prämaß \(\mu\) auf einer \(\sigma\)-Algebra \(\mathcal{A}\) heißt Maß auf \(\mathcal{A}\).
+
+Ein Maßraum ist ein Tripel \((\Omega, \mathcal{A}, \mu)\) aus einer Menge \(\Omega\), einer
+\(\sigma\)-Algebra \(\mathcal{A}\) über \(\Omega\) und einem Maß \(\mu\) auf \(\mathcal{A}\).
+
+[elementargeometrische Inhalt]  \(\lambda\colon \mathcal{R}^{n} \to \rinterval{0}{\infty}\) ist
+definiert durch \(\lambda(Q) \coloneq \prod_{j=1}^{n}(b_{j} - a_{j})\) wobei \(Q = I_{1} \times
+\cdots \times I_{n}\), \(I_{j}\) Intervalle auf \(\mathbb{R}\).  Zerfällt \(A \in \mathcal{R}\) in disjunkte
+Quader \(Q_{1}, \ldots, Q_{m}\), so ist \(\lambda(A) = \sum \lambda(Q_{k})\) und \(\lambda(\emptyset) = 0\).
+
+Der elementargeometrische Inhalt \(\lambda\) auf \(\mathcal{R}^{n}\) ist ein Prämaß auf \(\mathcal{R}^{n}\).
+
+[Fortsetzung von \(\mu\) auf \(R\) zum Maß auf \(\sigma(R)\)]
+
+Sei \(R\) Ring über \(\Omega\) und \(\mu\) Prämaß auf \(R\).  \(E \subseteq P(\Omega)\) schöpft \(\Omega\)
+aus, falls es existiert \((E_{k})_{k \in \mathbb{N}} \in E\) sodass \(\Omega = \bigcup E_{k}\).
+
+Sei \(E \subseteq R\).  \(E\) schöpft \(\Omega\) bzgl. \(\mu\) aus, falls es abzählbar viele
+Mengen \((E_{k})_{k \in \mathbb{N}}\) gibt, sodass \(\mu(E_{k}) < \infty\) für alle \(k \in \mathbb{N}\)
+und \(\Omega = \bigcup E_{k}\).
+
+Definition Äußeres Maß.  Sei \(R\) Ring über \(\Omega\) und \(\mu\) Prämaß auf \(R\),
+sodass \(R\) die Menge \(\Omega\) bzgl. \(\mu\) ausschöpft.  Wir definieren das
+äußere Maß auf \(\Omega\) als
+\[\mu^{\ast}\colon P(\Omega) \to \interval{0}{\infty}, \quad \mu^{\ast}(A) \coloneq \inf \left\{ \sum \mu(E_{k});
+    \text{ für alle } (E_{k})_{k \in \mathbb{N}} \in R \text{ mit } A \subseteq \bigcup E_{k}
+  \right\}\]
+
+Definition Abstandsmaß.  Seien \(A, B \subseteq \Omega\), dann heißt \(d(A, B) \coloneq
+\mu^{\ast}(A \triangle B)\) das Abstandsmaß von \(A\) und \(B\).
+
+Dann ist \(d(A,A) = 0\), \(d(A, B) = d(B, A)\) und \(d(A, B) \le d(A, C) +
+d(C, B)\).
+
+Definition messbare Menge.  Sei \(A \subseteq \Omega\).  \(A\) heißt endlich messbar
+bzgl. \(\mu^{\ast}\), falls \(\mu^{\ast} (A) < \infty\) und falls es eine Folge \((E_{n})
+\in R\) existiert, sodass \(\lim_{n \to \infty} d(E_{n}, A) = 0\) gilt.  Die Mengensystem
+der endlich messbaren Teilmengen von \(\Omega\) nennt man \(\mathcal{M}_{\mu^{\ast}}\).
+
+\(A\) heißt messbar bzgl. \(\mu^{\ast}\), falls \(A\) abzählbare Vereinigung von
+endlich messbaren Mengen bzgl. \(\mu^{\ast}\) ist.  Die Mengensystem der
+messbaren Teilmengen von \(\Omega\) nennt man \(\mathcal{A}_{\mu^{\ast}}\).
+
+[Maßerweiterungssatz von Caratheodory]  Seien \(R \subseteq P(\Omega)\) Ring und \(\mu\)
+Prämaß auf \(R\), sodass \(R\) die Menge \(\Omega\) bzgl. \(\mu\) ausschöpft und
+\(\mu^{\ast}\) das durchh \(\mu\) gegebene äußere Maß auf \(\Omega\).  Dann ist die
+Menge \(\mathcal{A}_{\mu^{\ast}}\) der bzgl. \(\mu^{\ast}\) messbaren Mengen eine \(\sigma\)-Algebra
+und \(\mu^{\ast}\) ein Maß auf \(\mathcal{A}_{\mu^{\ast}}\).
+
+Korollar.  Sei \(\lambda\) der elementargeometrische Inhalt auf \(\mathbb{R}^{n}\).  Dann
+ist das dadurch auf dem \(\mathbb{R}^{n}\) definierte äußere Maß \(\lambda^{\ast}\)
+\begin{itemize}
+\item ein Maß auf der \(\sigma\)-Algebra \(\mathcal{A}_{\lambda^{\ast}}\) der bzgl. \(\lambda^{\ast}\)
+  messbaren Mengen (genannt Lesbesgue-messbare Mengen), das sogenannte
+  Lebesgue-Maß \(\lambda^{n} = \lambda = \lambda^{\ast} \vert_{\mathcal{A}_{\lambda^{\ast}}}\).
+\item ein Maß auf der \(\sigma\)-Algebra \(\mathcal{B}\) der Borel-Mengen, das
+  Lebesgue-Borelsche Maß \(\lambda^{n} = \lambda = \lambda^{\ast} \vert_{\mathcal{B}}\).
+\end{itemize}
+
+[Nullmenge]
+
+Sei \((\Omega, \mathcal{A}, \mu)\) ein Maßraum.  Eine Menge \(N \in \mathcal{A}\) heißt Nullmenge,
+falls \(\mu(N) = 0\).  Eine Menge heißt vernachlässigbar, falls es eine
+Nullmenge \(N \in \mathcal{A}\) gibt, sodass \(T \subseteq N\).  \(\mu\) bzw. \((\Omega, \mathcal{A}, \mu)\) heißt
+vollständig, falls jede vernachlässigbare Menge eine Nullmenge ist,
+d.h. falls  für alle Nullmenge \(N \in \mathcal{A}\) gilt: für Teilmengen \(T \subseteq N\)
+ist Element von \(\mathcal{A}\) und \(\mu(T) = 0\).
+\end{document}
+

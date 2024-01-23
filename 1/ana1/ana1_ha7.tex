@@ -1,0 +1,232 @@
+%% page style
+\documentclass[12pt]{extarticle}
+\usepackage[margin=2cm]{geometry}
+\usepackage{fancyhdr,parskip}
+\pagestyle{fancy}
+\usepackage[onehalfspacing]{setspace}
+\setlength{\parindent}{0pt}
+\lhead{\myAuthor}
+\rhead{\mySubject \ \myHausaufgaben. Übungsblatt \\ \myTutor}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+
+%% language
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+
+%% default packages
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,
+  stmaryrd, % for the lightning symbol used in proof by contraction
+  tikz,     % used to draw diagrams
+}
+
+
+%% metadata
+\newcommand{\myAuthor}{Yuchen Guo 480788 | Meng Zhang 484981 | TB9}
+\newcommand{\myHausaufgaben}{7}
+\newcommand{\mySubject}{Analysis}
+\newcommand{\myTutor}{Tilman}
+
+
+%% custom commands
+\newcommand{\beh}{\textit{Behauptung.}\ }
+\newcommand{\aufgn}[1]{\textbf{Aufgabe #1.}}
+\newcommand{\mg}[1]{\mathbb{#1}}
+
+\begin{document}
+\aufgn{7.1.ii}
+
+\beh Die Funktion \(h(x)\) ist stetig in $\left]a,
+  b\right[\( mit \(a \in \mg{Q}\) und \)b:= \min \left\{ x
+  \in \mg{Q} \mid x > a \right\}$.
+
+\begin{proof}
+  Es gilt wegen der Definition des Intervalls dass
+  $\left] a, b \right[ \subseteq (\mg{R} \setminus
+  \mg{Q})$.  Es gilt wegen der Definition der Funktion
+  \(h\) dass \(h(x)=1-x\) für \(x \in \left]a, b\right[\).
+  Die Funktion \(h(x)\) ist ein Polynomfunktion und ist
+  deshalb stetig.
+\end{proof}
+
+\aufgn{7.3}
+
+\begin{proof}
+  Angenommen, es gilt \(f(\xi) \ne f(\xi + 1/2)\) für
+  alle \(\xi \in \left[0,1/2\right]\).
+
+  Falls es gilt für alle \(\xi \in \left[0,1/2\right]\)
+  dass \(f(\xi) > f(\xi + 1/2)\), dann gilt insbesondere
+  \(f(0) > f(1/2) > f(1)\) im Widerspruch zur
+  Voraussetzung \(f(0)=f(1)\).
+
+  Falls es gilt für alle \(\xi \in \left[0,1/2\right]\)
+  dass \(f(\xi) < f(\xi + 1/2)\), dann gilt insbesondere
+  \(f(0) < f(1/2) <  f(1)\) im Widerspruch zur
+  Voraussetzung \(f(0)=f(1)\).
+
+  Falls es gibt \(\xi_2<\xi_1 \in \left[ 0, 1/2 \right]\)
+  mit \(\xi_2 < f(\xi_2 + 1/2)\) und
+  \(f(\xi_1 + 1/2) < \xi_1\) dann es existiert(?) ein
+  \(\xi \in \left[ \xi_2, \xi_1 \right]\) mit
+  \(f(\xi + 1/2)=\xi\) im Widerspruch zur Voraussetzung.
+\end{proof}
+
+\aufgn{7.4}
+
+Sei \(f \colon \left[a, b\right] \to \left[a, b \right]\)
+stetig.
+
+\aufgn{7.4.i}
+
+
+\textbf{Lemma.} \beh Falls es gibt
+\(x_2<x_1 \in \left[ a, b \right]\) mit
+\(x_2 < f(x_2) < f(x_1) < x_1\) dann es existiert ein
+\(x \in \left[ f(x_2), f(x_1) \right]\) mit \(f(x)=x\).
+
+  \begin{proof}
+    Wir beweisen die Lemma mit der
+    Intervallhalbierungsmethode.  Dazu konstruieren wir
+    per Induktion Intervalle $I_n = \left[ a_n, b_n
+    \right]$ sodass \(I_{n+1} \subseteq I_n\), sowie
+\begin{align*}
+b_n - a_n = \frac{(b-a)}{2^n} \quad \text{und} \quad
+  f(a_n) \leq x \leq f(b_n) \tag*{\(\star\)}
+\end{align*}
+für alle \(n \in \mg{N}\) gilt.
+
+\textbf{Induktionsanfang:} \(n=0.\) Setze \(a_0:=x_2\) und
+\(b_0:=x_1\).  Dann gilt \(b_0 - a_0 = b - a\) und
+\(f(a_0) < x < f(b_0)\).
+
+\textbf{Induktionsschritt:} \(n \to n+1.\)  Seien $a_n,
+b_n$ bereits konstruiert, sodass \(\star\) erfüllt ist.
+Setze
+\begin{align*}
+  \begin{cases}
+    a_{n+1} = a_n, \qquad b_{n+1}=\frac{a_n+b_n}{2}
+                            \quad & \text{falls } f((a_n+b_n)/2) \ge x,\\
+    a_{n+1} = \frac{a_n+b_n}{2}, \qquad b_{n+1}=b_n
+                                          \quad &\text{sonst}.
+  \end{cases}
+\end{align*}
+Dann gilt \(b_{n+1}-a_{n+1}=\frac{b-a}{2^{n+1}}\) und
+\(f(a_{n+1})\leq x \leq f(b_{n+1})\).  Nach dem
+Intervallschachtelungsprinzip (Satz 2.37) existiert
+wegen \(I_{n+1} \in I_n\) für alle \(n \in \mg{N}\) und
+\(\lim_{n \to \infty}{(b_n - a_n)} = 0\) ein $x \in
+\mg{R}$, sodass
+\begin{align*}
+\bigcap_{n \in \mg{N}}{I_n} = \left\{ x \right\}
+\end{align*}
+gilt und die beiden Folgen \((a_n)\) und \((b_n)\) der
+Intervallränder gegen \(x\) konvergieren.  Da außerdem
+\(f\) stetig ist, erhalten wir damit
+\begin{align*}
+f(x) = f \left( \lim_{n \to \infty}{a_n} \right) =
+  \lim_{n \to \infty}{f(a_n)} \leq x \leq \lim_{n \to
+  \infty}{f(b_n)} = f \left( \lim_{n \to \infty}{b_n}
+  \right) = f(x),
+\end{align*}
+d.h. \(f(x) = x\).  Wegen \(f(a), f(b) \ne x\) und $x \in
+I_0$ folgt \(x \in \left] a, b \right[\).
+  \end{proof}
+
+\aufgn{7.4.i}
+
+\beh Es existiert ein \(x \in \left[ a, b \right]\) mit
+\(f(x) = x\).
+
+\begin{proof}
+  Seien \(p, q \in \left[ a, b \right]\) mit
+  $f(p):=\min \left\{ f(x) \mid x \in \left[ a, b \right]
+  \right\}$ und
+  $f(q):=\max \left\{ f(x) \mid x \in \left[ a, b \right]
+  \right\}$. Es gilt wegen der Voraussetzung dass
+\begin{align*}
+a \le f(p) \le f(q) \le b.
+\end{align*}
+Angenommen, es gilt für alle $x \in \left[ a, b
+\right]$ dass \(f(x) < x\) oder \(f(x) > x\).
+Falls \(f(x) > x\) für alle \(x \in \left[ a, b \right]\).
+Dann gilt insbesondere \(f(b) > b\) im Widerspruch zur
+\(f(b) \in \left[ a, b \right]\).
+Falls \(f(x) < x\) für alle \(x \in \left[ a, b \right]\).
+Dann gilt insbesondere \(f(a) < a\) im Widerspruch zur
+\(f(a) \in \left[ a, b \right]\).
+
+Falls es gibt \(x_1 \in \left[ a, b \right]\) mit
+\(f(x_1) < x_1\) und \(x_2 \in \left[ a, b \right]\) mit
+\(f(x_2) > x_2\) dann es existiert wegen Lemma ein
+\(x\) mit \(x_2 < x < x_1\) und \(f(x)=x\) im Widerspruch
+zur Voraussetzung.
+
+\end{proof}
+
+\aufgn{7.4.ii}
+
+Der Fixpunkt ist nicht immer eindeutig bestimmt.  Denn,
+es seien \(x_1, x_2, x_3, x_4 \in \left[ a, b \right]\)
+mit \(x_1<x_2<x_3<x_4\) und \(f(x_1)<x_1\), \(f(x_2)>x_2\),
+\(f(x_3)<x_3\) und \(f(x_4)>x_4\),  dann können mindestens
+zwei Fixpunkte \(x_a, x_b\) mit \(x_1<x_a<x_2\) und
+\(x_3<x_b<x_4\) mittels Intervallhalbierungsmethode
+gefunden werden.
+
+\aufgn{7.4.iii}
+
+\beh Sei \(f \colon \mg{R} \to \mg{R}\) stetig und
+beschränkt.  Daraus folgt, dass \(f\) einen Fixpunkt
+hat.
+
+\begin{proof}
+  Weil \(f \colon \mg{R} \to \mg{R}\) stetig und
+  beschränkt ist, gibt es \(a, b \in \mg{R}\) sodass für
+  alle \(x \in \mg{R}\) gilt
+\begin{align*}
+a \le f(x) \le b.
+\end{align*}
+Sei nun \(a\) die größte und \(b\) die kleinste solche
+Zahl.  Angenommen, es gilt für alle \(x \in \mg{R}\) dass
+\(f(x) < x\) oder \(f(x) > x\).  Falls \(f(x) > x\) für alle
+\(x \in \mg{R}\).  Dann gilt insbesondere \(f(b) > b\) im
+Widerspruch zur \(f(b) \le b\).  Falls \(f(x) < x\) für alle
+\(x \in \mg{R}\).  Dann gilt insbesondere \(f(a) < a\) im
+Widerspruch zur \(f(a) \ge a\).
+
+Falls es gibt \(x_1 \in \mg{R}\) mit
+\(f(x_1) < x_1\) und \(x_2 \in \mg{R}\) mit
+\(f(x_2) > x_2\) dann es existiert wegen Lemma ein
+\(x\) mit \(x_2 < x < x_1\) und \(f(x)=x\) im Widerspruch
+zur Voraussetzung.
+
+\end{proof}
+
+\aufgn{Zusatz 3}
+
+\beh Seien \(f, g \colon \left[a, b\right] \to \mg{R}\)
+ stetige Funktionen mit \(f(x)^2=g(x)^2 > 0\) für alle
+\(x \in \left[a, b\right]\).  Es gilt \(f = g\) oder \(f = -g\).
+
+\begin{proof}
+  Angenommen, es gilt \(f \ne g\) und \(f \ne -g\).  Das
+  heißt, es existiert \(m, n \in \left[a, b\right]\) mit
+  \(f(m) \ne g(m)\) und \(f(n) \ne -g(n)\).  Sei die
+  Funktion \(h(x):=x^2\).  Diese Funktion ist eine
+  Polynomfunktion und ihre Stetigkeit folgt aus (Satz
+  4.8).  Die Funktionen \(h \circ f\) und \(h \circ g\)
+  sind auch stetig wegen der Stetigkeit von \(f\) und \(g\).
+
+Wegen  \(f(x)^2=g(x)^2 > 0\) für alle
+\(x \in \left[a, b\right]\) gilt
+\begin{align*}
+  \left( \frac{f(x)}{g(x)} \right)^2 &= 1\\
+  f(x) &= \pm g(x).
+\end{align*}
+
+Wegen \(f(m) \ne g(m)\) dann gilt \(f(x) = -g(x)\) für alle
+\(x \in \left[a, b\right]\) im Widerspruch zur Annahme.
+\end{proof}
+
+\end{document}

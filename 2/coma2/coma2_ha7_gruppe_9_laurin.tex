@@ -1,0 +1,104 @@
+% !TeX program = lualatex
+%%% TeX-engine: luatex
+
+\documentclass[draft,a5paper]{article}
+\usepackage[margin=2cm]{geometry}
+\linespread{1.2}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Yiwen Yang 466096, Yuchen Guo 480788, Qing Wang 458040}
+\rhead{HA 7, CoMa 2, Laurin, Gruppe 9}
+
+% set language to german
+\usepackage[ngerman]{babel}
+
+\usepackage[amsthm,vvarbb,varg]{newtx}
+
+% used for integral with respect to a variable x
+% like \int \dd{x}
+% \usepackage{physics}
+
+% theorem environment used in this document
+\theoremstyle{remark}
+\newtheorem*{beh}{Behauptung}
+\newtheorem*{lem}{Lemma}
+
+\newcommand{\envert}[1]{\left\lvert#1\right\rvert}
+\let\abs=\envert
+
+\begin{document}
+\subsection*{1. Aufgabe (Extremale AVL-Bäume)}
+Zuerst ein paar Definitionen vorweg.
+
+\begin{itemize}
+\item Ein binärer Suchbaum \(T\) heißt
+  \textbf{AVL-Baum}, falls \(\abs{\beta(v)} \le 1\) für alle Knoten
+  \(v \in T\), d.h., falls alle Knoten balanciert ist.
+
+\item Ein AVL-Baum \(T\) heißt
+  \textbf{extremaler AVL-Baum} der Höhe \(h\), falls er die minimale
+  Anzahl von Knoten enthält, sodass er noch ein AVL-Baum der Höhe
+  \(h\) ist.
+
+\item Ein Knoten vom Grad \(1\) in einem Baum heißt
+  \textbf{Blatt.}
+\end{itemize}
+
+\subsubsection*{1. Aufgabe, Teil a}
+\begin{beh}
+  Die Blätteranzahl jedes extremale AVL-Baum der Höhe \(h\) ist
+  minimal.
+\end{beh}
+
+\begin{proof}
+  durch Widerspruch.  Angenommen, es existiert ein extremale AVL-Baum
+  \(T\) der Höhe \(h\), sodass die Blätteranzahl von \(T\) nicht
+  minimal ist, d.h., es existiert mindestens ein Blatt von \(T\), wenn
+  man dieses Blatt löscht, ist \(T'\) wieder ein AVL-Baum der Höhe
+  \(h\).  Damit haben wir einen AVL-Baum mit weniger Knoten gefunden,
+  im Widerspruch zur Definition von extremaler AVL-Baum.
+\end{proof}
+
+\subsubsection*{1. Aufgabe, Teil b}
+
+\begin{beh}
+  Sei \(T\) ein AVL-Baum der Höhe \(h\) mit minimaler Blätteranzahl.
+  Dann ist \(T\) extremal.
+\end{beh}
+
+\begin{proof}
+  ???
+\end{proof}
+
+\subsubsection*{1. Aufgabe, Teil c}
+\begin{lem}
+  Die Knotenzahl \(n(h)\) eines AVL-Baumes der Höhe \(h\) erfüllt
+  \[
+    n(h) \ge \Phi^{h}
+  \] mit \(\Phi \coloneq \frac{1+\sqrt{5}}{2}\).
+\end{lem}
+
+\begin{proof}
+  In der Vorlesung haben wir festgestellt, dass
+  \(n(h) \ge \sqrt{2}^{h}\) gilt. Wir suchen nach einer genauere Abschätzung
+  in der Gestalt \(n(h) \ge p^{h}.\) Es gilt
+  \[n(h) = 1 + n(h - 1) + n(h-2).\]  Da wir nach einer untere Schranke
+  suchen, konnen wir das Konstant \(1\) weglassen und erhalten wir \[
+    n(h) \ge n(h-1) + n(h-2) \] und daher \[p^{h} \ge p^{h-1} + p^{h-2}.\]
+  Daraus erhalten wir \[p^{2} - p - 1 = 0,\] daraus folgt \(p =
+  (1+\sqrt{5})/2\) und \[ n(h) \ge \Phi^{h}.\]
+\end{proof}
+
+\begin{beh}
+  Ein AVL-Baum \(T\) mit \(n \ge 1\) Knoten hat Höhe \(h(T) \le (\log
+  \Phi)^{-1} \log n\).
+\end{beh}
+
+\begin{proof}
+  Diese folgt sofort aus Lemma.
+\end{proof}
+
+
+
+\end{document}

@@ -1,0 +1,153 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+\documentclass[fleqn,draft,a5paper]{article}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+\geometry{left=1cm,
+ right=1cm,
+ top=1cm,
+ bottom=2cm}
+
+% (TeX-run-style-hooks "amsmath,mathtools,fontspec" "amsthm")
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,mathtools,fontspec,amssymb,amsthm,parskip,interval}
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\skp}[1]{\langle#1\rangle}
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\providecommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\providecommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+% 定义新函数，依赖于AMSmath
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\Rang}{Rang}
+
+\providecommand{\R}[1]{\mathrm{R#1}}
+
+\newcommand{\wt}{\widetilde}
+\newcommand{\dd}{\,\mathrm{d}}
+
+% 标题与作者
+\title{HA 2, LinA 2, Papp, Papp5}
+\author{Shilong Yu 478912, Yuchen Guo 480788}
+
+\begin{document}
+\maketitle
+\newpage
+\subsection{1. Aufgabe}
+\begin{enumerate}
+\item
+  \[
+    A = \begin{bmatrix}
+      1 & 2 & 3 & 4 \\ 2 & 4 & 6 & 8 \\ 1 & 2 & 3 & 4 \\ 1& 2 & 3 & 5
+    \end{bmatrix}
+  \]
+  dann sind die erste Zeile und die dritte Zeile gleich. Daraus folgt,
+  dass \(\Rang A < 4\) und wegen D10 gilt \(\det A = 0\).
+\item \[
+    B = \begin{bmatrix}
+      1 & 2 & 3 \\ 0 & 3 & 4 \\ 1 & 2 & 5
+    \end{bmatrix}
+    \stackrel{\text{D7}}{\longrightarrow}
+    \begin{bmatrix}
+      1 & 2 & 3 \\ 0 & 3 & 4 \\ 0 & 0 & 2
+    \end{bmatrix}
+  \]
+  wegen D8 folgt \(\det B = 1 \cdot 3 \cdot 2 = 6\).
+\item
+  \[C =
+    \begin{bmatrix}
+      1 & 0 & 0 \\ 0 & 3 & 2 \\ 0 & 2 & 3
+    \end{bmatrix}
+  \]
+  wegen D9 folgt \(\det C = 1 \cdot (3 \cdot 3 - 2 \cdot 2) = 5\).
+\end{enumerate}
+\subsection{2. Aufgabe}
+Wir definieren zwei Transpositionen
+\[\tau_{1}(1) = 2, \; \tau_{1}(2) = 1; \quad \tau_{2}(1) = 4, \; \tau_{2}(4) = 1.\]
+Dann ist die Permutation
+\[\sigma =
+  \begin{bmatrix}
+    1 & 2 & 3 & 4 & 5 \\ 2 & 4 & 3 & 1 & 5
+  \end{bmatrix}
+  = \tau_{2} \circ \tau_{1}.
+\]
+\subsection{3. Aufgabe}
+Wir berechnen die Determinante von
+\[
+  A =
+  \begin{bmatrix}
+    x & 1 & 1 \\ 1 & x & 1 \\ 1 & 1 & x
+  \end{bmatrix}
+\]
+durch die Regel von \textsc{Sarrus},
+\[\det A = x^{3} - 3x + 2.\]
+Die Matrix \(A\) ist genau dann nicht invertierbar, falls \(\det A = 0\).
+Daher berechnen die Nullstellen von \(\det A\), erhalten wir
+\[\det A = (x+2)(x-1)^{2}.\]
+Deshalb ist die Matrix \(A\) genau dann nicht invertierbar, falls \(x=-2\)
+oder \(x=1\) gilt.
+
+Wir berechnen die Determinante von
+\[
+  B =
+  \begin{bmatrix}
+    1 & x & x  \\ x & 1 & x \\ x & x & 1
+  \end{bmatrix}
+\]
+durch die Regel von \textsc{Sarrus},
+\[\det B = 2x^{3} - 3x^{2} + 1 = (2x+1)(x-1)^{2}.\]
+Siehe oben. Deshalb ist die Matrix \(B\) genau dann nicht invertierbar, falls \(x=-1/2\)
+oder \(x=1\) gilt.
+
+\subsection{4. Aufgabe}
+
+\begin{Behauptung}
+  Ein Dreieck im \(\mathbb{R}^{2}\) sei gegeben durch die Eckpunkte \(u = (u_{1},
+  u_{2}), v = (v_{1}, v_{2})\) und \(w = (w_{1}, w_{2})\).  Dann ist die
+  Fläche des Dreiecks gleich
+  \[\frac{1}{2}\abs{\det
+      \begin{bmatrix}
+        1 & u_{1} & u_{2} \\ 1 & v_{1} & v_{2} \\ 1 & w_{1} & w_{2}
+      \end{bmatrix}
+    }.\]
+\end{Behauptung}
+\begin{proof}
+  Wir betrachten \(u,v,w\) als Punkte im komplexen Ebene.  Wir
+  definieren die zwei Vektoren
+  \[\overrightarrow{uv}=z_{1}=(v_{1}-u_{1})+ i (v_{2}-u_{2}), \quad
+    \overrightarrow{uw} = z_{2} = (w_{1}-u_{1})+i (w_{2}-u_{2}).\]
+  Die Fläche des Dreiecks ist genau Halbe von die Fläche des von
+  \(z_{1},z_{2}\) aufgespannte Parallelograms.  Daraus folgt, dass
+  \begin{align*}
+    \frac{1}{2}z_{1}z_{2}
+    &= \frac{1}{2}\abs{\mathfrak{Im}((v_{1}-u_{1})-i(v_{2}-u_{2}))((w_{1}-u_{1})-i(w_{2}-u_{2}))}  \\
+    &=
+      \frac{1}{2}\abs{(v_{1}-u_{1})(v_{2}-u_{2})-(w_{1}-u_{1})(w_{2}-u_{2})}
+    \\
+    &=\frac{1}{2}\abs{\det
+      \begin{bmatrix}
+        1 & u_{1} & u_{2} \\ 1 & v_{1} & v_{2} \\ 1 & w_{1} & w_{2}
+      \end{bmatrix}
+    }.
+  \end{align*}
+\end{proof}
+\end{document}
+

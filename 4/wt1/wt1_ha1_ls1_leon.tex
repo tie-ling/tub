@@ -1,0 +1,201 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+\documentclass[fleqn,draft,a5paper]{article}
+
+% 让每个章节 subsection 在新的一页上开始
+% 而不是紧接着上一章节
+\AddToHook{cmd/subsection/before}{\clearpage}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+\geometry{left=1cm,
+ right=1cm,
+ top=1cm,
+ bottom=2cm}
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,mathtools,fontspec,amssymb,amsthm,parskip,interval,mathtools,fontspec}
+\setmainfont{TeX Gyre Termes}
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\skp}[1]{\langle#1\rangle}
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\providecommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\providecommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+% (TeX-run-style-hooks "amsmath,mathtools,fontspec")
+% 定义新函数，依赖于AMSmath
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\rg}{rg}
+
+\providecommand{\R}[1]{\mathrm{R#1}}
+
+\newcommand{\wt}{\widetilde}
+\newcommand{\dd}{\,\mathrm{d}}
+
+% 标题与作者
+\title{HA 1, WT 1, Leon, LS1}
+\author{Liu 503531, Zhang 484981, Guo 480788}
+
+\begin{document}
+\maketitle
+\begin{center}
+  Shengjie Liu 503531, Meng Zhang 484981, Yuchen Guo 480788
+\end{center}
+\newpage
+\subsection{1. Aufgabe}
+\(A\) bezeichnet das Ereignis, dass der Stromfluss nicht unterbrochen
+wird.
+\begin{itemize}
+\item \(A = A_{1} \cap A_{2} \cap A_{3} \cap A_{4}\)
+\item \(A = A_{1} \cup A_{2} \cup A_{3} \cup A_{4}\)
+\item \(A = A_{1} \cap (A_{2} \cup A_{3} \cup A_{4})\)
+\item \(A = (A_{1} \cup A_{2}) \cap (A_{3} \cup A_{4})\)
+\end{itemize}
+\subsection{2. Aufgabe}
+\begin{Behauptung}
+  Für \(n \in \mathbb{N} \setminus \{0\}\) seien \((A_{i})_{i \le n}\) mit \(\abs{A_{i}} < \infty\).
+  Dann gilt
+  \[\abs{\bigcup_{j=1}^{n}{A_{j}}}=\sum_{j=1}^{n}{(-1)^{j+1}} \sum_{1 \le i_{1} \le
+      \cdots \le i_{j} \le n}{\abs{A_{i_{1}} \cap \cdots \cap A_{i_{j}}}}.\]
+\end{Behauptung}
+\begin{proof}
+  Wir definieren ein Wahrscheinlichkeitsraum \((\Omega, \mathcal{A}, \mathbb{P})\) mit
+  \[\Omega \coloneq \bigcup_{j=1}^{n}{A_{j}}, \quad \mathcal{A} \coloneq \mathcal{P}(\Omega), \quad \mathbb{P}(A) \coloneq
+    \frac{\abs{A}}{\abs{\Omega}}.\]
+  Weil \(n\) endlich und alle \(A_{j}\) endlich sind, sind das Ergebnisraum
+  \(\Omega\) und die \(\sigma\)-Algebra \(\mathcal{A}\) auch endlich.
+  Die Abbildung \(\mathbb{P}\colon \mathcal{A} \to \interval{0}{1}, A \mapsto \frac{\abs{A}}{\abs{\Omega}}\)
+  ist ein Wahrscheinlichkeitsmaß, denn sie ist normiert und
+  \(\sigma\)-additiv.
+
+ Aus der Siebformel von Sylvester folgt, dass
+  \[\mathbb{P}\left(\bigcup_{j=1}^{n}{A_{j}}\right) = \sum_{j=1}^{n}{(-1)^{j+1}} \sum_{1 \le i_{1} \le
+      \cdots \le i_{j} \le n}{\mathbb{P}{(A_{i_{1}} \cap \cdots \cap A_{i_{j}})}}.\]
+  Es existiert eine bijektive Abbildung
+  \[f\colon \interval{0}{1} \to \mathbb{R}_{\le \abs{\Omega}}, \quad \mathbb{P}(A) \mapsto \abs{A} = \mathbb{P}(A) \cdot
+    \abs{\Omega}.\]
+  Damit folgt die Behauptung aus der Komposition \(f \circ \mathbb{P}\), das heißt,
+  wir bekommen das Formel in der Behauptung, indem wir die Siebformel
+  von Sylvester mit \(\abs{\Omega}\) multipliziert.
+\end{proof}
+\subsection{3. Aufgabe}
+Seien \((\Omega, \mathcal{A}, \mathbb{P})\) ein Wahrscheinlichkeitsraum und \((A_{n})_{n \in \mathbb{N}} \subseteq
+\mathcal{A}\) eine Folge von Ereignissen.
+\begin{Behauptung}
+  Aus \(A_{n} \uparrow A\) folgt \(\lim_{n \to \infty} \mathbb{P}(A_{n}) = \mathbb{P} \left(\bigcup_{n \in \mathbb{N}}{A_{n}}\right)\).
+\end{Behauptung}
+\begin{proof}
+  Wegen Voraussetzung ist \(\mathbb{P}\) ein Wahrscheinlichkeitsmaß, insbesondere
+  ist \(\mathbb{P}\) \(\sigma\)-additiv.
+
+  Wir definieren \(A \coloneq \bigcup_{n \in \mathbb{N}}{A_{n}}\) und
+  \(A_{0} = \emptyset\). Wegen \(A_{i-1} \subseteq A_{i}\) und
+  \(\sigma\)-Additivität, es gilt
+  \[\mathbb{P}(A) = \sum_{i=1}^{\infty}{\mathbb{P}(A_{i} \setminus A_{i-1})}.\]
+  Wir betrachten die partielle Summe von der Reihe, dann erhalten wir
+  \[\sum_{i=1}^{\infty}{\mathbb{P}(A_{i} \setminus A_{i-1})} = \lim_{n \to \infty}{\sum_{i=1}^{n}{\mathbb{P}(A_{i}
+        \setminus A_{i-1})}} = \lim_{n \to \infty}{\mathbb{P}(A_{n})}.\]
+  Damit gilt die Behauptung.
+\end{proof}
+\begin{Behauptung}
+  Falls \(A_{n} \downarrow A\), dann gilt \(\lim_{n \to \infty}{\mathbb{P}(A_{n})} = \mathbb{P}\left(\bigcap_{n \in
+    \mathbb{N}} A_{n}\right)\).
+\end{Behauptung}
+\begin{proof}
+  Weil \((\Omega, \mathcal{A}, \mathbb{P})\) ein Wahrscheinlichkeitsraum ist, ist
+  \(\mathbb{P}\) normiert.  Daraus folgt, dass \(\mathbb{P}(\Omega) = 1\) und
+  \(\mathbb{P}(A_{n}) < \infty\) für alle \(n \in \mathbb{N}\).  Setze
+  \(B_{n} \coloneq A_{n} \setminus A \in \mathcal{A}\) für jedes
+  \(n \in \mathbb{N}\).  Dann gilt \(B_{n} \downarrow \emptyset\).  Es gilt dann
+  \[\mathbb{P}(A_{n}) - \mathbb{P}(A) = \mathbb{P}(B_{n})\]
+  und
+  \[\lim_{n \to \infty}{\mathbb{P}(B_{n})} = 0.\]
+  Daraus folgt, dass
+  \[\lim_{n \to \infty}{\mathbb{P}(A_{n}) - \mathbb{P}(A)} = 0\]
+  und daher
+  \[\lim_{n \to \infty}{\mathbb{P}(A_{n})} = \mathbb{P}(A) = \mathbb{P}\left(\bigcap_{n \in
+    \mathbb{N}} A_{n}\right).\]
+\end{proof}
+\subsection{4. Aufgabe}
+\subsubsection{Teil a}
+Wir wählen das folgende diskrete Wahrscheinlichkeitsraum.
+\[ \Omega = \{(6,5), (6,1), (2,5), (2,1)\}, \quad \abs{\Omega} = 4, \quad \mathcal{A} = \mathcal{P}(\Omega) \]
+und
+\[p((6,5)) = p((6,1)) =\frac{2\times3}{36}, \quad p((2,5)) = p((2,1)) = 
+  \frac{4\times3}{36} \]
+und daher
+\[\mathbb{P}(\{\text{Mika siegt}\}) = \mathbb{P}(\{(6,5),(6,1),(2,1)\})=
+  \frac{24}{36}.\]
+\subsubsection{Teil b}
+Wir bemerken, dass es nur eine Möglichkeit gibt, um die Bedingung,
+Charlie in jedem Fall die besseren Gewinnchancen hat.
+\begin{center}
+\begin{tabular}{c c c| l}
+  Mika & & Charlie & \\
+  \hline
+  W1 & < & W2 & geht nicht wegen Teil a \\
+  W1 & < & W3 & \\
+  W3 & < & W1 & geht nicht wegen W1 < W3 \\
+  W3 & < & W2 & \\
+  W2 & < & W3 & geht nicht wegen W3 < W2 \\
+  W2 & < & W1
+\end{tabular}  
+\end{center}
+Das heißt, die Bedingung dass Charlie in jedem Fall die besseren
+Gewinnchancen hat, ist genau dann erfüllt, falls für W3 dass \(W_{1} <
+W_{3}\) und \(W_{3} < W_{2}\); wobei \(W_{i}\) die relative Gewinnchancen
+bezeichnet.
+
+Für uns sind nur die Augenzahlen \(\{7,4,0\}\) interessant, denn die
+Zahl \(7\) ist größer als alle vorhandende Augenzahlen, die Zahl \(0\) ist
+kleiner als alle vorhandende Augenzahlen, und die Zahl \(4\) liegt
+zwischen alle vorhandende Augenzahlen.  Wir müssen nur die Anzahl von
+\(\{7,4,0\}\) im \(W_{3}\) so bestimmen, sodass die oberen Bedingungen
+erfüllt sind.
+
+Wir bezeichnen die Anzahl von \(\{7,4,0\}\) im \(W_{3}\) jeweils mit
+\(a,b,c\).  Daraus folgt, dass
+\begin{align*}
+  &\Omega_{W_{1},W_{3}} = \{(7,6),(7,2),(4,6),(4,2),(0,6),(0,2)\}, \\
+  &\Omega_{W_{2},W_{3}} = \{(7,5),(7,1),(4,5),(4,1),(0,5),(0,1)\}
+\end{align*}
+dann ist
+\[\mathbb{P}(\{W_{3} \text{ siegt im } W_{1}, W_{3} \text{ Paar}\}) =
+\mathbb{P}(\{(7,6),(7,2),(4,2)\}) = \frac{a}{6}+\frac{b}{6}\cdot\frac{4}{6} > \frac{1}{2}\]
+und
+\[\mathbb{P}(\{W_{2} \text{ siegt im } W_{2}, W_{3} \text{ Paar}\}) =
+  \mathbb{P}(\{(4,5),(0,5),(0,1)\}) = \frac{b}{12}+\frac{c}{6} > \frac{1}{2}.\]
+Daraus erhalten wir die Ungleichungen
+\begin{align*}
+  \begin{cases}
+    3a+2b > 9 \\
+    b+2c >6 \\
+    a+b+c =6
+  \end{cases}
+  \to
+  \begin{cases}
+    c < 3 \\
+    b > 0 \\
+    6-a > c
+  \end{cases}
+\end{align*}
+
+Eine Lösung ist \(a=3,b=1,c=2\). Damit hat Charlie mit
+\(W_{3} = \{7,7,7,4,0,0\}\) in jedem Fall die besseren Gewinnchancen.
+\end{document}
+

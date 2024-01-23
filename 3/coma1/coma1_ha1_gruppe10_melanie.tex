@@ -1,0 +1,192 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+% draft mode incompatible with tikz
+\documentclass[a5paper]{article}
+
+% 让每个章节 subsection 在新的一页上开始
+% 而不是紧接着上一章节
+\AddToHook{cmd/subsection/before}{\clearpage}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+\geometry{a5paper,
+ left=1cm,
+ right=1cm,
+ top=1cm,
+ bottom=2cm
+}
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+
+% 调整 Emacs 预览字体大小
+% (setq preview-scale-function 1.5)
+
+% TeX Gyre Schola and unicode-math
+% which in turn loads amsmath,mathtools,fontspec and friends
+\usepackage{xcharter-otf}
+
+
+% 加载数学相关的包
+\usepackage{
+  % 自然段间留空
+  parskip,
+  % 区间排版
+  interval
+}
+
+% 中文支持，暂时不需要
+% \usepackage[UTF8]{ctex}
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\usepackage{amsthm}
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+
+% 标题与作者
+\title{HA 1, CoMa 1, Melanie, Gruppe 10}
+\author{Zhang 484981, Wernicke 492703, Guo 480788}
+
+\begin{document}
+\maketitle
+\begin{center}
+  Meng Zhang 484981, Moritz Karl Wernicke 492703, Yuchen Guo 480788
+\end{center}
+
+\newpage
+
+\subsection*{1. Aufgabe}
+\subsubsection*{1. Aufgabe, Teil a}
+\begin{enumerate}
+\item \(R = \{(a, b) \in \mathbb{N} \times \mathbb{N} \mid a \le b\}\) ist keine Äquivalenzrelation.
+  Denn aus \(2 \le 3\) folgt nicht \(3 \le 2\).  Die ist nicht symmetrisch.
+\item \(R = \{(a, b) \in \mathbb{N} \times \mathbb{N} \mid a \ne b\}\) ist keine Äquivalenzrelation.
+  Denn es gilt nicht \(a \ne a\).  Die ist nicht reflexiv.
+\item
+  \(R = \{(a, b) \in \mathbb{N} \times \mathbb{N} \mid \abs{a - b} > d\}\), für ein festes
+  \(d > 0\) ist keine Äquivalenzrelation.  Denn
+  \( a - a = 0 > d > 0 \) gilt nicht.  Die ist nicht reflexiv.
+\item \(R = \{(a, b) \in \mathbb{N} \times \mathbb{N} \mid f(a) = f(b)\}\), für eine feste Abbildung
+  \(f\colon \mathbb{R} \to \mathbb{R}\) ist eine Äquivalenzrelation.  Denn für alle \(a \in A\) gilt
+  \(f(a) = f(a)\).  Dies ist auch symmetrisch, denn für alle \((a, b) \in
+  R\) gilt \(f(a) = f(b) = f(a)\).  Dies ist auch transitiv.  Denn aus
+  \(f(a) = f(b)\) und \(f(b) = f(c)\) folgt \(f(a) = f(c)\).
+\end{enumerate}
+\subsubsection*{1. Aufgabe, Teil b}
+Sei \(A = \{-4, -3, -2, -1, 0, 1, 2, 3, 4\}, R \subseteq A \times A\) und \[ R =
+  \{(a, b) \in A \times A \mid a^{4} = b^{4}\}.\]
+Dann gilt,
+\begin{align*}
+  [4] = \{4, -4\}, \quad [3] = \{3, -3\}, \quad [-2] = \{2, -2\}, \quad [1] = \{1,
+  -1\}, \quad [0] = \{0\}.
+\end{align*}
+\subsection*{2. Aufgabe}
+\begin{enumerate}
+\item \(\{(a, b) \in \mathbb{Z} \times \mathbb{Z} \mid b = \abs{a}\}\) ist eine Abbildung von \(\mathbb{Z}\)
+  nach \(\mathbb{Z}\), denn für alle \(a \in \mathbb{Z}\) existiert genau eine eindeutig
+  bestimmte Zahl \(b \in \mathbb{Z}\) sodass gilt \(b = \abs{a}\).  Die ist aber
+  weder injektiv wegen \(\abs{1} = \abs{-1} = 1\) noch surjektiv wegen
+  \(\forall a \in \mathbb{Z}, \abs{a} \ge 0\).
+\item \(\{(a, b) \in \mathbb{Z} \times \mathbb{Z} \mid a = \abs{b}\}\) ist keine Abbildung.  Denn
+  für jeder Urbild \(a \ne 0\) existiert zwei Bilder \(b, -b\).
+\item \(\{(a, b) \in \mathbb{Z} \times \mathbb{Z} \mid b = a/2\}\) ist keine Abbildung.  Denn für
+  alle ungerade \(a\) existiert kein Bild in \(\mathbb{Z}\).
+\item \(\{(a, b) \in \mathbb{Z} \times \mathbb{Z} \mid (b-a) \bmod 7 = 0 \wedge -a-3 \le b \le -a+3\}\) ist
+  eine Abbildung.
+  \begin{proof}
+    Wir zeigen zuerst, dass es zu jedem \(a \in \mathbb{Z}\) eine \(b \in
+    \mathbb{Z}\) existiert, die obigen Bedingungen erfüllt.  Sei \(c \coloneq
+    \min(\abs{a \bmod 7}, (7 - \abs{a \bmod 7}))\).  Dann ist \(0 \le c \le 3\),
+    \(-b \coloneq a - c\) und \(-a - 3 \le b = -a + c \le -a + 3\).  Damit ist die
+    Existenz von \(b\) gezeigt.
+
+    Wir zeigen, dass solche \(b\) eindeutig bestimmt ist.  Sei \(a \in \mathbb{Z}\)
+    beliebig und \(p, q \in \mathbb{Z}, p \ne q\) mit \(b-a = 7p\) und \(b-a = 7q\).
+    Dann gilt insbesondere
+    \[b = 7p + a, \quad b= 7q + a \]
+    sowie
+    \[\abs{7p + 2a} \le 3, \quad \abs{7q + 2a} \le 3.\]
+    Daraus folgt, dass
+    \[\abs{p - q} \le 6/7\]
+    dies ist aber im Widerspruch zur \(\abs{p - q} \ge 1\) wegen \(p, q \in
+    \mathbb{Z}, p \ne q\).  Damit ist die Eindeutigkeit gezeigt.
+
+    [In,Sur,Bi]jektivität???
+  \end{proof}
+\end{enumerate}
+\subsection*{3. Aufgabe}
+Seien \(X, Y, Z\) Mengen und \(f\colon X \to Y, g \colon Y \to Z\) Abbildungen.
+\begin{enumerate}
+\item Behauptung.  Aus der Injektivität von \(f, g\) folgt diesselben
+  von \(g \circ f\).
+  \begin{proof}
+    Wegen der Injektivität von \(f\) folgt \(f(x_{1}) \ne f(x_{2})\) für
+    alle \(x_{1}, x_{2} \in X, x_{1} \ne x_{2}\).  Wegen der Injektivität
+    von \(g\) folgt \(g(f(x_{1}) \ne g(f(x_{2})))\).  Damit ist \((g \circ f)
+    (x_{1}) \ne (g \circ f)(x_{2}) \) für alle \(x_{1} \ne x_{2}\) und die
+    Injektivität ist bewiesen.
+  \end{proof}
+\item Behauptung.  Ist \(g \circ f\) bijektiv.  Dann ist \(g\) surjektiv und
+  \(f\) injektiv.
+  \begin{proof}
+    Weil \(g \circ f\) bijektiv ist, existiert zu jedem \(z \in Z\) ein
+    eindeutig bestimmte \(x \in X\) mit \((g \circ f)(x) = g(f(x))= z\).
+    Insbesondere existiert zu jedem \(z \in Z\) ein \(f(x) \in Y\) sodass
+    \(g(f(x)) = z\).  Damit ist \(g\) surjektiv.
+
+    Weil \(g \circ f\) bijektiv ist, gilt für alle \(x_{1}, x_{2} \in X, x_{1}
+    \ne x_{2}\) dass \((g \circ f)(x_{1}) \ne (g \circ f)(x_{2})\).  Daraus folgt,
+    dass \(g(f(x_{1})) \ne g(f(x_{2}))\) und \(f(x_{1}) \ne f(x)_{2}\).  Damit
+    ist \(f\) injektiv.
+  \end{proof}
+\item Aus der Surjektivität von \(g \circ f\) und \(g\) folgt nicht die
+  Surjektivität von \(f\).
+
+  Denn sei \(f\colon X \to Y' \subsetneq Y\) mit \(g(Y') = Z\).  Dann ist \(g \circ f\) und \(g\)
+  surjektiv, aber \(f\) nicht surjektiv.
+\end{enumerate}
+\subsection*{4. Aufgabe}
+Sei die Funktion \(f\colon \mathbb{N} \to \mathbb{N}\) mit
+\begin{align*}
+  f(x) =
+  \begin{cases}
+    3(x - 1), & \text{falls } x \bmod 2 \ne 0, \quad x \bmod 6 \ne 0; \\
+    x/2, & \text{falls } x \bmod 2 = 0,\quad x \bmod 6 \ne 0; \\
+    x+3, & \text{falls } x \bmod 2 = 0, \quad x \bmod 6 = 0. \\
+  \end{cases}
+\end{align*}
+\begin{proof}
+  Wir betrachten Injektivität.  Es gibt drei Fälle.
+  \begin{enumerate}
+  \item Angenommen,  \(a \ne b\) und \(f(a) = 3(a-1) = f(b) = b/2\).
+
+    Dann folgt \(b = 6a - 6\) im Widerspruch zur Voraussetzung dass \(b
+    \bmod 6 \ne 0\).
+
+  \item Angenommen,  \(a \ne b\) und \(f(a) = 3(a-1) = f(b) = b+3\).
+
+    Dann folgt \(b = 3a - 6\).  Wegen Voraussetzung dass \(a \bmod 2 \ne 0\)
+    und \(a \bmod 6 \ne 0\) gilt \(3a - 6 \bmod 6 \ne 0\).  Widerspruch!
+
+  \item Angenommen,  \(a \ne b\) und \(f(a) = a/2 = f(b) = b+3\).
+
+    Dann folgt \(a = 2b + 6\).  Aus \(b \bmod 6 = 0\) folgt \(a \bmod 6 = 0\)
+    im Widerspruch zur Voraussetzung.
+  \end{enumerate}
+  Damit ist \(f\) injektiv.
+\end{proof}
+\end{document}

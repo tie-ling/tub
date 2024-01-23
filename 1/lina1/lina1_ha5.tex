@@ -1,0 +1,352 @@
+\documentclass[12pt]{extarticle}
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,fancyhdr,color,graphicx,}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+\usepackage[onehalfspacing]{setspace}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{parskip}
+\pagestyle{fancy}
+\newcommand{\im}{\operatorname{\textbf{i}}}
+\setlength{\parindent}{0pt}
+\lhead{Yuchen Guo 480788, Meng Zhang 484981}
+\rhead{5. Hausaufgabenblatt, LinA I\\Tutorin: Saskia, Mi 2-4 p.m.}
+\begin{document}
+\textbf{Aufgabe 5.1.1}
+
+Sei \((G, \star)\) eine Gruppe, \(x \in G\) und \(e \star x = x\) für alle
+\(x \in G\).
+
+\vspace{3mm}
+\textit{Behauptung.}  Die Abbildung $f_x: G \rightarrow G, g \mapsto g
+\star x$ ist bijektiv.
+
+\begin{proof}
+
+  Wir zeigen, dass \(f_x\) bijektiv ist, indem wir zeigen, dass sie
+  injektiv und surjektiv ist.
+  \begin{itemize}
+  \item \(f_x\) ist injektiv.
+
+    Seien \(g_1, g_2 \in G\) mit \(f_x(g_1) = g_1 \star x = f_x(g_2) = g_2 \star x\) und
+    \(x \star x^{-1} = e\).  Wir zeigen, dass \(g_1 = g_2\) gilt.
+
+    Weil \(\star\) eine innere Verknüpfung ist, gilt $g_1 \star x, g_2
+    \star x \in G$.  Es gilt,
+\begin{align*}
+  g_1 \star x &= g_2 \star x \\
+  (g_1 \star x) \star x^{-1} &= (g_2 \star x) \star x^{-1} \\
+  g_1 \star (x \star x^{-1}) &= g_2 \star (x \star x^{-1})
+                               \tag*{Assoziativgesetz von Gruppen}\\
+  g_1 \star e &= g_2 \star e \\
+  e \star g_1 &= e \star g_2
+                \tag*{Lecture Notes Satz 3.4.i}\\
+  g_1 &= g_2.
+\end{align*}
+Daraus folgt, dass \(f_x\) injektiv ist.
+\item  \(f_x\) ist surjektiv.
+
+  Für alle \(g \star x \in G\) existiert mindestens ein Urbild
+  \(g \in G\), nämlich \(g = x^{-1}\), das die Bedingung $g \star x =
+  x^{-1} \star x = e \in G$ erfüllt.
+
+  Daher ist \(f_x\) surjektiv.
+\end{itemize}
+\end{proof}
+
+\textit{Behauptung.}  Die Abbildung \(f_x\) ist genau dann ein
+Gruppenmorphismus, wenn \(x = e\) gilt.
+\begin{proof}
+
+  Wir zeigen, dass die zwei Aussage äquivalent sind, indem wir zeigen,
+  dass Hinrichtung und Rückrichtung gelten.
+  \begin{itemize}
+  \item \(x = e \implies\) \(f_x\) ist ein Gruppenisomorphismus.
+
+    Seien \(m, n \in G\) beliebig gewählt.  Wir haben gezeigt, dass
+    \(f_x\) bijektiv ist.  Es ist daher ausreichend, zu zeigen, dass
+    \(f_x(m) \star f_x(n) = f_x(m \star n)\) gilt.  Es gilt,
+\begin{align*}
+  f_x(m) \star f_x(n) &= f_e(m) \star f_e(n) \tag*{Voraussetzung}\\
+                      &= (m \star e) \star (n \star e)\\
+                      &= (e \star m) \star (e \star n)
+                        \tag*{Lecture Notes Satz 3.4.i}\\
+                      &= m \star n \\
+                      &= (m \star n) \star e \\
+                      &= f_e(m \star n) \\
+                      &= f_x(m \star n)
+\end{align*}
+Daraus folgt, dass \(f_x(m) \star f_x(n) = f_x(m \star n)\) gilt.  Weil
+\(f_x\) bijektiv ist, folgt dass \(f_x\) ein Gruppenisomorphismus ist.
+\item \(f_x\) ist ein Gruppenisomorphismus \(\implies x = e\).
+
+  Seien \(m, n \in G\) beliebig gewählt mit \(m^{-1} \star m = e\) und
+  \(n^{-1} \star n = e\).  Es gilt
+  \(f_x(m) \star f_x(n) = f_x(m \star n)\).  Daraus folgt,
+\begin{align*}
+  (m \star x) \star (n \star x) &= (m \star n) \star x\\
+  m^{-1} \star (m \star x) \star (n \star x)
+                                &= m^{-1} \star (m \star n) \star x\\
+  (e \star x) \star (n \star x) &= e \star n \star x\\
+  x \star (n \star x) &= e \star n \star x\\
+  x \star (n \star x) \star x^{-1} &= e \star n \star x \star x^{-1}\\
+  x \star n &= e \star n\\
+  x \star n &= n.
+\end{align*}
+Wegen (Lecture Notes Satz 3.4.i: neutrales Element in \(G\) ist
+eindeutig bestimmt), folgt, dass \(x = e\).
+  \end{itemize}
+\end{proof}
+
+\textbf{Aufgabe 5.1.2}
+
+\textit{Behauptung.}  Die Abbildung $g_x: G \rightarrow G, g \mapsto x
+\star g \star x^{-1}$ ist ein Gruppenisomorphismus.
+
+\begin{proof}
+  Wir zeigen, dass \(g_x\) ein Gruppenisomorphismus ist, indem wir
+  zeigen, dass \(g_x\) bijektiv ist und
+  \(g_x(m) \star g_x(n) = g_x(m \star n)\) für alle \(m, n \in G\) gilt.
+  \begin{itemize}
+  \item \(g_x\) ist injektiv.
+
+    Sei \(g_1, g_2 \in G\) mit \(g_x(g_1) = g_x(g_2)\). Wir zeigen, dass
+    \(g_1 = g_2\) gilt.  Es gilt,  $x \star g_1 \star x^{-1} = x \star g_2
+    \star x^{-1}$, daraus folgt,
+\begin{align*}
+  x \star g_1 \star x^{-1} &= x \star g_2  \star x^{-1}\\
+  x \star g_1 \star (x^{-1} \star x)
+                           &= x \star g_2  \star (x^{-1} \star x)\\
+  x \star g_1 &= x \star g_2\\
+  (x^{-1} \star x) \star g_1 &= (x^{-1} \star x) \star g_2\\
+  g_1 &= g_2.
+\end{align*}
+Damit ist \(g_x\) injektiv.
+\item \(g_x\) ist surjektiv.
+
+  Für alle \(g_x(g) \in G\) existiert mindestens ein Urbild \(g \in G\),
+  nämlich \(g = e\), das die Bedingung \(g_x(g) = e \in G\) erfüllt.
+  Daher ist \(g_x\) surjektiv.
+
+  \item Es gilt \(g_x(m) \star g_x(n) = g_x(m \star n)\) für alle $m, n
+    \in G$.
+
+    Denn, es gilt
+\begin{align*}
+  g_x(m) \star g_x(n)
+  &= (x \star m \star x^{-1}) \star (x \star n \star x^{-1})\\
+  &= x \star m \star x^{-1} \star x \star n \star x^{-1}\\
+  &= x \star m \star e \star n \star x^{-1}\\
+  &= x \star m \star n \star x^{-1}\\
+  &= x \star (m \star n) \star x^{-1}\\
+  &= g_x(m \star n).
+\end{align*}
+Daher ist \(g_x\) ein Gruppenisomorphismus.
+  \end{itemize}
+\end{proof}
+
+
+\textbf{Aufgabe 5.1.3}
+
+\vspace{3mm}
+\textit{Behauptung.}  Sei \(h: G \rightarrow G\) ein Gruppenmorphismus.
+Es gilt \(g_x(\ker h)=\ker h\).
+
+\begin{proof}
+  Es gilt für alle \(g \in G\) dass $h(g) \star h(e) = h(g \star e) =
+  h(g)$.  Daraus folgt, dass \(h(e) = e\) und \(h^{-1}(e) = e\).  Also,
+  \(\ker h = h^{-1}(\left\{ e \right\}) = \left\{ e \right\}\).
+
+  Es gilt auch, dass \(g_x(e) = x \star e \star x^{-1} = e\).  Daraus
+  folgt, dass \(g_x(\left\{ e \right\}) = \left\{ e \right\}\) und
+  deshalb \(g_x(\ker h) = \ker h\).
+\end{proof}
+
+\textbf{Aufgabe 5.2.1}
+
+Sei \(H\) eine Untergruppe von \(\mathbb{Z}\).
+
+\vspace{3mm}
+\textit{Behauptung.}  Es gilt \(H = \left\{ 0 \right\}\) und gilt
+für alle \(n \in \mathbb{N}\) dass \(n\mathbb{Z} \nsubseteq H\).
+
+\begin{proof}
+  Die Menge \(n\mathbb{Z}\) ist die Menge der ganzen Zahlen, die durch
+  \(n\) teilbar ist.  Daher gilt \(n \neq 0\).
+
+  Es gilt auch, dass \(n\mathbb{Z} \cap H = \emptyset\) für alle $n \in
+  \mathbb{N}_{>0}$.  Daraus folgt, dass \(n\mathbb{Z} \nsubseteq H\).
+\end{proof}
+
+\textit{Behauptung.}  Es gilt \(H \neq \left\{ 0 \right\}\) und existiert
+ein minimales \(n \in \mathbb{N}\) mit \(n\mathbb{Z} \subseteq H\).
+
+\begin{proof}
+  Weil \(H\) eine Untergruppe von \(\mathbb{Z}\) ist, gilt für alle $a, b
+  \in H$ dass \(a + (-b) \in H\).
+
+  Sei \(n \in \mathbb{N}_{>0}\) und \(n \in H\).  Dann gilt für alle
+  \(\left\{ x | x = kn, k \in \mathbb{Z} \right\}\) dass \(x \in H\).
+  Daraus folgt, dass \(n\mathbb{Z} \subseteq H\).
+\end{proof}
+
+\textbf{Aufgabe 5.2.2}
+
+\begin{itemize}
+  \item Die Menge \(n\mathbb{Z}\) ist eine Untergruppe von $(\mathbb{Z},
+    +)$ für alle \(n \in \mathbb{N}\).
+
+    \begin{proof}
+      Sei \(n \in \mathbb{N}\) und \(a, b \in n\mathbb{Z}\) beliebig
+      gewählt.  Es gilt \(a = pn\) und \(b = qn\) mit
+      \(p, n \in \mathbb{Z}\).
+
+      Es gilt, \(a+b=(p+q)n \in n\mathbb{Z}\) und
+      \(a+(-b)=(p-q)n \in n\mathbb{Z}\).
+
+      Es gilt auch, dass \(n\mathbb{Z} \neq \emptyset\) für alle
+      \(n \in \mathbb{N}\). Wegen (Lecture Notes Satz 3.9.iii) ist dann
+      \(n\mathbb{Z}\) eine Untergruppe von \((\mathbb{Z}, +)\).
+    \end{proof}
+  \item Die Menge
+    \(M=\left\{A|A = n\mathbb{Z}, n \in \mathbb{N} \right\}\) enthält alle
+    Untergruppe von \((\mathbb{Z}, +)\).
+
+    \begin{proof}
+      Wir bemühen uns um einen Widerspruchsbeweis.
+
+      Sei \((B, +)\) eine nichtleere Untergruppe von \((\mathbb{Z}, +)\) mit
+      \(B \cap M = \emptyset\).
+
+      Weil die Menge \(B\) nichtleer ist, sei also \(b \in B\).  Aus der
+      Definition von Untergruppe folgt unmittelbar, dass \(b + b \in B\)
+      gilt.  Es gilt also \(b\mathbb{Z} \subseteq B\).  Diese ist im
+      Widerspruch zur Voraussetzung dass \(B \cap M = \emptyset\).
+
+      Daraus folgt, dass die Menge \(M\) alle Untergruppe von
+      \((\mathbb{Z}, +)\) enthält.
+    \end{proof}
+  \end{itemize}
+
+  \textbf{Aufgabe 5.3.1}
+
+  \vspace{3mm}
+  \textit{Behauptung.}  Seien \((G, \star)\), \((H, \cdot)\) Gruppen.
+  Wenn \(G\) isomorph zu \(H\) ist, dann \(G\) abelsch \(\iff\) H abelsch.
+  \begin{proof}
+    Wegen der Voraussetzung existiert eine bijektive Abbildung $f: G
+    \rightarrow H\( mit \(f(a \star b) = f(a) \cdot f(b)\) für alle \)a, b
+    \in G$.
+    \begin{itemize}
+    \item \((H, \cdot)\) abelsch \(\implies\) \((G, \star)\) abelsch.
+
+      Weil \(H\) abelsch ist, gilt \(f(b) \cdot f(a) = f(a) \cdot f(b)\).
+      Es gilt auch, \(f(b) \cdot f(a) = f(b \star a)\).  Daraus folgt,
+      \(f(b \star a) = f(a \star b)\).  Weil \(f\) bijektiv ist, gilt für
+      alle \(f(x_1)=f(x_2)\) dass \(x_1=x_2\).  Daher gilt
+      \(b \star a = a \star b\).
+
+      Die Gruppe \(G\) ist dann abelsch.
+    \item \((G, \star)\) abelsch \(\implies\) \((H, \cdot)\) abelsch.
+
+      Weil \(G\) abelsch ist, gilt \(f(a \star b) = f(b \star a)\).  Es
+      gilt auch, \(f(a \star b) = f(a) \cdot f(b)\).  Daraus folgt, $f(b
+      \star a) = f(b) \cdot f(a) = f(a) \cdot f(b)$.
+
+      Weil \(f\) bijektiv ist, gibt es für alle \(f(a) \in H\) genau ein
+      Urbild in \(G\).  Es gilt also, \(f(G) = H\).  Weil $f(a), f(b) \in
+      H$ beliebig sind, ist \(H\) dann abelsch.
+    \end{itemize}
+  \end{proof}
+
+  \textbf{Aufgabe 5.3.2}
+
+  \vspace{3mm}
+
+  Siehe nächste Seite.
+
+  \vspace{3mm}
+
+  \textbf{Aufgabe 5.3.3}
+
+  Siehe nächste Seite.
+
+  \textbf{Aufgabe 5.4}
+
+  Die Gaussschen Zahlen sind definiert als
+\begin{align*}
+\mathbb{Z}[\im] := \left\{ a+b\im: a, b \in \mathbb{Z} \right\} \subset \mathbb{C}.
+\end{align*}
+\textit{Behauptung.}  \((\mathbb{Z}[\im], +, \cdot)\) ist ein Integritätsring.
+  \begin{proof}
+    Wir beweisen, dass \((\mathbb{Z}[\im], +, \cdot)\) ein Integritätsring
+    ist, indem wir zeigen, dass diese die Definition von
+    Integritätsring erfüllt.
+
+    Zur Abkürzung setzen wir \(M=\mathbb{Z}[\im]\) ein.
+
+
+    Sei \(x = a_1+b_1\im, y=a_2+b_2\im, z=a_3+b_3\im \in M\) beliebig
+    gewählt.
+
+    \begin{itemize}
+    \item \((M, +)\) ist assoziativ.
+
+      Es gilt \((x+y)+z=x+(y+z)=x+y+z=(a_1+a_2+a_3)+(b_1+b_2+b_3)\im\).
+      Deshalb ist diese Gruppe assoziativ.
+    \item Es gibt ein \(e \in M\) mit \(e + x = x\) für alle
+      \(x \in M\), nämlich \(e = 0 + 0\im\).
+    \item Es gibt zu jedem \(x = a+b\im \in M\) ein \(-x = -a-b\im \in M\)
+      mit \(-x + x =e\).
+    \item Es gilt für alle \(x, y \in M\) dass \(x+y=y+x\).  Deshalb ist
+      diese Gruppe bezüglich \(+\) abelsch.
+    \item Für alle \(x, y, z \in M\) gilt:
+\begin{align*}
+  (x \cdot y) \cdot z
+  &= ((a_1a_2 - b_1b_2) + (a_1b_2+a_2b_1)\im) \cdot z\\
+  &= a_3(a_1a_2 - b_1b_2) - b_3(a_1b_2+a_2b_1) + (a_3(a_1b_2+a_2b_1)
+    + b_3(a_1b_2+a_2b_1)\im)\\
+  &= a_1a_2a_3-b_1b_2a_3-a_1b_2b_3-b_1a_2b_3 +
+    (a_1b_2a_3+b_1a_2a_3+a_1b_2b_3+b_1a_2b_3)\im\\
+  &= x \cdot (y \cdot z).
+\end{align*}
+\item Für alle \(x, y, z \in M\) gilt:
+\begin{align*}
+  x \cdot (y+z) &= x \cdot y + x \cdot z\\
+  (x+y) \cdot z &= x \cdot z + y \cdot z.
+\end{align*}
+\item Es gibt ein \(e \in M\), nämlich \(e = 1 + 0 \im\) sodass für alle
+  \(x \in M\) gilt
+\begin{align*}
+  e \cdot x &= a_1+b_1\im \\
+            &= x \cdot e \\
+            &= x.
+\end{align*}
+\item Für alle \(x, y \in M\) gilt
+\begin{align*}
+  x \cdot y &= a_1a_2-b_1b_2+(a_1b_2+a_2b_1)\im \\
+            &= a_2a_1-b_2b_1+(a_2b_1+a_1b_2)\im \\
+            &= y \cdot x.
+\end{align*}
+\item Es gilt \(x \cdot y \neq 0\) für alle
+  \(x, y \in M \setminus \left\{ 0 \right\}\).
+\end{itemize}
+Deshalb ist \((\mathbb{Z}[\im], +, \cdot)\) ein Integritätsring.
+  \end{proof}
+  \textit{Behauptung.}  \((M, \cdot)\) ist eine Gruppe.
+
+\vspace{3mm}
+
+Wir widerlegen diese Behauptung mit einem Gegenbeispiel.
+
+\vspace{3mm}
+
+Zuerst stellen wir fest, dass \(e = 1 + 0 \im\) das neutrales Element in
+\((M, \cdot)\) ist.  Denn, es gilt \(e \cdot x = x \cdot e = x\) für alle
+\(x \in M\).
+
+  Wir betrachten den Fall wo \(x = 2 + 0\im\).  Es gilt aber $x \cdot
+  (\frac{1}{2} + 0\im) = e$ mit \((\frac{1}{2} + 0\im) \notin M\).
+  Daher besitzt \(x\) kein inverses Element in \(M\).
+\end{document}

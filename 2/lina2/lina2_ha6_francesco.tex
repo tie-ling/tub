@@ -1,0 +1,152 @@
+% !TeX program = lualatex
+
+\documentclass[draft,a5paper]{article}
+\usepackage[margin=2cm]{geometry}
+\linespread{1.2}
+
+% set language to german
+\usepackage[ngerman]{babel}
+
+% load math packages and unicode support
+% must in this order
+\usepackage{amsmath,mathtools,fontspec}
+\usepackage{amsthm}
+\usepackage{unicode-math,luatex85}
+
+% set fonts
+\setmainfont{STIX Two Text}
+
+% theorem environment used in this document
+\theoremstyle{remark}
+\newtheorem*{beh}{Behauptung}
+\newtheorem*{lem}{Lemma}
+
+\author{Meng Zhang 484981, Yuchen Guo 480788}
+\date{\today}
+\title{HA 6, LinA 2 -- Francesco}
+
+% math operators
+\DeclareMathOperator{\Spek}{Spek}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\rg}{rg}
+
+%    Enclose the argument in vert-bar delimiters:
+\newcommand{\envert}[1]{\left\lvert#1\right\rvert}
+\let\abs=\envert
+
+%    is used as a closing delimiter.
+\newcommand{\interval}[1]{\mathinner{#1}}
+
+\begin{document}
+\maketitle
+
+\subsection*{Aufgabe 6.1}
+
+Sei \(A \in \mathbb{C}^{n \times n}\). Wir nennen die Matrix \(A\) nilpotent, falls es
+ein \(m \in \mathbb{N}_{\ge 1}\) gibt mit \(A^{m} = 0\).
+
+\subsubsection*{Aufgabe 6.1, Teil i}
+
+\begin{lem}
+  Die Matrix \(A\) ist nilpotent genau dann, wenn \(A\) nicht
+  invertierbar ist.
+\end{lem}
+
+\begin{proof}
+  Weil \(A\) nilpotent ist, existiert ein \(m \in \mathbb{N}_{\ge 1}\) mit
+  \(A^{m} = 0\).  Weil die Determinant-Funktion alternierend ist, gilt
+  \(\det(A^{m}) = 0\).  Es gilt
+  \begin{align*}
+    \det(A^{m}) = \det(A)\det(A^{m-1}) = \det(A)\det(A)\det(A^{m-2}) =
+    \ldots = \det(A)^{m} = 0.
+  \end{align*}
+  Damit gilt \(\det(A) = 0\) und \(A\) ist nicht invertierbar.  Damit
+  gilt die Behauptung.
+\end{proof}
+
+\begin{beh}
+  Es gilt \(\Spek(A) = \{0\}\) genau dann, wenn \(A\) nilpotent ist.
+\end{beh}
+
+\begin{proof}
+  Hinrichtung.  Angenommen, \(\Spek(A) = \{0\}\).  Dann ist die Matrix
+  \(A - \lambda I\) nicht invertierbar für \(\lambda = 0\) und invertierbar für
+  alle \(\lambda \in \mathbb{C} \setminus \{0\}\).  Wegen [Lemma], ist
+  \(A\) nilpotent genau dann, wenn \(A\) nicht invertierbar ist.
+  Daraus folgt, dass \(A - 0I = A\) nilpotent.  Damit gilt die Behauptung.
+
+  Rückrichtung.  Angenommen, \(A\) ist nilpotent.  Wir betrachten die
+  Matrix \(A - \lambda I\) für alle \(\lambda \in \mathbb{C}\).  Zuerst bemerken wir, dass
+  wegen \(\det(A - 0I) = \det(A) = 0\) gilt \(0 \in \Spek(A)\).  Sei nun
+  \(\lambda \in \mathbb{C} \setminus \{0\}\) beliebig.  Dann gilt
+  \begin{align*}
+    A^{m} - \lambda^{m}I = 0 - \lambda^{m}I = -\lambda^{m}I = (A - \lambda I)\sum_{k=0}^{n-1}{\lambda^{k}A^{n-1-k}}.
+  \end{align*}
+  Insbesondere gilt
+  \begin{align*}
+    \det(A - \lambda I) \det(\sum_{k=0}^{n-1}{\lambda^{k}A^{n-1-k}}) = \det(-\lambda^{m} I)
+    \ne 0.
+  \end{align*}
+  Daraus folgt, dass \(A - \lambda I \ne 0\) für alle
+  \(\lambda \in \mathbb{C} \setminus \{0\}\).  Damit gilt
+  \(\lambda \notin \Spek(A)\) für alle \(\lambda \in \mathbb{C} \setminus \{0\}\).  Damit gilt die Behauptung.
+\end{proof}
+
+\subsubsection*{Aufgabe 6.1, Teil ii}
+
+\begin{beh}
+  Sei \(A\) nilpotent.  Dann ist \(\chi_{A}(t) = t^{n}\). Das
+  Minimalpolynom von \(A\) ist \(t\).
+\end{beh}
+
+\begin{proof}
+  Wegen [Teil i] ist \( \Spek(A) = \{0\} \).  Es gilt
+  \(\chi_{A}(t) = 0\) genau dann, wenn \(t=0\) ist.  Die Gleichung
+  \(\chi_{A}(t) = 0\) hat keine Nullstellen in \(t \in \mathbb{C}_{\ne 0}\).  Daraus
+  folgt, dass \(\chi_{A}(t) = t^{n}\) und \(\mu_{A} = t\) ist
+  Minimalpolynom von \(A\).
+\end{proof}
+
+\subsubsection*{Aufgabe 6.1, Teil iii}
+
+\begin{beh}
+  Sei \(A\) nilpotent.  Dann ist \(\det(A + I_{n}) = 1\).
+\end{beh}
+
+\begin{proof}
+  Wir bemühen uns um einen Widerspruchsbeweis.  Angenommen,
+  \(\det(A+I_{n}) \ne 1\).  Dann existiert mindestens einen Eigenwert
+  \(\lambda \ne 1\) von der Matrix \(A+I_{n}\) und einen Eigenvektor
+  \(v \ne 0\) zu \(\lambda\) dass
+  \[ \lambda v = (A + I_{n}) v = Av + I_{n} v. \] Daraus folgt, dass
+  \((\lambda-1)v = Av\).  Wegen \(\lambda \ne 1\) und \(v \ne 0\) gilt
+  \(Av \ne 0\).  Durch Induktion erhalten wir \(A^{m}v \ne 0\) im
+  Widerspruch zur Voraussetzung dass \(A\) nilpotent ist.
+\end{proof}
+
+\subsection*{Aufgabe 6.3}
+
+Sei \(V\) Vektorraum mit \(\dim V < \infty\) und \(f \in L(V, V)\).
+
+\subsubsection*{Aufgabe 6.3, Teil i}
+
+\begin{beh}
+  Die Funktion \(f\) ist eine Projektion genau dann, wenn das
+  Minimalpolynom \(\mu_{f}\) das Polynom \(t(1-t)\) teilt.
+\end{beh}
+
+\begin{proof}
+  Hinrichtung.  Angenommen, \(f\) ist eine Projektion.  Wegen [Aufgabe
+  5.4] ist \(\{1\} \subseteq \Spek(f) \subseteq \{0, 1\}\).  Wir betrachten zwei
+  Fällen.  Falls \(\Spek(f) = \{1\}\).  Dann ist
+  \(\chi_{f}(t) = (t-1)^{n}\) und das Minimalpolynom teilt
+  \(\chi_{f}(t)\). Damit folgt die Behauptung.  Falls
+  \(\Spek(f) = \{0, 1\}\).  Dann ist \(\chi_{f}(t) = t^{m}(t-1)^{n}\) und
+  das Minimalpolynom teilt \(\chi_{f}(t)\).  Damit folgt die Behauptung.
+
+  Rückrichtung.  Angenommen, das Minimalpolynom \(\mu_{f}\) teilt das
+  Polynom \(t(1-t)\).
+\end{proof}
+
+\end{document}

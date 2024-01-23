@@ -1,0 +1,289 @@
+\documentclass[12pt]{extarticle}
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,fancyhdr,color,graphicx,}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{tikz}
+\renewcommand{\familydefault}{\sfdefault}
+\pagestyle{fancy}
+\setlength{\parindent}{0pt}
+\lhead{Yuchen Guo 480788, Meng Zhang 484981, Chaeyoung Hong 478363}
+\rhead{3. Hausaufgabenblatt, Ana I\\Tilman, Gruppe TB9}
+\begin{document}
+\textbf{H 3.1.i}
+
+\textit{Behauptung.} Die Folge \((a_n)\) konvergiert gegen 0.
+
+\begin{proof}
+  Seien \(\varepsilon > 0\) beliebig gewählt und
+  \(N_{\varepsilon} := \lceil \frac{1}{\varepsilon} \rceil + 1\).  Wir
+  zeigen, dass für alle natürliche Zahlen \(N \geq N_{\varepsilon}\)
+  gilt \(a_N < \varepsilon\).  Durch Umformungen erhalten wir
+  \(a_n=\frac{1}{n+1}\cdot \left( \prod_{k=1}^n{\frac{2}{k}} \right)\).
+
+  \begin{itemize}
+  \item Wir zeigen, dass diese Folge monoton fallend ist mit \(n \geq 1\).
+\begin{align*}
+  a_n-a_{n-1}&=\frac{2^n}{(n+1)!}-\frac{2^{n-1}}{n!}\\
+             &=\frac{2^{n-1}(1-n)}{(n+1)!}
+\end{align*}
+Daraus folgt, dass \(a_n-a_{n-1} \leq 0\) für alle \(n \geq 1\).  Diese
+Folge ist daher monoton fallend.
+  \item Falls \(0<\frac{1}{\varepsilon}\leq 1\)
+
+    Dann gilt  \(\varepsilon \geq 1\) und \(N_{\varepsilon}=2\).  Es gilt
+    \(a_{N_{\varepsilon}}=\frac{2}{3}\).
+
+    Weil diese Folge monoton fallend ist, gilt für alle
+    \(n \geq N_{\varepsilon}\) dass \(a_n \leq \frac{2}{3}\).  D.h.,
+    \(a_{n} < \varepsilon\).
+  \item Falls \(1<\frac{1}{\varepsilon}\leq 2\)
+
+    Dann gilt \(\varepsilon \geq \frac{1}{2}\) und
+    \(N_{\varepsilon} = 3\).  Es gilt \(a_{N_{\varepsilon}}=\frac{1}{3}\).
+    Daraus folgt, \(a_n < \varepsilon\).
+  \item Falls \(\frac{1}{\varepsilon}>2\)
+
+    Dann gilt \(\varepsilon < \frac{1}{2}\) und
+    \(N_{\varepsilon}=\lceil \frac{1}{\varepsilon} \rceil + 1\).  Aus
+    \(\frac{1}{\varepsilon}>2\) folgt \(N_{\varepsilon} \geq 4\).
+    Es gilt auch
+    $a_{N_{\varepsilon}}=\frac{1}{N_{\varepsilon}+1}\cdot \left(
+      \prod_{k=1}^{N_{\varepsilon}}{\frac{2}{k}} \right)$.
+
+
+    Der erste Faktor $\frac{1}{N_{\varepsilon}+1}=\frac{1}{\lceil
+      \frac{1}{\varepsilon} \rceil +1}$ ist stets kleiner als \(\varepsilon\).
+    Der zweite Faktor \(\prod_{k=1}^{N_{\varepsilon}}{\frac{2}{k}}\) ist
+    mit \(N_{\varepsilon} \geq 4\) stets kleiner-gleich \(2/3\).
+
+    Daraus folgt, dass für alle \(n \geq N_{\varepsilon}\) gilt $a_n
+    \leq \frac{2}{3}\varepsilon < \varepsilon$.
+  \end{itemize}
+\end{proof}
+
+\textbf{H 3.1.ii}
+
+\textit{Behauptung.} Die Folge \((b_n)\) divergiert.
+
+\vspace{4mm}
+  Wir zeigen, dass die Folge divergiert, indem wir zeigen, dass für
+  alle \(a \in \mathbb{R}\) existiert ein \(\varepsilon > 0\) und $n \in
+  \mathbb{N}$ mit \(\left| b_n - a \right| \geq \varepsilon\).
+\begin{proof}
+
+  Seien \(a \in \mathbb{R}\) beliebig und $n > \max \left\{ 2,2a+2
+  \right\}$.  Durch Umformungen erhalten wir
+\begin{align*}
+b_n=\frac{n^3-n^2}{n^2+n+1}+1.
+\end{align*}
+
+Es gilt die Ungleichungen
+\(n^3-n^2 > n^3-2n^2\) und
+\(n^2+n+1 < 2n^2\) für alle \(n > 2\).
+
+Daraus folgt,
+\begin{align*}
+b_n > \frac{n^3-2n^2}{2n^2}=\frac{n}{2}-1 > a
+\end{align*}
+für alle \(n>\max \left\{ 2,2a+2 \right\}\).  Sei $\varepsilon :=
+\frac{b_n-a}{2}$, dann gilt \(\left| b_n-a \right| > \varepsilon\).
+\end{proof}
+
+\textbf{H 3.1.iii}
+
+\textit{Behauptung.} Die Folge \((c_n)\) divergiert.
+
+\vspace{4mm}
+  Wir zeigen, dass die Folge divergiert, indem wir zeigen, dass für
+  alle \(a \in \mathbb{R}\) existiert ein \(\varepsilon > 0\) und $n \in
+  \mathbb{N}$ mit \(\left| c_n - a \right| \geq \varepsilon\).
+
+  \begin{proof}
+
+    Seien \(a \in \mathbb{R}\) beliebig und
+    \(n > \sqrt{1+ \left| a \right|} +1\).  Durch Umformungen erhalten
+    wir
+\begin{align*}
+  c_n&=\frac{(n+1)^4+(-1)^n}{(n+1)^2}\\
+     &>\frac{(n+1)^4-(n+1)^2}{(n+1)^2}\\
+  &=n^2+2n.
+\end{align*}
+
+Wegen \(n > \sqrt{1+ \left| a \right|} +1\) gilt \(c_n > a\).
+Sei $\varepsilon :=
+\frac{c_n-a}{2}$, dann gilt \(\left| c_n-a \right| > \varepsilon\).
+
+  \end{proof}
+
+\textbf{H 3.2}
+
+Seien die Menge
+\(A = \left\{ x \in \mathbb{R} | p \leq x \leq q \right\}\), die monoton
+steigende Folge \(a_n:=q-\frac{q}{n}\) und die monoton fallende Folge
+\(b_n:=\frac{q}{n}\).  Es gilt für alle \(n \in \mathbb{N}\) dass $a_n,
+b_n \in A$.
+
+\vspace{4mm}
+
+Aus der Definition der Menge \(A\) folgt unmittelbar \(\sup A = q\) und
+\(\inf A = p\).  Wir zeigen, dass \(\lim_{n\rightarrow \infty}{a_n}=q\) und
+\(\lim_{n\rightarrow \infty}{b_n}=p\) gilt.
+
+\begin{itemize}
+\item \(\lim_{n\rightarrow \infty}{a_n}=q\)
+  \begin{proof}
+    Sei \(\varepsilon >0\) beliebig gewählt und
+    \(N_{\varepsilon} \in \mathbb{N}\) mit
+    \(N_{\varepsilon} > \left| \frac{q}{\varepsilon} \right|\).  Dann gilt für alle
+    natürliche Zahlen \(n \geq N_{\varepsilon}\) die folgende
+    Ungleichung
+\begin{align*}
+  \left| a_n - q \right| = \left| \frac{q}{n} \right|<\varepsilon.
+\end{align*}
+D.h., die Folge \((a_n)\) konvergiert gegen \(q\).   Aus \(\sup A = q\) folgt
+\(\lim_{n\rightarrow \infty}{a_n}=\sup A\).
+  \end{proof}
+\item \(\lim_{n\rightarrow \infty}{b_n}=p\)
+  \begin{proof}
+    Sei \(\varepsilon >0\) beliebig gewählt und
+    \(N_{\varepsilon} \in \mathbb{N}\) mit
+    \(N_{\varepsilon} > \left| \frac{q}{\varepsilon} \right|\).  Dann
+    gilt für alle natürliche Zahlen \(n \geq N_{\varepsilon}\) die
+    folgende Ungleichung
+\begin{align*}
+  \left| b_n - p \right| = \left| \frac{q}{n} \right|<\varepsilon.
+\end{align*}
+D.h., die Folge \((b_n)\) konvergiert gegen \(p\).  Aus \(\inf A = p\) folgt
+\(\lim_{n\rightarrow \infty}{b_n}=\inf A\).
+\end{proof}
+
+Damit haben wir gezeigt, dass es die Folgen, die die Voraussetzungen
+erfüllen, existiert.
+\end{itemize}
+
+\textbf{H 3.3.i}
+
+\textit{Behauptung.} Aus \(\lim_{n\rightarrow \infty}{a_n}=a\) folgt
+\(\lim_{n \rightarrow \infty}{\left| a_n \right|}= \left| a \right|\).
+
+\begin{proof}
+  Wegen \(\lim_{n \rightarrow \infty}{a_n}=a\) existiert ein
+  \(N_{\varepsilon} \in \mathbb{N}\) sodass für alle \(\varepsilon > 0\)
+  und \(n \geq N_{\varepsilon}\) gilt
+  \(\left| a_n - a \right| < \varepsilon\).
+  Wegen umgekehrter Dreiecksungleichung gilt
+  $\left| \left| a_n \right| - \left| a \right|\right| \leq \left| a_n
+    - a \right|\(.  Wegen Transitivität gilt dann \)\left| \left|
+      a_n \right| - \left| a \right|\right|  < \varepsilon$.
+
+  Damit konvergiert die Folge \(\left(  \left| a_n \right| \right)\) gegen \(\left| a \right|\).
+\end{proof}
+
+\textbf{H 3.3.ii}
+
+\begin{proof}
+  Die Folge \((a_n)\) ist eine Nullfolge.  Daraus folgt, es existiert
+  für alle \(\varepsilon > 0\) ein \(N_{\varepsilon_{a}} \in \mathbb{N}\)
+  mit \(|a_n|<\varepsilon\) für alle natürliche Zahlen
+  \(n \geq N_{\varepsilon_{a}}\).  Die Folge \((b_n)\) ist eine Folge mit
+  \(|b_n-b| \leq |a_n|\) für fast alle \(n \in \mathbb{N}\).  Daraus
+  folgt, es existiert ein \(N_{\varepsilon_b} \in \mathbb{N}\) sodass
+  für alle natürliche Zahlen \(n \geq N_{\varepsilon_b}\) gilt
+  \(|b_n-b| \leq |a_n|\).
+
+  Seien \(\varepsilon > 0\) beliebig gewählt und $N > \max \left\{
+    N_{\varepsilon_a}, N_{\varepsilon_b} \right\}$.  Dann gilt für
+  alle \(n \geq N\) die folgende Ungleichung
+\begin{align*}
+  |b_n-b| \leq |a_n| < \varepsilon.
+\end{align*}
+Insbesondere gilt für alle \(n \geq N\) dass \(|b_n-b|<\varepsilon\).
+Damit konvergiert die Folge \((b_n)\) gegen \(b\).
+\end{proof}
+
+\textbf{H 3.4}
+\begin{proof}
+  Wir zeigen, dass die vier Aussagen äquivalent sind, mittels ein
+  Ringschluss.    Sei \(a \in \mathbb{R}\) beliebig gewählt.
+
+  \begin{itemize}
+  \item i \(\implies\) ii
+
+    Falls \(a > 0\).  Dann wegen (i) existiert für alle \(\frac{1}{a}>0\)
+    ein \(k+1 \in \mathbb{N}\) mit \(k+1 > a\).  Sei \(k+1\) die kleinste
+    natürliche Zahl mit \(k+1>a\) sodass \((k+1)-1 \leq a\).
+
+    Wir zeigen, dass \(k\) eindeutig bestimmt ist.  Sei \(j\) eine andere
+    Zahl mit \(j \neq k\) und \(j \leq a < j+1\).  Wegen der
+    Anordnungsaxiomen gilt entweder \(j < k\) oder \(j > k\).  Sei die
+    Aussage \(j < k\) wahr.  Daraus folgt, dass \(j+1 \leq k\) und
+    \(j+1 \leq k \leq a\).  Dies ist im Widerspruch zur \(a < j+1\).  Sei
+    nun die Aussage \(j > k\) wahr.  Dann gilt \(j \geq k+1\) und
+    \(j \geq k+k > a\) im Widerspruch zur \(j \leq a\).  Daraus folgt,
+    dass \(j=k\) sein muss.  \(k\) ist damit eindeutig bestimmt.
+
+    Falls \(a=0\).  Dann gilt \(0 \leq a < 0+1\) und daher \(k=0\).
+
+    Falls \(a < 0\), dann gilt \(-a>0\) und folgt aus den Beweis oben dass
+    genau eine negative ganze Zahl \(k\) existiert.
+  \item ii \(\implies\) iii
+
+    Sei es \(a, b \in \mathbb{R}\), dann ist \(b-a > 0\) \\
+    Wegen Archimedischem Axiom: \(\exists n \in \mathbb{N}\) mit \(n(b-a)>1\) \\
+    aus (ii): für \(n \in \mathbb{N}\), \(\exists k \in \mathbb{Z}\) mit \(k-1 < na < k \), und \(k\) ist eindeutig. \\
+    \(\Rightarrow na < k \leq na + 1 < nb\) \\
+    \(\Rightarrow a < \frac{k}{n} < b\). Weil \(k\) ganze Zahl ist und \(n\)
+    natürliche Zahl ist, ist \(q =\frac{k}{n}\) rationale Zahl.
+
+  \item iii \(\implies\) iv
+
+    Seien \(a \in \mathbb{R}\), \(\varepsilon \in \mathbb{R}_{>0}\)
+    beliebig gewählt.  Wegen (iii) gilt, für beliebige $a-\varepsilon,
+    a+\varepsilon \in \mathbb{R}\( mit \)a - \varepsilon <
+    a+\varepsilon\( immer existiert ein \(q \in \mathbb{Q}\) mit \)a-\varepsilon
+    < q < a+\varepsilon$.
+
+    Wir definieren dann die Folge
+    \((q_n)_{n\in\mathbb{N}}\in \mathbb{Q}\) als eine Folge mit der
+    Eigenschaft \(a-\varepsilon_n < q_n < a+\varepsilon_n\) für alle
+    \(n \in \mathbb{N}\) mit \(\varepsilon_n = \frac{1}{n+1}\).  Wegen
+    (iii) wissen wir, dass eine rationale Zahl \(q_n\) immer existiert.
+
+    Aus der Definition von \((q_n)\) folgt dann,
+    \(\left| q_n - a \right| < \varepsilon\) für alle
+    \(n \in \mathbb{N}\).  Also, die Folge \((q_n)\) konvergiert gegen
+    \(a\).
+  \item iv \(\implies\) i
+
+    Wegen (iv) existiert zu jedem \(a \in \mathbb{R}\) ein
+    \(\varepsilon > 0\) mit \(a - \varepsilon < q_n < a + \varepsilon\)
+    für alle \(n \geq N_{\varepsilon}\).
+
+    Es gilt, \((q_n) \in \mathbb{Q}\).  Daraus folgt, dass
+    \(q_n=\frac{a_n}{b_n}\) mit \(a_n \in \mathbb{Z}\), $b_n \in
+    \mathbb{N}_{>0}$.
+
+    Falls \(a_n > 0\), dann gilt
+    $\frac{a-\varepsilon}{a_n}< \frac{1}{b_n} <
+    \frac{a+\varepsilon}{a_n}$.  Insbesondere gilt
+    \(\frac{1}{b_n} < \frac{a+\varepsilon}{a_n}\) für alle
+    \(b_n \in \mathbb{N}_{>0}\) und
+    \(\frac{a-\varepsilon}{a_n} \in \mathbb{R}\) beliebig.  Daraus folgt
+    dann (i).
+
+    Falls \(a_n=0\), dann gilt \(q_n=a=0\).  Es gilt \(0 < \varepsilon\)
+    für alle \(\varepsilon > 0\).  Daraus folgt dann (i).
+
+    Falls \(a_n < 0\), dann gilt
+    $\frac{a-\varepsilon}{a_n}> \frac{1}{b_n} >
+    \frac{a+\varepsilon}{a_n}$.  Insbesondere gilt
+    \(\frac{a-\varepsilon}{a_n}> \frac{1}{b_n}\) für alle
+    \(b_n \in \mathbb{N}_{>0}\) und
+    \(\frac{a-\varepsilon}{a_n} \in \mathbb{R}\) beliebig.  Daraus folgt
+    dann (i).
+  \end{itemize}
+\end{proof}
+\end{document}

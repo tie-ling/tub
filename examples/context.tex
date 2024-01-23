@@ -1,0 +1,48 @@
+\setuppapersize[A4]
+\setuphead[section][style=\bfa]
+\mainlanguage[de]
+\setupbodyfont[times,10pt]
+\starttext
+\startpagemakeup[align=center,pagestate=start]
+This should be the long title, Andreas' solution.
+\stoppagemakeup
+
+\startsection[title={Stetigkeit}]
+Sei $(X, d)$ ein metrischer Raum und $(x_{n})$ eine Folge in $X$.
+$(x_{n})$ heißt konvergent gegen $a \in X$, falls
+\startformula
+  \forall \varepsilon > 0, \forall N \in \mathbb{N}, \forall n \ge N\colon d(x_{n}, a) < \varepsilon.
+\stopformula
+Wir definieren $A \colonequals \bigcup_{n \in \mathbb{N}}{A_{n}}$ und $A_{0} = \emptyset$.  Wegen $A_{i -
+  1} \subseteq A_{i}$ und $\sigma$-Additivität, es gilt
+\startformula
+  \mathbb{P}(A) = \sum_{i=1}^{\infty}{\mathbb{P}(A_{i} \setminus A_{i-1})}.
+\stopformula
+  Wir betrachten die partielle Summe von der Reihe, dann erhalten wir
+  \startformula \sum_{i=1}^{\infty}{\mathbb{P}(A_{i} \setminus A_{i-1})} = \lim_{n \to \infty}{\sum_{i=1}^{n}{\mathbb{P}(A_{i}
+        \setminus A_{i-1})}} = \lim_{n \to \infty}{\mathbb{P}(A_{n})}.\stopformula
+    Damit gilt die \quotation{Behauptung}.
+    \startquotation
+      \input knuth
+    \stopquotation
+    \startformula
+      \lVert f \rVert
+    f(T), f\left( T \right),
+    \int_{a}^{b} f\left( x \right) d x, \fraction{1}{T},
+    \iiint_{a}^{b}
+    \stopformula
+\stopsection
+\startsection[title={Einteilung der reellen Zahlen}]
+  Zur Bezeichung der Menge aller reelen Zahlen wird das Symbol $\mathbb{R}$
+  oder auch $\mathbf{R}$ verwendet.  Die reelen Zahlen umfassen
+  \startitemize
+  \item rationale Zahlen
+    \startformula
+      \mathbb{Q} = \left\{\ldots, -\frac21, -\frac12, 0, \frac11, \frac12, \ldots\right\}
+      = 
+      \{\frac{p}{q} \mid p \in \mathbb{Z}, q \in \mathbb{N} \setminus \{0\}\}
+    \stopformula
+  \stopitemize
+  
+\stopsection
+\stoptext

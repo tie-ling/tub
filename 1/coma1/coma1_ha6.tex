@@ -1,0 +1,62 @@
+\documentclass[12pt]{extarticle}
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,fancyhdr,color,graphicx,}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{tikz}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{parskip}
+\pagestyle{fancy}
+\setlength{\parindent}{0pt}
+\lhead{Yiwen Yang 466096, Qing Wang 458040, Yuchen Guo 480788}
+\rhead{CoMa 6. Übungsblatt\\Tutor: Lino Mo 4-5.30pm}
+\author{HA Gruppe 103: \\Yiwen Yang 466096\\Qing Wang 458040\\Yuchen Guo 480788\\Tutor: Lino Mo 4-5.30pm}
+\title{6. Übungsblatt\\\small CoMa I WS 22/23}
+\date{}
+\begin{document}
+\maketitle
+\newpage
+\textbf{1. Aufgabe (a)}
+
+\textit{Behauptung.}  Die Aussage gilt für jeden Baum auf \(n\) Knoten
+\(\implies\) Die Aussage gilt für jeden einfachen, ungerichteten,
+zusammenhängenden Graphen auf \(n\) Knoten.
+
+\begin{proof}
+  Aus der Definition von Baum folgt, dass ein Baum ein ungerichteter,
+  zusammenhängender Graph ohne Kreise ist.
+
+  Nun fügen wir Kanten hinzu, sodass dieser ungerichteter,
+  zusammenhängender Graph nicht mehr ein Baum ist.  Wir haben aber
+  vorausgesetzt, dass es einen Knoten in dem Baum gibt, dessen Abstand
+  von allen anderen Knoten höchstens \(\frac{n}{2}\) ist.  Der Abstand
+  kann nur durch das Hinzufügen von Kanten verkürzt werden.  Daraus
+  folgt, dass die Aussage für jeden einfachen, ungerichteten,
+  zusammenhängenden Graphen auf \(n\) Knoten gilt.
+\end{proof}
+
+\textbf{1. Aufgabe (b)}
+
+\textit{Behauptung.}  Es gibt in jedem einfachen, ungerichteten,
+zusammenhängenden Graphen \(G = (V, E, \Psi)\) ohne Kreise (Baum) mit \(n\) Knoten einen
+Knoten, dessen Abstand von allen anderen Knoten höchstens
+\(\frac{n}{2}\) ist.
+
+\begin{proof}
+  Wir bemühen uns um einen Widerspruchsbeweis.
+
+  Falls \(n\) gerade.  Angenommen, der Abstand zwischen allen Knoten im
+  Baum \(G\) ist mindestens \(\frac{n}{2}+1\).  Es gibt insgesamt $\left|
+    V(G) \right|-1=n-1$ Kanten. Im Fall \(n=2\) dann gibt es nur \(2\)
+  Knoten und \(1\) Kante.  Der Abstand zwischen allen Knoten ist \(1\) im
+  Widerspruch zur Annahme \(\geq 2\).
+
+  Falls \(n\) ungerade.  Angenommen, der Abstand zwischen allen Knoten
+  im Baum \(G\) ist mindestens \(\lceil\frac{n}{2}\rceil\). Es gibt insgesamt $\left|
+    V(G) \right|-1=n-1$ Kanten. Im Fall \(n=3\) dann gibt es nur \(3\)
+  Knoten und \(2\) Kante.  Der Abstand zwischen den mittleren Punkt und
+  den beiden Punkt am Rand ist \(1\) im Widerspruch zur Annahme \(\geq 2\).
+\end{proof}
+\end{document}

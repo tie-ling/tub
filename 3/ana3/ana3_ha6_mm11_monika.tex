@@ -1,0 +1,150 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+\documentclass[draft,a5paper]{article}
+
+% 让每个章节 subsection 在新的一页上开始
+% 而不是紧接着上一章节
+\AddToHook{cmd/subsection/before}{\clearpage}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+\geometry{margin=1.5cm}
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+
+% 调整 Emacs 预览字体大小
+% (setq preview-scale-function 1.5)
+
+% TeX Gyre Schola and unicode-math
+% which in turn loads amsmath,mathtools,fontspec and friends
+\usepackage{xcharter-otf}
+
+% 加载数学相关的包
+\usepackage{
+  % 自然段间留空
+  parskip,
+  % 区间排版
+  interval
+}
+
+% 中文支持，暂时不需要
+% \usepackage[UTF8]{ctex}
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\usepackage{amsthm}
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+% 定义新函数，依赖于AMSmath
+\DeclareMathOperator{\card}{card}
+
+\newcommand{\wt}{\widetilde}
+\newcommand{\dd}{\,\mathrm{d}}
+% 标题与作者
+\title{HA 6, Ana 3, Monika, MM 11}
+\author{Zhang 484981, Yang 466096, Guo 480788}
+
+\begin{document}
+\maketitle
+\begin{center}
+  Meng Zhang 484981, Yiwen Yang 466096, Yuchen Guo 480788
+\end{center}
+
+\subsection{H 6.1}
+\subsubsection{Teil i}
+Wegen Korollar 1.100:
+\begin{align*}
+  \int_{\interval{0}{1}^{2}}{x e^{-xy} \dd \lambda^{2}(x, y)}
+  &= \int\left(\int_{\interval{0}{1}_{x}} {x e^{-xy} \dd \lambda(y)}\right) \dd
+    \lambda(x) \\
+  &= \int^{1}_{0}\left(\int_{0}^{1} x e^{-xy} \dd \lambda(y)\right) \dd \lambda(x) \\
+  &= \int_{0}^{1}\left(-e^{-xy}\bigg\vert_{0}^{1}\right) \dd \lambda(x) \\
+  &= \int_{0}^{1}{1-e^{-x}} \dd \lambda(x) \\
+  &= (x + e^{-x}) \bigg\vert_{0}^{1} = e^{-1}.
+\end{align*}
+\subsubsection{Teil ii}
+\begin{align*}
+  \int_{\interval{0}{\pi/2}^{2}}{\sin (x+y) \dd \lambda^{2}(x, y)}
+  &= \int\left(\int_{\interval{0}{\pi/2}_{x}}{\sin (x+y) \dd \lambda(y)}\right) \dd
+    \lambda(x) \\
+  &= \int_{0}^{\pi/2}\left(\int_{0}^{\pi/2}{\sin(x+y) \dd
+    \lambda(y)}\right) \dd \lambda(x) \\
+  &= \int_{0}^{\pi/2}{\cos(x) - \cos(x+\pi/2)\dd \lambda(x)} \\
+  &= \sin(\pi/2) - \sin(0) - \sin(\pi) + \sin(\pi/2) \\
+  &= 2.
+\end{align*}
+\subsection{Teil iii}
+\begin{align*}
+  \int_{0}^{1}\int_{0}^{1-z}\int_{0}^{1-y-z}{1}\dd x \dd y \dd z
+  &= \int_{0}^{1} \int_{0}^{1-z} 1-y-z \dd y \dd z \\
+  &= \int_{0}^{1}  (1-z)^{2} - \frac{(1-z)^{2}}{2} \dd z \\
+  &= -\frac{(1-z)^{3}}{6} \bigg\vert^{1}_{0}\\
+  &= \frac{1}{6}.
+\end{align*}
+
+\subsection{H 6.2}
+\begin{Behauptung}
+  Sei \(f\colon \interval{a}{b} \to \rinterval{0}{\infty}\) eine messbare und
+  Riemann-integrierbare Funktion sowie
+  \[M \coloneq \{(x, y) \in \interval{a}{b} \times \mathbb{R} \mid 0 \le y \le f(x)\}.\]
+  Dann ist \(M\) eine Borel-Menge mit
+  \begin{equation}
+    \label{eq:1}
+    \lambda^{2}(M) = \int_{a}^{b}{f(x) \dd x}.
+  \end{equation}
+\end{Behauptung}
+\begin{proof}
+  Wir zeigen, dass die Menge \(M\) eine Borel-Menge ist, indem wir
+  zeigen, dass \(M\) eine abgeschlossene Menge ist.  Wir bemerken, dass
+  \(f\) wegen ihrer Riemann-integrierbarkeit auf dem abgeschlossenen
+  Interval \(\interval{a}{b}\) ihrer Maximum annehmmt.  D.h., es
+  existiert \(x \in \interval{a}{b}\) sodass \(f(x) = \max
+  f(\interval{a}{b}) = \sup f(\interval{a}{b})\).
+
+  Wir zeigen, dass
+  \[M^{c} = \mathbb{R}^{2} \setminus M = \{(x,y) \in \mathbb{R}^{2} \mid x < a \text{ oder } x > b
+    \text{ oder } y > \max f(\interval{a}{b}) \text{ oder } y < 0\}\]
+  eine offene Menge ist.  Sei \(p \in M^{c}\) beliebig.  Wählen wir
+  \[0 < \varepsilon < \min d(p, q), \quad q \in M,\] dann ist
+  \(U_{\varepsilon}(p) \subseteq M^{c}\) eine Umgebung von \(p\).  Weil \(p\) beliebig gewählt
+  war, folgt die Behauptung dass \(M^{c}\) offen und \(M\) abgeschlossen.
+  Damit ist \(M \in \mathcal{B}^{2}\).
+
+  Wir zeigen, dass die Gleichung \eqref{eq:1} gilt.  Aus der
+  Riemann-integrierbarkeit von \(f\) folgt, dass die Oberintegral und
+  Unterintegral von \(f\) auf dem Intervall \(\interval{a}{b}\)
+  existieren und übereinstimmen.  Aus der Definition von Ober- und
+  Unterintegral folgt
+\[    \overline{\int_{a}^{b}}{f(x)\dd x}
+    = \underline{\int_{a}^{b}}{f(x) \dd x}\]
+  und
+  \[    \inf\{I(\varphi) \mid f \le \varphi,~ \varphi \text{ Treppenfunktion}\}
+    = \sup\{I(\psi) \mid \psi \le f,~ \psi \text{ Treppenfunktion}\}\]
+  wobei
+  \[I(\varphi) = \sum_{i=1}^{n}{c_{i} \cdot (x_{i} - x_{i-1})}\]
+  gilt.  Es existiert daher zwei Folgen von Treppenfunktionen
+  \((\varphi_{i})\) und \((\psi_{i})\) sodass gilt
+  \[\lim_{i \to \infty} \varphi_{i} = \varphi, \quad \lim_{i \to \infty} \psi_{i} = \psi, \quad \varphi_{i} < \varphi, \quad
+    \psi_{i} > \psi, \quad \lim_{i \to \infty}{I(\varphi_{i} - \psi_{i})} = 0.\]
+  Wir bemerken, dass die zwei Funktionenfolgen \((-\varphi_{i})\) und \((\psi_{i})\)
+  monoton wachsende Folge messbarer Funktionen sind.  Damit gilt wegen
+  Satz von Beppo Levi, dass
+  \[\int_{M}(\lim_{i \to \infty}\psi_{i}) \dd \lambda^{2}(M) = \lim_{i \to \infty}I(\psi_{i}) =
+    I(\psi) = \int_{a}^{b}{f(x) \dd x}. \]
+  Damit gilt die Gleichung \eqref{eq:1}.
+\end{proof}
+\end{document}

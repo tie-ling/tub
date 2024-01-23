@@ -1,0 +1,248 @@
+\documentclass[12pt]{extarticle}
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,fancyhdr,color,graphicx,}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{tikz}
+\renewcommand{\familydefault}{\sfdefault}
+\pagestyle{fancy}
+\setlength{\parindent}{0pt}
+\lhead{Yiwen Yang 466096, Qing Wang 458040, Yuchen Guo 480788}
+\rhead{CoMa 3. Übungsblatt\\Tutor: Lino Mo 4-5.30pm}
+\author{HA Gruppe 103: \\Yiwen Yang 466096\\Qing Wang 458040\\Yuchen Guo 480788\\Tutor: Lino Mo 4-5.30pm}
+\title{3. Übungsblatt\\\small CoMa I WS 22/23}
+\date{}
+\begin{document}
+\maketitle
+\newpage
+
+\textbf{H 1.a}
+
+\textit{Behauptung.}  Aus \(b_1 > b_2\) folgt \(n_1 > n_2\).
+
+\vspace{4mm}
+
+Wir widerlegen diese Behauptung mit einem Beispiel.  Seien \(n_1=(1)_3\)
+und \(n_2=(1)_2\).  Es gilt \(b_1 > b_2\) und im Widerspruch zur
+Behauptung \(n_1=n_2=(1)_{10}\).  Damit ist die Behauptung widerlegt.
+
+\vspace{4mm}
+
+\textbf{H 1.b}
+
+\textit{Behauptung.}  Aus \(n_1 > n_2\) folgt \(b_1 > b_2\).
+
+\begin{proof}
+  Es gilt
+  $n_1=\sum_{i=0}^{l-1}{z_ib_1^i}=\sum_{i=0}^{l-1}{ \left(
+      \frac{b_1}{b_2} \right)^iz_i b_2^i}$ und
+  \(n_2=\sum_{i=0}^{l-1}{z_ib_2^i}\).  Aus \(n_1>n_2\) folgt, dass
+  \(\left( \frac{b_1}{b_2} \right)^i > 1\) gilt.
+
+  Es gilt, für alle \(0 < x \leq 1\) dass \(0 < x^n \leq 1\).  Deshalb
+  muss \(\frac{b_1}{b_2}>1\) sein.  Wegen \(b_1, b_2 \in \mathbb{N}_{>0}\)
+  gilt dann \(b_1>b_2\).
+
+\end{proof}
+
+\textbf{H 1.c}
+
+\textit{Behauptung.}  Aus \(b_1|b_2\) folgt \(n_1|n_2\).
+
+\begin{proof}
+  Es gilt \(n_1=\sum_{i=0}^{l-1}{z_ib_1^i}\) und
+  $n_2=\sum_{i=0}^{l-1}{z_ib_2^i}=\sum_{i=0}^{l-1}{
+    \left( \frac{b_2}{b_1}  \right)^iz_i b_1^i}$.
+
+
+  Aus \(b_1|b_2\) folgt, dass \(b_2 = kb_1\) mit \(k \in \mathbb{N}\).
+  Daraus folgt, dass \(n_2=\sum_{i=0}^{l-1}{ k^i z_i b_1^i}\).
+
+  Es gilt, \(n_2/n_1=\sum_{i=1}^{l-1}{k^i} \in \mathbb{N}\).  Damit gilt
+  \(n_1|n_2\).
+\end{proof}
+
+\textbf{H 1.d}
+
+\textit{Behauptung.}  Aus \(n_1|n_2\) folgt \(b_1|b_2\).
+
+\vspace{4mm}
+
+Wir widerlegen diese Behauptung mit einem Beispiel.  Seien \(n_1=(0)_2\)
+und \(n_2=(0)_3\).  Es gilt \(n_1=n_2=(0)_{10}\) und daher \(n_1|n_2\).  Es
+gilt aber nicht \(2|3\).
+
+\vspace{4mm}
+
+\textbf{H 1.e}
+
+\textit{Behauptung.}  Es gilt \(\frac{n_1}{n_2}=\frac{b_1}{b_2}\).
+
+\vspace{4mm}
+
+Wir widerlegen diese Behauptung mit einem Beispiel.  Seien \(n_1=(1)_2\)
+und \(n_2=(1)_3\).  Es gilt \(\frac{n_1}{n_2}=1\neq \frac{3}{2}\).
+
+\vspace{4mm}
+
+\textbf{H 1.f}
+
+\textit{Behauptung.}  Sei \(b_1 > b_2\) und \(m \in \mathbb{N}\).  Dann
+existiert ein \(N \in \mathbb{N}\), sodass folgendes gilt:  Ist \(l > N\)
+und \(z_{l-1}\neq 0\), dann ist \(n_1 > mn_2\).
+
+\vspace{4mm}
+
+\begin{proof}
+  Es gilt
+  $n_1=\sum_{i=0}^{l-1}{z_ib_1^i}=\sum_{i=0}^{l-1}{ \left(
+      \frac{b_1}{b_2} \right)^iz_i b_2^i}$ und
+  \(n_2=\sum_{i=0}^{l-1}{z_ib_2^i}\).  Wegen \(b_1>b_2\) gilt
+  \(\frac{b_1}{b_2}>1\).
+  Seien \(m=1\), \(N=2\) und \(l=3\).  Dann gilt
+\begin{align*}
+n_1&=z_2\left(\frac{b_1}{b_2} \right)^2 b_2^2 +
+     z_1\left(\frac{b_1}{b_2} \right) b_2 + z_0\\\\
+  n_2&=z_2 b_2^2 + z_1 b_2 + z_0\\
+     &=mn_2
+\end{align*}
+Es gilt wegen \(\frac{b_1}{b_2}>1\) dass \(n_1>mn_2\).
+\end{proof}
+\vspace{4mm}
+
+\newpage
+
+\textbf{H 2.a}
+
+\vspace{4mm}
+
+Siehe Aufgabe (H 1.b).
+
+\vspace{4mm}
+
+\textbf{H 2.b}
+
+\vspace{4mm}
+
+Siehe Aufgabe (H 1.a).
+
+\vspace{4mm}
+
+\textbf{H 2.c}
+
+\vspace{4mm}
+
+Aus der Voraussetzung folgt,
+\begin{align*}
+  (b_1^l-n_1) \mod b_1^l&=(b_2^l-n_2) \mod b_2^l.
+\end{align*}
+???
+
+\vspace{4mm}
+
+\textbf{H 3.a}
+
+\vspace{4mm}
+
+\vspace{4mm}
+
+\textbf{H 3.b.i}
+
+\vspace{4mm}
+
+\vspace{4mm}
+
+\textbf{H 3.b.ii}
+
+\vspace{4mm}
+
+\vspace{4mm}
+
+\newpage
+
+\textbf{H 4.a}
+
+\begin{proof}
+  Sei der Code an der \(k\)-ten Stelle nicht erkennbar.
+
+  Es gilt $\sum_{n=0}^6{a_{2n+1}}+3\sum_{n=1}^6{a_{2n}} \equiv 0
+  \pmod{10}$.  Es gilt auch, \(1 \leq a_k \leq 9\).
+
+\vspace{4mm}
+  \begin{itemize}
+  \item Falls \(k\) gerade.
+
+    Dann gilt
+\begin{align*}
+    \sum_{n=0}^6{a_{2n+1}}+3\sum_{n=1}^{k-1}{a_{2n}}+3\sum_{n=k+1}^{6}{a_{2n}}+3a_k
+  \equiv 0 \pmod{10}\\\\
+  3a_k=10p-\left( \sum_{n=0}^6{a_{2n+1}}+3\sum_{n=1}^{k-1}{a_{2n}}+3\sum_{n=k+1}^{6}{a_{2n}} \right)
+\end{align*}
+mit \(p \in \mathbb{N}\).  Wegen \(3a_k\) muss die Rechtsseite der
+Gleichung durch \(3\) teilbar sein, die mögliche Lösungen sind also
+\(\left\{ 3, 6, 9, 12, 15, 18, 21, 24, 27 \right\}\).  Wir bemerken,
+dass alle mögliche Lösungen geteilt durch \(10\) einen eindeutigen Rest
+besitzt, nämlich \(\left\{ 7, 4, 1, 8, 5, 2, 9, 6, 3 \right\}\).  Also,
+die Werte von \(a_k\) und \(p\) ist durch den Rest von der größen Klammern
+geteilt durch \(10\) eindeutig bestimmt.
+
+  \item Falls \(k\) ungerade.
+
+    Dann gilt
+\begin{align*}
+\sum_{n=0}^{k-1}{a_{2n+1}}+\sum_{n=k+1}^6{a_{2n+1}}+3\sum_{n=1}^6{a_{2n}}+a_k
+  \equiv 0  \pmod{10}\\\\
+  a_k=10p-\left( \sum_{n=0}^{k-1}{a_{2n+1}}+\sum_{n=k+1}^6{a_{2n+1}}+3\sum_{n=1}^6{a_{2n}} \right).
+\end{align*}
+mit \(p \in \mathbb{N}\).  Wegen \(1 \leq a_k \leq 9\) ist dann \(p\)
+eindeutig bestimmt.  Denn, für \(p-1\) oder \(p+1\) muss entweder $a_k >
+9$ oder \(a_k<1\) gelten.
+
+  \end{itemize}
+\end{proof}
+
+\vspace{4mm}
+
+\newpage
+
+\textbf{H 4.b}
+
+\begin{proof}
+  Sei der Code an der \(k\)-ten und \(k+1\) Stelle vertauscht.
+
+  Es gilt $\sum_{n=0}^6{a_{2n+1}}+3\sum_{n=1}^6{a_{2n}} \equiv 0
+  \pmod{10}$.  Es gilt auch, \(1 \leq a_k \leq 9\).
+
+Jetzt werden \(a_k\) und \(a_{k+1}\) vertauscht.  Wir zeigen, dass
+\(3a_k+a_{k+1} \neq a_k+3a_{k+1}+10n\), also
+\(4|a_k-a_{k+1}| \neq 10n\) für alle \(n \in \mathbb{Z}\)
+gilt.
+
+Nun betrachten wir die Fälle wenn
+\(|a_k-a_{k+1}|\) gleich \(\left\{ 1,2,3,4,5,6,7,8 \right\}\) ist.
+
+Sei \(|a_k-a_{k+1}|=1\), dann gilt \(4|a_k-a_{k+1}| =4 \neq 10n\).
+
+Sei \(|a_k-a_{k+1}|=2\), dann gilt \(4|a_k-a_{k+1}| =8 \neq 10n\).
+
+Sei \(|a_k-a_{k+1}|=3\), dann gilt \(4|a_k-a_{k+1}| =12 \neq 10n\).
+
+Sei \(|a_k-a_{k+1}|=4\), dann gilt \(4|a_k-a_{k+1}| =16 \neq 10n\).
+
+Sei \(|a_k-a_{k+1}|=5\), dann gilt $4|a_k-a_{k+1}| =20 =
+10n$ mit \(n=2\).
+
+Sei \(|a_k-a_{k+1}|=6\), dann gilt \(4|a_k-a_{k+1}| =24 \neq 10n\).
+
+Sei \(|a_k-a_{k+1}|=7\), dann gilt \(4|a_k-a_{k+1}| =28 \neq 10n\).
+
+Sei \(|a_k-a_{k+1}|=8\), dann gilt \(4|a_k-a_{k+1}| =32 \neq 10n\).
+
+Damit haben wir gezeigt, dass der Code kann niemals korrekt sein, wenn
+zwei ungleichen, aufeinanderfolgenden Ziffern vertauscht werden.
+Außer deren Differenz ist gleich \(5\).
+
+\end{proof}
+\end{document}

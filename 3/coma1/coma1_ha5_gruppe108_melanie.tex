@@ -1,0 +1,87 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+% draft mode incompatible with tikz
+\documentclass[a5paper]{article}
+
+% 让每个章节 subsection 在新的一页上开始
+% 而不是紧接着上一章节
+\AddToHook{cmd/subsection/before}{\clearpage}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+\geometry{a5paper,
+ left=1cm,
+ right=1cm,
+ top=1cm,
+ bottom=2cm
+}
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+
+% 调整 Emacs 预览字体大小
+% (setq preview-scale-function 1.5)
+
+% TeX Gyre Schola and unicode-math
+% which in turn loads amsmath,mathtools,fontspec and friends
+\usepackage{xcharter-otf}
+
+
+% 加载数学相关的包
+\usepackage{
+  % 自然段间留空
+  parskip,
+  % 区间排版
+  interval
+}
+
+% 中文支持，暂时不需要
+% \usepackage[UTF8]{ctex}
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\usepackage{amsthm}
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+% 标题与作者
+\title{HA 5, CoMa 1, Laurin, Gruppe 108}
+\author{Kuan 480169, Yu 478912, Guo 480788}
+
+% 画图工具
+\usepackage{tikz,pgfplots}
+\pgfplotsset{compat=1.18}
+
+
+\begin{document}
+\maketitle
+\begin{center}
+Ting Yu Kuan 480169, Shilong Yu 478912, Yuchen Guo 480788
+\end{center}
+\subsection{1. Aufgabe}
+\begin{Behauptung}
+  Die Graphen \(G_{1}\) und \(G_{4}\) sind isomorph.  Die Graphen \(G_{2},
+  G_{3}\) und \(G_{5}\) sind isomorph.
+\end{Behauptung}
+\begin{proof}
+  Wir zeigen, dass die Behauptung gilt, indem wir zeigen, dass die
+  bijektive Abbildung \(\varphi_{1}, \varphi_{2}, \varphi_{3}\) existiert sodass gilt
+  \[\varphi_{1}(G_{1}) = G_{4}, \quad \varphi_{2}(G_{2}) = G_{3}, \quad \varphi_{3}(G_{2}) =
+    G_{5}.\]
+
+  Wir bemerken, dass \(\abs(E_{1}) = \abs(E_{4}) = \)
+\end{proof}
+
+\end{document}

@@ -1,0 +1,182 @@
+% settings for chktex
+% chktex-file 3
+\documentclass[draft,a5paper]{article}
+%\usepackage[a-1b]{pdfx}
+%\hypersetup{bookmarksnumbered,colorlinks=true}
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+% bolder computer modern
+\usepackage{xcharter-otf}
+\usepackage{xcharter-otf}
+
+\usepackage[a5paper, margin=2cm]{geometry}
+
+% adjust emacs scaling
+% (setq preview-scale-function 2)
+% run C-x C-e here
+
+% 使用德语标点
+\usepackage[ngerman]{babel}
+
+% 加载数学相关的包
+\usepackage{amsmath,mathtools,fontspec,amssymb,amsthm,interval,mathtools}
+
+% theorems
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+
+% math commands
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Img}{Im}
+\DeclareMathOperator{\rg}{rg}
+
+
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\charPol}{char\,Pol}
+
+\usepackage{tikz,pgfplots}
+\pgfplotsset{
+  compat=1.18,
+  every axis/.append style={
+    axis x line=middle,
+    axis y line=middle,
+    xlabel={\(x\)},
+    ylabel={\(y\)},
+    axis line style={->},
+  },
+  grid style={dotted,gray},
+}
+\begin{document}
+\maketitle
+\begin{center}
+  Ting Yu Kuan 480169, Shilong Yu 478912, Yuchen Guo 480788
+\end{center}
+
+\newpage
+\subsection*{Aufgabe 1.1}
+Sei \(A_{x, y} \in \mathbb{C}^{3\times3}\) eine Matrix mit
+\begin{align*}
+  \begin{bmatrix}
+    1 & 0 & 1 \\
+    0 & 1 & -1 \\
+    0 & x & y
+  \end{bmatrix}.
+\end{align*}
+\begin{enumerate}
+\item Das charakteristische Polynom von \(A_{x,y}\) ist bestimmt durch
+  \begin{align*}
+    \charPol_{A_{x, y}}(p) &= \det(E \cdot p - A_{x, y}) = \det
+    \begin{bmatrix}
+      p - 1 & 0 & -1 \\
+      0 & p - 1 & 1 \\
+      0 & -x & p - y
+    \end{bmatrix} \\
+                           &= (p-1)^{2}(p-y) + (p-1)x \\
+                           &= (p-1)[p^{2} - (y+1)p + x + y].
+  \end{align*}
+\item Genau dann ist \(f \in \mathbb{C}\) ein Eigenwert der Matrix \(A\), wenn \(f\)
+  eine Nullstelle des charakteristischen Polynomes \(\charPol_{A}(p)\)
+  von \(A\) ist.  Daraus folgt, dass
+  \[1, \quad \frac{(1+y) \pm \sqrt{(1+y)^{2} - 4(x+y)}}{2}\]
+  die Eigenwerte der Matrix \(A\) ist.
+\item Wir bestimmen alle Paare \((x, y) \in \mathbb{R}^{2}\), sodass die Matrix \(A\)
+  über \(\mathbb{R}\) nur den Eigenwert Eins hat.  Dazu betrachten wir die
+  Lösungsmenge von
+  \[(1+y)^{2} - 4(x+y) = y^{2} - 2y - 4x + 1 < 0.\]
+  Daraus folgt, dass
+  \(\frac{y^{2} - 2y + 1}{4} < x\).
+  \begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+      \begin{axis}[
+        grid=both,
+        axis equal,
+        xmin=-1,xmax=4,
+        ymin=-4,ymax=5,
+        ]
+        % \addplot[smooth,domain = -6:6]{2-x^2};
+        \addplot[domain=-4:5, smooth](x^2/4 - x/2 + 1/4, x);
+        \addplot[draw=none,
+        fill=red!20,
+        semitransparent,
+        domain=-5:7,
+        smooth]
+        (x^2/4 - x/2 + 1/4, x);
+      \end{axis}
+    \end{tikzpicture}
+    \caption{Aufgabe 1.1, Teil iii}
+  \end{figure}
+\end{enumerate}
+\subsection*{Aufgabe 1.2}
+Seien die Matrizen \(A, B \in \mathbb{R}^{3 \times 3}\) mit
+\begin{align*}
+  A \coloneq
+  \begin{bmatrix}
+    1 & 2 & 3 \\
+    4 & 5 & 6 \\
+    0 & 0 & 1
+  \end{bmatrix}, \quad
+  B \coloneq
+  \begin{bmatrix}
+    1 & 0 & 1 \\
+    0 & 1 & 1 \\
+    0 & 2 & 4
+  \end{bmatrix}.
+\end{align*}
+\begin{enumerate}
+\item Wir zeigen, dass \(A\) und \(B\) nicht ähnlich sind, indem wir
+  zeigen, dass die beide Matrizen nicht dieselben Eigenwerte
+  besitzen. [Kowalsky, Satz 6.1.4.]
+  Analog zu erster Aufgabe gilt
+  \[\charPol_{A}(p) = (p-1)^{2}(p-5) - 8(p-1), \quad \charPol_{B}(p) =
+    (p-1)^{2}(p-4) - 2(p-1).\]
+  mit Eigenwerten
+  \[\left\{1, 3 \pm \sqrt{12}\right\}, \quad \left\{1, \frac{5
+        \pm\sqrt{17}}{2}\right\}.\]
+\item Seien \(C, D \in \mathbb{R}^{n \times n}\) Matrizen.  Wegen Voraussetzung besitzt
+  die Matrizen \(C\) und \(D\) die gleiche, paarweise verschiedene
+  \(n\)-Eigenwerte \(\lambda_{1}, \ldots, \lambda_{n}\).  Wegen [Definition von Eigenwerte]
+  und [Kowalsky, Satz 6.2.1] existieren die linear unabhängige
+  Spaltenvektoren \(v_{1}, \ldots, v_{n}, w_{1}, \ldots, w_{n} \in \mathbb{R}^{n}\) sodass gilt
+  \[C \cdot v_{i} = v_{i} \lambda_{i}, \quad D \cdot w_{i} = w_{i} \lambda_{i}; \quad 1 \le i \le n.\]
+  Weil \(C, D \in \End(\mathbb{R}^{n})\) gilt und
+  \((v_{i})_{1 \le i \le n}\) und \((w_{i})_{1 \le i \le n}\) linear unabhängig
+  sind, definieren wir Basen von \(\mathbb{R}^{n}\) mit
+  \[M \coloneq \{v_{i} \mid 1 \le i \le n \}, \quad N \coloneq \{w_{i} \mid 1 \le i \le n\}.\] Damit
+  existiert eine invertierbare Matrix des Basiswechsels
+  \(P \in \End(\mathbb{R}^{n})\) von \(M\) nach \(N\) mit
+  \[D = P \cdot C \cdot P^{-1}.\] Damit sind die Matrizen \(C, D\) ähnlich.
+\end{enumerate}
+\subsection*{Aufgabe 1.3}
+Sei die Matrix \(M \in \mathbb{R}^{3 \times 3}\) mit
+\begin{align*}
+  M \coloneq
+  \begin{bmatrix}
+    1 & 2 & 3 \\
+    0 & 5 & 0 \\
+    0 & 3 & -1
+  \end{bmatrix}.
+\end{align*}
+\begin{enumerate}
+\item Es gilt \[\charPol_{M}(p) = (p-1)(p+1)(p-5).\]  Daraus folgt, dass
+  die Eigenwerte \(\{\pm 1, 5\}\) sind.
+\item Wir berechnen \(\Ker(E \cdot f - M)\), wobei \(f \in \{\pm 1, 5\}\) gilt.
+  Dann sind die entsprechende Eigenvektoren
+  \[[1, 0, 0], [-3, 0, 2], [7, 8, 4]\]
+\item Ja, die Eigenvektoren bilden eine Basis von \(\mathbb{R}^{3}\), denn die
+  drei Vektoren linear unabhängig sind.
+  \begin{align*}
+    \begin{bmatrix}
+      1 & 0 & 0 \\
+      0 & 1 & 0 \\
+      0 & 0 & 1
+    \end{bmatrix}
+  \end{align*}
+  Die Matrix \(M\) ist diagonalisierbar.
+\end{enumerate}
+\end{document}

@@ -1,0 +1,107 @@
+\setuppapersize[A5]
+\setuphead[section][style=\bfa]
+\mainlanguage[de]
+\setupbodyfont[times,9pt]
+\define[1]\abs{\lvert#1\rvert}
+\definemathfunction [mysin]
+
+\defineenumeration[theorem]
+                  [text=Behauptung.,number=no,headstyle=italic,title=no,style=normal]
+\defineenumeration[proof]
+                  [text=Beweis.,number=no,headstyle=italic,title=no,style=normal]
+
+\starttext
+  {\bf WT1, HA2, Gruppe LS1, Leon}
+
+  Shengjie Liu 503531, Meng Zhang 484981, Yuchen Guo 480788
+
+  \startsection[title={Aufgabe}]
+    
+  \stopsection
+
+  \startsection[title={Aufgabe}]
+
+    Die siebenstelligen Gewinnzahlen haben genau dann die größte
+    Ziehungswahrscheinlichkeit, wenn {\tt abcdefg} paarweise
+    verschieden sind.  Denn die Ziehungswahrscheinlichkeit beträgt in
+    diesem Fall
+    \startformula
+      \frac{7 \times 7 \times 7 \times 7 \times 7 \times 7 \times 7}{70 \times 69 \times 68 \times 67 \times 66 \times 65 \times
+        64 \times 63}
+    \stopformula
+    Die haben genau dann die kleinste Ziehungswahrscheinlichkeit,
+    falls {\tt aaaaaaa} an jeder Stelle gleich sind, denn in diesem
+    Fall ist die Wahrscheinlichkeit
+    \startformula
+      \frac{7 \times 6 \times 5 \times 4 \times 3 \times 2 \times 1}{70 \times 69 \times 68 \times 67 \times 66 \times 65 \times
+        64 \times 63}
+    \stopformula
+
+    Wir bestimmen die Gewinnwahrscheinlichkeit für die Zahl {\tt
+      3143643}
+    \startformula
+      \frac{7 \times 7 \times 7 \times 6 \times 7 \times 6 \times 5}{70 \times 69 \times 68 \times 67 \times 66 \times 65 \times
+        64 \times 63}
+    \stopformula
+    Um allen Gewinnzahlen die gleiche Ziehungswahrscheinlichkeit zu
+    sichern, kann man nacheinander rein zufällig 7 Kugeln, mit
+    Reihenfolge, mit Zurücklegen ziehen.  In diesem Fall ist für alle
+    {\tt abcdefg} die gleiche Wahrscheinlichkeit $\frac{7^{7}}{70^{7}}$.
+  \stopsection
+
+  \startsection[title={Aufgabe}]
+    Auf $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ gibt es keine Gleichverteilung.
+    \startproof
+      Angenommen, es gäbe eine Gleichverteilung $f(x)\colon \mathbb{R} \to \left[0,
+        \infty\right[$.  Aus der Definition von Gleichverteilung in der
+          Aufgabenstellung folgt, dass für alle $p, q \in \mathbb{Z}$
+          \startformula
+            f(\left]p, p+1\right]) = f(\left]q, q+1\right]) = \varepsilon.
+        \stopformula
+        Weil $f$ ein W-Maß ist, gilt $f(\mathbb{R}) = 1$.  Dies ist jedoch
+        nicht möglich, denn
+        \startformula
+          f(\mathbb{R}) = \sum_{p \in \mathbb{Z}}f(\left]p, p+1\right]) = \varepsilon \cdot \infty = \infty > 1
+        \stopformula
+        Widerspruch.
+    \stopproof
+  \stopsection
+
+  \startsection[title={Aufgabe}]
+    Es seien $\lambda > 0$ und $n \in \mathbb{N} \setminus \{0\}$.
+    \starttheorem
+      $p\colon \mathbb{N} \setminus \{0\} \to \mathbb{R}, k \mapsto \frac{1}{k(k+1)}$ ist eine Zähldichte,
+      d.h., $\sum_{\omega \in \mathbb{N}\setminus\{0\}}p(\omega)=1$.
+    \stoptheorem
+
+    \startproof
+      Die Folge $(\sum p)$ ist eine Teleskop-Summe.  Denn seien $c_{n} 
+      \colonequals \frac{n}{n+1}$ und $c_{0} = 0$ dann gilt
+      \startformula
+        c_{k} - c_{k-1} = \frac{k}{k+1} - \frac{k-1}{k} = \frac{1}{k(k+1)}.
+      \stopformula
+      Daraus folgt, dass
+      \startformula
+        \sum_{k=1}^{n}{\frac{1}{k(k+1)}} = \frac{n}{n+1}
+      \stopformula
+      und
+      \startformula
+        \sum_{k=1}^{\infty}{\frac{1}{k(k+1)}} = \lim_{n \to \infty}\frac{n}{n+1} = 1.
+      \stopformula
+      Weil alle partielle Summe positiv sind, konvergiert die Reihe
+      absolut und konvergiert jede Umordnung der Reihe gegen $1$.
+      Daraus folgt die Behauptung.
+    \stopproof
+    \starttheorem
+      $f\colon \mathbb{R} \to \mathbb{R}, x \mapsto \frac{1}{\pi (1+x^{2})}$ ist Dichte.
+    \stoptheorem
+    \startproof
+      Denn es gilt, mittels Substitution $x = \tan t$, dass
+      \startformula
+        \int_{\mathbb{R}}f(x) d x = \pi \int_{\mathbb{R}} {\frac{\sec^{2} t}{1 + \tan^{2}
+            t}} dt = \pi \cdot t \bigg\vert_{\mathbb{R}} = \pi \cdot \tan^{-1} x \bigg\vert_{\mathbb{R}} = \pi \cdot \frac{1}{\pi} = 1.
+      \stopformula
+    \stopproof
+  \stopsection
+
+\stoptext

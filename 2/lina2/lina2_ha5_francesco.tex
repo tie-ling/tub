@@ -1,0 +1,394 @@
+% !TeX program = lualatex
+%%% TeX-engine: luatex
+
+\documentclass[draft,a5paper]{article}
+\usepackage[margin=2cm]{geometry}
+\linespread{1.2}
+
+% set language to german
+\usepackage[ngerman]{babel}
+
+% load math packages and unicode support
+% must in this order
+\usepackage{amsmath,mathtools,fontspec}
+\usepackage{amsthm}
+\usepackage{unicode-math,luatex85}
+
+% set fonts
+\setmainfont{STIX Two Text}
+
+% theorem environment used in this document
+\theoremstyle{remark}
+\newtheorem*{beh}{Behauptung}
+\newtheorem*{lem}{Lemma}
+
+\author{Meng Zhang 484981, Yuchen Guo 480788}
+\date{\today}
+\title{HA 5, LinA 2 -- Francesco}
+
+% math operators
+\DeclareMathOperator{\Spek}{Spek}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\rg}{rg}
+
+%    Enclose the argument in vert-bar delimiters:
+\newcommand{\envert}[1]{\left\lvert#1\right\rvert}
+\let\abs=\envert
+
+%    is used as a closing delimiter.
+\newcommand{\interval}[1]{\mathinner{#1}}
+
+\begin{document}
+\maketitle
+
+\subsection*{Aufgabe 5.1}
+
+Für \(x \in \mathbb{R}\) sei
+\begin{align*}
+  A_{x} =
+  \begin{bmatrix}
+    x + 4 & 0 & 5 & 1 \\
+    0 & 2 & 0 & x \\
+    1 & 0 & x & 1 \\
+    0 & 0 & 0 & 2
+  \end{bmatrix}
+  \in \mathbb{R}^{4 \times 4}.
+\end{align*}
+
+\begin{beh}
+  Für \(x = 0\) ist \(A_{x}\) diagonalisierbar.
+\end{beh}
+
+\begin{proof}
+  Wir bestimmen solche \(x \in \mathbb{R}\) sodass \(A_{x}\) diagonalisierbar
+  ist, indem wir \(\chi_{A_{x}}\) bestimmen.  Es gilt
+  \begin{align*}
+    \chi_{A_{x}}(t) = \det(A_{x} - tI) = (2 - t)^{2} (x - t - 1) (x - t +
+    5).
+  \end{align*}
+  Die Eigenwerte von Matrix \(A_{x}\) sind \(\lambda_{1} \coloneq 2\),
+  \(\lambda_{2} \coloneq x-1\) und \(\lambda_{3} \coloneq x+5\).  Wegen der Charakterisierung
+  von diagonalisierbarer Matrizen [Korollar 20.16] ist Matrix \(A\)
+  genau dann diagonalisierbar, falls
+  \begin{align*}
+    \sum_{i = 1}^{3}{\dim \Ker(A - \lambda_{i} I_{n})} = n.
+  \end{align*}
+  Es gilt auch, dass
+  \begin{align*}
+    \dim \Ker(A - \lambda_{i} I_{n}) =  \dim V - \rg (A - \lambda_{i} I_{n}).
+  \end{align*}
+  Wir bestimmen nun die Summen von \(\dim \Ker(A - \lambda_{i} I_{n})\).  Es
+  ist
+  \begin{align*}
+    A - \lambda_{1}I_{n} =
+    \begin{bmatrix}
+      x + 2 & 0 & 5 & 1 \\
+      0 & 0 & 0 & x \\
+      1 & 0 & x - 2 & 1 \\
+      0 & 0 & 0 & 0
+    \end{bmatrix},~
+    A - \lambda_{2}I_{n} =
+    \begin{bmatrix}
+      5 & 0 & 5 & 1 \\
+      0 & 3 - x & 0 & x \\
+      1 & 0 & 1 & 1 \\
+      0 & 0 & 0 & 3-x
+    \end{bmatrix},~
+    A - \lambda_{3}I_{n} =
+    \begin{bmatrix}
+      -1 & 0 & 5 & 1 \\
+      0 & -3-x & 0 & x \\
+      1 & 0 & -5 & 1 \\
+      0 & 0 & 0 & -3-x
+    \end{bmatrix}.
+  \end{align*}
+  Wir bezeichnen die drei Matrizen als \(M_{1}, M_{2}\) und \(M_{3}\).
+  Wir betrachten vier Fällen.
+  \begin{itemize}
+  \item   Falls \(x = 0\), dann ist
+    \(\rg(M_{1}) = 2\) und \(\rg(M_{2}) = \rg(M_{3}) = 3\) und die
+    Matrix ist diagonalisierbar.
+  \item Falls \(x = 3\), dann ist
+    \(\rg(M_{1}) = \rg(M_{3}) = 2\) und \(\rg(M_{2}) = 3\) und
+    \( \sum_{i = 1}^{3}{\dim \Ker(A - \lambda_{i} I_{n})} = 5 > \dim V = 4\)
+    und daher nicht diagonalisierbar.
+  \item Falls \(x = -3\), dann ist
+    \(\rg(M_{1}) = \rg(M_{2}) = 2\) und \(\rg(M_{3}) = 3\) und
+    \( \sum_{i = 1}^{3}{\dim \Ker(A - \lambda_{i} I_{n})} = 5 > \dim V = 4\)
+    und daher nicht diagonalisierbar.
+  \item Sonst ist die Summe gleich \(3\) und nicht diagonalisierbar.
+  \end{itemize}
+  Nun berechnen wir \(S_{0} \in \GL(4, \mathbb{R})\) mit
+  \(\mathcal{D} = S_{0}^{-1} A_{0} S_{0}\).  Wir bemerken, dass die
+  Spaltenvektoren von \(S_{0}\) genau die Basisvektoren von der Eigenraum
+  \(\Ker(A - \lambda_{i}I_{n})\) ist.  Wir berechnen deshalb die Basen der
+  Eigenräume zu den Eigenwerte \(\lambda_{1}, \lambda_{2}, \lambda_{3}\).
+  Es ist
+  \begin{align*}
+    B_{1} = \{[-1, 0, 1, 0], [-7, 0, 1, 9]\}; \quad B_{2} = \{[0, 1,
+    0, 0]\}; \quad B_{3} = \{[5, 0, 1, 0]\}.
+  \end{align*}
+  Daraus folgt, dass
+  \begin{align*}
+    S_{0} =
+    \begin{bmatrix}
+      -1 & -7 & 0 & 5 \\
+      0 & 0 & 1 & 0 \\
+      1 & 1 & 0 & 1 \\
+      0 & 9 & 0 & 0
+    \end{bmatrix}.
+  \end{align*}
+\end{proof}
+
+\subsection*{Aufgabe 5.2}
+
+Sei die lineare Abbildung
+\begin{align*}
+  f\colon \mathbb{R}^{2 \times 2} \to \mathbb{R}^{2 \times 2}, \quad
+  \begin{bmatrix}
+    a & b \\
+    c & d
+  \end{bmatrix}
+  \mapsto
+  \begin{bmatrix}
+    3a + b - 2d & 2b \\
+    2a+ 2b + 2c - 4d & 2d
+  \end{bmatrix}.
+\end{align*}
+
+\begin{beh}
+  Die lineare Abbildung \(f\) ist nicht diagonalisierbar.
+\end{beh}
+
+\begin{proof}
+  Wir formen die lineare Abbildung um.  Sei
+  \begin{align*}
+    B = \left\{
+    \begin{bmatrix}
+      1 & 0 \\
+      0 & 0
+    \end{bmatrix},
+    \begin{bmatrix}
+      0 & 1 \\
+      0 & 0
+    \end{bmatrix},
+    \begin{bmatrix}
+      0 & 0 \\
+      1 & 0
+    \end{bmatrix},
+    \begin{bmatrix}
+      0 & 0 \\
+      0 & 1
+    \end{bmatrix}
+    \right\}
+  \end{align*}
+  eine Basis von \(\mathbb{R}^{2 \times 2}\) Matrizen.  Dann ist die Abbilung
+  \(f\) äquivalent zu
+  \begin{align*}
+    f\colon \mathbb{R}^{4\times1} \to \mathbb{R}^{4\times1},~
+    \begin{bmatrix}
+      a \\ b \\ c \\ d
+    \end{bmatrix}
+    \mapsto
+    \begin{bmatrix}
+      3 & 1 & 0 & 2 \\
+      0 & 2 & 0 & 0 \\
+      2 & 2 & 2 & -4 \\
+      0 & 0 & 0 & 2
+    \end{bmatrix} \cdot
+    \begin{bmatrix}
+      a \\ b \\ c \\ d
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      3a+b-2d \\
+      2b \\
+      2a+2b+2c-4d \\
+      2d
+    \end{bmatrix}.
+  \end{align*}
+  Eine lineare Abbildung
+  \(f\) ist genau dann diagonalisierbar, falls die Matrix
+  \(M_{B,B}(f)\) diagonalisierbar ist.  Wir zeigen, dass
+  \(M \coloneq M_{B,B}(f)\) nicht diagonalisierbar ist, indem wir zeigen, dass
+  das Kriterium
+  \begin{align*}
+    \sum_{i=1}^{s}{\dim \Ker(A-\lambda_{i}I_{n})} = n
+  \end{align*}
+  nicht erfüllt ist, wobei \(\lambda_{i}\) Eigenwerte von \(M\) ist.  Wir
+  berechnen die Eigenwerte mittels charakteristische Polynoms
+  \begin{align*}
+    \chi_{M}(t) = \det(A - tI_{n}) =
+    \det
+    \begin{bmatrix}
+      3 - t & 1 & 0 & 2 \\
+      0 & 2 -t & 0 & 0 \\
+      2 & 2 & 2 - t & -4 \\
+      0 & 0 & 0 & 2 -t
+    \end{bmatrix}
+    = (t-3)(t-2)^{3}.
+  \end{align*}
+  Damit sind die Eigenwerte \(\lambda_{1} = 2\) und
+  \(\lambda_{2} = 3\).  Weiter gilt
+  \begin{align*}
+    \sum_{i=1}^{2}{\dim \Ker(A-\lambda_{i}I_{n})}
+    &= \dim \mathbb{R}^{4} - \rg (A-\lambda_{1}I_{n})
+      + \dim \mathbb{R}^{4} - \rg (A-\lambda_{2}I_{n}) \\
+    &= 1 + 2 < \dim \mathbb{R}^{4} = 4.
+  \end{align*}
+  Daraus folgt, dass \(f\) nicht diagonalisierbar ist.
+\end{proof}
+
+\subsection*{Aufgabe 5.3}
+
+Sei \(A \in \mathbb{R}^{n \times n}\).
+
+\subsubsection*{Aufgabe 5.3, Teil i}
+
+Sei \(\envert{\Spek(A)} = r\)  für ein \(r \in \mathbb{N}_{\ge 1}\) und sei \(\lambda \in
+\Spek(A)\) mit \(\rg(A - \lambda I_{n}) = r - 1\).
+
+\begin{beh}
+  Die Matrix \(A\) ist diagonalisierbar.
+\end{beh}
+
+\begin{proof}
+  Weil die Eigenwerte von \(A\) die Nullstellen des charakteristischen
+  Polynoms \(\chi_{A}(t)\) sind, gilt \(\envert{\Spek(A)} = r \le n\).  Sei
+  \(\Spek(A) = \{\lambda_{1}, \ldots, \lambda_{r}\}\) die Menge der Eigenwerte der
+  Matrix \(A\).  Wegen Voraussetzung existiert ein
+  \(\lambda_{j} \in \Spek(A)\) mit
+  \(\rg(A - \lambda_{j}I_{n}) = r - 1\). Weiter gilt wegen
+  \begin{align*}
+    \rg(A - \lambda_{j}I_{n}) + \dim \Ker(A - \lambda_{j}I_{n}) = \dim \mathbb{R}^{n \times n}
+  \end{align*}
+  dass \(\dim \Ker(A - \lambda_{j}I_{n}) = n - (r - 1)\).  Wegen [Korollar
+  20.16]
+  \begin{align*}
+    \sum_{i=1}^{r}{\dim \Ker(A - \lambda_{i}I_{n})} = n \iff \text{\(A\) diagonalisierbar}
+  \end{align*}
+  müssen wir zeigen, dass
+  \begin{align*}
+    \sum_{i=1}^{j-1}{\dim \Ker(A - \lambda_{i}I_{n})}
+    + \sum_{i=j+1}^{r}{\dim \Ker(A - \lambda_{i}I_{n})}
+    = r - 1
+  \end{align*}
+  gilt.  Sei \(\lambda_{i} \in (\Spek(A) \setminus \{\lambda_{j}\})\) beliebig.  Wir zeigen,
+  dass \(\rg(A - \lambda_{i}I_{n}) = n - 1\).  Zur Abkürzung setzen wir
+  \(M \coloneq A - \lambda_{i}I_{n}\).  Weil die Determinant Funktion alternierend
+  ist und \(\lambda_{i}\) Eigenwert ist, folgt \(\det(M) = 0\) und die
+  Matrix \(M\) ist linear abhängig, d.h., es existiert mindestens zwei
+  Zeilen, die linear abhängig sind.  Daraus folgt, dass
+  \(\rg(M) < n\).  Es gilt auch \(\rg(M) > n - 2\).  Denn angenommen,
+  \(\rg(M) = n - 2\), dann existiert drei Zeilen in \(M\), die linear
+  abhängig sind.???
+
+  Es gilt \(\dim \Ker(A -
+  \lambda_{i}I_{n}) = 1\) für alle \(i \in \mathbb{N}, i \in \interval{[1, r]}, i \ne j\).
+  Daraus folgt, dass \(A\) diagonalisierbar ist.
+\end{proof}
+
+\subsubsection*{Aufgabe 5.3, Teil ii}
+
+Sei \(A\) diagonalisierbar und \(\Spek(A) \subseteq \{-1, 1\}\).
+
+\begin{beh}
+  Es gilt \(A^{2}=I_{n}\).
+\end{beh}
+
+\begin{proof}
+  Zuerst bemerken wir, dass \(\Spek(A) \ne \emptyset\) wegen der
+  Diagonalisierbarkeit von \(A\).
+  \begin{itemize}
+  \item Falls \(\Spek(A) = \{1\}\).
+
+    Dann folgt aus der Diagonalisierbarkeit dass
+    \(\dim \Ker (A - I_{n}) = n\) und \(\rg(A-I_{n}) = 0\).  Das
+    heißt, die Matrix \(A - I_{n}\) ist die Nullmatrix.  Daraus folgt,
+    dass \(A = I_{n}\) und \(A^{2} = I_{n}\).  Der Fall
+    \(\Spek(A) = \{-1\}\) folgt analog.
+
+  \item Falls \(\Spek(A) = \{-1, 1\}\).
+
+    Dann folgt aus der Diagonalisierbarkeit dass
+    \begin{align*}
+      (n - \rg(A - I_{n})) + (n - \rg(A + I_{n})) = n.
+    \end{align*}
+    Sei \(\rg(A - I_{n}) = a\), dann folgt \(\rg(A + I_{n}) = n - a\).
+    Das heißt, die Matrix \(A\) ist eine \(n \times n\) Diagonalmatrix mit
+    genau \((n-a)\)-Mal \(1\)-Einträge und \(a\)-Mal \(-1\)-Einträge.
+    \begin{align*}
+      A_{i,j} =
+      \begin{cases}
+        1 \text{ oder } -1, & i = j, \\
+        0, & \text{sonst.}
+      \end{cases}
+    \end{align*}
+    Es gilt dann \(A^{2} = I_{n}\).
+  \end{itemize}
+\end{proof}
+
+\subsection*{Aufgabe 5.4}
+
+Sei \(V\) ein \(\mathbb{K}\) Vektorraum mit \(\dim V < \infty\).  Sei
+\(P, Q \in L(V, V)\) mit \(P(P(v)) = P(v)\) und \(Q(Q(v)) = Q(v)\) für
+alle \(v \in V\).
+
+\subsubsection*{Aufgabe 5.4, Teil i}
+
+\begin{beh}
+  Es gilt \(\Spek(P) \ne \emptyset\) und \(\Spek(P) \subseteq \{0, 1\}\).
+\end{beh}
+
+\begin{proof}
+  Sei \(v \in V\) ein beliebiges Vektor.  Dann gilt wegen der Definition
+  von \(P\) dass \(P(v) \in V\).  Wir bezeichnen dieses Vektor als \(w
+  \coloneq P(v)\).  Dann folgt aus der Definition von \(P\) dass \(P(w) =
+  w\).  Insbesondere ist \(P(w) = 1 \cdot w\), das heißt, \(w\) ist das
+  Eigenvektor bezüglich den Eigenwert \(1\).  Daraus folgt, dass
+  \(\{1\} \subseteq \Spek(P)\).  Daraus folgt, dass \(\Spek(P) \ne \emptyset\).
+
+  Nun zeigen wir, dass alle Zahlen \(\lambda \in (\mathbb{K} \setminus \{0, 1\})\) keine
+  Eigenwert ist. Wegen der Definition von \(P\) gilt die folgende
+  Aussage für jeden Eigenwert \(\lambda \in \Spek(P)\) und das Eigenvektor
+  \(v \in V\) bzgl. \(\lambda\)
+  \begin{align*}
+    P(v) &= \lambda v \tag*{\(v\) ist Eigenvektor bzgl. \(\lambda\)} \\
+    P(P(v)) &= P(\lambda v) \\
+    P(\lambda v) &= \lambda v \tag*{\(P\) Projektion} \\
+    \lambda P(v) &= \lambda v \tag*{\(P\) linear} \\
+    \lambda P(v) &= P(v).
+  \end{align*}
+  Also erhalten wir \(\lambda \alpha = \alpha\) für ein Vektor
+  \(\alpha \in V\). Der Eigenwert \(\lambda\) muss entweder \(0\) oder \(1\) sein.
+\end{proof}
+
+\subsubsection*{Aufgabe 5.4, Teil ii}
+
+\begin{beh}
+  Die lineare Abbildung \(P\) ist diagonalisierbar.
+\end{beh}
+
+\begin{proof}
+  Wegen Voraussetzung ist \(V\) ein endlich-dimensionaler Vektorraum
+  über \(\mathbb{K}\).  Sei \(\mathcal{B} = \{b_{1}, \ldots, b_{n}\}\) eine Basis von
+  \(V\).  Dann gilt \(\dim V = \envert{\mathcal{B} } = n\).  Wir bestimmen die
+  Matrixdarstellung \(M \coloneq M_{B,B}(P)\) von \(P\) bzgl. den Basen
+  \(B, B\).  Es gilt wegen [Bemerkung 11.15] dass
+  \begin{align*}
+    P(b_{j}) = \sum_{i=1}^{n}{b_{i}M_{i,j}}.
+  \end{align*}
+  Weiter gilt,
+  \begin{align*}
+    P(P(b_{j}))
+    &= P(b_{j})  \tag*{\(P\) Projektion} \\
+    P(b_{j}) &= P(\sum_{i=1}^{n}{M_{i,j}b_{i}}) \\
+    P(b_{j}) &= \sum_{i=1}^{n}{M_{i,j}P(b_{i})}. \tag*{\(P\) linear}
+  \end{align*}
+  Daraus folgt, dass \(M_{i,j} = 1\) falls \(i = j\) und
+  \(M_{i,j} = 0\) sonst.  Damit ist \(M\) die \(n\)-te Einheitsmatrix
+  und diagonalisierbar.  Wegen [Satz 20.5] ist \(P\) diagonalisierbar.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,246 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+\documentclass[fleqn,draft,a5paper]{article}
+
+% 让每个章节 subsection 在新的一页上开始
+% 而不是紧接着上一章节
+\AddToHook{cmd/subsection/before}{\clearpage}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+\geometry{left=1cm,
+ right=1cm,
+ top=1cm,
+ bottom=2cm}
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,mathtools,fontspec,amssymb,amsthm,parskip,interval,mathtools,fontspec}
+\setmainfont{TeX Gyre Termes}
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\skp}[1]{\langle#1\rangle}
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\providecommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\providecommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+% 定义新函数，依赖于AMSmath
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\Rang}{Rang}
+
+\providecommand{\R}[1]{\mathrm{R#1}}
+
+\newcommand{\wt}{\widetilde}
+\newcommand{\dd}{\,\mathrm{d}}
+
+% 标题与作者
+\title{HA 1, LinA 2, Papp, Papp5}
+\author{Shilong Yu 478912, Yuchen Guo 480788}
+
+\begin{document}
+\maketitle
+\newpage
+\subsection{1. Aufgabe}
+Es gibt keine lineare Abbildung \(F\colon \mathbb{R}^{2} \to \mathbb{R}^{2}\), sodass
+\(F(3,0)=(0,1), F(2,2)=(3,1) \) und \(F(2,1)=(2,3)\).  Denn wegen Linearität
+gilt
+\[F(\lambda x) = \lambda F(x)\]
+und
+\[F(2,1)=F(1,0)+F(1,1) = \frac{1}{3}F(3,0) + \frac{1}{2}F(2,2) =
+  (0,\frac{1}{3})+(\frac{3}{2}, \frac{1}{2}) \ne (2,3).\]
+Damit ist der Existenz widerliegt.
+\subsection{2. Aufgabe}
+Berechne \(A \cdot B\).
+\begin{enumerate}
+\item \(A =
+  \begin{bmatrix}
+    1 & 2 \\ 3 & 4
+  \end{bmatrix},
+  B =
+  \begin{bmatrix}
+    1 & 1 \\ 0 & 1
+  \end{bmatrix}.
+  \)
+  Wegen \(C_{ik} = \sum_{j=1}^{n}{A_{ij}B_{jk}}\) gilt
+\[A \cdot B =
+  \begin{bmatrix}
+    1 \times 1 + 2 \times 0 & 1 \times 1 + 2 \times 1 \\
+    3 \times 1 + 4 \times 0 & 3 \times 1 + 4 \times 1
+  \end{bmatrix} =
+  \begin{bmatrix}
+    1 & 3 \\ 3 & 7
+  \end{bmatrix}.
+  \]
+\item Berechne \(B \cdot A\), wobei \(A, B\) Matrizen wie in Teil Eins.
+  \[B \cdot A =
+    \begin{bmatrix}
+      1 \times 1 + 1 \times 3 & 1 \times 2 + 1 \times 4 \\ 0 \times 1 + 1 \times 3 & 0 \times 2 + 1 \times 4
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      4 & 6 \\ 3 & 4
+    \end{bmatrix}.
+  \]
+\item \(A =
+  \begin{bmatrix}
+    0 & 1 & 0 \\ 1 & -1 & -1
+  \end{bmatrix},
+  B =
+  \begin{bmatrix}
+    1 & 0 & 2 \\ 0 & 0 & 1 \\  -1 & 0 & 0
+  \end{bmatrix}.
+  \)
+  \begin{align*}
+    A \cdot B
+    &=
+    \begin{bmatrix}
+      0 \times 1 + 1 \times 0 + -1 \times 0
+      & 0
+      & 2 \times 0 + 1 \times 1 + 0 \times 0 \\
+      1 \times 1 + -1 \times 0 + -1 \times -1
+      & 0
+      & 2 \times 1 + -1 \times 1 + -1 \times 0
+    \end{bmatrix} \\
+    &=
+    \begin{bmatrix}
+      0 & 0 & 1 \\ 2 & 0 & 1
+    \end{bmatrix}.
+  \end{align*}
+\end{enumerate}
+\subsection{3. Aufgabe}
+Es sind
+\[\Phi_{\mathcal{A}}=
+  \begin{bmatrix}
+    1 & 2 & 2 \\ -1 & 3 & 3 \\ 2 & 7 & 6
+  \end{bmatrix},
+  \quad
+  \Phi_{\mathcal{B}} =
+  \begin{bmatrix}
+    1 & -1 & -2 \\ 2 & 3 & 7 \\ 2 & 3 & 6
+  \end{bmatrix}.
+\]
+Dann erhalten wir
+\[\Phi_{\mathcal{B}}^{-1}=
+  \begin{bmatrix}
+    3/5 & 0 & 1/5 \\ -2/5 & -2 & 11/5 \\ 0 & 1 & -1
+  \end{bmatrix}, \quad
+  T^{\mathcal{A}}_{\mathcal{B}} = \Phi_{\mathcal{B}}^{-1} \circ \Phi_{\mathcal{A}} =
+  \begin{bmatrix}
+    1 & 13/5 & 12/5 \\ 6 & 43/5 & 32/5 \\ -3 & -4 & -3
+  \end{bmatrix}.
+\]
+indem wir die  elementare Zeilenumformungen gleichzeitig auf \(\Phi_{\mathcal{B}}\)
+und \(E_{3}\) anwenden:
+\begin{align*}
+  \begin{bmatrix}
+    1 & -1 & -2 \\ 2 & 3 & 7 \\ 2 & 3 & 6
+  \end{bmatrix}
+  &
+    \begin{bmatrix}
+      1 & 0 & 0 \\ 0 & 1  & 0 \\ 0 & 0 & 1
+    \end{bmatrix}\\
+  \begin{bmatrix}
+    1 & -1 & -2 \\ 0 & 5 & 11 \\ 0 & 5 & 10
+  \end{bmatrix}
+  &
+    \begin{bmatrix}
+      1 & 0 & 0 \\ -2 & 1 & 0 \\ -2 & 0 & 1
+    \end{bmatrix}\\
+  \begin{bmatrix}
+    1 & -1 & -2 \\ 0 & 0 & 1 \\ 0 & 5& 10 
+  \end{bmatrix}
+  &
+    \begin{bmatrix}
+      1 & 0 & 0 \\ 0 & 1 & -1 \\ -2 & 0 & 1
+    \end{bmatrix}\\
+  \begin{bmatrix}
+    1 & -1 & -2 \\ 0 & 5 & 10 \\ 0 & 0& 1
+  \end{bmatrix}
+  &
+    \begin{bmatrix}
+      1 & 0 & 0 \\ -2 & 0 & 1 \\ 0 & 1 & -1
+    \end{bmatrix}\\
+  \begin{bmatrix}
+    1 & -1 & -2 \\ 0 & 1 & 2 \\ 0 & 0 & 1
+  \end{bmatrix}
+  &
+    \begin{bmatrix}
+      1 & 0 & 0 \\ -2/5 & 0 & 1/5 \\ 0 & 1 & -1
+    \end{bmatrix}\\
+  \begin{bmatrix}
+    1 & -1 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1
+  \end{bmatrix}
+  &
+    \begin{bmatrix}
+      1 & 2 & -2 \\ -2/5 & -2 & 11/5 \\ 0& 1 & -1
+    \end{bmatrix}\\
+  \begin{bmatrix}
+    1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1
+  \end{bmatrix}
+  &
+    \begin{bmatrix}
+      3/5 & 0 & 1/5 \\ -2/5 & -2 & 11/5 \\ 0 & 1 & -1
+    \end{bmatrix}
+\end{align*}
+
+
+Für die zweiten Aufgabe erhalten wir
+\[T^{\mathcal{A}}_{\mathcal{B}} \cdot
+  \begin{bmatrix}
+    2 \\ 9 \\ -8
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    31/5 \\ 191/5 \\ -18
+  \end{bmatrix}.
+\]
+\subsection{4. Aufgabe}
+\begin{enumerate}
+\item \(A =
+  \left[
+  \begin{smallmatrix}
+    0 & 1 & 0 \\ 1 & -1 & -1 \\ -1 & 0 & 1
+  \end{smallmatrix}\right]
+  \) ist nicht invertierbar, denn bezeichen wir die drei Zeilenvektoren
+  als \(a, b , c\) dann gilt \(b=-a-c\) und \(\Rang A = 2\).
+\item \(B =
+  \left[
+  \begin{smallmatrix}
+    1 & 2 & 0 \\ 0 & 1 & 2 \\ 2 & 0 & 1
+  \end{smallmatrix}\right]
+  \)
+  ist invertierbar mit
+  \[
+    B^{-1} =
+    \begin{bmatrix}
+      1/9 & -2/9 & 4/9 \\ 4/9 & 1/9 & -2/9 \\ -2/9 & 4/9 & 1/9
+    \end{bmatrix}.
+  \]
+\item \(C=
+  \begin{bmatrix}
+    1 & 2 \\ 0 & 3
+  \end{bmatrix}
+  \)
+  ist invertierbar mit
+  \[C^{-1}=
+    \begin{bmatrix}
+      1 & -2/3 \\ 0 & 1/3
+    \end{bmatrix}.
+  \]
+\end{enumerate}
+\end{document}
+

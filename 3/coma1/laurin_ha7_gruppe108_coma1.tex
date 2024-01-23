@@ -1,0 +1,388 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+% draft mode incompatible with tikz
+\documentclass[a5paper]{article}
+
+% 让每个章节 subsection 在新的一页上开始
+% 而不是紧接着上一章节
+\AddToHook{cmd/subsection/before}{\clearpage}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+\geometry{a5paper,
+ left=1cm,
+ right=1cm,
+ top=1cm,
+ bottom=2cm
+}
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+
+% 调整 Emacs 预览字体大小
+% (setq preview-scale-function 1.5)
+
+% TeX Gyre Schola and unicode-math
+% which in turn loads amsmath,mathtools,fontspec and friends
+\usepackage{xcharter-otf}
+
+% 加载数学相关的包
+\usepackage{
+  % 自然段间留空
+  parskip,
+  % 区间排版
+  interval
+}
+
+% 中文支持，暂时不需要
+% \usepackage[UTF8]{ctex}
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\mt}{\texttt}
+\newcommand{\npreceq}{\npreccurlyeq}
+
+\usepackage{amsthm}
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+% 标题与作者
+\title{HA 7, CoMa 1, Laurin, Gruppe 108}
+\author{Kuan 480169, Yu 478912, Guo 480788}
+
+% 画图工具
+\usepackage{tikz,pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{shapes.geometric}
+ \usepackage{graphicx}
+
+\begin{document}
+\maketitle
+\begin{center}
+Ting Yu Kuan 480169, Shilong Yu 478912, Yuchen Guo 480788
+\end{center}
+\newpage
+\subsection{1. Aufgabe}
+\subsubsection{Teil i}
+\begin{proof}
+Es gibt insgesamt vier Aussagen zu beweisen.
+
+\begin{itemize}
+\item Ein größtes Element \(p\) von \(S\) ist ein maximales
+  Element in \(S\).
+
+  Weil \(p\) ein größtes Element von \(S\) ist, gilt für
+  alle \(y \in S\) dass \(y \preceq p\).  Insbesondere, es
+  gilt für alle \(y \in S\) mit \(y \succeq p\) dass
+  \(y \preceq p\).  Wegen Antisymmetrie folgt dann
+  \(y = p\).  Die Definition eines maximalen Elements ist
+  erfüllt.
+\item Es gibt kein anderes maximale Element in \(S\).
+
+  Sei \(q\) ein maximales Element in \(S\).  Weil \(p\) ein
+  größtes Element von \(S\) ist, gilt \(q \preceq p\).  Weil
+  \(q\) ein maximales Element in \(S\) ist und
+  \(q \preceq p\) gilt, gilt \(q \succeq p\).  Wegen
+  Antisymmetrie folgt dann \(p = q\).  Das größten Element
+  ist dann eindeutig bestimmt.
+\item Ein kleinstes Element von \(S\) ist ein
+  minimales Element in \(S\).
+
+  Weil \(p\) ein kleinstes Element von \(S\) ist, gilt für
+  alle \(y \in S\) dass \(y \succeq p\).  Insbesondere, es
+  gilt für alle \(y \in S\) mit \(y \preceq p\) dass
+  \(y \succeq p\).  Wegen Antisymmetrie folgt dann
+  \(y = p\).  Die Definition eines minimalen Elements ist
+  erfüllt.
+\item Es gibt kein anderes minimale Element in \(S\).
+
+  Sei \(q\) ein minimales Element in \(S\).  Weil \(p\) ein
+  kleinstes Element von \(S\) ist, gilt \(q \succeq p\).
+  Weil \(q\) ein minimales Element in \(S\) ist und
+  \(q \succeq p\) gilt, gilt \(q \preceq p\).  Wegen
+  Antisymmetrie folgt dann \(p = q\).  Das kleinsten
+  Element ist dann eindeutig bestimmt. \qedhere
+\end{itemize}
+\end{proof}
+\subsubsection{Teil ii}
+\begin{proof}
+  durch Widerspruch.  Wir betrachten die Menge \(M\) aller minimalen
+  Elementen in \(S\).  Zuerst ist diese Menge nicht leer, denn in dem
+  schlechtesten Fall dass \(x \npreceq y\) für alle \(x \ne y\) in \(S\) ist jedes
+  Element selbst ein minimales Element.  Wegen \(S\) endlich ist \(M\)
+  auch endlich.
+
+  Angenommen, es gibt kein minimales Element \(x \in M\)  sodass mit \(x
+  \preceq y\).  Daraus folgt, dass für alle \(s \in \{s \in S \mid s \preceq y\}\) und alle
+  \(x \in M\) gilt \(x \npreceq s\), denn andersfalls folgt aus Transitivität dass
+  \(x \preceq y\) im Widerspruch zur Voraussetzung.
+
+  Es gilt jetzt, für alle \(x \in M\) und für alle \(s \in \{s \in S \mid s
+  \preceq y\}\) dass \(x \npreceq s\).  Wir bemerken, dass die Menge \(\{s \in S \mid s
+  \preceq y\}\) eine partielle Ordnung enthält und daher ein minimales
+  Element \(s_{m}\) besitzt.  Wegen \(x \npreceq s_{m}\) für alle \(x \in M\) ist
+  \(s_{m}\) minimal in \(S\) und soll \(s_{m} \in M\) gelten, im Widerspruch
+  zur Voraussetzung.
+\end{proof}
+\subsubsection{Teil iii}
+  Wir zeigen, dass es eine Bijektion
+  \[\pi\colon \{1, 2, \ldots, \abs{S}\} \to S\]
+  existiert mit \(\pi(j) \npreceq \pi(i)\) für alle \(i < j\).
+
+  Wir konstruieren eine Bijektion mittels einem rekursiven
+  Algorithmus.
+\begin{verbatim}
+Pseudo-Python-Code
+
+def relation(a, b):
+    if a ?< b:
+        return True
+    return False
+
+def toposort(S):
+    if len(S) <= 1:
+        return S
+
+    x = S[0]
+    left = list()
+    right = list()
+
+    for element in S:
+        if relation(x, element):
+            left.append(element)
+        else:
+            right.append(element)
+
+    return toposort(left) + [x] + toposort(right)
+\end{verbatim}
+  \begin{Behauptung}
+    Der Algorithmus ist korrekt und terminiert.
+  \end{Behauptung}
+  \begin{proof}
+    Wir zeigen die Korrektheit der Algorithmus.  Wir nummieren alle
+    Elemente in \mt{Output}  mit \(\{x_{1}, \ldots, x_{\abs{S}}\}\) durch.
+
+    Sei  \(i < j\) beliebige Indizes des \mt{Output}.  Wir
+    zeigen, dass \(\pi(i) \npreceq \pi(j)\) gilt.  Wegen Definition des Programms
+    ist \(\pi(i)\) in \mt{toposort(left)} enthält.  Dieser List enthält
+    wegen Definition alle \(j\) sodass \(\pi(j) \preceq \pi(i)\).  Damit ist die
+    Bedingung von Topologische Sortierung erfüllt.
+
+    Der Programm terminiert, denn jedes Aufruf reduziert die Länge des
+    Lists um Eins.
+  \end{proof}
+
+\subsection{2. Aufgabe}
+
+\subsubsection{Teil i}
+Die Zahl Eins ist ein kleinste Element, denn
+\[\forall n \in \mathbb{N}\colon 1 \vert n.\]
+Wegen [1. Aufgabe] ist das kleinste Element eindeutig bestimmt und
+gleichzeitig das einzige minimale Element.
+
+Es gibt kein maximales Element.  Denn sei \(i \in \mathbb{N}\) ein minimales
+Element, das heißt, alle durch \(i\) teilbare natürliche Zahlen ist nur
+\(i\) selbst.  Dies ist nicht wahr, denn \(i\mathbb{N}\) ist durch \(i\) teilbar.
+Damit existiert auch kein größes Element.
+\subsubsection{Teil ii}
+Die leere Menge ist ein kleinste Element, denn alle Mengen
+sie enthält.  Die ist auch das minimalen Element und
+eindeutig, wegen [1. Aufgabe].
+
+Es gilt \(\{1, 2, 3, 4\} \notin S\).  Daraus folgt, dass es kein größtes
+Element gibt.   Hingegen sind
+\[ T \coloneq \{\{1, 3\}, \{1, 4\}, \{2\}\}\]
+maximal.  Denn für alle \(M \in S\) mit \(N \preceq M\) und \(N \in T\) gilt \(M = N\).
+\subsubsection{Teil iii}
+Sei \(S = \mathcal{P}(\mathbb{N})\), also die Potenzmenge von \(\mathbb{N}\).  Dann ist \(\emptyset\) das
+kleinste Element und \(\mathbb{N}\) das größte Element.  Eindeutigkeit und
+Gleichheit mit minimales und maximales Element folgt aus [1. Aufgabe].
+\subsubsection{Teil iv}
+Es existiert kein größtes oder kleinstes oder maximales oder minimales
+Element.  Denn sei \((a, b) \in \mathbb{R}^{2}\) beliebig.  Dann ist
+\[ (a-1, b-1) \preceq (a,b) \preceq (a+1, b+1).\]
+
+\subsubsection{Teil v}
+Sei \(S = B(0, 1)\).  Dann sind
+\[\{(-1/\sqrt2,-1/\sqrt2), (-1,0),(0,-1)\}\]
+minimal und
+\[\{(1/\sqrt2,1/\sqrt2), (1,0),(0,1)\}\]
+maximal.  Beweis.  Sei \((a, b) \in S\).  Falls \(b = 0\), dann gilt
+\[(-1, 0)\preceq(a, b)\preceq(1, 0).\]
+Falls \(a = 0\) ist der Beweis analog.  Falls \(a, b \ne 0\), dann gilt
+\[(-1/\sqrt2,-1/\sqrt2) \preceq (a, b) \preceq (1/\sqrt2,1/\sqrt2).\]
+Es existiert kein größtes oder kleinstes Element, denn falls
+sie existiere, seien sie eindeutig bestimmt und gleich das einzige
+maxi oder mini Element.
+\subsubsection{Teil vi}
+Die minimalen Elemente ist
+\[\{(-1, 0)\}\]
+denn für alle \((a, b) \in S\) gilt \(-1 \le a\).
+
+\subsection{3. Aufgabe}
+\subsubsection{Teil i}
+\begin{verbatim}
+######## Aufruf 0
+def findMissingNumber([6, 4], 4):
+    if len(A) == 0:              # len(A) = 4 != 0
+        return a
+    else:
+        m = a + len(A) // 2      # m = 5 = 4 + 1
+        l = []
+        L = []
+        for i in A:              # i = 6
+            if i > m:            # i > 5
+                L.append(i)      # L = [6]
+            else:
+                l.append(i)
+        for i in A:              # i = 4
+            if i > m:            # i !> 5
+                L.append(i)
+            else:
+                l.append(i)      # l = [4]
+        if len(L) >= len(l):     # len([6]) == len([4])
+            return findMissingNumber(l, a)
+                                 # return findMissingNumber([4], 4)
+        else:
+            return findMissingNumber(L, m+1)
+
+######## Aufruf 1
+def findMissingNumber([4], 4):
+    if len(A) == 0:              # len(A) = 1 != 0
+        return a
+    else:
+        m = a + len(A) // 2      # m = 4 + 0
+        l = []
+        L = []
+        for i in A:              # i = 4
+            if i > m:            # i !> 4
+                L.append(i)
+            else:
+                l.append(i)      # l = [4]
+        if len(L) >= len(l):     # len(L) == 0 !> len(l) == 1
+            return findMissingNumber(l, a)
+
+        else:
+            return findMissingNumber(L, m+1)
+                                 # return findMissingNumber([], 5)
+
+######## Aufruf 2
+def findMissingNumber([], 5):
+    if len(A) == 0:              # len(A) = 0 == 0
+        return 5
+\end{verbatim}
+\subsubsection{Teil ii}
+\begin{verbatim}
+def findMissingNumber(A, a):
+    if len(A) == 0:
+        return a
+    else:
+        m = a + len(A) // 2
+        l = []
+        L = []
+        for i in A:
+            if i > m:
+                L.append(i)
+            else:
+                l.append(i)
+        if len(L) >= len(l):
+            return findMissingNumber(l, a)
+        else:
+            return findMissingNumber(L, m+1)
+\end{verbatim}
+\begin{Behauptung}
+  Der Algorithmus ist korrekt.
+\end{Behauptung}
+\begin{proof}
+  Der Algorithmus ist ähnlich zur binären Suche.  In jeder Aufruf
+  teilen wir den Input-List \mt{A} nach \mt{floor}-Mittelpunkt \mt{m} in zwei
+  Listen: links bezeichnen wir mit \mt{l} und rechts mit \mt{L}, wobei
+  für alle \mt{i} \(\in\) \mt{L} gilt \mt{i} \(>\) \mt{m} und für alle
+  \mt{i} \(\in\) \mt{l} gilt \mt{i} \(\le\) \mt{m}.
+
+  Falls \mt{b} \(-\) \mt{a} gerade ist. Dann gilt
+\begin{verbatim}
+  m = len(A) // 2 + a = (b - a)/2 + a.
+
+  Input A Mit fehlenden x, aufsteigend sortiert:
+  [a, a+1, a+2, ..., m-1, m, m+1, ..., b]
+   <-------- n -------->     <--- n --->
+          Liste l             Liste L  aber in beliebige Reihenfolge
+\end{verbatim}
+  Falls links die gesuchte Zahl \mt{x} enthält, dann gilt
+\begin{verbatim}
+len(l) = n - 1 < n = len(L)
+\end{verbatim}
+  In diesem Fall ist der nächster Aufruf \mt{findMissingNumber(l, a)}.
+
+  Falls rechts die gesuchte Zahl \mt{x} enthält, dann gilt
+\begin{verbatim}
+len(l) = n > n - 1 = len(L)
+\end{verbatim}
+  In diesem Fall ist der nächster Aufruf \mt{findMissingNumber(L, m+1)}.
+
+  Falls \mt{b} \(-\) \mt{a} ungerade ist. Dann gilt
+\begin{verbatim}
+  m = len(A) // 2 + a = (b - a - 1)/2 + a.
+
+  Input A Mit fehlenden x, aufsteigend sortiert:
+  [a, a+1, a+2, ..., m, m+1, ..., b]
+   <------- n -------|---- n ----->
+        Liste l         Liste L  aber in beliebige Reihenfolge
+\end{verbatim}
+  Falls links die gesuchte Zahl \mt{x} enthält, dann gilt
+\begin{verbatim}
+len(l) = n - 1 < n = len(L)
+\end{verbatim}
+  In diesem Fall ist der nächster Aufruf \mt{findMissingNumber(l, a)}.
+
+  Falls rechts die gesuchte Zahl \mt{x} enthält, dann gilt
+\begin{verbatim}
+len(l) = n > n - 1 = len(L)
+\end{verbatim}
+  In diesem Fall ist der nächster Aufruf \mt{findMissingNumber(L,
+    m+1)}.
+
+  Der Algorithmus terminiert, falls \mt{A} leer ist.  Denn jede
+  rekursive Aufruf reduziert die Länge von Input-Liste \mt{A} um ein Halbe.
+\end{proof}
+\subsubsection{Teil iii}
+Jede rekursive Aufruf reduziert die
+Länge von Input-Liste \mt{A} um ein Halbe, und jede rekursive Aufruf
+enthält eine \mt{for}-Schleife, die die Länge der Input \mt{A}
+durchläuft.  Damit gilt
+\begin{align*}
+  n + \left \lfloor \frac{n}{2}  \right \rfloor + \left \lfloor
+  \frac{n}{4} \right \rfloor + \left \lfloor \frac{n}{8}
+  \right \rfloor + \ldots + 0 \in \Theta(n).
+\end{align*}
+\subsection{4. Aufgabe}
+\subsubsection{Teil i}
+Wir modifizieren den Algorithmus Insertion-Sort, indem wir lineare
+Vergleiche mit binären Suche ersetzen.  Damit erhalten wir \(\Theta(n\log
+n)\) Vergleichungen.
+
+\subsubsection{Teil ii}
+Für das \(p\)-ten Element, wir müssen \(\log p\) Vergleichungen
+und im schlimmsten Fall \(p\) Zuweisungsoperationen durchführen.
+
+Summieren wir über \(p\),  wir erhalten
+\[ \sum_{p = 1}^{n} (p + \log p) = \frac{n(n+1)}{2} + \log (n!) \in O(n^2). \]
+\subsubsection{Teil iii}
+\begin{verbatim}
+Anfangszustand:
+Kr7,Ka7,KrK,H10,H7,KrB,KrD,P10,Kr9,HD
+\end{verbatim}
+\end{document}
+

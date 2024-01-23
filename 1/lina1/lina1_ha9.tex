@@ -1,0 +1,537 @@
+%% page style
+\documentclass[12pt]{extarticle}
+\usepackage[margin=2cm]{geometry}
+\usepackage{fancyhdr,parskip}
+\pagestyle{fancy}
+\usepackage[onehalfspacing]{setspace}
+\setlength{\parindent}{0pt}
+\lhead{\myAuthor}
+\rhead{\mySubject \ \myHausaufgaben. Übungsblatt \\ \myTutor}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+
+%% language
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+
+%% default packages
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,
+  stmaryrd, % for the lightning symbol used in proof by contraction
+  tikz,     % used to draw diagrams
+}
+
+%% metadata
+\newcommand{\myAuthor}{Yuchen Guo 480788 | Meng Zhang 484981}
+\newcommand{\myHausaufgaben}{9}
+\newcommand{\mySubject}{LinA}
+\newcommand{\myTutor}{Saskia}
+
+
+%% custom commands
+\newcommand{\mg}[1]{\mathbb{#1}}
+\newcommand{\lin}{\operatorname{lin}}
+\newcommand{\aufgn}[1]{\textbf{Aufgabe #1.}}
+\newcommand{\beh}{\textit{Behauptung.}\ }
+
+\begin{document}
+\aufgn{9.1}
+
+Bestimmen die Basen von \(U, W, U+W\) sowie eine Basis von \(\mg{R}^4\),
+die eine Basis von \(U \cap W\) enthält, mit
+\begin{align*}
+  U=
+  \lin \left( \left\{
+    u_1, u_2, u_3
+  \right\} \right), \quad
+    W=
+  \lin \left( \left\{
+    w_1, w_2, w_3
+   \right\} \right).
+\end{align*}
+
+\beh Eine Basis von \(U\) ist \(\left\{ u_1, u_2 \right\}\) mit Dimension
+\(2\) und eine Basis von \(W\) ist \(\left\{ w_1, w_2, w_3 \right\}\) mit
+Dimension \(3\).
+
+\begin{proof}
+  Zuerst bemerken wir, dass \(U\) endlich erzeugt ist.  Wegen
+  Basis-Auswahlsatz müssen wir nur Vektoren von dem Erzeugendensystem
+  weglassen, bis das Erzeugendensystem linear unabhängig ist.  Es gilt
+  \(-1 \cdot u_1 + -1 \cdot u_2 + 1 \cdot u_3 = 0\).  Also \(u_3\) ist
+  eine Linearkombination von \(u_1\) und \(u_2\).  Andereseits lösen wir
+  die Gleichung \(\lambda_1 u_1 + \lambda_2 u_2 = 0\) erhalten wir
+  \(\lambda_1 = \lambda_2 = 0\).  Das Erzeugendensystem
+  \(\left\{ u_1, u_2 \right\}\) ist linear unabhängig und ist deshalb
+  eine Basis von \(U\).
+
+Das Erzeugendensystem \(\left\{ w_1, w_2, w_3 \right\}\) ist eine Basis
+der Unterraum \(W\).  Denn, aus $\lambda_1 w_1 + \lambda_2w_2 +
+\lambda_3w_3=0$ folgt
+\begin{align*}
+  3 \lambda_1 = 0 \\
+  1 \lambda_1 + 3 \lambda_2 = 0 \\
+  3 \lambda_1 + 3 \lambda_2 + 1 \lambda_3 = 0
+\end{align*}
+also \(\lambda_1 = \lambda_2 = \lambda_3 = 0\).  Das Erzeugendensystem
+ist daher linear unabhängig und ist eine Basis von dem Unterraum \(W\).
+\end{proof}
+
+\beh Eine Basis von \(U + W\) ist $\left\{ u_1, u_2, w_1, w_2, w_3
+\right\}$ mit Dimension \(5\).
+
+\begin{proof}
+Es gilt
+\begin{align*}
+U + W = \left\{ v \in V \mid \text{es gibt } u \in U \text{ und } w
+  \in W \text{ mit } v = u + w \right\}.
+\end{align*}
+
+Wegen \(u = \alpha_1 u_1 + \alpha_2 u_2\) und
+\(w = \beta_1 w_1 + \beta_2 w_2 + \beta_3 w_3\) für
+\(\alpha_1, \alpha_2, \beta_1, \beta_2, \beta_3 \in \mg{K}\) gilt für
+alle \(v \in U + W\) dass
+\begin{align*}
+v = (\alpha_1 u_1 + \alpha_2 u_2) + (\beta_1 w_1 + \beta_2 w_2 +
+\beta_3 w_3).
+\end{align*}
+Also $v \in \lin \left(  \left\{ u_1, u_2, w_1, w_2, w_3 \right\}
+\right)\(.  Es ist ausreichend, zu zeigen, dass \)\left\{ u_1, u_2, w_1,
+  w_2, w_3 \right\}$ linear unabhängig ist.  Diese ist tatsächlich
+linear unabhängig, denn aus der Koeffizientenmatrix erhalten wir diese
+Matrix in Zeilenstufenform:
+\begin{align*}
+\begin{pmatrix}
+  1 & 0 & 3 & 0 & 0\\
+  1 & -2 & 1 & 3 & 0 \\
+  2 & 1 & 7 & 2 & 0\\
+  1 & 0 & 3 & 2 & 1
+\end{pmatrix} \to
+\begin{pmatrix}
+  1 & 0 & 3 & 0 & 0\\
+  0 & 1 & 1 & 0 & -1\\
+  0 & 0 & 0 & 2 & 0\\
+  0 & 0 & 0 & 0 & 0,5
+\end{pmatrix}.
+\end{align*}
+
+Weil die Zeilenstufenform wie die original Form eine
+\(4 \times 5\)-Matrix ist, ist
+\(\left\{ u_1, u_2, w_1, w_2, w_3 \right\}\) linear unabhängig.
+\end{proof}
+
+\beh (Unklar???) Die Dimension von \(U \cap W\) ist \(0\).
+
+\begin{proof}
+  Diese folgt aus der Dimensionsformel.
+
+  Für endlich dimensionale
+  Untervektorräume \(U, W \subset V\) gilt
+\begin{align*}
+\dim(U + W) = \dim U + \dim W - \dim \left( U \cap W \right).
+\end{align*}
+Daraus folgt \(\dim \left( U \cap W \right)=0\).  Eine Basis von
+\(\mg{R}^4\), die eine Basis von \(U \cap W\) enthält, wäre die
+Standardbasis
+\begin{align*}
+\left\{ \left( 1, 0, 0, 0 \right), \left( 0, 1, 0, 0 \right), \left(
+  0, 0, 1, 0 \right), \left( 0, 0, 0, 1 \right) \right\}.
+\end{align*}
+\end{proof}
+
+\aufgn{9.2.i}
+
+Sei \(f \colon V \to V\) eine lineare Abbildung, sowie \(v \in V\), sodass
+für eine natürliche Zahl \(n\) gilt
+\begin{align*}
+f^n(v) \ne 0 \quad \text{und} \quad f^{n+1}(v) = 0
+\end{align*}
+
+\beh Sei das Unterraum
+$U := \lin \left( \left\{ f^k(v) \colon k \in
+    \mg{N}\right\} \right)$.  Dann gilt
+\( 1 \leq \dim U \leq n\).
+
+\begin{proof}
+Es gilt \(f^k(v) = 0\) für alle \(k \geq n + 1\).  Denn, es
+gilt
+\begin{align*}
+  f^{n+2}(v) &= f \left( f^{n+1}(v) \right) \\
+             &= f (0) \\
+             &= f(0 \cdot 0)\\
+             &= 0 \cdot f(0)\\
+             &= 0.
+\end{align*}
+
+Es gilt \(\dim U \geq 1\), denn es gibt mindestens einen
+von Null verschieden Vektor in dem Erzeugendensystem
+\(\left\{ f^k(v) \colon k \in \mg{N}\right\}\), nämlich
+\(f^n(v) \ne 0\).
+
+Es gibt wegen  \(f^k(v) = 0\) für alle \(k \geq n + 1\)
+höchstens \(n\) verschiedene, lineare unabhängige
+Vektoren \(f^k(v)\) mit \(k \in \mg{N}_{\leq n}\), die das
+Erzeugendensystem bilden.
+\end{proof}
+
+\aufgn{9.2.ii}
+
+Was bedeutet \(n\) in \(\dim(\ker(f))=n-1\)?
+
+\aufgn{9.3}
+
+Gegeben sei der Unterraum \(U = \lin M\) von \(\mg{R}[t]\).
+
+\aufgn{9.3.1}
+
+\beh Eine Basis \(B \subseteq M\) von \(U\) ist $\left\{
+  t^3 - 1, 2t^3 - t, t^3 - t^2 \right\}$
+und es gilt \(\dim_{\mg{R}}(U) = 3\).
+
+\begin{proof}
+  Aus der Koeffizientenmatrix erhalten wir diese Matrix
+  in Zeilenstufenform:
+\begin{align*}
+\begin{pmatrix}
+  -1 & 0 & 0 & 1 \\
+  0 & 0 & -1 & 1 \\
+  1 & -1 & 0 & 1 \\
+  0 & -1 & -1 & 3 \\
+  0 & 1 & -1 & -1
+\end{pmatrix} \to
+\begin{pmatrix}
+  -1 & 0 & 0 & 1\\
+  0 & -1 & 0 & 2\\
+  0 & 0 & -1 & 1\\
+  0 & 0 & 0 & 0 \\
+  0 & 0 & 0 & 0
+\end{pmatrix}.
+\end{align*}
+Daraus folgt, dass eine Basis $B := \left\{
+  t^3 - 1, 2t^3 - t, t^3 - t^2 \right\}$ ist
+und es gilt \(\dim_{\mg{R}}(U) = 3\).
+\end{proof}
+
+\aufgn{9.3.2}
+
+Es gilt
+\begin{align*}
+p := 2t^3 - t^2 - t + 1 = (2t^3 - t) + -(t^3 -
+  1) + (t^3 - t^2)
+\end{align*}
+Wegen Austauschlemma können wir die Polynome
+\(\mathbf{p}\) gegen genau einen beliebigen Vektor in \(B\)
+tauschen.
+
+Andereseit  gilt \(q \notin \lin B\),  daraus folgt, dass
+\begin{align*}
+\lin \left( (B \setminus \left\{ v \right\}) \cup
+  \left\{ q \right\}  \right) \ne \lin B
+\end{align*}
+für alle \(v \in B\).  Daraus folgt, dass keinen Vektor
+in \(B\) gegen \(q\) getauscht werden kann.
+
+\aufgn{9.4}
+
+Zu zeigen: \(U\) ist ein Unterraum von \(\mg{R}[t]\) mit
+\begin{align*}
+U = \left\{ p \in \mg{R}[t] \colon p(-1) = p(0) = p(1)
+  = 0 \right\}.
+\end{align*}
+
+\begin{proof}
+Wir zeigen, dass \(U\) ein Unterraum von \(\mg{R}[t]\) ist,
+indem wir zeigen, dass die drei
+Untervektorraumkriterien erfüllt sind.
+
+\begin{itemize}
+\item \(U \ne \emptyset\),
+
+  Sei \(p := 0\).  Dann gilt \(p \in U\).  Daraus folgt, $U
+  \ne \emptyset$.
+\item \(v, w \in U \implies v + w \in U\),
+
+  Sei \(v, w \in U\) beliebig gewählt.  Dann gilt
+\begin{align*}
+  v(-1) = v(0) = v(1) &= 0\\
+  w(-1) = w(0) = w(1) &= 0\\
+  (v+w)(-1) = (v+w)(0) = (v+w)(1) &= 0.
+\end{align*}
+Also \(v+w \in U\).
+\item $v \in U, \lambda \in \mg{K} \implies \lambda v
+  \in U$.
+
+  Sei \(v \in U\) und \(\lambda \in \mg{K}\) beliebig
+  gewählt.  Dann gilt wegen der Definition von \(U\) dass
+\begin{align*}
+  v(-1) = v(0) = v(1) &= 0\\
+  (\lambda v)(-1) = (\lambda v)(0) = (\lambda v)(1) &= 0.
+\end{align*}
+Also \(\lambda v \in U\).
+\end{itemize}
+\end{proof}
+
+\beh Die Dimension von dem Quotientenvektorraum
+\(\mg{R}[t]/U\) ist sieben.
+
+\begin{proof}
+  (Unklar???)
+Es gilt
+\begin{align*}
+  \mg{R}[t] / U &= \left\{ v + U \mid v \in (\mg{R}[t]
+                  \setminus U) \right\} \\
+                &= \left\{ v + U \mid v \in \mg{R}[t]
+                  \wedge (v(-1) \ne 0 \lor v(0) \ne 0
+                  \lor v(1) \ne 0) \right\}
+\end{align*}
+Seien die Aussagen
+\begin{align*}
+  a &:= v(-1) \ne 0 \\
+  b &:= v(0) \ne 0 \\
+  c &:= v(1) \ne 0
+\end{align*}
+Dann gibt es insgesamt sieben Möglichkeiten, nämlich,
+\begin{itemize}
+\item a wahr, bc nicht wahr
+\item b wahr, ac nicht wahr
+\item c wahr, ab nicht wahr
+\item ab wahr, c nicht wahr
+\item ac wahr, b nicht wahr
+\item bc wahr, a nicht wahr
+\item abc wahr
+\end{itemize}
+
+Eine Basis von \(\mg{R}[t]/U\) ist dann
+\begin{align*}
+\left\{ v + U \mid v \in \mg{R}[t] \wedge v \text{
+  erfüllt einer der sieben Möglichkeiten} \right\}.
+\end{align*}
+Die Dimension ist deshalb sieben.
+\end{proof}
+
+\aufgn{9.5.i}
+
+\beh Sei \(v \in \mg{R}^3\) beliebig gewählt.  Dann ist
+\(U := \lin (v)\) eine \(1\)-dimensionalen Unterraum des
+\(\mg{R}^3\).
+
+\begin{proof}
+Wir zeigen, dass \(U\) ein Unterraum von \(\mg{R}^3\) ist,
+indem wir zeigen, dass die drei
+Untervektorraumkriterien erfüllt sind.
+
+\begin{itemize}
+\item \(U \ne \emptyset\),
+
+  Es gilt \(v \in U\).  Daraus folgt, $U
+  \ne \emptyset$.
+\item \(v, w \in U \implies v + w \in U\),
+
+  Diese folgt aus der Definition von linearen Hülle.
+\item $v \in U, \lambda \in \mg{K} \implies \lambda v
+  \in U$.
+
+  Diese folgt aus der Definition von linearen Hülle.
+\end{itemize}
+
+Außerdem gilt \(\dim U = 1\), denn \(U\) ist von \(v\) erzeugt.
+\end{proof}
+
+
+\aufgn{9.5.ii}
+
+Was bedeutet \(H(a,0)\)?
+
+\aufgn{9.6.i}
+
+\beh \(U_f\) ist ein Untervektorraum von \(V\).
+\begin{proof}
+  Wir zeigen, dass \(U_f\) ein Unterraum von \(V\) ist,
+  indem wir zeigen, dass die drei
+  Untervektorraumkriterien erfüllt sind.
+
+\begin{itemize}
+\item \(U_f \ne \emptyset\),
+
+Weil \(f\) eine lineare Abbildung ist, gilt insbesondere
+\begin{align*}
+f(0) = f(0v) = 0f(v) = 0
+\end{align*}
+also \(f(0)=0\) und damit \(0 \in U_f\) und
+\(U_f \ne \emptyset\).
+\item \(v, w \in U_f \implies v + w \in U_f\),
+
+  Sei \(v, w \in U_f\) beliebig gewählt.  Dann gilt
+  \(f(v) = v\) und \(f(w) = w\).  Weil \(f\) eine lineare
+  Abbildung ist, gilt \(v+w = f(v) + f(w) = f(v + w)\).
+  Daraus folgt, \(v + w \in U_f\).
+\item $v \in U_f, \lambda \in \mg{K} \implies \lambda v
+  \in U_f$.
+
+  Sei \(v \in U_f\) beliebig gewählt.  Dann gilt
+  \(f(v) = v\).  Weil \(f\) eine lineare Abbildung ist,
+  gilt \(\lambda v = \lambda f(v) = f(\lambda v)\).
+  Daraus folgt, dass \(\lambda v \in U_f\).
+\end{itemize}
+\end{proof}
+
+\aufgn{9.6.ii}
+
+\beh Eine Basis von \(U_f\) ist
+\(\left\{ \left( 0, 1, -1 \right) \right\}\).
+
+\begin{proof}
+  Sei \(v \in V\) beliebig gewählt.  Wegen
+  \(V := \mg{R}^3\) und \(f\colon \mg{R}^3 \to \mg{R}^3\)
+  linear gilt
+\begin{align*}
+  v &= \alpha e_1 + \beta e_2 + \gamma  e_3 \\
+  f(v) &= \alpha f(e_1) + \beta f(e_2) + \gamma f(e_3)
+\end{align*} für \(\alpha, \beta, \gamma \in \mg{K}\).
+
+Sei \(v = f(v)\), dann gilt
+\begin{align*}
+  \alpha &= \alpha + 2 \beta + 2 \gamma, \\
+  \beta &= \beta, \\
+  \gamma &= 3 \alpha + \gamma.
+\end{align*}
+
+Daraus folgt \(\alpha = 0\), \(\beta = \beta\) und
+\(\gamma = - \beta\).  Das heißt,
+\(U_f = \lin (\left\{ (0, 1, -1) \right\})\) und eine
+Basis von \(U_f\) ist \(\left\{ (0, 1, -1) \right\}\).
+\end{proof}
+
+\aufgn{9.7}
+
+\textbf{Definition linearer Abbildung.}  Sind \(V, W\)
+Vektorräume über einem Körper \(K\), so heißt eine
+Abbildung \(F \colon V \to W\) \textit{linear}, oder
+genauer \textit{\(K\)-linear}, wenn sie folgende
+Eigenschaften hat:
+
+\begin{itemize}
+\item Für \(v, w \in V\) gilt \(F(v + w) = F(v) + F(w)\).
+\item Für \(v \in V\) und \(\lambda \in K\) gilt $F(\lambda
+  v) = \lambda F(v)$.
+\end{itemize}
+
+\aufgn{9.7.i}
+
+\beh \(\Phi_1\) ist eine lineare Abbildung.
+
+\begin{proof}
+Wir zeigen, dass \(\Phi_1\) eine lineare Abbildung ist,
+indem wir zeigen, dass die Definition einer linearen
+Abbildung erfüllt ist.
+
+  Seien \(v:=(a, b, c), w:=(x, y, z) \in \mg{Z}^3_p\) beliebig
+  gewählt.  Dann gilt $a, b, c, x, y, z \in \mg{Z}_p =
+  \left\{ [0]_p, \cdots, [p-1]_p \right\}$.
+
+  Es gilt dann \(\Phi_1(v+w)=\Phi_1(v)+\Phi_1(w)\) und
+  \(\lambda \Phi_1(v) = \Phi_1(\lambda v)\).   ???
+\end{proof}
+
+\aufgn{9.7.ii}
+
+\beh \(\Phi_2\) ist keine lineare Abbildung.
+
+\begin{proof}
+  Seien \(v:=(a, b, c), w:=(x, y, z) \in \mg{Z}^3_p\) beliebig
+  gewählt.  Dann gilt $a, b, c, x, y, z \in \mg{Z}_p =
+  \left\{ [0]_p, \cdots, [p-1]_p \right\}$.
+
+  Es gilt
+\begin{align*}
+  \Phi_2(v+w) &= (3(a+x)(b+y), a+x, c + z) \\
+              &\ne (3xy+3ab, a+x, c + z)\\
+              &= \Phi_2(v) + \Phi_2(w).
+\end{align*}  Damit ist \(\Phi_2\) keine lineare Abbildung.
+\end{proof}
+\aufgn{9.7.iii}
+
+\beh \(\Phi_{3}\) ist keine lineare Abbildung.
+
+\begin{proof}
+  Seien \(v:=(a, b, c), w:=(x, y, z) \in \mg{Z}^3_p\) beliebig
+  gewählt.  Dann gilt $a, b, c, x, y, z \in \mg{Z}_p =
+  \left\{ [0]_p, \cdots, [p-1]_p \right\}$.
+
+  Es gilt
+\begin{align*}
+  \Phi_3(v+w) &= ((a+x)^2, a+x+b+y, -2c-2z)\\
+              &\ne (a^2+x^2, a+x+b+y, -2c-2z)\\
+              &= \Phi_3(v) + \Phi_3(w).
+\end{align*}  Damit ist \(\Phi_3\) keine lineare Abbildung.
+\end{proof}
+
+\aufgn{9.8}
+
+\beh Es gilt \(\ker (f) = \mg{R} \cdot (2, -1, 1) \).
+
+\begin{proof}
+  Sei \(v \in V\) beliebig gewählt.  Wegen
+  \(V := \mg{R}^3\) und \(f\colon \mg{R}^3 \to \mg{R}[t]\)
+  linear gilt
+\begin{align*}
+  v &= \alpha e_1 + \beta e_2 + \gamma  e_3 \\
+  f(v) &= \alpha f(e_1) + \beta f(e_2) + \gamma f(e_3)
+\end{align*} für \(\alpha, \beta, \gamma \in \mg{K}\).
+
+Sei \(f(v) = 0\), dann gilt
+\begin{align*}
+  \beta + \gamma &= 0\\
+  2\alpha - 4\gamma &= 0\\
+  -\alpha - 2 \beta &= 0\\
+  \alpha - 2\gamma &= 0
+\end{align*}
+
+Daraus folgt \(\alpha = -2 \beta = 2\gamma\).  D.h., alle
+Vektoren mit dieser Eigenschaft ist Teil der Menge
+\(\ker(f)\).
+\end{proof}
+
+\beh Eine Basis von \(\operatorname{Bild}(f)\) ist
+\(\left\{ 1-t+2t^2 , -2t + t^3 \right\}\) und die
+Dimension ist \(2\).
+
+\begin{proof}
+  Sei \(v \in \mg{R}^3\) beliebig gewählt.  Wegen
+\begin{align*}
+v := \alpha e_1 + \beta e_2 + \gamma e_3
+\end{align*} und \(f\) linear gilt für alle \(f(v)\) dass
+\begin{align*}
+  f(v) &= \alpha f(e_1) + \beta f(e_2) + \gamma f(e_3)
+\end{align*} mit \(\alpha, \beta, \gamma \in \mg{K}\).
+
+Also \(\operatorname{Bild}(f)\) ist endlich erzeugt und
+es gilt
+\begin{align*}
+  \lin (\left\{ f(e_1), f(e_2), f(e_3) \right\} )
+  = \operatorname{Bild}(f).
+\end{align*}
+Wegen Basis-Auswahlsatz müssen wir nur Vektoren von dem
+Erzeugendensystem weglassen, bis das Erzeugendensystem
+linear unabhängig ist.
+
+  Aus der Koeffizientenmatrix erhalten wir diese Matrix
+  in Zeilenstufenform:
+\begin{align*}
+\begin{pmatrix}
+  1 & -1 & 2 & 0 \\
+  0 & -2 & 0 & 1 \\
+  -2 & 0 & -4 & 1
+\end{pmatrix} \to
+\begin{pmatrix}
+  1 & -1 & 2 & 0 \\
+  0 & -2 & 0 & 1 \\
+  0 & 0 & 0 & 0
+\end{pmatrix}.
+\end{align*}
+Also eine Basis ist
+\begin{align*}
+\left\{ 1-t+2t^2 , -2t + t^3 \right\}
+\end{align*}
+und die Dimension ist \(2\).
+\end{proof}
+\end{document}

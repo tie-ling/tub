@@ -1,0 +1,131 @@
+% !TeX program = lualatex
+%%% TeX-engine: luatex
+
+\documentclass[draft,a5paper]{article}
+\usepackage[margin=2cm]{geometry}
+\linespread{1.2}
+
+% set language to german
+\usepackage[ngerman]{babel}
+
+% load math packages and unicode support
+% must in this order
+\usepackage{amsmath,mathtools,fontspec}
+\usepackage{amsthm}
+\usepackage{unicode-math,luatex85}
+
+% used for integral with respect to a variable x
+% like \int \dd{x}
+%\usepackage{physics}
+
+% set fonts
+\setmainfont{STIX Two Text}
+
+% theorem environment used in this document
+\theoremstyle{remark}
+\newtheorem*{beh}{Behauptung}
+\newtheorem*{lem}{Lemma}
+
+%    \interval is used to provide better spacing after a [ that
+%    is used as a closing delimiter.
+\newcommand{\interval}[1]{\mathinner{#1}}
+
+% pseudocode
+\usepackage[commentColor=black]{algpseudocodex}
+
+%    Enclose the argument in vert-bar delimiters:
+\newcommand{\envert}[1]{\left\lvert#1\right\rvert}
+\let\abs=\envert
+
+\author{Yiwen Yang 466096, Yuchen Guo 480788, Qing Wang 458040}
+\date{\today}
+\title{HA 4, CoMa 2 -- Gruppe 9, Laurin Geyer}
+
+\begin{document}
+\maketitle
+
+\newpage
+
+\subsection*{1. Aufgabe}
+
+Sei \(G = (V, E)\) ein ungerichteter Graph und seien
+\(c \in \mathbb{R}^{E}\) Kantenlängen.
+
+\subsubsection*{1. Aufgabe, Teil i}
+
+\begin{beh}
+  Es gibt genau dann zwischen allen Paaren \(v, w \in V\) einen
+  kürzesten Pfad, wenn \(G\) zusammenhängend und \(c_{e} \ge 0\) für
+  alle \(e \in E\) ist.
+\end{beh}
+
+\begin{proof}
+  Hinrichtung.  Angenommen, es gibt zwischen allen Paaren \(v, w \in V\)
+  einen kürzesten Pfad.  Dann existiert mindestens einen Pfad zwischen
+  alle Paaren \(v, w \in V\).  Damit ist \(G\) zusammenhängend.  Es gilt
+  \(c_{e} \ge 0\) für alle \(e \in E\), denn angenommen, es existiert ein
+  \(e \in E\) mit \(c_{e} < 0\).  Da \(G\) ungerichtet ist, können wir
+  diese Pfad \(v_{0}, e, v_{1}\) unendlich Mal treten und erhalten wir
+  die kleinste Länge eines Pfades \(P\) mit \(- \infty\).  Damit muss
+  \(c_{e} \ge 0\) für alle \(e \in E\) sein.
+
+  Rückrichtung.  Angenommen, der Graph \(G\) ist zusammenhängend und
+  \(c_{e} \ge 0\) für alle \(e \in E\).  Weil \(G\) zusammenhängend ist,
+  existiert mindestens einen Pfad zwischen allen Paaren
+  \(v, w \in V\).  Weil \(c_{e} \ge 0\) für alle \(e \in E\), kann die Länge
+  aller Pfade zwischen \(v, w \in V\) absteigend sortiert werden mit
+  \(c(P) \ge 0\) für alle \(P\).  Damit existiert einen kürzesten Pfad
+  zwischen allen Paaren \(v, w \in V\).
+\end{proof}
+
+\subsubsection*{1. Aufgabe, Teil ii}
+
+\begin{beh}
+  Sei \(G\) zusammenhängend und \(c_{e} > 0\) für alle \(e \in E\).  Die
+  Abbildung
+  \begin{align*}
+    d\colon V \times V \to \mathbb{R}; \quad (v, w) \mapsto \min \{c(P) \mid P~\text{\(v\)-\(w\)-Pfad}\}
+  \end{align*}
+  ist eine Metrik.
+\end{beh}
+
+\begin{proof}
+  Sei \(x, y, z \in V\) beliebig gewählt.
+
+  Wegen \(c_{e} > 0\) für alle \(e \in E\) ist \(d(x, y) > 0\) für alle
+  \(x \ne y\) und \(d(x, y) = 0\) für alle \(x = y\).  Damit ist die
+  positive Definitheit erfüllt.  Weil \(G\) ungerichteter Graph ist,
+  ist der kürzeste Pfad zwischen \(v, w\) auch der kürzeste Pfad
+  zwischen \(w, v\).  Damit ist die Symmetrie erfüllt.  Die
+  Dreiecksungleichung ist erfüllt, denn, angenommen, die
+  Dreiecksungleichung gelte nicht.  Dann ist
+  \(d(x, y) > d(x, z) + d(z, y)\), also der \(x,z,y\) Pfad ist kürzer
+  als \(x,y\) Pfad im Widerspruch zur Voraussetzung dass \(d(x,y)\)
+  das Minimum von Länge aller \(x, y\) Pfaden ist.
+\end{proof}
+
+\subsubsection*{1. Aufgabe, Teil iii}
+
+\begin{beh}
+  Sei \(G\) zusammenhängend und \(c \in \mathbb{R}^{E}\) beliebig.  Für \(v, w \in
+  V\) sei \(d'(v, w)\) die Länge eines kürzesten Weges von \(v\) nach
+  \(w\).  Positive Definitheit ist nicht erfüllt.
+\end{beh}
+
+\begin{proof}
+  Positive Definitheit ist nicht erfüllt.  Denn, sei
+  \(c \in \mathbb{R}^{E}\) die konstante Funktion \(0\).  Dann ist
+  \(d'(x, y) = 0\) für alle \(x, y \in V\) und wir können \(x = y\)
+  nicht folgern.  Weil \(G\) ungerichteter Graph ist, ist der kürzeste
+  Weg zwischen \(v, w\) auch der kürzeste Weg zwischen \(w, v\).
+  Damit ist die Symmetrie erfüllt.  Die
+  Dreiecksungleichung ist erfüllt, denn, angenommen, die
+  Dreiecksungleichung gelte nicht.  Dann ist
+  \(d(x, y) > d(x, z) + d(z, y)\), also der \(x,z,y\) Pfad ist kürzer
+  als \(x,y\) Pfad im Widerspruch zur Voraussetzung dass \(d(x,y)\)
+  das Minimum von Länge aller \(x, y\) Pfaden ist.
+\end{proof}
+
+
+
+\end{document}

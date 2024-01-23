@@ -1,0 +1,415 @@
+%% page style
+\documentclass[draft,a5paper]{article}
+\usepackage[margin=2cm]{geometry}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+
+%% language
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+
+%% default packages
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts
+}
+
+
+%% metadata
+\newcommand{\myAuthor}{Yuchen Guo 480788 | Meng Zhang 484981 | TB9}
+\newcommand{\myHausaufgaben}{13}
+\newcommand{\mySubject}{Analysis}
+\newcommand{\myTutor}{Tilman}
+
+
+%% custom commands
+\newcommand{\beh}{\textit{Behauptung.}\ }
+\newcommand{\aufgn}[1]{\textbf{Aufgabe #1.}}
+\newcommand{\mg}[1]{\mathbb{#1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+
+\begin{document}
+\aufgn{13.1}
+
+Sei die Abbildung $f \colon \left]0, \infty \right[ \to
+\mg{R}, \quad x \mapsto x^{-2}$ gegeben.
+
+\aufgn{13.1.i}
+
+Sei \(n \in \mg{N}\) gegeben.
+
+\beh Die Formel für das \(n\)-te Taylorpolynom \(T_n\) von
+\(f\) im Entwicklungspunkt \(x_0 = 1\) ist
+\begin{align*}
+T_n(x) = \sum_{k = 0}^n{(-1)^k \cdot (k+1) \cdot (x-1)^k}.
+\end{align*}
+
+\begin{proof}
+Zuerst zeigen wir mittels vollständigen Induktion, dass
+die Ableitungen von \(f\) die Formel
+\begin{align*}
+f^{(n)}(x) = (-1)^n \cdot (n+1)! \cdot x^{-n-2}
+\end{align*}
+entspricht.
+
+\textbf{Induktionsanfang.} Für \(n = 0\) gilt $f^{(0)}(x)
+= x^{-2} = f(x)$.
+
+\textbf{Induktionsvoraussetzung.} Es gilt für ein festes
+\(n \in \mg{N}\) dass \(f^{(n)}(x) = (-1)^n \cdot (n+1)! \cdot x^{-n-2}\).
+
+\textbf{Induktionsschritt.} \(n \to n+1\).  Die Ableitung
+von \(f^{(n)}(x)\) ist
+\begin{align*}
+(-1)^{n+1} \cdot (n+1)! \cdot
+(n+2) \cdot x^{-n-3} = (-1)^{n+1} \cdot (n+2)! \cdot
+x^{-(n+1) - 2} = f^{(n+1)}(x).
+\end{align*}
+Damit ist die Formel für die Ableitung bewiesen. Weiter
+gilt wegen der Definition von Taylorpolynom, dass
+\begin{align*}
+T_n(x)= \sum_{k=0}^n{\frac{f^{(k)}(x_0)}{k!}(x -
+  x_0)^k} = \sum_{k = 0}^n{(-1)^k \cdot (k+1) \cdot (x-1)^k}.
+\end{align*}
+\end{proof}
+
+\aufgn{13.1.ii}
+
+Sei \(n \in \mg{N}\) gegeben.  Abschätzung des Fehlers
+\(\left| R_n(x) \right|\) für alle
+\(x \in \left] \frac{1}{2}, 2 \right[\).
+
+\begin{proof}
+  Zur Abkürzung setzen wir
+  \(I := \left] \frac{1}{2}, 2 \right[\) und sei der
+  Entwicklungspunkt \(x_0 \in I\) beliebig gewählt. Die
+  Abbildung \(f(x)\) ist im Intervall \(I\) beliebig mal
+  differenzierbar.  Wegen (Lagrangesche Form des
+  Restglieds) gibt es zu jedem $x \in I \setminus\left\{ x_0
+  \right\}$ ein \(\xi \in I(x, x_0)\) mit
+\begin{align*}
+R_n(x) = \frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}.
+\end{align*}
+Falls \(n\) gerade.  Dann ist \(f^{(n+1)}(x) < 0\).
+
+Falls \(n\) ungerade. Dann ist \(f^{(n+1)}(x) > 0\).
+
+???
+\end{proof}
+
+\fbox{
+  \begin{minipage}{\textwidth}
+\textbf{Definition 6.27.}
+
+Sei \(D \subseteq \mg{R}\), \(f \colon D \to \mg{R}\) und
+\(x_0 \in D\).  Wir sagen \(f\) hat ein lokales Minimum in
+\(x_0\), falls es \(\varepsilon > 0\) gibt, sodass $f(x_0)
+\le f(x)$ für alle \(x \in D \cap U_{\varepsilon}(x_0)\)
+gilt.
+  \end{minipage}
+}
+
+
+\aufgn{13.2}
+
+\(\mc{C}^2(\mg{R})\) ist der Vektorraum der zweimal stetig
+differenzierbaren Funktionen $f \colon \mg{R} \to
+\mg{R}\(.  Sei \(f \in \mc{C}^2(\mg{R})\) und \)x_0 \in
+\mg{R}$ gegeben.
+
+\aufgn{13.2.i}
+
+\beh Ist \(x_0\) Stelle eines lokalen Minimums von \(f\), so
+gilt \(f^{(2)}(x_0) \ge 0\).
+
+\begin{proof}
+Wegen der Definition von ein lokales Minimum existiert
+ein \(\varepsilon > 0\), sodass \(f(x_0) \le f(x)\) für alle
+\(x \in D \cap U_{\varepsilon}(x_0)\) gilt.  Sei dann $x_1
+\in \left] x_0 - \varepsilon, x_0 \right[\( und \)x_2 \in
+\left]x_0, x_0 + \varepsilon \right[$.  Damit gilt
+\(f(x_0) \le f(x_1)\) und \(f(x_0) \le f(x_2)\).
+
+Wegen (Satz 6.29: Notwendiges Kriterium für lokale
+Extremstellen) gilt \(f'(x_0) = 0\).  Weil \(f\) in ganz
+\(\mg{R}\) zweimal diffbar ist, folgt aus (Satz 6.40:
+Monotoniekriterium für Funktionen) wegen \(f\)
+monoton fallend in
+\(\left] x_0 - \varepsilon, x_0 \right[\) und monoton
+wachsend in \(\left]x_0, x_0 + \varepsilon \right[\) dass
+\(f'(x_1) \le 0\) und \(f'(x_2) \ge 0\).
+
+Nun betrachten wir \(f^{(2)}(x_0)\).  Weil \(f\) zweimal
+diffbar ist, existiert der Grenzwert
+\begin{align*}
+  f^{(2)}(x_0) =
+  \lim_{x \to x_0}{\frac{f'(x)-f'(x_0)}{x - x_0}}
+  = \underbrace{\lim_{x_1 \to x_0^-}{\frac{f'(x_1) - f'(x_0)}{x_1 - x_0}}}_{\text{(1)}}
+  = \underbrace{\lim_{x_2 \to x_0^+}{\frac{f'(x_2) - f'(x_0)}{x_2 - x_0}}}_{\text{(2)}}.
+\end{align*}
+Wegen \(f'(x_0) = 0\), \(f'(x_1) \le 0\) und \(f'(x_2) \ge 0\)
+und \(x_1 < x_0\), \(x_2 > x_0\) gilt dann (1) \(\ge 0\) und
+(2) \(\ge 0\).
+\end{proof}
+
+\aufgn{13.2.ii}
+
+\beh Gilt \(f'(x_0) = 0\) und existiert ein $\varepsilon >
+0\( mit \(f^{(2)}(x) \ge 0\) für alle \)x \in
+U_{\varepsilon}(x_0)$, so ist \(x_0\) Stelle eines lokalen
+Minimums von \(f\).
+
+\begin{proof}
+Sei \(x \in U_{\varepsilon}(x_0)\) beliebig gewählt.  Es
+gilt wegen \(f^{(2)}(x) \ge 0\) dass
+\begin{align*}
+  f^{(2)}(x)
+  = \underbrace{\lim_{p \to x^+}{\frac{f^{(1)}(p) -  f^{(1)}(x)}{p -
+  x}}}_{\text{(1)}}
+  = \underbrace{\lim_{p \to x^-}{\frac{f^{(1)}(p) -  f^{(1)}(x)}{p -
+  x}}}_{\text{(2)}}
+  = m \ge 0.
+\end{align*}
+Wegen (1) gilt für alle \(p > x\) dass $f^{(1)}(p) \ge
+f^{(1)}(x)\(.  Wegen (2) gilt für alle \(p < x\) dass \)f^{(1)}(p) \le
+f^{(1)}(x)\(.  Insbesondere gilt wegen \)x_0 \in
+U_{\varepsilon}(x_0)\( dass für alle \(p > x_0\) dass \)f^{(1)}(p) \ge
+f^{(1)}(x_0) = 0\( und für alle \(p < x_0\) dass \)f^{(1)}(p) \le
+f^{(1)}(x_0) = 0$.  Weil \(f\) auf \(\mg{R}\) zweimal diffbar
+und stetig ist, gilt wegen (Satz 6.40:
+Monotoniekriterium für Funktionen) dass \(f\) monoton
+wachsend auf \(\left]x_0, x_0 + \varepsilon\right[\) und
+monoton fallend auf $\left]x_0 - \varepsilon,
+  x_0\right[$.  Aus der Definition von Monotonie folgt
+dann, dass \(f\) auf Stelle \(x_0\) ein lokales Minimum besitzt.
+\end{proof}
+
+\aufgn{13.3}
+
+Sei \(D \subseteq \mg{R}\) und \(f \colon D \to \mg{R}\) mit
+\begin{align*}
+f(y) := - \inf_{x \in \mg{R}} \left\{ e^x - xy \right\}.
+\end{align*}
+
+\aufgn{13.3.i}
+
+\beh Der bezüglich Inklusion maximalen
+Definitionsbereich \(D\) von \(f\) ist $\left[0, \infty
+\right[$ und eine explizite Formel für den Wert \(f(y)\)
+ist
+\begin{align*}
+  f(y) :=
+\begin{cases}
+  (\ln y - 1) \cdot y & y > 0, \\
+  0 & y = 0.
+\end{cases}
+\end{align*}
+
+\begin{proof}
+Zur Abkürzung setzen wir \(g(x) = e^x - xy\) für ein
+festes \(y\).  Es gilt \(g'(x) = e^x - y\).  Nun betrachten
+wir drei Fälle.
+
+Falls \(y > 0\).  Dann gilt für alle \(x > \ln y\) dass
+\(g'(x) > 0\) und für alle \(x < \ln y\) dass \(g'(x) < 0\).
+Weil die Abbildung \(g(x)\) stetig ist, hat \(g(x)\) Minimum
+und Infimum genau dann, wenn \(x = \ln y\) gilt.  Daraus
+folgt, dass für alle \(y > 0\),
+\begin{align*}
+  f(y)
+  = - \inf_{x \in \mg{R}} \left\{ e^x - xy \right\}
+  = - (e^{\ln y} - \ln y \cdot y) = (\ln y - 1) \cdot y.
+\end{align*}
+Falls \(y = 0\).  Dann ist
+\begin{align*}
+  f(y)
+  = - \inf_{x \in \mg{R}} \left\{ e^x \right\}
+  = 0.
+\end{align*}
+Falls \(y < 0\).  Dann ist \(g'(x) > 0\) für alle $x \in
+\mg{R}$ und die Abbildung ist monoton steigend auf ganz
+\(\mg{R}\).  Es gilt dann
+\begin{align*}
+  f(y) = - \inf_{x \in \mg{R}} \left\{ e^x - xy \right\}
+  = - ( - \infty) = \infty \notin \mg{R}
+\end{align*}
+im Widerspruch zur Voraussetzung dass $f \colon D \to
+\mg{R}$.
+
+Damit folgt dann die Behauptung.
+\end{proof}
+
+\aufgn{13.3.ii}
+
+\beh \(f\) ist auf \(D\) stetig.
+
+\begin{proof}
+Zuerst ist \(f\) auf \(y > 0\) stetig.  Diese folgt aus der
+Stetigkeit von Logarithmusfunktionen und (Satz 4.8:
+\(f,g\) stetig, dann sind \(f + g\), \(f \cdot g\) stetig)
+dass \(f\) auf \(y > 0\) stetig.
+
+Nun zeigen wir, dass \(f\) im Punkt \(y = 0\) stetig ist.
+Zu zeigen:
+\begin{align*}
+\lim_{x \to 0}{f(x)} = f \left( \lim_{x \to 0}{x} \right).
+\end{align*}
+Diese gilt wegen (Satz 6.44: Regel von de L'Hospital)
+dass
+\begin{align*}
+\lim_{x \to 0}{f(x)} = \lim_{x \to 0}{\frac{\ln x -
+  1}{1/x}} = \lim_{x \to 0}{-x} = 0 = f(0).
+\end{align*}
+Daraus folgt, dass \(f\) auf \(D\) stetig ist.
+\end{proof}
+
+\aufgn{13.3.iii}
+
+\beh \(f\) ist diffbar auf $D \setminus \left\{ 0
+\right\}$.
+
+\begin{proof}
+  Die Abbildung \(f\) ist nicht diffbar im Punkt \(y = 0\),
+  denn der linksseitige Grenzwert existiert nicht.  Die
+  Abbildung \(f\) ist wegen Produktregel diffbar auf
+  \(D \setminus \left\{ 0 \right\}\) mit der Ableitung
+\begin{align*}
+f'(y) = \ln y.
+\end{align*}
+\end{proof}
+
+\aufgn{13.3.iv}
+
+\beh \(f\) ist konvex auf \(D\).
+
+\begin{proof}
+  Zuerst zeigen wir, dass \(f\) konvex auf
+  $D \setminus \left\{ 0 \right\} = \left]0,
+    \infty\right[$ ist.  Diese folgt unmittelbar aus
+  (Satz 6.51) mit \(f''(y) = \frac{1}{y} \ge 0\) für alle
+  \(y \in D \setminus \left\{ 0 \right\}\).
+
+  Danach zeigen wir, dass \(f\) konvex auf
+  \(D = \left[0, \infty\right[\) ist.  Angenommen, \(f\) ist
+  nicht konvex und es existiert ein
+  \(y \in \left]0, \infty\right[\) und ein
+  \(\lambda \in \left[0, 1\right]\) mit
+\begin{align*}
+f \left( (1- \lambda) \cdot 0 + \lambda y \right) > (1 -
+  \lambda) f(0) + \lambda f(y).
+\end{align*}
+Daraus folgt, es  existiert ein
+  \(y \in \left]0, \infty\right[\) und ein
+  \(\lambda \in \left[0, 1\right]\) mit
+\begin{align*}
+f \left( \lambda y \right) >  \lambda f(y).
+\end{align*}
+Wir setzen diese Ungleichung in $f(y) = (\ln y - 1)
+\cdot y$ ein, erhalten wir
+\begin{align*}
+(\ln \lambda y - 1) \cdot \lambda y &> (\ln y - 1) \cdot
+                                      \lambda y \\
+  \ln \lambda y &> \ln y
+\end{align*}
+für ein \(\lambda y < y\).  Aber die Abbildung \(\ln y\) ist
+monoton steigend und es gilt \(\ln \lambda y < \ln y\).
+Diese ist ein Widerspruch und \(f\) ist konvex auf \(D\).
+\end{proof}
+
+\aufgn{13.4}
+
+Seien \(\varphi, \psi \colon \left[a, b\right] \to \mg{R}\)
+Treppenfunktionen.
+
+\aufgn{13.4.0}
+
+\beh \(\varphi \psi\) ist eine Treppenfunktion.
+
+\begin{proof}
+Angenommen,
+\begin{itemize}
+\item  \(\varphi\) ist eine Treppenfunktion
+bzgl. \(Z_1\) und seien \(c_1, \ldots, c_n \in \mg{R}\)
+sodass \(\varphi(x) = c_i\) für alle $x \in
+\left]x_{i-1}, x_i \right[$ für \(i = 1, \ldots, n\) gilt.
+\item  \(\psi\) ist eine Treppenfunktion
+bzgl. \(Z_2\) und seien \(d_1, \ldots, d_p \in \mg{R}\)
+sodass \(\psi(x) = d_j\) für alle $x \in
+\left]x_{j-1}, x_j \right[$ für \(j = 1, \ldots, p\) gilt.
+\end{itemize}
+
+Zu zeigen: Es gibt eine Zerlegung \(Z\) von
+\(\left[a, b\right]\) sodass
+\(\varphi \psi \colon \left[a, b\right] \to \mg{R}\)
+Treppenfunktion bzgl. \(Z\) ist und es gibt
+\(m_1, \ldots, m_n \in \mg{R}\) sodass
+\(\varphi(x) \psi(x) = m_i\) für alle
+\(x \in \left]x_{i-1}, x_i \right[\) für
+\(i = 1, \ldots, n\).
+
+Sei dann die Zerlegung \(Z\) die gemeinsame Verfeinerung
+von \(Z_1\) und \(Z_2\).  Dann ist jeder Punkt von \(Z_1\) und
+\(Z_2\) auch ein Punkt von \(Z\).  Sei die Zerlegung \(Z\) das
+Tupel \((h_0, h_1, \ldots, h_q)\).  Dann gilt für alle $x
+\in \left]h_{k - 1}, h_k\right[$ dass
+\begin{align*}
+\varphi(x) = c_w \text{ und } \psi(x) = d_z
+\end{align*}
+für ein \(0 \le w \le n\) und \(0 \le z \le p\).  Es gilt
+dann \(\varphi(x) \psi(x) = c_w d_z := m_i\) bzgl. der
+Zerlegung \(Z\).  Damit ist \(\varphi \psi\) eine Treppenfunktion.
+\end{proof}
+\aufgn{13.4.i}
+
+\beh \(I(\varphi \psi) = I(\varphi) I(\psi)\) nicht immer wahr.
+
+\begin{proof}
+Wir zeigen, dass diese Aussage falsch ist, mit einem
+Gegenbeispiel.
+
+Seien
+\(\varphi, \psi \colon \left[a, b\right] \to \mg{R}\)
+Treppenfunktionen bzgl. der Zerlegungen \(Z_1\) und
+\(Z_2\).  Dann existiert eine gemeinsame Verfeinerung $Z
+:= (x_0, \ldots, x_n)$ von \(Z_1\) und \(Z_2\) mit
+\begin{align*}
+  I(\varphi) = \sum_{k=1}^n{c_k (x_k - x_{k-1})} \text{ und }
+  I(\psi) = \sum_{k=1}^n{d_k (x_k - x_{k-1})}.
+\end{align*}
+Dann ist
+\begin{align*}
+  I(\varphi \psi)
+  &= \sum_{k=1}^n{c_k d_k (x_k - x_{k-1})} \tag{1}\\
+  &= c_1 d_1 (x_1 - x_0) + \ldots + c_n d_n (x_n -
+    x_{n-1}), \\
+  I(\varphi) I(\psi)
+  &= \sum_{k=1}^n{\left( c_k (x_k - x_{k-1})
+    \sum_{j=1}^n {d_j (x_j - x_{j-1})} \right)} \tag{2}\\
+  &= (c_1 (x_1 - x_0) + \ldots + c_n (x_n - x_{n-1}))
+    \cdot
+    (d_1 (x_1 - x_0) + \ldots + d_n ( x_n - x_{n-1})).
+\end{align*}
+Falls es existiert ein \(k\) sodass $d_k \ne \sum_{j=1}^n
+{d_j (x_j - x_{j-1})}$, d.h. falls \(\psi\) nicht konstant null
+ist, dann gilt $I(\varphi \psi) \ne
+I(\varphi) I(\psi)$ und die Aussage ist falsch.
+\end{proof}
+
+
+\aufgn{13.4.ii, iii, iv}
+
+\beh Es gilt $I^2(\varphi \psi) \le
+I^2(\varphi)I^2(\psi)$ und wegen Trichotomie sind die
+andere Behauptungen falsch.
+
+\begin{proof}
+Es folgt aus (2) und (1) dass
+\begin{align*}
+  I(\varphi) I(\psi)
+  &= \sum_{k=1}^n{ c_k \cdot I(\psi)  \cdot (x_k -
+    x_{k-1})}, \\
+  I(\varphi \psi)
+  &= \sum_{k=1}^n{ c_k \cdot d_k \cdot (x_k - x_{k-1})}.\\
+\end{align*}
+Zu zeigen: $0 \le I(\varphi \psi) \le I(\varphi)
+I(\psi)\( oder \)I(\varphi) I(\psi) \le I(\varphi \psi)
+\le 0$.
+\end{proof}
+\end{document}

@@ -1,0 +1,217 @@
+\documentclass[12pt]{extarticle}
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,fancyhdr,color,graphicx,}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{tikz}
+\renewcommand{\familydefault}{\sfdefault}
+\pagestyle{fancy}
+\setlength{\parindent}{0pt}
+\lhead{Yuchen Guo 480788, Meng Zhang 484981}
+\rhead{3. Hausaufgabenblatt, LinA I\\Tutorin: Saskia, Mi 2-4 p.m.}
+\begin{document}
+\textbf{Aufgabe 3.1}
+\begin{itemize}
+\item \(f_1\): \(\mathbb{R} \rightarrow \mathbb{R}^2\), \(x \mapsto (x,x^2)\).
+
+  \begin{itemize}
+  \item Injektivität
+
+    Seien \(x_1, x_2 \in \mathbb{R}\) mit \(x_1 \neq x_2\).  Zu zeigen:
+    \(x_1 \neq x_2 \implies (x_1,x_1^2) \neq (x_2,x_2^2)\).
+
+    Diese Aussage folgt unmittelbar aus \(x_1 \neq x_2\).  Deshalb ist
+    diese Abbildung injektiv.
+  \item Surjektivität
+
+    Seien \((y, y^2) \in \mathbb{R}^2\).  Zu zeigen: es existiert
+    mindestens ein \(x \in \mathbb{R}\) mit \(x \mapsto (y,y^2)\).
+
+    Setzen wir \(x=y\), dann erhalten wir \(x=y \mapsto (y,y^2)\).  Deshalb
+    ist diese Abbildung surjektiv.
+  \end{itemize}
+
+  Diese Abbildung ist daher injektiv, surjektiv und bijektiv.
+\item \(f_2\): \(\mathbb{N} \rightarrow \mathbb{N}\), $n \mapsto
+  \begin{cases}
+     \frac{n}{2}, & n \text{ gerade} \\
+     \frac{n+1}{2}, & n \text{ ungerade}
+  \end{cases}$
+
+  \begin{itemize}
+  \item Nicht Injektiv
+
+  Denn, mit \(x_1=1\) und \(x_2=2\) erhalten wir \(y_1=y_2=1\).
+
+  \item Surjektivität
+
+    Sei \(y \in \mathbb{N}\) beliebig gewählt.  Zu zeigen: es existiert
+    mindestens eine Lösung \(x \in \mathbb{N}\) mit \(f(x)=y\).
+
+    \begin{itemize}
+    \item Fall 1:  Sei \(y=\frac{n+1}{2}\) mit \(n=2k+1\), $k \in
+      \mathbb{N}$.
+
+      Mit Umformungen erhalten wir \(k=y-1\).  Wegen \(n=2k+1\), $k \in
+      \mathbb{N}\(, es gilt \(n \geq 1\) und \(y \geq 1\).  D.h., \)k=y-1
+      \geq 0$, also \(k \in \mathbb{N}\).
+
+      Deshalb existiert mindestens eine Lösung \(k \in \mathbb{N}\),
+      sodass \(f(x)=f(2k+1)=y\) gilt.
+    \item Fall 2:  Sei \(y=\frac{n}{2}\) mit \(n=2k\), $k \in
+      \mathbb{N}$.
+
+      Mit Umformungen erhalten wir \(k=y\).
+
+      Deshalb existiert mindestens eine Lösung \(k \in \mathbb{N}\),
+      sodass \(f(x)=f(2k)=y\) gilt.
+    \end{itemize}
+    Daher ist die Abbildung surjektiv.
+
+    Die Abbildung ist injektiv, surjektiv und bijektiv.
+  \end{itemize}
+
+\item \(f\): \(\mathbb{R}^2 \rightarrow \mathbb{R}\), $(x,y) \mapsto
+  x^2-y^2+1$.
+
+  \begin{itemize}
+  \item Nicht injektiv.
+
+    Denn, für alle \((x,y)\) in \(\mathbb{R}^2\) gilt $f
+    \left( (x,y) \right) = f \left( (-x,-y) \right)$.
+  \item Surjektiv.
+
+    Sei \(p \in \mathbb{R}\) beliebig gewählt.
+\begin{align*}
+  x^2-y^2+1&=p\\
+  y^2&=x^2+1-p\\
+  y&=\pm \sqrt{x^2+1-p}
+\end{align*}
+Diese Abbildung ist surjektiv, denn, für alle \(p \in \mathbb{R}\)
+existiert ein \(x \in \mathbb{R}\) mit der Eigenschaft \(x^2+1-p \geq 0\).
+Damit existiert ein Tupel \((x,y) \in \mathbb{R}^2\) für alle \(p \in \mathbb{R}\).
+  \end{itemize}
+\end{itemize}
+
+\textbf{Aufgabe 3.2}
+
+\begin{itemize}
+\item[i \(\implies\) ii]
+  \begin{proof}
+    Wegen der Injektivität der Abbildung, gilt für alle $x_1 \in X
+    \setminus N$ und \(x_2 \in N\), \(f(x_1) \neq f(x_2)\).
+
+    Daraus folgt,
+\begin{align*}
+f(X \setminus N) \cap f(N) = \emptyset \tag{1}
+\end{align*}
+
+Nach Voraussetzung gilt \(N \subseteq X\). Dann für alle
+\(x \in (X \setminus N) \cup N\) gilt, \(x \in X\).
+
+Daraus folgt,
+\begin{align*}
+f(X \setminus N) \cup f(N) = f(X) \tag{2}
+\end{align*}
+
+Wegen (1) und (2), gilt
+\begin{align*}
+f(X) \setminus f(N)   &= (f(X \setminus N) \cup f(N)) \setminus f(N)
+                                                \tag*{Wegen (2)}\\
+&=  f(X \setminus N)  \tag*{Wegen (1)}
+\end{align*}
+    \end{proof}
+\item[ii \(\implies\) iii]
+Wir zeigen, dass die beide Aussage $f(M\cap N) \subseteq f(M) \cap
+f(N)$ und \(f(M) \cap f(N) \subseteq f(M \cap N)\) gelten.
+
+\begin{itemize}
+\item \(f(M\cap N) \subseteq f(M) \cap f(N)\)
+  \begin{proof}
+    Wir setzen zur Abkürzung \(A=M \cap N\) ein.
+
+    Aus der Voraussetzung folgt, dass $f(M \setminus A)=f(M) \setminus
+    f(A)$ und \(f(N \setminus A)=f(N) \setminus f(A)\).
+
+    Daraus folgt:
+\begin{align*}
+       f(M \setminus A) \cup f(A) &= f(M)\\
+       f(N \setminus A) \cup f(A) &= f(N)\\
+       f(M \setminus A) \cap f(A) &= \emptyset\\
+       f(N \setminus A) \cap f(A) &= \emptyset
+\end{align*}
+
+Wir erhalten $f(M) \cap f(N) = f(A) \cup (f(M \setminus A) \cap f(N
+\setminus A))$.  Damit gilt \(f(A) \subseteq f(M) \cap f(N)\).
+    \end{proof}
+\item \(f(M) \cap f(N) \subseteq f(M \cap N)\)
+
+  ??? Wir können diese Aussage leider nicht beweisen.
+
+\end{itemize}
+\item[iii \(\implies\) i]
+  \begin{proof}
+Wegen der Voraussetzung gilt für alle \(M, N \in X\) die Aussage $f(M
+\cap N)=f(M) \cap f(N)$.
+
+Insbesondere, gilt für alle \(M, (X \setminus M) \in X\) die Aussage
+\(f(M \cap (X \setminus M))=f(\emptyset)=f(M) \cap f(X \setminus M)\).
+
+Das heißt, für alle \(x_1, x_2 \in X\) mit \(x_1 \neq x_2\) gilt $f(x_1)
+\neq f(x_2)$.  Damit ist diese Abbildung injektiv.
+    \end{proof}
+\end{itemize}
+
+\textbf{Aufgabe 3.3}
+\begin{itemize}
+\item[i \(\implies\) ii]
+
+  \begin{proof}
+    Weil die Abbildung surjektiv ist, gibt es für jedes \(y \in Y\)
+    mindestens ein \(x \in X\) mit \(f(x)=y\).
+
+    Daraus folgt, dass es für jedes \(a \in A\) mit \(A \subseteq Y\)
+    mindestens ein \(b \in X\) mit \(f(b)=a\) gibt.
+
+    Sei die Menge \(B = \left\{ b \in X|f(b)=a, a \in A \right\}\).  Es
+    gilt daher \(f^{-1}(A)=B\).  Aus der Definition von \(B\) folgt, dass \(f(B)=A\).
+    \end{proof}
+  \item[ii \(\implies\) iii]
+
+    ???
+  \item[iii \(\implies\) i]
+
+    ???
+  \end{itemize}
+
+
+  \textbf{Aufgabe 3.4.1}
+
+  \begin{proof}
+    Wir bemühen einen Widerspruchsbeweis.
+
+    Seien \(X,Y\) nichtleere endliche Mengen mit $\left| X \right| >
+    \left| Y \right|\(.  Es existiert eine injektive Abbildung \)f: X
+    \rightarrow Y$.
+
+    Aus der Definition von Abbildung folgt, dass für jedes \(x \in X\)
+    muss ein \(y \in Y\) zugeordnet sein.  Weil die Abbildung injektiv
+    ist, gilt \(x_1 \neq x_2 \implies f(x_1) \neq f(x_2)\).
+
+    Es gilt daher, dass \(\left| Y \right| \geq \left| X \right|\).
+    Dies ist im Widerspruch zur Voraussetzung  $\left| X \right| >
+    \left| Y \right|$.  Deshalb existiert keine injektive Abbildung
+    \(f: X \rightarrow Y\).
+    \end{proof}
+
+
+\textbf{Aufgabe 3.4.2}
+
+Es gilt \(\left| \mathbb{Z} \right| > \left| \mathbb{N} \right|\).
+Denn, für alle \(n \in \mathbb{N}_{>0}\) gibt es eine Inverse von \(n\) in
+\(\mathbb{Z}\), nämlich \(-n\).  Daher gibt es wegen des vorherigen Beweis
+keine injektive und daher keine bijektive Abbildung
+\(f: \mathbb{Z} \rightarrow \mathbb{N}\).
+\end{document}

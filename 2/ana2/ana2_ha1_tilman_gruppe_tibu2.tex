@@ -1,0 +1,273 @@
+\documentclass[draft,a5paper]{article}
+\usepackage[ngerman]{babel}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath,mathtools,fontspec,amssymb,mathtools}
+
+% for theorems and lemma
+\usepackage{amsthm}
+\newtheorem*{beh}{Behauptung}
+\newtheorem*{lem}{Lemma}
+
+% times new roman font
+\usepackage{newtx}
+
+\linespread{1.2}
+
+\author{Yiwen Yang 466096, Yuchen Guo 480788, Meng Zhang 484981}
+\date{\today}
+\title{HA 1, Ana 2 -- Gruppe TiBu 2, Tilman Friedrich Burghoff}
+
+\begin{document}
+\maketitle
+
+\newpage
+
+\subsection*{H 1.1}
+
+\begin{lem}
+  Sei \(I \subseteq \mathbb{R}_{\ge 0}\) ein Intervall,
+  \(\{0\} \subseteq I\) und \(f\colon I \to \mathbb{R}_{\ge 0}\) mit
+  \(f(0) = 0\).  Falls \(f\) konkav ist, dann gilt für alle
+  \(a, b \in I\) mit \(b \ge a \ge 0\) dass
+  \begin{align*}
+    f(a + b) \le f(a) + f(b).
+  \end{align*}
+\end{lem}
+
+\begin{proof}
+  Weil \(f\) konkav ist, gilt für alle \(\lambda \in [0, 1]\) dass
+  \begin{align*}
+    f(\lambda x + (1 - \lambda) \cdot 0) \ge \lambda f(x) + (1 - \lambda) f(0).
+  \end{align*}
+  Daraus folgt, dass \(f(\lambda x) \ge \lambda f(x)\) für alle \(\lambda \in [0, 1]\) und
+  alle \(x \in I\).  Damit gilt
+  \begin{align*}
+    f\left( \frac{b}{a+b} (a+b)\right) = f(b) \ge \frac{b}{a+b} f(a+b), \quad
+    f\left( \frac{a}{a+b} (a+b)\right) = f(a) \ge \frac{a}{a+b} f(a+b).
+  \end{align*}
+  Addieren die zwei Ungleichungen erhalten wir
+  \begin{align*}
+    f(a) + f(b) \ge \frac{a+b}{a+b} f(a+b).
+  \end{align*}
+  Damit gilt die Behauptung.
+\end{proof}
+
+\begin{beh}
+  Sei \((X, d)\) ein metrischer Raum,
+  \(f \colon \mathbb{R}_{\ge 0} \to \mathbb{R}_{\ge 0}\) eine streng monoton wachsende und konkave
+  Funktion mit \(f(0) = 0\).  Dann ist
+  \(d_{f} \colon X \times X \to \mathbb{R}, d_{f}(x, y) \coloneq f(d(x, y))\) ebenfalls eine auf
+  \(X\) definierte Metrik.
+\end{beh}
+
+\begin{proof}
+  Wir zeigen, dass \(d_{f}\) eine Metrik auf \(X\) definiert, indem
+  wir zeigen, dass für alle \(x, y, z \in X\) die Definition von einer
+  Metrik erfüllt sind.
+
+  Es gilt \(d_{f}(x,y) \ge 0\).  Denn, wegen Voraussetzung ist \(d\)
+  eine Metrik auf \(X\). Damit gilt \(d(x,y) \ge 0\) für alle \(x, y \in
+  X\).  Die Funktion \(f\) hat einen Wertbereich von \(\mathbb{R}_{\ge 0}\).
+  Daraus folgt, dass \(d_{f}(x, y) \coloneq f(d(x,y)) \ge 0\).
+
+  Aus \(d_{f}(x, y) = 0\) folgt \(x = y\).  Denn, wegen Voraussetzung ist \(d\)
+  eine Metrik auf \(X\). Damit gilt \(d(x,y) = 0 \iff  x = y\) für alle \(x, y \in
+  X\).    Die Funktion \(f\) ist streng monoton wachsend mit \(f(0) = 0\).
+  Daraus folgt, dass \(f(x) \ne 0 \) für alle \(x \ne 0\).  Insbesondere,
+  aus \(d_{f}(x, y) \coloneq f(d(x, y)) = 0\) folgt \(d(x, y) = 0\) und \(x =
+  y\).
+
+  Aus \(x = y\) folgt \(d_{f}(x, y) = 0\). Denn, wegen Voraussetzung ist \(d\)
+  eine Metrik auf \(X\). Damit gilt \(x = y \iff  d(x,y) = 0\) für alle \(x, y \in
+  X\).    Wegen Voraussetzung gilt \(f(0)=0\).  Daraus folgt, dass
+  \(d_{f}(x, y) = f(d(x, y)) = f(0) = 0\).
+
+  Es glit \(d_{f}(x, y) = d_{f}(y, x)\). Denn, wegen Voraussetzung ist \(d\)
+  eine Metrik auf \(X\). Damit gilt \(d(x, y) = d(y, x)\).  Daraus
+  folgt, dass \(d_{f}(x, y) = f(d(x, y)) = f(d(y, x)) = d_{f}(y, x)\).
+
+  Es gilt \(d_{f}(x, z) \le d_{f}(x, y) + d_{f}(y, z)\).  Denn, wegen
+  Voraussetzung ist \(d\) eine Metrik auf \(X\). Damit gilt
+  \(d(x, z) \le d(x, y) + d(y, z)\) für alle \(x, y, z \in X\).  Weil
+  \(f\) monoton wachsend ist, gilt
+  \begin{align*}
+    d_{f}(x, z) \le f(d(x, y) + d(y, z)).
+  \end{align*}
+  Weil \(f\) konkav ist, folgt aus dem Lemma dass
+  \begin{align*}
+    f(d(x, y) + d(y, z)) \le d_{f}(x, y) + d_{f}(y, z).
+  \end{align*}
+  Damit gilt
+  \begin{align*}
+    d_{f}(x, z) \le f(d(x, y) + d(y, z)) \le d_{f}(x, y) + d_{f}(y, z).
+  \end{align*}
+  Damit gilt die Behauptung.
+\end{proof}
+
+\subsection*{H 1.2}
+
+\begin{beh}
+  Sei \(X\) eine nicht leere Menge, \((d_{n})_{n \in \mathbb{N}}\) ein Familie
+  von Metriken auf \(X\).  Sei \(l(X) \coloneq \{x \colon \mathbb{N} \to X\}\) die Menge
+  aller Folgen mit Elementen in \(X\).  Dann ist die Abbildung \(d\)
+  eine Metrik auf \(l(X)\) und \(d\) ist wohldefiniert mit
+  \begin{align*}
+    d \colon l(X) \times l(X) \to \mathbb{R}, \quad (x, y) \mapsto
+    \sum_{n=1}^{\infty}{2^{-n}\frac{d_{n}(x_{n}, y_{n})}{1+d_{n}(x_{n}, y_{n})}}.
+  \end{align*}
+\end{beh}
+
+\begin{proof}
+  Weil \(d_{n}\) eine Metrik auf \(X\) ist, ist insbesondere
+  \(d_{n}(x_{n},y_{n}) \ge 0\) für alle \(n \in \mathbb{N}\).  Daraus folgt, dass
+  \begin{align*}
+    0 \le \frac{d_{n}(x_{n}, y_{n})}{1+d_{n}(x_{n}, y_{n})} < 1. \tag{1}
+  \end{align*}
+  Die unendliche geometrische Reihe \(\sum_{n=1}^{\infty}{x^{n}}\) konvergiert
+  für alle \(|x| < 1\).  Weil \(\sum_{n=1}^{\infty}{2^{-n}}\) konvergiert, die
+  Folgengliedern nicht negativ ist und die Ungleichung (1) gilt,
+  konvergiert \(d(x,y)\) wegen Majorantenkriterium. Damit ist \(d\)
+  wohldefiniert.
+
+  Es gilt \(d(x,y) \ge 0\).  Denn, weil \(d_{n}\) eine Metrik ist, gilt
+  \(d_{n}(x_{n}, y_{n}) \ge 0\) für alle \(n \in \mathbb{N}\), \(x, y \in l(X)\).
+  Die Summe von lauter nicht negativen Zahlen ist nicht negativ.
+  Damit gilt die Behauptung.
+
+  Aus \(d(x, y) = 0\) folgt \(x = y\).  Denn, aus \(d(x, y) = 0\)
+  folgt \(d_{n}(x_{n}, y_{n}) = 0\).  Weil \(d\) eine Metrik ist, gilt
+  \(x_{n} = y_{n}\) für alle \(n \in \mathbb{N}\).  Daraus folgt, dass \(x = y\).
+
+  Aus \(x = y\) folgt \(d(x, y) = 0\).  Denn, aus \(x = y\) folgt
+  \(d_{n}(x_{n}, y_{n}) = 0\).  Daraus folgt, \(\sum_{n=1}^{\infty}{0} = 0\)
+  und \(d(x, y) = 0\).
+
+  Es glit \(d(x, y) = d(y, x)\). Denn, weil \(d_{n}\) eine Metrik ist,
+  gilt \(d_{n}(x_{n}, y_{n}) = d_{n}(y_{n}, x_{n})\) für alle
+  \(n \in \mathbb{N}\), \(x, y \in l(X)\).  Daraus folgt, dass
+  \(d(x, y) = d(y, x)\).
+
+  Es gilt \(d(x, z) \le d(x, y) + d(y, z)\). Denn, weil \(d_{n}\) eine
+  Metrik ist, gilt
+  \(d_{n}(x_{n}, z_{n}) \le d_{n}({x_{n}, y_{n}}) + d_{n}({y_{n},
+    z_{n}})\) für alle \(n \in \mathbb{N}\), \(x, y, z \in l(X)\).  Es gilt auch,
+  dass die Abbildung
+  \(f \colon \mathbb{R}_{\ge 0} \to \mathbb{R}_{\ge 0}, x \mapsto \frac{x}{1+x} = 1 - \frac{1}{1+x}\) auf
+  \(\mathbb{R}_{\ge 0}\) streng monoton steigend ist, wegen
+  \(f'(x) = \frac{1}{(1+x)^{2}}\).  Wegen Satz 6.48 ist \(f\) konkav,
+  denn \(-f'\) ist monoton wachsend.
+
+  Wir zeigen nun, dass für alle \(a, b, c \in \mathbb{R}_{\ge 0}\) mit
+  \(c \le a + b\) die Ungleichung \(f(c) \le f(a+b) \le f(a) + f(b)\) gilt.
+  Die linke Ungleichung \(f(c) \le f(a+b)\) gilt, weil \(c \le a+b\) und
+  \(f\) streng monoton steigend ist. Die rechte Ungleichung
+  \(f(a+b) \le f(a) + f(b)\) gilt, weil \(f\) konkav ist und das Lemma
+  aus H 1.1 gilt.  Daraus folgt, dass
+  \begin{align*}
+    2^{-n} \frac{d_{n}(x_{n}, z_{n})}{1+d_{n}(x_{n}, z_{n})}
+    \le 2^{-n} \left[ \frac{d_{n}(x_{n}, y_{n})}{1+ d_{n}(x_{n}, y_{n})}
+    + \frac{d_{n}(y_{n}, z_{n})}{1 + d_{n}(y_{n}, z_{n})}\right]
+  \end{align*}
+  für alle \(n \in \mathbb{N}\).  Damit gilt die Behauptung.
+\end{proof}
+
+\subsection*{H 1.3}
+
+\begin{beh}
+  Die Teilmenge
+  \begin{align*}
+    \mathcal{C} ([a, b], \mathbb{R}) \coloneq \{f\colon [a, b] \to \mathbb{R} \mid f \text{ ist stetig}\}
+  \end{align*}
+  von der Vektorraum
+  \(\mathcal{B} ([a, b], \mathbb{R}) \coloneq \{f \colon [a, b] \to \mathbb{R} \mid f \text{ ist beschränkt}\}\),
+  vesehen mit der durch die Supremumsnorm induzierten Metrik, ist
+  offen.
+\end{beh}
+
+\begin{proof}
+  Wir zeigen, dass \(C \coloneq \mathcal{C} ([a, b], \mathbb{R})\) offen ist, indem wir zeigen, dass
+  es zu jedem \(f \in C\) ein \(\varepsilon > 0\) gibt, sodass \(U_{\varepsilon}(f) \subseteq C\)
+  gilt.
+
+  Seien \(f \in C\) und \(\varepsilon > 0\) beliebig gewählt.  Dann ist
+  \(f: [a, b] \to \mathbb{R}\) stetig und
+  \begin{align*}
+    g \colon [a, b] \to \mathbb{R}, \quad x \mapsto f(x) + \frac{x-a}{b-a} \cdot q, \quad q \in \left] 0, \varepsilon \right[
+  \end{align*}
+  ein Familie von stetige Funktionen. Dann gilt
+  \begin{align*}
+    \|f - g\|_{\infty}
+    = \sup \{ \|f(x) - g(x)\| \mid x \in \left[a, b\right]\}
+    = q < \varepsilon.
+  \end{align*}
+  Definieren wir für alle \(\varepsilon > 0\) dass
+  \begin{align*}
+    U_{\varepsilon}(f) \coloneq \{ g \mid g \text{ wie oben definiert} \}
+  \end{align*}
+  dann sind alle Elemente von der Menge \(U_{\varepsilon}(f)\) stetige
+  Funktionen mit Definitionsbereich \([a, b]\).  Es gilt \(U_{\varepsilon} \subseteq
+  C\).  Damit gilt die Behauptung.
+\end{proof}
+
+\subsection*{H 1.4}
+
+Sei \((X, d)\) ein metrischer Raum.  Sei \(\varepsilon > 0\) und \(A \subseteq X\).  Die
+\(\varepsilon\)-Umgebung von \(A\) wird definiert durch
+\begin{align*}
+  U_{\varepsilon}(A) \coloneq \{ x \in X \colon d(x, A) < \varepsilon\}, \quad d(x, A) \coloneq \inf \{ d(x, a) \mid a
+  \in A\}.
+\end{align*}
+
+\begin{beh}
+  Die \(\varepsilon\)-Umgebung einer Menge ist stets offen.
+\end{beh}
+
+\begin{proof}
+  Angenommen, es gibt einen Menge \(A \subseteq X\), deren \(\varepsilon\)-Umgebung
+  abgeschlossen ist.  Das heißt, es gibt einen Punkt \(p \in U_{\varepsilon}(A)\),
+  sodass für alle \(\lambda > 0\) gilt \(U_{\lambda}(p) \nsubseteq U_{\varepsilon}(A)\).  Das heißt,
+  es existiert einen Punkt \(q \in U_{\lambda}(p)\) mit \(q \notin U_{\varepsilon}(A) = \{x \in
+  X \colon d(x, A) < \varepsilon\}\).  D.h., \(\inf \{d(q, a) \mid a \in A\} \ge \varepsilon\).
+
+  Weil die obige Aussage für alle \(\lambda > 0\) gilt, gilt insbesondere
+  für \(\lambda \coloneq \varepsilon - d(p, a)\).  Daraus folgt, dass
+  \begin{align*}
+    d(q, a)
+    \le d(q, p) + d(p, a)
+    < \lambda + d(p, a)
+    = \varepsilon.
+  \end{align*}
+
+  Diese ist im Widerspruch zur Annahme dass
+  \(\inf \{d(q, a) \mid a \in A\} \ge \varepsilon\).
+\end{proof}
+
+\begin{beh}
+  Für \(A \subseteq X\) gilt \(\overline{A} = \bigcap_{n \ge 1}{U_{1/n}(A)}\).
+\end{beh}
+
+\begin{proof}
+  Zuerst bemerken wir, dass \(A \subseteq U_{\varepsilon}(A)\) für alle
+  \(\varepsilon > 0\) gilt, denn \(d(x, A) = 0\) für alle \(x \in A\).  Es gilt
+  auch, dass \(\partial A \subseteq U_{\varepsilon}(A)\) für alle
+  \(\varepsilon > 0\), denn sei \(p \in \partial A\) beliebig, es gilt
+  \(\inf \{d(p, a) \mid a \in A\} = 0\).
+
+  Andereseits existiert für alle \(q \in X \setminus \overline{A}\) ein
+  \(n \in \mathbb{N}\) dass \(q \notin U_{1/n}(A)\) wegen
+  \(\inf \{d(q, a) \mid a \in A\} > 0\).  Daraus folgt, dass \(A \cup \partial A \subseteq
+  \bigcap_{n \ge 1}{U_{1/n}(A)}\) und \((X \setminus \overline{A}) \cap \bigcap_{n \ge
+    1}{U_{1/n}(A)} = \emptyset \).  Damit gilt die Behauptung.
+\end{proof}
+
+\begin{beh}
+  Jede abgeschlossene Menge lässt sich als abzählbarer Schnitt offener
+  Mengen darstellen.
+\end{beh}
+
+\begin{beh}
+  Jede offene Menge lässt sich als abzählbare Vereinigung
+  abgeschlossener Mengen darstellen.
+\end{beh}
+
+\end{document}

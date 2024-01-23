@@ -1,0 +1,131 @@
+%% page style
+\documentclass[12pt]{extarticle}
+\usepackage[margin=2cm]{geometry}
+\usepackage{fancyhdr,parskip}
+\pagestyle{fancy}
+\usepackage[onehalfspacing]{setspace}
+\setlength{\parindent}{0pt}
+\lhead{\myAuthor}
+\rhead{\mySubject \ \myHausaufgaben. Übungsblatt \\ \myTutor}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+
+%% language
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+
+%% default packages
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,
+  tikz,     % used to draw diagrams
+}
+
+
+%% metadata
+\newcommand{\myAuthor}{Yuchen Guo 480788 | Meng Zhang 484981 | TB9}
+\newcommand{\myHausaufgaben}{9}
+\newcommand{\mySubject}{Analysis}
+\newcommand{\myTutor}{Tilman}
+
+
+%% custom commands
+\newcommand{\beh}{\textit{Behauptung.}\ }
+\newcommand{\aufgn}[1]{\textbf{Aufgabe #1.}}
+\newcommand{\mg}[1]{\mathbb{#1}}
+\newcommand{\Real}{\operatorname{Re}}
+\newcommand{\Imag}{\operatorname{Im}}
+\begin{document}
+\aufgn{9.2}
+
+\beh Die Funktion \(f \colon \mg{R} \to \mg{R}\) mit $x
+\mapsto \sin(x^2)$ ist nicht gleichmäßig stetig.
+
+\begin{proof}
+  Sei \(0<\varepsilon<2\) und \(\delta > 0\) beliebig
+  gewählt.  Weil die Funktion
+  $g \colon \mg{R}_{\ge 0} \to \mg{R}_{\ge 0}, x \mapsto
+  x^2$ stetig und streng monoton steigend ist, existiert
+  eine stetige und streng monoton steigende
+  Umkehrabbildung $h \colon \mg{R}_{\ge 0} \to
+  \mg{R}_{\ge 0}, x \mapsto \sqrt{x}$.
+
+  Daraus folgt, es gibt
+  ein \(n \in \mg{N}\) mit
+\begin{align*}
+0 < \sqrt{2n \pi} < \sqrt{(2n + 1)\pi} < \sqrt{\delta}.
+\end{align*}
+
+Es existiert insbesondere $a :=
+\sqrt{2n \pi +\frac{1}{2} \pi}\( und \)b :=
+\sqrt{2n \pi +\frac{3}{2} \pi}$ mit
+\begin{align*}
+0 < \sqrt{2n \pi} < a < b < \sqrt{(2n + 1)\pi} < \sqrt{\delta}.
+\end{align*}
+
+Es gilt,
+\begin{align*}
+  \left| a - b \right| &< \delta \\
+\left| f(a) - f(b) \right| &> \varepsilon.
+\end{align*}
+D.h., es existiert ein \(\varepsilon > 0\) sodass zu jedem
+\(\delta > 0\) und \(a, b \in \mg{R}\) mit $\left| a - b
+\right| < \delta\( gilt \)\left| f(a) - f(b) \right| >
+\varepsilon$.  Die Abbildung ist nicht gleichmäßig stetig.
+\end{proof}
+
+\aufgn{9.3}
+
+\beh Die Identität, die Nullfunktion und die komplexe
+Konjugation sind die einzige stetige Körperisomorphismen
+auf \((\mg{C}, +, \cdot)\).
+
+\begin{proof}
+Wir zeigen zuerst, dass die oben genannten komplexen
+Abbildungen stetige Körperisomorphismen sind.
+
+\begin{itemize}
+\item Identität.  Diese Abbildung erfüllt $f(z+w) = z+w
+  = f(z) + f(w)$ und \(f(zw)=zw=f(z)f(w)\).
+
+  Diese Abbildung ist stetig, denn für jede Folge
+  \((z_n)\) in \(\mg{C}\) und jede \(z \in \mg{C}\) gilt: aus $\lim_{n \to
+    \infty}{z_n}=z\( folgt \)\lim_{n \to \infty}{f(z_n)} =
+  \lim_{n \to \infty}{z_n} = z =
+  f(z)$.
+\item Nullfunktion.  Diese Abbildung erfüllt $f(z+w) = 0
+  + 0  = f(z) + f(w) = 0$ und \(f(zw)=0=0\cdot0=f(z)f(w)\).
+
+  Diese Abbildung ist stetig, denn für jede Folge
+  \((z_n)\) in \(\mg{C}\) gilt: aus
+  \(\lim_{n \to \infty}{z_n}=0\) folgt
+  $\lim_{n \to \infty}{f(z_n)} = \lim_{n \to
+    \infty}{z_n} = 0 = f(0)$.
+\item Komplexe Konjugation.
+
+  Diese Funktion hat die Eigenschaft dass für alle $z =
+  a + bi, w = c + di \in \mg{C}$,
+\begin{align*}
+  f(z+w)
+  = (a+c) - i (b+d)
+  = a - ib + c - id
+  = f(z) + f(w) \\
+  f(zw)
+  = ac - bd - (ad+bc) i
+  = (a - bi) (c - di)
+  = f(z)f(w).
+\end{align*}
+Damit ist diese Funktion ein Körperisomorphismus.
+
+  Diese Abbildung ist stetig, denn für jede Folge
+  \((z_n)\) in \(\mg{C}\) gilt: aus
+  \(\lim_{n \to \infty}{z_n}=a+bi\) folgt
+  \(\lim_{n \to \infty}{f(z_n)} = a - bi = f(z)\).
+\end{itemize}
+
+Für alle stetige Körperisomorphismen gilt wegen
+\(f(0) = f(0+0) = f(0) + f(0)\) dass \(f(0) = 0\).  Es gilt
+auch wegen \(f(-i \cdot i) = f(1) = f(-i)f(i) = f(1)f(1)\).
+
+\end{proof}
+
+
+\end{document}

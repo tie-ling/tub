@@ -1,0 +1,241 @@
+%% page style
+\documentclass[12pt]{extarticle}
+\usepackage[margin=2cm]{geometry}
+\usepackage{fancyhdr,parskip}
+\pagestyle{fancy}
+\usepackage[onehalfspacing]{setspace}
+\setlength{\parindent}{0pt}
+\lhead{\myAuthor}
+\rhead{\mySubject \ \myHausaufgaben. Übungsblatt \\ \myTutor}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+
+%% language
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+
+%% default packages
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,
+  stmaryrd, % for the lightning symbol used in proof by contraction
+  tikz,     % used to draw diagrams
+}
+
+%% metadata
+\newcommand{\myAuthor}{Yiwen Yang 466096 | Qing Wang 458040 | Yuchen Guo 480788}
+\newcommand{\myHausaufgaben}{7}
+\newcommand{\mySubject}{CoMa}
+\newcommand{\myTutor}{Lino}
+
+%% custom commands
+\newcommand{\aufgn}[1]{\textbf{Aufgabe #1.}}
+\newcommand{\mg}[1]{\mathbb{#1}}
+\newcommand{\lin}{\operatorname{lin}}
+\newcommand{\beh}{\textit{Behauptung.}\ }
+%% code listing options
+\usepackage{listings}
+\usepackage[lighttt]{lmodern}
+\lstset{
+  numbers=left,
+  basicstyle=\ttfamily,
+  keywordstyle=\ttfamily\bfseries,
+}
+\begin{document}
+
+\aufgn{3.1}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+  \begin{scope}[every node/.style={circle,thick,draw}]
+    \node (1) at (0,1) {1};
+    \node (2) at (0,0) {2};
+    \node (3) at (0,-1) {3};
+    \node (4) at (2,1) {4};
+    \node (5) at (2,0) {5};
+    \node (6) at (2,-1) {6};
+\end{scope}
+\begin{scope}
+  \path [-] (1) edge[bend right=60] (2);
+  \path [-] (2) edge[bend right=60] (3);
+  \path [-] (3) edge (4);
+  \path [-] (2) edge (5);
+  \path [-] (4) edge[bend left=60] (5);
+  \path [-] (5) edge[bend left=60] (6);
+  \path [-] (4) edge[bend left=90] (6);
+\end{scope}
+\end{tikzpicture}
+\caption{Original.}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+  \begin{scope}[every node/.style={circle,thick,draw}]
+    \node (1) at (0,1) {1};
+    \node (2) at (0,0) {2};
+    \node (3) at (0,-1) {3};
+    \node (4) at (2,1) {4};
+    \node (6) at (2,-1) {6};
+\end{scope}
+\begin{scope}
+  \path [-] (1) edge[bend right=60] (2);
+  \path [-] (2) edge[bend right=60] (3);
+  \path [-] (3) edge (4);
+  \path [-] (2) edge (4);
+  \path [-] (4) edge[bend left=60] (4);
+  \path [-] (4) edge[bend left=60] (6);
+  \path [-] (4) edge[bend left=90] (6);
+\end{scope}
+\end{tikzpicture}
+\caption{Kontraktion.}
+\end{figure}
+
+\[
+  \begin{pmatrix}
+0 & 1 & 0 & 0 & 0 \\
+    1 & 0 & 1 & 1 & 0\\
+
+    0 & 1 & 0 & 1 & 0\\
+    0 & 1 & 1 & 0 & 2\\
+    0 & 0 & 0 & 2 & 0
+  \end{pmatrix}
+\]
+
+\aufgn{3.2}
+
+\(G\) zusammenhängend \(\implies\) \(G_{/e}\) zusammenhängend.
+\begin{proof}
+  Angenommen, \(G_{/e}\) ist nicht zusammenhängend.  Dann existiert
+  mindestens ein \(v \in E_{/e}\) mit \(\delta(v) = \emptyset\).
+  \begin{itemize}
+  \item   Falls \(v \notin \Psi(e)\), dann ist \(G\) nicht
+    zusammenhängend.
+  \item   Falls \(v \in \Psi(e)\), dann gilt
+  $(\Psi(e_1) \cup \Psi(e_2)) \setminus \left\{ e \right\} =
+  \emptyset$.  Das heißt, die Knoten \(e_1, e_2\) besitzt keine Kante
+  anders als \(e\).  Es gibt kein Weg zwischen \(e_1, e_2\) und alle
+  andere Knoten in der Knotenmenge.  Dann ist \(G\) nicht
+  zusammenhängend.
+  \end{itemize}
+\end{proof}
+\(G_{/e}\) zusammenhängend \(\implies\) \(G\) zusammenhängend.
+
+\begin{proof}
+  Angenommen, \(G\) ist nicht zusammenhängend.  Es existiert ein $a, b
+  \in V$ sodass es kein a-b Weg gibt.  Nach Kontraktion gibt es immer
+  keinen a-b Weg.  Deshalb ist \(G_{/e}\) nicht zusammenhängend.
+\end{proof}
+
+\aufgn{3.3}
+
+\(G\) zusammenhängend mit \(n\) Kanten \(\implies\) nach \(n\)-ten
+Kantenkontraktion gibt es nur eine Knoten.
+
+\begin{proof}
+  Dann gibt es für alle Knoten \(a, b \in V\) ein a-b Weg.  Daraus folgt
+  die Behauptung.
+\end{proof}
+
+Nach \(n\)-ten Kantenkontraktion gibt es nur eine Knoten. \(\implies\) \(G\)
+zusammenhängend mit \(n\) Kanten.
+
+\begin{proof}
+  Angenommen, \(G\) ist zusammenhängend aber lässt sich nicht auf eine
+  Knoten kontraktieren.  Dann ist \(G\) im Widerspruch zur Voraussetzung
+  nicht zusammenhängend.
+\end{proof}
+\newpage
+\aufgn{4}
+\begin{lstlisting}[language=Python]
+def MinMaxSort(A, sta=0, end=-1):
+    if end < 0:
+        end += len(A)
+    if sta >= end:
+        return A
+    mini = maxi = A[sta]
+    mi = ma = sta
+
+    for i in range(sta+1, end+1):
+        if A[i] > maxi:
+            maxi, ma = A[i], i
+        if A[i] < mini:
+            mini, mi = A[i], i
+
+    A[mi], A[sta] = A[sta], A[mi]
+
+    if (ma != sta):
+        A[ma], A[end] = A[end], A[ma]
+    else:
+        A[mi], A[end] = A[end], A[mi]
+    return MinMaxSort(A, sta+1, end-1)
+\end{lstlisting}
+\aufgn{4.1}
+
+\beh  Die Funktion ist korrekt.
+\begin{proof}
+  Wir zeigen, dass diese Funktion korrekt ist, mittels Induktion.
+
+  \textit{Induktionsanfang.}  Eingabe ist List \texttt{A}.  Beim
+  ersten Aufruf dieser Funktion gilt \texttt{sta=0} und
+  \texttt{end=len(A)-1}.  Innerhalb der \texttt{for}-Schleife wird
+  jeweils
+  \begin{itemize}
+  \item das größte Element der Variable \texttt{maxi},
+  \item der Index des größte Element der Variable \texttt{ma},
+  \item das kleinste Element der Variable \texttt{mini},
+  \item der Index des kleinste Element der Variable \texttt{mi},
+  \end{itemize}
+  zugewiesen.  Anschließend werden das Element am Anfang dieses Lists
+  mit dem kleinsten Element dieses ganzen Lists und das Element am
+  Ende dieses Lists mit dem größten Element dieses ganzen Lists
+  getauscht.  So dass es gilt
+  \begin{itemize}
+  \item \texttt{L[0] \(\leq\) L[i]} für alle \texttt{i} \(\leq\)
+    \texttt{len[L] - 1}, und
+  \item \texttt{L[-1] \(\geq\) L[i]} für alle \texttt{i} \(\leq\)
+    \texttt{len[L] - 1}.
+  \end{itemize}
+
+  \textit{Induktionsannahme.}  Beim \(n\)-ten rekursiven Aufruf dieser
+  Funktion, also \texttt{MinMaxSort(L, n, len(L)-n)} gilt, dass
+  jeweils die ersten und die letzten \(n\) Elemente dieses Lists korrekt
+  sortiert sind.
+
+  \textit{Induktionsschritt.}  Als Eingabe \texttt{(L, n, len(L)-n)}
+  \(\rightarrow\) \texttt{(L, n+1, len(L)-n-1)}.  Dann gilt wegen
+  Induktionsannahme dass
+  \begin{itemize}
+  \item \texttt{L[n+1]} \(\geq\) \texttt{L[i]} für alle
+  \(0\leq\) \texttt{i} \(\leq\) \texttt{n},
+\item \texttt{L[len(L)-n-1]} \(\leq\) \texttt{L[i]} für alle
+  \texttt{len(L)-n} \(\leq\) \texttt{i} \(\leq\) \texttt{len(L)}.
+\end{itemize}
+
+Analog zum ersten Aufruf gilt auch \texttt{L[len(L)-n-1]}
+größer-gleich und \texttt{L[n+1]} kleiner-gleich alle Elemente
+inzwischen.  Deshalb werden die Elemente korrekt sortiert.
+\end{proof}
+
+\aufgn{4.2}
+
+\beh Sei Laufzeitfunktion dieses Funktions \(g\).  Es gilt \(g \in \Theta(n^2)\).
+
+\begin{proof}
+  Wir bemerken, dass nur die \texttt{for}-Schleife und deren rekursive
+  Aufrufe eine nicht konstante Laufzeit haben.
+
+  Die Funktion terminiert genau dann, wenn alle Elemente sortiert
+  sind. O.B.d.A, sei der Lange des Lists gerade, dann benötigt die
+  Funktion
+\begin{align*}
+\underbrace{n + (n - 2) + (n - 4) + (n - 6) + \ldots + 0}_{n/2\text{ Elemente}}
+\end{align*}
+Schritte zu terminieren.  Die Laufzeitfunktion ist dann
+\begin{align*}
+\frac{n^2}{2}-n^2-n.
+\end{align*}
+
+Damit folgt  \(g \in \Theta(n^2)\).
+\end{proof}
+
+\end{document}

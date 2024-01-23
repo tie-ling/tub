@@ -1,0 +1,175 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+\documentclass[fleqn,draft,a5paper]{article}
+
+% 让每个章节 subsection 在新的一页上开始
+% 而不是紧接着上一章节
+\AddToHook{cmd/subsection/before}{\clearpage}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+\geometry{left=1cm,
+ right=1cm,
+ top=1cm,
+ bottom=2cm}
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,mathtools,fontspec,amssymb,amsthm,parskip,interval,mathtools,fontspec}
+\setmainfont{TeX Gyre Termes}
+
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\M}{M}
+
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+% 标题与作者
+\title{Lineare Algebra, Klausurvorbreitung}
+\author{me}
+
+\begin{document}
+\subsection{Lineare Gleichungssysteme}
+Die grundlegenden Operationen in der Linearen Algebra sind die
+Addition von Vektoren und die Multiplikation mit Skalaren.
+
+Das lineare Gleichungssystem kann man in der Form \(A \cdot x = b\)
+schreiben.
+
+Wir berechnen die Lösungsmenge
+mittels das Eliminationsverfahren von Gauss, indem wir die erweiterte
+Koeffizientenmatrix  durch elementaren
+Zeilenumformungenin in der Zeilenstufenform bringt.
+
+Die elementaren Zeilenumformungen: (1) Vertauschung von zwei Zeilen;
+(2)  Addition der \(\lambda\)-fachen \(i\)-ten Zeilen zur \(k\)-ten Zeilen, wobei
+\(0 \ne \lambda \in \mathbb{R}\) und \(i \ne k\).
+
+Satz.  Elementaren Zeilenumformungen ändert die Lösungsmenge eines
+linearen Gleichungssystems nicht.
+
+Satz.  Jede Matrix \(A\) kann man durch elementare Zeilenumformungen in
+eine Matrix \(\tilde{A}\) in Zeilenstufenform überführen.
+
+Satz.  Die Parametrisierung von freien Variabeln nach Lösung des
+linearen Gleichungssystems
+ist bijektiv.
+\subsection{Grundbegriffe}
+\subsubsection{Gruppen, Ringe und Körper}
+Definition.  Eine Menge \(G\) zusammen mit einer Verknüpfung \(\ast\) heißt
+Gruppe, falls (G1) assoziativ; (G2a) existiert ein neutrales Element
+\(e \in G\) sodass für alle \(a \in G\) gilt \(e \ast a = a\); (G2b) existiert ein
+inverses Element \(a' \in G\) zu jedem \(a \in G\) sodass \(a' \ast a = e\); (G3)
+falls kommutativ, dann abelsch.
+
+Definition.  Eine Menge \(R\) mit zwei Verknüpfungen \(+\) und \(\cdot\) heißt
+Ring, falls (R1) \(R\) mit \(+\) ist eine abelsche Gruppe; (R2) Die
+Multiplikation ist assoziativ; (R3) distributiv, also für alle \(a,b,c
+\in R\) gilt \(a(b+c)=ab+ac\) und \((a+b)c=ac+bc\); (R4) kommutativ, falls
+multiplikation kommutativ ist. Einselement ist das neutrales Element
+bzgl. Multiplikation.  Nullelement ist das neutrales Element
+bzgl. Addition.
+
+Definition.  Nullteilerfreier Ring ist ein Ring, sodass aus \(ab=0\)
+stets \(a=0\) oder \(b=0\) folgt.
+
+Definition.  Eine Menge \(K\) mit zwei Verknüpfungen \(+\) und \(\cdot\) heißt
+Körper, wenn Folgendes gilt: (K1) \(K\) mit der Addition ist eine
+abelsche Gruppe; (K2) \(K^{\ast} \coloneq K \setminus \{0\}\) mit der Multiplikation ist
+eine abelsche Gruppe; (K3) Distributivgesetze, \(a(b+c)=ab+ac\) und
+\((a+b)c=ac + bc\).
+
+Definition.  Der Grad von Polynom \(f \in K[t]\) ist definiert durch
+\[
+  f = a_{0} + a_{1}t + \ldots + a_{n}t^{n}, \quad
+  \deg f \coloneq
+  \begin{cases}
+    -\infty, & f = 0; \\
+    \max\{\nu \in \mathbb{N}\colon a_{\nu} \ne 0\} & \text{sonst.}
+  \end{cases}
+\]
+
+Satz.  Ist \(K\) ein Körper, so ist die Menge \(K[t]\) der Polynome über
+\(K\) zusammen mit den oben definierten Verknüpfungen ein kommutativer
+Ring ohne Nullteiler.  Weiter gilt für \(f,g \in K[t]\) dass \(\deg (f g) =
+\deg f + \deg g.\)
+
+Satz.  Teilung mit Rest.  Sind \(f,g \in K[t]\) und \(g \ne 0\), so gibt es
+dazu eindeutig bestimmte Polynome \(q,r \in K[t]\) derart, dass
+\[f=qg+r \text{ und } \deg r < \deg g.\]
+
+Definition.  Integritätsring \(R\) ist ein Ring, der kommutativ mit
+Einselement und nullteilerfrei ist.
+
+Definition.  Die Vielfachheit der Nullstelle \(\lambda\) von \(0 \ne f \in K[t]\)
+ist definiert durch \[\mu(f; \lambda) \coloneq \max \{r \in \mathbb{N}\colon f = (t - \lambda)^{r} \cdot g
+  \text{ mit } g \in K[t]\}\]
+
+Fundamentalsatz der Algebra.  Jedes Polynom \(f \in \mathbb{C}[t]\) mit \(\deg f >
+0\) hat mindestens eine Nullstelle in \(\mathbb{C}\).
+
+Definition.  Ein Körper \(K\) heißt algebraisch abgeschlossen, wenn
+jedes Polynom \(f \in K[t]\) in Linearfaktoren zerfällt.
+
+Fundamentalsatz der Algebra.  Der Körper \(\mathbb{C}\) ist algebraisch abgeschlossen.
+
+\subsubsection{Vektorräume}
+
+Definition.  Vektorraum.  Sei \(K\) ein Körper.  Eine Menge \(V\) zusammen
+mit einer inneren Verknüpfung (Addition von Vektoren) \(+\) und einer
+äußeren Verknüpfung (Multiplikation mit Skalaren) heißt
+\(K\)-Vektorraum, falls (V1) \(V\) bzgl. Vektoraddition ist eine abelsche
+Gruppe; (V2) für Skalaren \(\lambda, \mu \in K\) und Vektoren \(v, w \in V\) gilt
+\begin{align*}
+  &(\lambda + \mu)v=\lambda v + \mu v, && \lambda(v+w) = \lambda v+ \lambda w, \\
+  &\lambda(\mu v) = (\lambda \mu) v, && 1v = v.
+\end{align*}
+
+Definition Untervektorraum.  Sei \(V\) ein \(K\)-Vektorraum, \(W \subseteq V\) heißt
+Untervektorraum von \(V\) falls gilt (UV1) \(W \ne \emptyset\); (UV2) abgeschlossen
+bzgl. Addition: für alle \(v, w
+\in W\) gilt \(v+w \in W\); (UV3) abgeschlossen bzgl. Multiplikation mit
+Skalaren: für alle \(\lambda \in K\) und \(v \in W\) gilt \(\lambda v \in W\).
+
+Satz.  Durchschnitt von Untervektorräume ist wieder ein
+Untervektorraum.
+
+Definition.  Von der Familie \((v_{i})_{i \in I}\) aufgespannten
+Vektorraum ist  die Menge, die alle Linearkombination von der Familie
+enthält, oder Durchschnitt von alle Untervektorräume, die die Familie
+enthält.
+
+Definition.  Eine endliche Familie \((v_{1}, \ldots, v_{r})\) von Vektoren
+aus \(V\) heißt linear unabhängig, falls sich der Nullvektor nur trivial
+aus den \(v_{1}, \ldots, v_{r}\) linear kombinieren lässt.
+
+\subsubsection{Basis und Dimension}
+
+Definition.  Eine Familie \(\mathcal{B} = (v_{i})_{i \in I}\) in einem Vektorraum
+\(V\) heißt Erzeugendensystem von \(V\), falls
+\(V = \Span (v_{i})_{i\in I}\).  Eine Familie \(\mathcal{B}\) heißt Basis von
+\(V\), falls \(\mathcal{B}\) linear unabhängig ist.  Falls ein endliches
+Erzeugendensystem von \(V\) gibt, dann heißt \(V\) endlich erzeugt.  Ist
+die Familie \(\mathcal{B}\) eine endliche Basis, so nennt man
+\(\abs{\mathcal{B}}\) Länge der Basis.
+
+Beispiel.  \((1, t, t^{2}, \ldots)\) ist eine Basis unendlicher Länge des
+Polynomrings \(K[t]\).
+ 
+Satz.  Eine Basis ist eine maximal linear unabhängiges
+Erzeugendensystem.  Eine Basis ist eine minimal Erzeugendensystem, das
+heißt, dass \(\mathcal{B}\) kein Erzeugendensystem mehr, wenn man um ein Vektor
+davon verkürzt.
+
+Basisauswahlsatz.  Aus jedem endlichen Erzeugendensystem eines
+Vektorraums kann man eine Basis auswählen.
+
+Existenz von Basen.  Jeder Vektorraum besitzt eine Basis.
+
+\textsc{Zorn}sche Lemma.
+\end{document}
+

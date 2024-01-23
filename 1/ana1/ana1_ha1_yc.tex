@@ -1,0 +1,295 @@
+\documentclass[12pt]{extarticle}
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,fancyhdr,color,graphicx,}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{tikz}
+\renewcommand{\familydefault}{\sfdefault}
+\pagestyle{fancy}
+\setlength{\parindent}{0pt}
+\lhead{Yuchen Guo 480788, Meng Zhang 484981, Chaeyoung Hong 478363}
+\rhead{Analysis I 1. Übungsblatt\\Tutor*in: Tilman}
+\begin{document}
+
+\section*{Aufgabe 1.1} Für alle \(a, b \in \mathbb{R}\) gelten die
+folgenden Aussagen und Rechenregeln:
+\subsection*{(i)} \(A\): Es gilt \(ab = 0\).
+
+\(B\): Es gilt \(a = 0\) oder \(b = 0\).
+
+\begin{proof}
+\(A \implies B\).
+    \begin{itemize}
+    \item Falls \(a = 0\), Aussage \(B\) ist dann wahr und es gilt $A
+\implies B$.
+    \item Falls \(a \neq 0\), sollen wir zeigen, dass \(b = 0\) gilt.
+
+\textbf{Skript Satz 1.4.4} Die Gleichung \(a \cdot x = b\) hat genau
+eine Lösung, nämlich \(x = a^{-1} \cdot b\).
+
+\textbf{Skript Satz 1.5.1} Für alle \(a,b \in \mathbb{R}\) gilt $a \cdot
+0 = 0$.
+
+Das heißt, die Gleichung \(ab=0\) hat genau eine Lösung $b=a^{-1} \cdot
+0$ (Satz 1.4.4) und \(a^{-1} \cdot 0 = 0\) (Satz 1.5.1).
+
+Daraus folgt, dass \(b = 0\), Aussage \(B\) ist dann wahr und es gilt
+\(A \implies B\).
+    \end{itemize}
+\(B \implies A\).
+
+  Wir nehmen an, dass \(B\) gilt.  Es folgt aus Satz 1.5.1, dass \(A\)
+  wahr ist.  Damit ist \(B \implies A\) bewiesen.
+
+Damit ist \( A \Leftrightarrow B\) bewiesen.
+
+\end{proof}
+
+\textbf{Skript Satz 1.4.4} Die Gleichung \(a \cdot x = b\) hat genau
+eine Lösung, nämlich \(x = a^{-1} \cdot b\).
+\begin{proof}
+  In dieser Aussage stecken genau genommen gleich zwei Aussagen,
+  nämlich eine über die Existenz der Lösung und eine weitere über
+  deren Eindeutigkeit.  Wir beweisen zunächst die Existenz, indem wir
+  zeigen, dass \(a^{-1} \cdot b\) eine Lösung ist.  Es gilt:
+\begin{align*}
+  a \cdot (a^{-1} \cdot b) &= (a \cdot a^{-1}) \cdot b \tag*{M1} \\
+                           &= 1 \cdot b \tag*{M4} \\
+                           &= b \cdot 1 \tag*{M2} \\
+  &= b \tag*{M3}
+\end{align*}
+
+Sei nun \(y \in \mathbb{R}\) ein weiteres Element mit der Eigenschaft
+\(a \cdot y = b\).  Dann gilt:
+\begin{align*}
+  a^{-1} \cdot b &= a^{-1} \cdot (a \cdot y) \tag*{Definition von \(y\)}
+  \\
+                 &= (a^{-1} \cdot a) \cdot y \tag*{M1} \\
+                 &= (a \cdot a^{-1}) \cdot y \tag*{M2} \\
+                 &= 1 \cdot y \tag*{M4} \\
+                 &= y \cdot 1 \tag*{M2} \\
+  &= y \tag*{M3}
+\end{align*}
+Jede weitere Lösung \(y\) ist also identisch mit \(a^{-1} \cdot b\).
+\end{proof}
+
+\textbf{Skript Satz 1.5.1} Für alle \(a \in \mathbb{R}\) gilt $a \cdot
+0 = 0$.
+
+\begin{proof}
+
+\begin{align*}
+  a \cdot 0 &= a \cdot (0+0) \tag*{A3} \\
+  &= a \cdot 0 + a \cdot 0 \tag*{D}
+\end{align*}
+
+
+Das heißt, dass \(a \cdot 0\) eine Lösung für
+\(a \cdot 0 + x = a \cdot 0\) ist.  Nach der Definition des additiven
+neutralen Elements ist aber auch \(x = 0\) eine Lösung für diese Gleichung.
+Wegen der Eindeutigkeit des additiven neutralen Elements (Skript Satz
+1.3.1, in Skript bewiesen) ist also \(a \cdot 0 = 0\).
+\end{proof}
+
+\subsection*{(ii)}
+Um \((-a)b=a(-b)=-(ab)\) zu beweisen, sollen wir zeigen, dass
+\(A \implies B \implies C \implies A\) wahr ist.
+
+
+\textbf{Lemma Ü1 A1.1.ii.1}  Für alle \(a \in \mathbb{R}\) gilt, dass $(-1)
+\cdot a = -a$.
+\begin{proof}
+\begin{align*}
+  (-1) \cdot a &= (-1) \cdot a + 0 \tag*{A3}\\
+               &= (-1) \cdot a + (a + (-a)) \tag*{A4}\\
+               &= ((-1) \cdot a + a) + (-a) \tag*{A1} \\
+               &= ((1 + (-1)) \cdot a) + (-a) \tag*{D} \\
+               &= 0 \cdot a + (-a) \tag*{A4} \\
+               &= a \cdot 0 + (-a) \tag*{M2} \\
+               &= 0 + (-a) \tag*{Skript Satz 1.5.1} \\
+               &= (-a) + 0 \tag*{A2} \\
+               &= -a \tag*{A3}
+\end{align*}
+\end{proof}
+
+\begin{proof}
+  Zunächst zeigen wir, dass \(A \implies B\) wahr ist.
+\begin{align*}
+  (-a)b &= (-1) \cdot a \cdot b \tag*{Lemma Ü1 A1.1.ii.1}\\
+        &= a \cdot (-1) \cdot b \tag*{M2} \\
+        &= a \cdot ((-1) \cdot b) \tag*{M1} \\
+  &= a \cdot (-b) \tag*{Lemma Ü1 A1.1.ii.1}
+\end{align*}
+\end{proof}
+
+\begin{proof}
+Wir zeigen, dass \(B \implies C\) wahr ist.
+\begin{align*}
+  a(-b) &= a \cdot ((-1) \cdot b) \tag*{Lemma Ü1 A1.1.ii.1} \\
+        &= (-1) \cdot a \cdot b \tag*{M2} \\
+        &= (-1) \cdot (ab) \tag*{M1} \\
+        &= -ab \tag*{Lemma Ü1 A1.1.ii.1}
+\end{align*}
+\end{proof}
+
+Analog können wir zeigen, dass \(C \implies A\) wahr ist.  Damit ist die
+Behauptung bewiesen. \qed
+
+\subsection*{(iii)}
+\textbf{Lemma Ü1 A1.1.iii.1} Für alle \(a \in \mathbb{R}\) gilt, $-(-a)
+= a$.
+
+Nach Existenz des additiven Inverses, gilt \((-a) + -(-a) = 0\).  Es
+gilt aber auch, \((-a) + a =0\).  Wegen der Eindeutigkeit der Addition
+(analog zum Skript Satz 1.4.4, siehe oben), gilt \(-(-a) = a\). \qed
+\begin{proof}
+\begin{align*}
+  (-a)(-b) &= ((-1) \cdot a)((-1) \cdot b) \tag*{Lemma Ü1 A1.1.ii.1}\\
+           &= ((-1) \cdot (-1)) (a \cdot b) \tag*{M1, M2}\\
+           &= 1 \cdot (a \cdot b) \tag*{Lemma Ü1 A1.1.iii.1} \\
+  &= ab \tag*{M3}
+\end{align*}
+  \end{proof}
+
+\section*{Aufgabe 1.2}
+\subsection*{(i)}
+\begin{proof}
+Zuerst zeigen wir, dass wegen Dreiecksungleichung die folgende
+Ungleichungen gilt.
+\begin{align*}
+\left| (x+y) + (x-y) \right| &\leq \left| x+y \right| + \left| x - y
+                               \right| \tag*{Dreiecksungleichung}\\
+  \left| 2x \right| &\leq \left| x+y \right| + \left| x - y \right|\\
+  2\left|  x \right| &\leq \left| x+y \right| + \left| x - y \right| \tag{1}\\
+\end{align*}
+\textbf{Fallunterscheidung}
+\begin{itemize}
+\item Wenn \(\left| x \right| \geq \left| y \right|\) gilt,
+
+  Dann aus (1) folgt, dass $\left| x \right| + \left| y \right| \leq
+  \left| x+y \right| + \left| x - y \right|$.
+
+\item Wenn \(\left| y \right| > \left| x \right|\) gilt,
+
+  Dann wegen \(\left| y-x \right| = \left| x-y \right|\), gilt $2 \left|
+    y \right| \leq \left| y+x \right| + \left| y-x \right|$, daraus
+  folgt, dass $\left| x \right| + \left| y \right| \leq
+  \left| x+y \right| + \left| x - y \right|$.
+\end{itemize}
+\end{proof}
+\subsection*{(ii)}
+\textbf{Fallunterscheidung}
+\begin{itemize}
+\item Falls \(xy > 0\), dann folgt
+
+\begin{align*}
+  \left| \frac{x}{y} + \frac{y}{x} \right|
+  &= \left| \frac{x^2+y^2}{xy} \right|\\
+  &= \frac{x^2+y^2}{xy} \tag*{\(xy>0\)}\\
+  &= \frac{x^2+y^2+2xy-2xy}{xy} \\
+  &= \frac{(x-y)^2}{xy} + 2 \\
+  &\geq 2
+\end{align*}
+
+\item Falls \(xy < 0\), dann folgt
+
+\begin{align*}
+  \left| \frac{x}{y} + \frac{y}{x} \right|
+  &= \left| \frac{x^2+y^2}{xy} \right|\\
+  &= - \frac{x^2+y^2}{xy} \tag*{\(xy<0\)}\\
+  &= - \frac{x^2+y^2+2xy-2xy}{xy} \\
+  &= - \frac{(x+y)^2}{xy} + 2 \\
+  &\geq 2
+\end{align*}
+\end{itemize}
+
+\section*{Aufgabe 1.3}
+\subsection*{(i)}
+\textbf{Fallunterscheidung}
+\begin{itemize}
+\item \((x-2 \geq 0) \wedge (x-3 > 0) \implies x > 3\)
+
+  Dann folgt,
+\begin{align*}
+  \frac{1-(x-2)}{x-3} &< \frac{1}{2}\\
+  1-x+2 &< \frac{x}{2} - \frac{3}{2}\\
+  x &> 3
+\end{align*}
+
+D.h., \(\{x|x \in \mathbb{R}, x > 3\}\) ist eine Menge von Lösungen.
+\item \((x-2 \geq 0) \wedge (x-3 < 0) \implies 2 \leq x < 3\)
+
+  Dann folgt,
+\begin{align*}
+  \frac{1-(x-2)}{3-x} &< \frac{1}{2}\\
+  x &> 3
+\end{align*}
+
+Weil \(\{x|x>3\} \cap \{x|2 \leq x < 3\} = \emptyset\), gibt es keine
+Lösung, die diese Voraussetzung erfüllt.
+\item \((x-2 < 0) \wedge (x-3 > 0) \implies x = \emptyset\)
+\item \((x-2 < 0) \wedge (x-3 < 0) \implies x < 2\)
+
+  Dann folgt,
+\begin{align*}
+  \frac{1-(2-x)}{3-x} &< \frac{1}{2}\\
+  x &< \frac{5}{2}
+\end{align*}
+D.h., \(\{x|x \in \mathbb{R}, x < 2\}\) ist eine Menge von Lösungen.
+\end{itemize}
+
+Insgesamt gilt \(\{x|x \in \mathbb{R}, x < 2 \quad \text{oder} \quad x > 3\}\) als die
+Menge von Lösungen.
+
+\subsection*{(ii)}
+\textbf{Fallunterscheidung}
+\begin{itemize}
+\item \(x \geq -3a\) und \(x \geq a\).
+
+  Dann erhalten wir \(4a = 2a\), weshalb \(a=0\) gilt.  Die Gleichung gilt
+  dann für alle \(x \geq 0\).
+\item \(x \geq -3a\) und \(x < a\).
+
+  Dann erhalten wir \(2x =0\), weshalb \(x=0\) gilt.  Die Gleichung gilt
+  dann für alle \(a > 0\).
+\item \(x < -3a\) und \(x \geq a\).
+
+  Dann erhalten wir \(x=-2a\).  Die Gleichung gilt dann für alle $-2a <
+  -3a$ und \(-2a \geq a\) und \(x = -2a\).
+\item \(x < -3a\) und \(x < a\).
+
+  Dann erhalten wir \(-2a=2a\), weshalb \(a=0\).  Die Gleichung gilt dann
+  für alle \(x < 0\).
+\end{itemize}
+\section*{Aufgabe 1.4}
+\subsection*{(i)}
+\(A\): Gegeben ist \(a \in \mathbb{R}\) mit der folgenden Eigenschaft: für
+jedes \(\varepsilon > 0\) ist \(|a| < \varepsilon\).
+
+\(B\): Es gilt \(a = 0\).
+\begin{proof}
+Wir beweisen \(A \implies B\) mit Kontraposition, nämlich $\neg B
+\implies \neg A$ gilt.
+
+Angenommen, es gilt \(a \neq 0\).  Aus der Definition des Absolutbetrags
+folgt, dass \(|a| > 0\).  Wegen \textbf{Skript Satz 1.10.6},
+\begin{center}
+  Aus \(a < b\) folgt \(a < \frac{a+b}{2} < b\).
+\end{center}
+
+existiert eine Zahl \(x = \frac{|a|+0}{2}\) mit
+\(0 < x < |a|\).  Insbesondere für \(\varepsilon = \frac{|a|}{2}\) gilt
+\(\varepsilon < |a|\).
+
+Es gilt also \(\neg A\).  Damit ist \(A \implies B\) bewiesen.
+\end{proof}
+
+\subsection*{(ii)}
+
+Die Aussage (i) ist auch dann noch wahr, wenn man nur
+\(|a| \leq \varepsilon\) für alle \(\varepsilon > 0\) fordert, denn
+\(\neg B \implies \neg A\) gilt immer noch, nämlich es existiert ein
+\(\varepsilon = \frac{|a|}{2}\) mit \(|a| > \varepsilon\).
+\end{document}

@@ -1,0 +1,120 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+\documentclass[draft,a5paper]{article}
+
+% 让每个章节 subsection 在新的一页上开始
+% 而不是紧接着上一章节
+\AddToHook{cmd/subsection/before}{\clearpage}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+\geometry{a5paper,
+ left=1cm,
+ right=1cm,
+ top=1cm,
+ bottom=2cm
+}
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+
+% 调整 Emacs 预览字体大小
+% (setq preview-scale-function 1.5)
+
+% TeX Gyre Schola and unicode-math
+% which in turn loads amsmath,mathtools,fontspec and friends
+\usepackage{xcharter-otf}
+
+
+% 加载数学相关的包
+\usepackage{
+  % 自然段间留空
+  parskip,
+  % 区间排版
+  interval
+}
+
+% 中文支持，暂时不需要
+% \usepackage[UTF8]{ctex}
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\usepackage{amsthm}
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+% 定义新函数，依赖于AMSmath
+\DeclareMathOperator{\card}{card}
+
+\title{HA 0, Ana 3, Monika, MM 11}
+\author{Zhang 484981, Yang 466096, Guo 480788}
+
+\begin{document}
+\maketitle
+\begin{center}
+  Meng Zhang 484981, Yiwen Yang 466096, Yuchen Guo 480788
+\end{center}
+
+\newpage
+
+\subsection*{H 0.1}
+Seien \(I \coloneq \rinterval{t_{0}}{T} \subseteq \mathbb{R}\) und \(\alpha, \beta \in \mathcal{C}(I, \mathbb{R})\).
+\subsubsection*{H 0.1, Teil i}
+Sei \(\varphi \in \mathcal{C}^{1}(I, \mathbb{R})\) mit \(\varphi'(t) \le \alpha(t) + \beta(t)\varphi(t)\) für alle \(t \in
+I\).
+
+\begin{Behauptung}
+  Es gilt für alle \(t \in I\), dass
+  \[\varphi(t) \le \varphi(t_{0})e^{\int_{t_{0}}^{t}\beta(\tau)d\tau}+\int_{t_{0}}^{t}\alpha(s)e^{\int_{s}^{t}\beta(\tau)d\tau}ds.\]
+\end{Behauptung}
+
+\begin{proof}
+  Sei \(u(t) \coloneq e^{-\int_{t_{0}}^{t}\beta(\tau)d\tau}\).  Wir zeigen, dass \((u\varphi)' \le
+  u\alpha\) gilt.  Offensichtlich gilt wegen der Hauptsatz der
+  Differential- und Integralrechnung dass
+  \begin{align*}
+    (u\varphi)' &= u' \varphi + u \varphi' \\
+    &= [ u \cdot \left(-\int_{t_{0}}^{t}\beta(\tau)d\tau\right)'(t) ] \varphi + u
+      \varphi' \\
+    &= - u \beta \varphi + u \varphi'
+  \end{align*}
+  siehe auch [Amann, Analysis II, Theorem VI.4.12].
+
+  Nun wegen Voraussetzung dass
+  \[\varphi' \le \alpha + \beta \varphi\]
+  gilt
+  \[(u \varphi)' = - u \beta \varphi + u \varphi' \le u \alpha + u \beta \varphi - u \beta \varphi = u \alpha.\] Damit gilt
+  \((u\varphi)' \le u \alpha\).
+
+  Wir integrieren die Ungleichung, erhalten wir
+  \begin{align*}
+    \int_{t_{0}}^{t}{(u(s) \varphi(s))' ds} &\le \int_{t_{0}}^{t}{u(s) \alpha(s) ds} \\
+    u(t)\varphi(t) - u(t_{0})\varphi(t_{0}) &\le \int_{t_{0}}^{t}{\alpha(s)
+                                  e^{\int_{s}^{t_{0}}\beta(\tau)d\tau} ds}
+  \end{align*}
+  Es gilt \(u(t_{0}) = 1\) und \(u(t) > 0\) für alle
+  \(t \in \mathbb{R}\).  Daraus folgt, dass
+  \begin{align*}
+    \varphi(t) &\le \frac{\varphi(t_{0})}{u(t)} + \int_{t_{0}}^{t}{\alpha(s)
+           e^{\int_{s}^{t_{0}}\beta(\tau)d\tau} ds} \\
+           &\le \frac{\varphi(t_{0})}{u(t)} + \int_{t_{0}}^{t}{\alpha(s)
+             e^{\int_{t_{0}}^{t}\beta(\tau)d\tau + \int_{s}^{t_{0}}\beta(\tau)d\tau} ds} \\
+         &= \varphi(t_{0})e^{\int_{t_{0}}^{t}\beta(\tau)d\tau}+\int_{t_{0}}^{t}\alpha(s)e^{\int_{s}^{t}\beta(\tau)d\tau}ds
+  \end{align*}
+  weil die Exponentialfunktion \(\exp(x)\) auf \(\mathbb{R}\) monoton steigend ist.
+  Damit gilt die Behauptung.
+\end{proof}
+
+\end{document}

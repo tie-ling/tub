@@ -1,0 +1,79 @@
+% !TeX program = lualatex
+%%% TeX-engine: luatex
+
+\documentclass[draft,a5paper]{article}
+\usepackage[margin=2cm]{geometry}
+\linespread{1.2}
+
+\setlength{\headheight}{15pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Yiwen Yang 466096, Yuchen Guo 480788, Qing Wang 458040}
+\rhead{HA 6, CoMa 2, \\ Laurin, Gruppe 9}
+
+% set language to german
+\usepackage[ngerman]{babel}
+
+\usepackage[amsthm,vvarbb,varg]{newtx}
+
+% used for integral with respect to a variable x
+% like \int \dd{x}
+% \usepackage{physics}
+
+% theorem environment used in this document
+\theoremstyle{remark}
+\newtheorem*{beh}{Behauptung}
+\newtheorem*{lem}{Lemma}
+
+\newcommand{\envert}[1]{\left\lvert#1\right\rvert}
+\let\abs=\envert
+
+% pseudocode
+\usepackage[commentColor=black]{algpseudocodex}
+
+\begin{document}
+\subsection*{3. Aufgabe (Iterative \texttt{Inorder-Tree-Walk} mit Stack)}
+
+Wir schreiben einen iterativen Algorithmus \textsc{Inorder-Tree-Walk}
+in Pseudocode.  Wir nehmen an, dass einen Stack \textit{S} mit den
+Methoden \textsc{insert}, \textsc{pop}, \textsc{peek} und
+\textsc{isEmpty} existiert.
+
+\begin{algorithmic}
+  \State \textbf{function} \textsc{Insert-Node-to-Stack}(\textit{current-node}, \textit{S})
+  \While{\textit{current-node} \(\ne\) \textsc{None}}
+  \State \textsc{insert}(\textit{S}, \textit{current-node})
+  \State \textit{current-node} \(\gets\) \textit{current-node.left}
+  \EndWhile
+
+  \State \textbf{function} \textsc{Inorder-Tree-Walk}(\textit{T})
+
+  \State \textit{current-node} \(\gets\) \textit{T.root}
+
+  \State \textsc{Insert-Node-to-Stack}(\textit{current-node}, \textit{S})
+
+  \If{\textit{current-node} \(=\) \textsc{None} \textbf{and}
+    \textsc{isEmpty}(\textit{S}) \(=\) \textsc{False}}
+  \State \textsc{print}(\textsc{pop}(\textit{S}))
+  \State \textit{current-node} \(\gets\) \textit{current-node.right}
+  \State \textsc{Insert-Node-to-Stack}(\textit{current-node}, \textit{S})
+  \EndIf
+
+\end{algorithmic}
+
+
+
+\begin{beh}
+  Der Algorithmus ist korrekt.
+\end{beh}
+
+\begin{proof}
+  Am Anfang ist der Stack \textit{S} leer.  Während der ersten Aufruf
+  von \textsc{Insert-Node-to-Stack} werden alle Nodes an der linken
+  Seite zum Stack eingefügt.  Wegen der Suchbaum-Eigenschaft ist der
+  letzte Node im Stack genau der kleinste.  Wir poppen dies, drücken
+  der Wert aus, und im Fall des Existenz von
+  \textit{current-node.right}, print der Baum der rechten Seite.
+  Wegen der Suchbaum-Eigenschaft ist das Resultat sortiert.
+\end{proof}
+\end{document}

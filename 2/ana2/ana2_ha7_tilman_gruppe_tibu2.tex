@@ -1,0 +1,324 @@
+% !TeX program = lualatex
+%%% TeX-engine: luatex
+
+\documentclass[draft,a5paper]{article}
+\usepackage[margin=2cm]{geometry}
+\linespread{1.2}
+
+\setlength{\headheight}{15pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Yiwen Yang 466096, Yuchen Guo 480788, Meng Zhang 484981}
+\rhead{HA 7, Ana 2, TiBu 2}
+
+% set language to german
+\usepackage[ngerman]{babel}
+
+\usepackage[amsthm,vvarbb,varg]{newtx}
+
+% used for integral with respect to a variable x
+% like \int \dd{x}
+% \usepackage{physics}
+
+% theorem environment used in this document
+\theoremstyle{remark}
+\newtheorem*{beh}{Behauptung}
+\newtheorem*{lem}{Lemma}
+
+% \interval is used to provide better spacing after a [ that
+% is used as a closing delimiter.
+\newcommand{\interval}[1]{\mathinner{#1}}
+
+% Enclose the argument in vert-bar delimiters:
+\newcommand{\envert}[1]{\left\lvert#1\right\rvert}
+\let\abs=\envert
+
+% Enclose the argument in double-vert-bar delimiters:
+\newcommand{\enVert}[1]{\left\lVert#1\right\rVert}
+\let\norm=\enVert
+
+\begin{document}
+\subsection*{H 7.1}
+Seien die Funktionen \(f, g\colon \mathbb{R}^{2} \to \mathbb{R}\) mit
+\begin{align*}
+  f(x, y) &=
+  \begin{cases}
+    0 & \text{falls } (x, y) = (0, 0), \\
+    xy \cdot (x^{2} + y^{2})^{-\frac{1}{2}} & \text{sonst.}
+  \end{cases}\\
+  g(x, y) &=
+  \begin{cases}
+    0 & \text{falls } (x, y) = (0, 0), \\
+    (x^{2} + y^{2}) \sin{[(x^{2}+y^{2})^{-\frac{1}{2}}]} & \text{sonst.}
+  \end{cases}
+\end{align*}
+\subsubsection*{H 7.1.i}
+Es gilt für alle \((x, y) \ne (0, 0)\) dass
+\[
+  \partial_{x}f(x, y) = \lim_{h \to 0}{\frac{f((x, y) + h(1, 0)) - f(x, y)}{h}}
+  = (x^{2} + y^{2})^{-\frac{1}{2}} y -(x^{2} +
+  y^{2})^{-\frac{3}{2}}x^{2}y,
+\]
+\[
+  \partial_{y}f(x, y) = \lim_{h \to 0}{\frac{f((x, y) + h(0, 1)) - f(x, y)}{h}}
+  = (x^{2} + y^{2})^{-\frac{1}{2}} x -(x^{2} +
+  y^{2})^{-\frac{3}{2}}xy^{2}.
+\]
+\[
+  \partial_{x}g(x, y) = 2x \sin[(x^{2} + y^{2})^{-\frac{1}{2}}] - x (x^{2} +
+  y^{2})^{-\frac{1}{2}} \cos[(x^{2} + y^{2})^{-\frac{1}{2}}],
+\]
+\[
+  \partial_{y}g(x, y) = 2y \sin[(x^{2} + y^{2})^{-\frac{1}{2}}] - y (x^{2} +
+  y^{2})^{-\frac{1}{2}} \cos[(x^{2} + y^{2})^{-\frac{1}{2}}].
+\]
+Es gilt für \((x, y) = (0, 0)\) dass
+\[
+  \partial_{x}f(0, 0) = \lim_{h \to 0}{\frac{f((0, 0) + h(1, 0)) - f(0, 0)}{h}}
+  = 0,
+\]
+\[
+  \partial_{y}f(0, 0) = \lim_{h \to 0}{\frac{f((0, 0) + h(0, 1)) - f(0, 0)}{h}}
+  = 0.
+\]
+\[
+  \partial_{x}g(0, 0) = \lim_{h \to 0}{\frac{g((0, 0) + h(1, 0)) - g(0, 0)}{h}}
+  = \lim_{h \to 0}{\frac{h^{2} \sin (h^{-1})}{h}} = \lim_{h \to 0}{h \sin
+    (h^{-1})} = 0,
+\]
+\[
+  \partial_{y}g(0, 0) = \lim_{h \to 0}{\frac{g((0, 0) + h(0, 1)) - g(0, 0)}{h}}
+  = \lim_{h \to 0}{\frac{h^{2} \sin (h^{-1})}{h}} = \lim_{h \to 0}{h \sin
+    (h^{-1})} = 0.
+\]
+\subsubsection*{H 7.1.ii}
+Wir zeigen, dass die partielle Ableitung \(\partial_{x}f(x, y)\) in \((0,
+0)\) stetig ist, indem wir zeigen, dass für alle Folgen
+\((x_{n})_{n \in \mathbb{N}}\) mit \(\lim_{n \to \infty}{x_{n}} = 0\) gilt
+\[\lim_{n \to \infty}{\partial_{x}f(x_{n}, 0)} = \partial_{x}f(0, 0) = 0.\]
+Diese gilt wegen \(y = 0\) und
+\(\partial_{x}f(x, y) = (x^{2} + y^{2})^{-\frac{1}{2}} y -(x^{2} +
+y^{2})^{-\frac{3}{2}}x^{2}y.\)  Analog ist \(\partial_{y}f(x, y)\) stetig in
+\((0, 0)\).
+
+Wir zeigen, dass die partielle Ableitung \(\partial_{x}g(x, y)\) in \((0,
+0)\) stetig ist, indem wir zeigen, dass für alle Folgen
+\((x_{n})_{n \in \mathbb{N}}\) mit \(\lim_{n \to \infty}{x_{n}} = 0\) gilt
+\[\lim_{n \to \infty}{\partial_{x}g(x_{n}, 0)} = \partial_{x}g(0, 0) = 0.\]
+Diese gilt wegen \(y = 0\) und
+\[
+  \partial_{x}g(x, 0) = 2x \sin(x^{-1}) - \cos(x^{-1}),
+\]
+da \(\sin(x^{-1})\) und \(\cos(x^{-1})\) beschränkt sind.  Analog ist
+\(\partial_{y}g(x, y)\) stetig in \((0, 0)\).
+
+\subsubsection*{H 7.1.iii}
+Die Funktion \(g(x, y)\) ist diffbar im Nullpunkt.  Denn, für alle
+\((x, y) \to (0, 0)\) gilt
+\[ \lim_{(x, y) \to (0, 0)}{\frac{g(x, y) - g(0, 0)}{\norm{(x, y)}}} =
+  \lim_{(x, y) \to (0, 0)}{\frac{(x^{2} + y^{2})
+      \sin{[(x^{2}+y^{2})^{-\frac{1}{2}}]}}{\norm{(x, y)}}}
+\] und die Funktion \(\sin{[(x^{2}+y^{2})^{-\frac{1}{2}}]}\) ist
+beschränkt.  Weil alle Normen in \(\mathbb{R}^{2}\) äquivalent sind, nehmen wir
+die euklidische Norm und erhalten wir
+\[
+  \lim_{(x, y) \to (0, 0)}{\frac{(x^{2} + y^{2})
+      \sin{[(x^{2}+y^{2})^{-\frac{1}{2}}]}}{\norm{(x, y)}}}
+  = \lim_{(x, y) \to (0, 0)}{\sqrt{x^{2} + y^{2}} \cdot
+    \sin{[(x^{2}+y^{2})^{-\frac{1}{2}}]}} = 0.
+\]
+
+{\Huge Frage Frage Frage Frage Frage}
+
+Sei \((x, y) = (\frac{1}{n}, \frac{1}{n})\).  Dann ist die Ableitung
+von \(f(x, y)\) im Nullpunkt
+\[ \lim_{n \to \infty}{\frac{f(x, y) - f(0, 0)}{\norm{(x, y)}}} = \lim_{n \to
+    \infty}{\frac{f(x, y) - 0}{\sqrt{x^{2} + y^{2}}}} = \lim_{n \to
+    \infty}{\frac{xy}{x^{2} + y^{2}}} = \lim_{n \to
+    \infty}{\frac{1}{n^{2}}\cdot\frac{n^{2}}{2}} = \frac{1}{2}.
+\]
+
+Sei \((x, y) = (\frac{1}{n}, \frac{1}{n^{2}})\).  Dann ist die
+Ableitung von \(f(x, y)\) im Nullpunkt
+\[ \lim_{n \to \infty}{\frac{f(x, y) - f(0, 0)}{\norm{(x, y)}}} = \lim_{n \to
+    \infty}{\frac{f(x, y) - 0}{\sqrt{x^{2} + y^{2}}}} = \lim_{n \to
+    \infty}{\frac{xy}{x^{2} + y^{2}}} = \lim_{n \to
+    \infty}{\frac{1}{n^{3}}\cdot\frac{n^{4}}{n^{2}+1}} = 0.
+\]
+
+\subsection*{H 7.2}
+Zeigen, [1] Diffbarkeit, [2] Ableitungen, [3] Jacobimatrizen.
+
+\subsubsection*{H 7.2.i}
+\[f\colon \mathbb{R}^{3} \to \mathbb{R}^{2},~ f(x, y, z) =
+  \begin{bmatrix}
+    \sin(xy) + y \\ e^{x + y + z}
+  \end{bmatrix}.
+\]
+Diffbarkeit.  Wir zeigen, dass die Funktion \(f\) diffbar ist, indem
+wir zeigen, dass \(f\) stetig partiell diffbar ist, d.h., \(f\) ist
+partiell diffbar und die partielle Ableitungen sind stetig.  Die
+partielle Ableitungen sind
+\begin{alignat*}{3}
+\partial_{x}f_{1}(x, y, z) &= y \cos(xy) &&\quad
+\partial_{y}f_{1}(x, y, z) = 1 + x \cos(xy) &&\quad
+\partial_{z}f_{1}(x, y, z) = 0 \\
+\partial_{x}f_{2}(x, y, z) &= e^{x + y + z} &&\quad
+\partial_{y}f_{2}(x, y, z) = e^{x + y + z} &&\quad
+\partial_{z}f_{2}(x, y, z) = e^{x + y + z}
+\end{alignat*}
+Alle partielle Ableitung sind wegen [Ana 1] auf \(\mathbb{R}\) stetig.  Daraus
+folgt, dass \(f\) diffbar, wegen [Satz 2.18].
+Daraus folgt, dass die Jacobimatrix ist
+\[
+  \begin{bmatrix}
+    y \cos(xy) & 1 + x \cos(xy) & 0 \\
+    e^{x + y + z} & e^{x + y + z} & e^{x + y + z}
+  \end{bmatrix}.
+\]
+
+Wir bestimmen die Ableitung \(Df(x, y, z)\) von \(f\) im Punkt
+\((x, y, z)\).  Wir bemerken, dass \(Df(x, y, z)\) eine lineare
+Abbildung ist mit
+\[
+  Df(x, y, z)\colon \mathbb{R}^{3} \to \mathbb{R}^{2},~ (a, b, c) \mapsto Df(x, y, z)(a, b, c).
+\]
+Daraus folgt, dass \[
+  Df(x, y, z)(a, b, c) =
+  \begin{bmatrix}
+    (ay+bx)\cos(xy) + b \\
+    (a+b+c)e^{x+y+z}
+  \end{bmatrix}.
+\]
+
+\subsubsection*{H 7.2.ii}
+\[
+  g\colon \mathbb{R}^{2} \to \mathbb{R},~ g(x, y) = x \cos(x + y^{2}).
+\]
+
+Diffbarkeit.  Wir zeigen, dass die Funktion \(g\) diffbar ist, indem
+wir zeigen, dass \(g\) stetig partiell diffbar ist, d.h., \(g\) ist
+partiell diffbar und die partielle Ableitungen sind stetig.  Die
+partielle Ableitungen sind
+\[
+  \partial_{x}g(x, y) = \cos(x+y^{2}) - x \sin(x+y^{2}) \quad \text{und} \quad \partial_{y}g(x, y) = -2
+  xy \sin(x+y^{2}).
+\]
+Alle partielle Ableitung sind wegen [Ana 1] auf \(\mathbb{R}\) stetig.  Daraus
+folgt, dass \(g\) diffbar, wegen [Satz 2.18].
+Daraus folgt, dass die Jacobimatrix ist
+\[
+  \begin{bmatrix}
+    \cos(x+y^{2}) - x \sin(x+y^{2})
+    & -2 xy \sin(x+y^{2})
+  \end{bmatrix}.
+\]
+Wir bestimmen die Ableitung \(Dg(x, y)\) von \(g\) im Punkt
+\((x, y)\).  Es gilt
+\[ Dg(x, y)\colon \mathbb{R}^{2} \to \mathbb{R},~ (a, b) \mapsto
+  \begin{bmatrix}
+    Dg(x, y)
+  \end{bmatrix}
+  \cdot
+  \begin{bmatrix}
+    a \\ b
+  \end{bmatrix}=
+  (-ax-2bxy)\sin(x+y^{2}) + a\cos(x+y^{2}).
+\]
+Daraus folgt, dass
+\(Dg(x, y)(a, b) = (-ax-2bxy)\sin(x+y^{2}) + a\cos(x+y^{2}).\)
+
+\subsubsection*{H 7.2.iii}
+\[
+  h\colon \mathbb{R}^{2} \to \mathbb{R}^{3},~ h(x, y) =
+  \begin{bmatrix}
+    xy+y^{4} \\ \ln(1+y^{2}) \\ y \sin x
+  \end{bmatrix}.
+\]
+Diffbarkeit.  Die partielle Ableitungen sind
+\begin{alignat*}{2}
+  \partial_{x}h_{1}(x, y) &= y &&\quad
+  \partial_{y}h_{1}(x, y) = x + 4y^{3} \\
+  \partial_{x}h_{2}(x, y) &= 0 &&\quad
+  \partial_{y}h_{2}(x, y) = \frac{2y}{1+y^{2}} \\
+  \partial_{x}h_{3}(x, y) &= y \cos x &&\quad
+  \partial_{y}h_{3}(x, y) = \sin x
+\end{alignat*}
+Offenbar sind alle partielle Ableitung stetig.  Daraus folgt, dass
+\(h\) diffbar ist.  Die Jacobimatrix ist
+\[
+  \begin{bmatrix}
+    y & x + 4y^{3} \\
+    0 & \frac{2y}{1+y^{2}} \\
+    y \cos x & \sin x
+  \end{bmatrix}.
+\]
+Die Ableitung \(Df(x,y)\) ist \[
+  Df(x, y)\colon \mathbb{R}^{2} \to \mathbb{R}^{3},~ (a, b) \mapsto
+  \begin{bmatrix}
+    ay + b(x+4y^{3}) \\
+    \frac{2by}{1+y^{2}} \\
+    a y\cos x + b \sin x
+  \end{bmatrix}.
+\]
+
+\subsection*{H 7.3}
+
+Sei \(g\colon \mathbb{R} \to \mathbb{R}\) eine Funktion und \(f\colon \mathbb{R}^{2} \to \mathbb{R}\) definiert durch
+\(f(x, y) \coloneq y \cdot g(x)\).
+
+\begin{beh}
+  Die Funktion \(f\) ist in \((0, 0)\) genau dann diffbar, falls \(g\)
+  stetig in \(0\) ist.
+\end{beh}
+
+\begin{proof}
+  Hinrichtung. Angenommen, \(f\) ist in \((0, 0)\) diffbar.  Dann
+  existiert eine lineare Abbildung
+  \(Df(0, 0)\colon \mathbb{R}^{2} \to \mathbb{R}\) und eine Restfunktion
+  \(R\colon \mathbb{R}^{2} \to \mathbb{R}\) sodass für alle Folgen
+  \((x_{n}, y_{n})_{n \in \mathbb{N}} \in \mathbb{R}^{2}\) mit
+  \(\lim_{n \to \mathbb{N}}{(x_{n}, y_{n})} = (0, 0)\) gilt
+  \[
+    f(x_{n}, y_{n}) = f(0, 0) + Df(0, 0)(x_{n}, y_{n}) + R(x_{n},
+    y_{n}) \quad \text{mit} \quad \lim_{n \to \mathbb{N}}{\frac{R(x_{n},
+        y_{n})}{\norm{(x_{n}, y_{n})}}} = 0.
+  \]
+  Wir setzen \(f(x, y) \coloneq y \cdot g(x)\) ein.  Dann erhalten wir,
+  \[
+    y_{n} \cdot g(x_{n}) = 0 + Df(0, 0)(x_{n}, y_{n}) + R(x_{n}, y_{n}).
+  \]
+  Weil \(f\) diffbar im Punkt \((0, 0)\) ist, ist \(f\) insbesondere
+  partiell diffbar in \((0, 0)\) nach aller Richtung.  Es gilt
+  \[\partial_{x}f(0, 0) = \lim_{h \to 0}{\frac{f(h, 0) - f(0, 0)}{h}} = 0, \quad
+    \partial_{y}f(0, 0) = \lim_{h \to 0}{\frac{f(0, h) - f(0, 0)}{h}} = g(0). \]
+  Damit ist die Jacobimatrix \(
+  \begin{bmatrix}
+    0 & g(0)
+  \end{bmatrix}
+  \) und \(Df(0, 0)(x_{n}, y_{n}) = y_{n} \cdot g(0).\)
+  Damit gilt
+  \[
+    y_{n} \cdot g(x_{n}) = y_{n} \cdot g(0) + R(x_{n}, y_{n}) \quad \text{mit} \quad
+    \lim_{n \to \infty}{\frac{R(x_{n}, y_{n})}{\norm{(x_{n}, y_{n})}}} = 0.
+  \]
+  Es gilt insbesondere
+  \[
+    \lim_{n \to \infty}{x_{n}} = 0 \quad \text{und} \quad \lim_{n \to \infty}{g(x_{n})} =
+    g(0) + \lim_{n \to \infty}{\frac{R(x_{n}, y_{n})}{y_{n}}} \quad \text{mit} \quad
+    \lim_{n \to \infty}{\frac{R(x_{n}, y_{n})}{\norm{(x_{n}, y_{n})}}} = 0.
+  \]
+  {\Huge Warum \(\lim_{n \to \infty}{\frac{R(x_{n}, y_{n})}{y_{n}}} = 0\)?}
+  Damit ist
+  \(\lim_{n \to \infty}{\frac{R(x_{n}, y_{n})}{y_{n}}} = 0\) und die Funktion
+  \(g\) ist stetig in \(0\).
+
+  Rückrichtung.
+\end{proof}
+
+\subsection*{H 7.4}
+
+Eine Matrix \(A \in K^{n \times n}\) heißt schiefsymmetrisch, falls
+\(A^{\mathrm{T}} = -A\) gilt.
+
+\end{document}

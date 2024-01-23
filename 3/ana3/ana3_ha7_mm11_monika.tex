@@ -1,0 +1,129 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+\documentclass[draft,a5paper]{article}
+
+% 让每个章节 subsection 在新的一页上开始
+% 而不是紧接着上一章节
+\AddToHook{cmd/subsection/before}{\clearpage}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+\geometry{margin=1.5cm}
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+
+% 调整 Emacs 预览字体大小
+% (setq preview-scale-function 1.5)
+
+% TeX Gyre Schola and unicode-math
+% which in turn loads amsmath,mathtools,fontspec and friends
+\usepackage{xcharter-otf}
+
+% 加载数学相关的包
+\usepackage{
+  % 自然段间留空
+  parskip,
+  % 区间排版
+  interval
+}
+
+% 中文支持，暂时不需要
+% \usepackage[UTF8]{ctex}
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\usepackage{amsthm}
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+% 定义新函数，依赖于AMSmath
+\DeclareMathOperator{\card}{card}
+
+\newcommand{\wt}{\widetilde}
+\newcommand{\dd}{\,\mathrm{d}}
+% 标题与作者
+\title{HA 7, Ana 3, Monika, MM 11}
+\author{Zhang 484981, Yang 466096, Guo 480788}
+
+\begin{document}
+\maketitle
+\begin{center}
+  Meng Zhang 484981, Yiwen Yang 466096, Yuchen Guo 480788
+\end{center}
+
+\subsection{H 7.1}
+\begin{Behauptung}
+  Sei \((\Omega, \mathcal{A}, \mu)\) ein Maßraum und seien \(f_{1}, \ldots, f_{n}\colon \Omega \to
+  \overline{\mathbb{R}}\) messbare Funktionen.  Seien \(r, p_{1}, \ldots, p_{n} \in
+  \ointerval{0}{\infty}\) mit \(\sum_{i=1}^{n}{\frac{1}{p_{i}}} = \frac{1}{r}\).
+  Dann gilt
+  \[\left(\int_{\Omega}\prod_{i=1}^{n}{\abs{f_{i}}^{r}\dd\mu}\right)^{1/r} \le
+    \prod_{i=1}^{n}\left(\int_{\Omega}\abs{f_{i}}^{p_{i}}\dd\mu\right)^{1/p_{i}}\le\infty.\]
+\end{Behauptung}
+\begin{proof}
+  Falls existiert ein \(1 \le i \le n\) sodass gilt
+  \[\int\abs{f_{i}}^{p_{i}}\dd\mu = \infty\]
+  dann gilt wegen \(\infty^{s} \coloneq \infty\) für alle \(s >0\) dass
+  \(\infty \le \infty\) und die Behauptung gilt.
+
+  Falls für alle \(1\le i \le n\) dass
+  \[f_{i} \in \mathcal{L}_{p_{i}}(\mu)\] gilt.  Vollständige Induktion über
+  \(n\).  Induktionsanfang, \(n = 2\).  Die Behauptung gilt, der Beweis
+  ist derselbe wie Hölder-Ungleichung.  Induktionsannahme. Die
+  Behauptung gelte für ein festes \(n-1\).  Induktionsschritt,
+  \(n -1 \to n\).  Wir betrachten
+  \[\frac{1}{p_{1}}+\cdots+\frac{1}{p_{n-1}} + \frac{1}{p_{n}}
+    = \frac{1}{r}.\]
+  Dann ist wegen Hölder-Ungleichung im Fall \(n = 2\) für \(p, q =
+  \frac{p_{n}}{p_{n}-r}, \frac{p_{n}}{r}\)dass
+  \begin{align*}
+    \int\abs{f_{1} \cdots f_{n-1}}^{r}\abs{f_{n}}^{r}\dd\mu \le
+    \left(\int\abs{f_{1}\cdots f_{n-1}}^{\frac{rp_{n}}{p_{n}-r}}\dd\mu\right)^{\frac{p_{n}-r}{p_{n}}}\left(\int\abs{f_{n}}^{p_{n}}\right)^{\frac{r}{p_{n}}}.
+  \end{align*}
+  Nun gilt
+  \[\frac{1}{p_{1}}+\cdots+\frac{1}{p_{n-1}}=\frac{1}{r} -
+    \frac{1}{p_{n}}  = \frac{p_{n}-r}{rp_{n}}.\]
+  Wegen Induktionsannahme, dass die Behauptung für \(n-1\) gelte, folgt
+  die Behauptung.
+\end{proof}
+
+\subsection{H 7.4}
+Seien \(p \in \interval{1}{\infty}\) und
+\[A \coloneq L_{p}(\ointerval{0}{1}, \mathcal{B}(\ointerval{0}{1}), \lambda), \quad M = \{f \in A\mid f \ge 0
+  \text{ fast überall}\}.\]
+
+\subsubsection{Teil i}
+
+\begin{Behauptung}
+  \(M\) ist eine abgeschlossene Teilmenge von \(A\).
+\end{Behauptung}
+\begin{proof}
+  Wir zeigen, dass \(M\) abgeschlossen ist, indem wir zeigen, dass
+  \[M^{c}\coloneq\{f \in A \mid \forall N \in  \mathcal{B}(\ointerval{0}{1}), \exists y \in \ointerval{0}{1}
+    \setminus N \colon f(y) < 0\}\]
+  (wobei \(N\) eine Nullmenge) offen ist.  Sei \(g \in M^{c}\) beliebig.  Wir zeigen, dass es ein \(\varepsilon >
+  0\) existiert, sodass \(U_{\varepsilon}(g) \subseteq M^{c}\) gilt.
+
+  Es gilt
+  \[\norm{f - g}_{p} = \left(\int\abs{f-g}^{p}\dd \lambda\right)^{1/p}.\]
+  Wir erhalten das globale Minimum von \(\norm{f-g}_{p}\), genau dann
+  \[f(x) = g(x) \text{ für alle } x \in \ointerval{0}{1} \setminus \{y\} \text{
+      und } f(y) = 0.\]
+  In diesem Fall gilt
+  \[\norm{f - g}_{p} = \abs{g(x)} = -g(x) > 0.\]
+  Sei \(0 < \varepsilon < -g(x)\), dann gilt \(U_{\varepsilon}(g) \subseteq M^{c}\).
+\end{proof}
+\end{document}

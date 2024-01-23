@@ -1,0 +1,70 @@
+% Insert environment
+\starttext
+% Insert item in itemize environment
+\startitemize
+\item This is the first item.
+\stopitemize
+% Insert section
+
+\section{First Level Title}
+
+% Now this title should show up in Emacs menu bar,
+% first add TOC to Emacs menu.
+
+% Close environment
+\startitemize
+\stopitemize
+
+% More key bindings available in C-h m.
+
+% Insert macro
+% Config.  AUCTeX defaults to ConTeXt mkii.  Set ConTeXt-Mark-version
+% to "IV" for IV and above.
+
+% Demo.  Electric dollar for inline math.  Press dollar key \$ for a
+% pair of dollars, then place the cursor (point in Emacs jargon)
+% between the dollars.
+
+$a + b = c$.  Therefore we obtain $E = mc^{2}$, q.e.d.
+
+% Demo.  Electric braces.  Automatically insert \{\} and \left[\right]
+$ a \in \{a,b,c\}$ or $\left(\frac{1}{2} + \frac{1}{2}\right) = 1$.
+% As you can see, left*right* pairs are electric, very helpful when
+% entering such pairs in math environment.
+
+% Demo.  Electric sub and superscript.
+$ c^{ab}_{cd} $.  Automatically insert {} pairs immediately after sub
+and superscripts, then place the cursor inside the braces.
+
+% Demo.  Prettify symbols mode.  Display TeX math commands as Unicode
+% symbols.
+$ \alpha \beta \mathbb{R}$.
+
+% a full list of prettified symbols can be viewed at
+% tex--prettify-symbols-alist variable.
+
+% Demo.  Keyboard shortcuts for math symbols.
+% Press acute ` key, followed by another key, such as a, will type \alpha.
+$ \alpha $
+% A full list of all shortcuts is available in LaTeX-math-default
+% variable.  Customizable via LaTeX-math-list variable.
+% Alternatively, you can insert and view available math symbols from
+% Emacs menu bar.
+$\Subset$
+
+% Config.  Emacs/AUCTeX does not recognize start/stop formula
+% environment as math mode by default.  We need to fix this, or else
+% math shortcuts will not work properly.
+
+% Now we can insert a formula environment.
+\startformula
+  \alpha + \beta = \rho \gamma \sigma.
+\stopformula
+
+% Finally, compile the document with C-c C-c.
+% Interrupt the compilation with C-c C-k.
+% Type C-c C-c again to launch the PDF viewer.
+% Type C-c C-l to view logs.
+
+Happy \ConTeXt{}ing!
+\stoptext

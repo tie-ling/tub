@@ -1,0 +1,229 @@
+\documentclass[draft,a5paper]{article}
+\usepackage[ngerman]{babel}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath,mathtools,fontspec,amssymb,mathtools}
+
+% for theorems and lemma
+\usepackage{amsthm}
+\newtheorem*{beh}{Behauptung}
+\newtheorem*{lem}{Lemma}
+
+% times new roman font
+\usepackage{newtx}
+
+\linespread{1.2}
+
+\author{Yiwen Yang 466096, Yuchen Guo 480788, Meng Zhang 484981}
+\date{\today}
+\title{HA 0, Ana 2 -- Gruppe TiBu 2, Tilman Friedrich Burghoff}
+
+\begin{document}
+\maketitle
+
+\newpage
+
+\subsection*{1. Aufgabe.}
+Für \(f \colon [0, 1] \to \mathbb{R}\) und
+\(n \in \mathbb{N} \setminus \left\{ 0 \right\}\) definieren wir das
+\(n\)-te Bernstein-Polynom von \(f\) durch
+\begin{align*}
+  B_n f \colon [0, 1] \to \mathbb{R}, \quad (B_n f)(x) \coloneq \sum_{k=0}^n
+  {f \left( \frac{k}{n} \right)
+  \begin{pmatrix} n \\ k \end{pmatrix} x^k (1-x)^{n - k}}.
+\end{align*}
+
+\subsubsection*{1. Aufgabe, Teil i.}
+
+\begin{lem}
+  Für alle \(x \in \mathbb{R}\) gilt
+  \begin{align}
+    \label{eq:1}
+    \sum_{k = 0}^{n}
+    {\begin{pmatrix} n \\ k \end{pmatrix} x^k (1 - x)^{n - k}} &= 1; \\
+    \label{eq:2}
+    \sum_{k=0}^n{k \begin{pmatrix} n \\ k \end{pmatrix} x^k (1 -
+    x)^{n - k}} &= n x; \\
+    \label{eq:3}
+    \sum_{k=0}^n{k^2 \begin{pmatrix} n \\ k \end{pmatrix} x^k (1 -
+    x)^{n - k}} &= n (n - 1) x^2 + n x.
+  \end{align}
+\end{lem}
+
+\begin{proof}
+  Die Gleichung \eqref{eq:1} folgt sofort aus binomischen
+  Lehrsatz. Die Gleichung \eqref{eq:2} gilt wegen
+  \begin{align*}
+    \sum_{k=0}^n{k \begin{pmatrix} n \\ k \end{pmatrix} x^k (1 - x)^{n -
+    k}}
+    &= \sum_{k=0}^n{k \cdot  \frac{n!}{k! (n-k)!} \cdot x^k (1 -
+      x)^{n - k}} \\
+    &= \sum_{k=0}^n{k \cdot \frac{n (n-1)!}{k (k-1)! [(n-1) - (k-1)]!} \cdot x^k (1 -
+      x)^{n - k}} \\
+    &= n \cdot \sum_{k=0}^n {\frac{(n-1)!}{(k-1)! [(n-1) - (k-1)]!} \cdot x^k (1 -
+      x)^{n - k}} \\
+    &= n \cdot x \cdot \sum_{k=0}^n {\frac{(n-1)!}{(k-1)! [(n-1) - (k-1)]!} \cdot x^{k-1} (1 -
+      x)^{(n - 1) - (k - 1)}} \\
+    &= n \cdot x \cdot (x + 1 - x)^{n-1} \\
+    &= nx.
+  \end{align*}
+  Die Gleichung \eqref{eq:3} folgt wegen \(k^2 = k ( k - 1 ) + k\) dass
+  \begin{align*}
+    & \sum_{k=0}^n{k^2 \begin{pmatrix} n \\ k \end{pmatrix} x^k (1 -
+      x)^{n - k}} \\
+    &= \sum_{k=0}^n{k (k - 1) \frac{n (n - 1) (n - 2)!}{k (k - 1) (k -
+      2)! [(n - 2) - (k - 2)]!} \cdot x^k (1 -  x)^{n - k}}
+      + \text{Gleichung \eqref{eq:2}} \\
+    &= n \cdot (n - 1) x^2 \sum_{k=0}^n{\frac{(n - 2)!}{(k - 2)! [(n -
+      2) - (k - 2)]!} \cdot x^{k - 2} (1 - x)^{(n - 2) - (k - 2)}}
+      + \text{Gleichung \eqref{eq:2}} \\
+    &= n(n-1)x^2 (x + 1 - x)^{n-2} + \text{Gleichung \eqref{eq:2}} \\
+    &= n(n-1)x^2 + nx.
+  \end{align*}
+\end{proof}
+
+\begin{beh}
+  Falls \(f\) stetig ist, konvergiert \((B_n f)_{n \in \mathbb{N}}\)
+  gleichmäßig gegen \(f\).
+\end{beh}
+
+\begin{proof}
+  Wir zeigen, dass die Funktionenfolge \(B_n f\) gegen \(f\)
+  gleichmäßig konvergiert, indem wir zeigen, dass zu jedem
+  \(\varepsilon > 0\) ein \(N_{\varepsilon} \in \mathbb{N}\) existiert, sodass
+  für alle \(n \in \mathbb{N}\), \(n \ge N_{\varepsilon}\) und alle
+  \(x \in [0, 1]\) gilt \(\left| (B_n f)(x) - f(x) \right| < \varepsilon\).
+  Es gilt
+  \begin{align*}
+    (B_n f)(x) - f(x)
+    &= \sum_{k = 0}^n {\left[ f \left( \frac{k}{n}
+      \right) - f(x) \right]
+      \begin{pmatrix} n \\ k \end{pmatrix} x^k (1-x)^{n-k}}.
+  \end{align*}
+  Wegen der Stetigkeit von der Funktion \(f\) können wir ein \(\delta > 0\)
+  so wählen, dass für alle \(x, x' \in [0, 1]\) mit \(|x - x'| < \delta\) gilt
+  \(|f(x) - f(x')|< \varepsilon / 2\).  Dann gilt
+  \begin{align}
+    (B_n f)(x) - f(x) =
+    \label{eq:4}
+    &\sum_{|x - k/n| < \delta} {\left[ f \left( \frac{k}{n}
+      \right) - f(x) \right]
+      \begin{pmatrix} n \\ k \end{pmatrix} x^k (1-x)^{n-k}} \\
+    \label{eq:5}
+    &+ \sum_{|x - k/n| \ge \delta} {\left[ f \left( \frac{k}{n}
+      \right) - f(x) \right]
+      \begin{pmatrix} n \\ k \end{pmatrix} x^k (1-x)^{n-k}}.
+  \end{align}
+  Wegen der Voraussetzung dass für alle \(x, x' \in [0, 1]\) mit
+  \(|x - x'| < \delta\) die Ungleichung \(|f(x) - f(x')|< \varepsilon / 2\)
+  gilt, folgt daraus, dass
+  \begin{align*}
+    \text{Summe \eqref{eq:4}} < \frac{\varepsilon}{2} \cdot \sum_{k=0}^n
+    {\begin{pmatrix} n \\ k \end{pmatrix} x^k (1-x)^{n-k}}
+    = \frac{\varepsilon}{2}.
+  \end{align*}
+  Wir betrachten nun die Summe \eqref{eq:5}.  Aus der Definition von
+  Supremumsnorm folgt \(|f(x)| \le \|f\|\) für alle \(x \in [0, 1]\).  Damit
+  gilt
+  \begin{align*}
+    \text{Summe \eqref{eq:5}} \le 2 \|f\|
+    \sum_{|x - k/n| \ge \delta}
+    {\begin{pmatrix} n \\ k \end{pmatrix} x^k (1-x)^{n-k}}.
+  \end{align*}
+  Jetzt gilt wegen \(\delta^{-2}(x - k/n)^2 \ge 0\) für alle \(k\) und
+  \(\delta^{-2}(x - k/n)^2 \ge 1\) für alle \(|x - k/n| \ge \delta\) dass
+  \begin{align*}
+    \sum_{|x - k/n| \ge \delta}
+    {\begin{pmatrix} n \\ k \end{pmatrix} x^k (1-x)^{n-k}}
+    &\le \sum_{k = 0}^{n} \delta^{-2}(x - k/n)^2
+      {\begin{pmatrix} n \\ k \end{pmatrix} x^k (1-x)^{n-k}} \\
+    &= \delta^{-2} \sum_{k = 0}^{n}
+      \left( x^2 - \frac{2kx}{n} + \frac{k}{n}^2 \right)
+      {\begin{pmatrix} n \\ k \end{pmatrix} x^k (1-x)^{n-k}}
+  \end{align*}
+  Nun nutzen wir Lemma von \eqref{eq:1} bis \eqref{eq:3} aus, erhalten wir
+  \begin{align*}
+    \delta^{-2} \sum_{k = 0}^{n}
+    \left( x^2 - \frac{2kx}{n} + \frac{k}{n}^2 \right)
+    {\begin{pmatrix} n \\ k \end{pmatrix} x^k (1-x)^{n-k}}
+    &= \delta^{-2} \left[ x^2 - \frac{2x}{n} \cdot (nx) + \frac{1}{n^2}
+      \cdot (n(n-1)x^2 + nx) \right]\\
+    &= \frac{x(1-x)}{n\delta^2} \le \frac{1}{4n\delta^2}.
+  \end{align*}
+  Damit haben wir gezeigt, dass für alle
+  \(n \ge \frac{\varepsilon}{2 \|f\| \delta^2}\) gilt Summe \eqref{eq:4} +
+  Summe \eqref{eq:5} \(\le \varepsilon\).  Damit konvergiert die
+  Funktionenfolge \(B_n f\) gleichmäßig gegen \(f\).
+\end{proof}
+
+\subsubsection*{1. Aufgabe, Teil ii.}
+
+\begin{beh}
+  Zu jeder stetigen Funktion \(f \colon [a, b] \to \mathbb{R}\) existiert
+  eine Funktionenfolge \((p_n)_{n \in \mathbb{N}}\), $p_n \colon [a, b] \to
+  \mathbb{R}$, die gleichmäßig gegen \(f\) konvergiert.
+\end{beh}
+
+\begin{proof}
+  Sei die Zahlen \(a, b \in \mathbb{R}, a < b\) und die Funktion
+  \(g(x) \colon [a, b] \to \mathbb{R}, x \mapsto \frac{(x-a)}{(b-a)}\).  Dann
+  ist der Wertbereich von \(g\) gleich \([0, 1]\) und die Verknüpfung
+  \(f \circ g = g(f(x))\) ist stetig.  Aus Teil i dieser Aufgabe folgt
+  dann die Existenz einer Funktionenfolge, die gleichmäßig gegen \(f\)
+  konvergiert.
+\end{proof}
+
+\subsection*{2. Aufgabe.}
+
+Gegeben ist die Fibonacci-Folge mit
+\begin{align*}
+  a_0 \coloneq 0, \quad a_1 \coloneq 1, \quad a_n \coloneq a_{n-1} + a_{n-2}, \quad n \ge 2.
+\end{align*}
+
+\begin{beh}
+  Es gilt für alle \(n \in \mathbb{N}\) dass
+  \begin{align*}
+    a_n = \frac{1}{\sqrt{5}}
+    \left[ \left( \frac{1 + \sqrt{5}}{2} \right)^{n}
+    - \left( \frac{1 - \sqrt{5}}{2} \right)^n \right].
+  \end{align*}
+\end{beh}
+
+\begin{proof}
+  Wir bemühen uns um einen Beweis mit vollständigen Induktion.
+
+  \begin{itemize}
+  \item Induktionsanfang.  Es gilt \(a_0 = 0 = 1/\sqrt{5} \cdot 0\) und
+    \(a_1 = 1 = 1/\sqrt{5} \cdot \sqrt{5}\).
+  \item Induktionsvoraussetzung.  Sei \(n\) fest gewählt mit
+    \(n \in \mathbb{N}_{\ge 2}\).  Die Behauptung gelte für alle natürliche
+    Zahlen kleiner gleich \(n\).
+  \item Induktionsschritt. Wir zeigen, dass
+    \begin{align*}
+      a_{n+1} = \frac{1}{\sqrt{5}}
+      \left[ \left( \frac{1 + \sqrt{5}}{2} \right)^{n+1}
+      - \left( \frac{1 - \sqrt{5}}{2} \right)^{n+1} \right].
+    \end{align*}
+    gilt.  Wegen der Definition von Fibonacci-Folgen und
+    Induktionsvoraussetzung gilt
+    \begin{align*}
+      a_{n+1}
+      &= a_n + a_{n - 1} \\
+      &= \frac{1}{\sqrt{5}}
+        \left[ \left( \frac{1 + \sqrt{5}}{2} \right)^{n+1}
+        - \left( \frac{1 - \sqrt{5}}{2} \right)^{n+1} \right]
+      + \frac{1}{\sqrt{5}}
+        \left[ \left( \frac{1 + \sqrt{5}}{2} \right)^{n-1}
+        - \left( \frac{1 - \sqrt{5}}{2} \right)^{n-1} \right] \\
+      &= \frac{1}{\sqrt{5}} \cdot \frac{1}{2^{n+1}} \cdot [(1 +
+        \sqrt{5})^{n-1} \cdot (2 (1 + \sqrt{5}) + 4) - (1 -
+        \sqrt{5})^{n-1} \cdot (2 (1 - \sqrt{5}) + 4)] \\
+      &= \frac{1}{\sqrt{5}} \cdot \frac{1}{2^{n+1}} \cdot [(1 +
+        \sqrt{5})^{n+1} - (1 - \sqrt{5})^{n+1}] \\
+      &= \frac{1}{\sqrt{5}}
+        \left[ \left( \frac{1 + \sqrt{5}}{2} \right)^{n+1}
+        - \left( \frac{1 - \sqrt{5}}{2} \right)^{n+1} \right].
+    \end{align*}
+  \end{itemize}
+  Damit gilt die Behauptung.
+\end{proof}
+\end{document}

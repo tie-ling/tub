@@ -1,0 +1,178 @@
+%% page style
+\documentclass[12pt]{extarticle}
+\usepackage[margin=2cm]{geometry}
+\usepackage{fancyhdr,parskip}
+\pagestyle{fancy}
+\usepackage[onehalfspacing]{setspace}
+\setlength{\parindent}{0pt}
+\lhead{\myAuthor}
+\rhead{\mySubject \ \myHausaufgaben. Übungsblatt \\ \myTutor}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+
+%% language
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+
+%% default packages
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,
+  stmaryrd, % for the lightning symbol used in proof by contraction
+  tikz,     % used to draw diagrams
+}
+
+
+%% metadata
+\newcommand{\myAuthor}{Yuchen Guo 480788 | Meng Zhang 484981 | TB9}
+\newcommand{\myHausaufgaben}{12}
+\newcommand{\mySubject}{Analysis}
+\newcommand{\myTutor}{Tilman}
+
+
+%% custom commands
+\newcommand{\beh}{\textit{Behauptung.}\ }
+\newcommand{\aufgn}[1]{\textbf{Aufgabe #1.}}
+\newcommand{\mg}[1]{\mathbb{#1}}
+
+\begin{document}
+\aufgn{12.1.i}
+
+\beh Die Abbildung \(f\) ist in \(x_0\) diffbar mit $f'(x_0)
+= m$.
+
+\begin{proof}
+  Zur Abkürzung setzen wir \(D := \mg{R}\).  Sei die
+  Folgen \((a_n)\) in \(D_{< x_0}\) und \((b_n)\) in
+  \(D_{> x_0}\) beliebig gewählt mit
+  \(\lim_{n \to \infty}{a_n} = x_0\) und
+  \(\lim_{n \to \infty}{b_n} = x_0\).  Zu zeigen: die
+  Grenzwerte
+  $\lim_{n \to \infty}{\frac{f(a_n) - f(x_0)}{a_n -
+      x_0}}$ und
+  $\lim_{n \to \infty}{\frac{f(b_n) - f(x_0)}{b_n -
+      x_0}}$ existiert und gleich
+  \(m := \lim_{x \to x_0}{f'(x)}\).
+
+  Weil \(f\) in \(D\) stetig und auf
+  \(D \setminus \left\{ x_0 \right\}\) diffbar ist, ist
+  \(f\) insbesondere in \(\left[ a_n, x_0 \right]\) und
+  \(\left[ x_0, b_n \right]\) stetig, sowie in
+  \(\left] a_n, x_0 \right[\) und
+  \(\left] x_0, b_n \right[\) diffbar.  Dann existieren
+  wegen Mittelwertsatz die Stellen
+  \(c_n \in \left] a_n, x_0 \right[\) und
+  \(d_n \in \left] x_0, b_n \right[\) mit
+\begin{align*}
+  f'(c_n) &= \frac{f(a_n) - f(x_0)}{a_n - x_0}, \\
+  f'(d_n) &= \frac{f(b_n) - f(x_0)}{b_n - x_0}.
+\end{align*}
+
+Die Folgen \((a_n)\) und \((b_n)\) konvergieren gegen \(x_0\)
+Es gilt auch \(c_n \in \left] a_n, x_0 \right[\) und
+\(d_n \in \left] x_0, b_n \right[\).  Daraus folgt, die
+Folgen \((c_n)\) und \((d_n)\) konvergieren gegen \(x_0\).
+
+Wegen der Aufgabenstellung existiert der Grenzwert $m :=
+\lim_{x \to x_0}{f'(x)}$.  Weil die Folgen \((c_n)\) und
+\((d_n)\) gegen \(x_0\) konvergiert, es gilt dann
+\begin{align*}
+  m = \lim_{n \to \infty}{f'(c_n)}, \\
+  m = \lim_{n \to \infty}{f'(d_n)}.
+\end{align*}
+
+Damit ist \(f\) diffbar in \(x_0\), denn \(x_0\) ist ein
+Häufungspunkt von \(D\) und der Grenzwert
+\begin{align*}
+f'(x_0) :=
+\lim_{x \to x_0}{\frac{f(x) - f(x_0)}{x - x_0}}
+\end{align*}
+existiert und gleich \(m\).  Die Definition von
+Differenzierbarkeit in \(x_0\) (Def 6.1.1) ist damit erfüllt.
+\end{proof}
+
+\aufgn{12.1.ii}
+
+\beh Die Aussage in (i) ist falsch, wenn man die
+Stetigkeit in \(x_0\) nicht voraussetzt.
+
+\begin{proof}
+Als Gegenbeispiel betrachten wir die folgende Abbildung
+\(g \colon \mg{R} \to \mg{R}\),
+\begin{align*}
+  x \mapsto
+\begin{cases}
+  1 & \text{falls } x = 0, \\
+  x & \text{sonst.}
+\end{cases}
+\end{align*}
+Wir zeigen, dass die Abbildung \(g\) diffbar auf $\mg{R}
+\setminus \left\{ 0 \right\}$ aber nicht diffbar im
+Punkt \(x = 0\) ist.
+
+Sei \((a_n)\) eine Folge mit
+\(\lim_{n \to \infty}{a_n} = a\),
+\(a \in \mg{R} \setminus \left\{ 0 \right\}\) und
+\(a_n \ne 0\) für alle \(n \in \mg{N}\).  Damit existiert
+der Grenzwert
+\begin{align*}
+f'(a) = \lim_{n \to \infty}{\frac{f(a_n) - f(a)}{a_n -
+  a}} = 1.
+\end{align*}
+
+Sei \((b_n)\) eine Folge mit
+\(\lim_{n \to \infty}{b_n} = 0\). Der Grenzwert
+\begin{align*}
+  \frac{f(b_n) - f(0)}{b_n -  0} = \frac{1}{0}
+\end{align*}
+existiert nicht.
+
+Damit haben wir gezeigt, dass die Abbildung \(g\) diffbar
+auf \(\mg{R} \setminus \left\{ 0 \right\}\) aber nicht
+diffbar im Punkt \(x = 0\) ist.
+\end{proof}
+
+\aufgn{12.2.i}
+
+\beh Ist \(f \colon \left] a, b \right[ \to \mg{R}\)
+konvex, so ist \(f\) stetig.
+
+\begin{proof}
+  Wir beweisen diese Aussage mittels Kontraposition,
+  d.h., eine Abbildung, die nicht stetig ist, ist nicht
+  konvex.  Zur Abkürzung setzen wir
+  \(D := \left] a, b \right[\).
+
+  Angenommen, \(f\) ist nicht stetig in \(c \in D\).  Dann
+  existiert wegen des \(\varepsilon\)-\(\delta\) Kriterium
+  ein \(\varepsilon > 0\) sodass zu jedem \(\delta > 0\)
+  existiert ein \(x \in D\) mit
+  \(\left| x - c \right| < \delta\) aber
+  \(\left| f(x) - f(c) \right| \ge \varepsilon\).
+
+  O.B.d.A. sei \(0 < x - c < \delta\) und
+  \(f(x) - f(c) \ge \varepsilon\). Zu zeigen: es existiert
+  ein \(\lambda \in \left[ 0, 1 \right]\) mit $f((1 -
+  \lambda) x + \lambda c) > (1 - \lambda) f(x) +
+  \lambda f(c)$.  Diese Ungleichung gilt im Fall
+  \(\lambda = \frac{1}{2}\).
+
+
+\end{proof}
+\aufgn{12.2.ii}
+
+\beh Ist \(f \colon \left[ a, b \right] \to \mg{R}\)
+konvex, so ist \(f\) stetig.  Diese Aussage ist falsch.
+
+\begin{proof}
+Wir widerlegen diese Aussage mit einem Gegenbeispiel.
+Wir betrachten die Abbildung
+\begin{align*}
+f \colon \left[ 0, 1 \right] \to \mg{R}, \quad x \mapsto
+\begin{cases}
+  x & x \in \left[ 0, 1 \right[, \\
+  2 & x = 1.
+\end{cases}
+\end{align*}
+Die Abbildung \(f\) ist konvex aber nicht stetig.
+\end{proof}
+
+\end{document}

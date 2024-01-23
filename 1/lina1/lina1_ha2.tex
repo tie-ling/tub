@@ -1,0 +1,364 @@
+\documentclass[12pt]{extarticle}
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,fancyhdr,color,graphicx,}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{tikz}
+\renewcommand{\familydefault}{\sfdefault}
+\pagestyle{fancy}
+\setlength{\parindent}{0pt}
+\lhead{Yuchen Guo 480788, Meng Zhang 484981}
+\rhead{2. Hausaufgabenblatt, LinA I\\Tutorin: Saskia, Mi 2-4 p.m.}
+\begin{document}
+\textbf{Lemma Aufgabe 2.1.1.1} Seien \(A\) und \(B\) Mengen.  Es gilt \(A \setminus B = A \cap \overline{B}\).
+\begin{proof}
+  \begin{align*}
+    A \setminus B
+    &\iff \left\{ x|x \in A \wedge x \notin B \right\}
+      \tag*{Definition von Differenz}\\
+    &\iff \left\{ x|x \in A \wedge x \in \overline{B} \right\}
+      \tag*{Definition von \(\overline{B}\), 1.19.iv}\\
+    &\iff A \cap \overline{B}
+  \end{align*}
+\end{proof}
+
+\textbf{Aufgabe 2.1.1}
+\begin{proof}
+  \begin{align*}
+    M \setminus (N \cap L)
+    &\iff M \cap \overline{\left( N \cap L \right)}
+      \tag*{Lemma} \\
+    &\iff M \cap \left( \overline{N} \cup \overline{L} \right)
+      \tag*{De Morgan'sche Regeln}\\
+    &\iff (M \cap \overline{N}) \cup (M \cap \overline{L}) \tag*{Distributivität}\\
+    &\iff (M \setminus N) \cup (M \setminus L) \tag*{Lemma}
+  \end{align*}
+\end{proof}
+
+\textbf{Aufgabe 2.1.2}
+\begin{proof}
+  \begin{align*}
+    M \setminus (N \cup L)
+    &\iff M \cap \overline{\left( N \cup L \right)}
+      \tag*{Lemma} \\
+    &\iff M \cap \left( \overline{N} \cap \overline{L} \right)
+      \tag*{De Morgan'sche Regeln}\\
+    &\iff (M \cap \overline{N}) \cap (M \cap \overline{L}) \tag*{Distributivität}\\
+    &\iff (M \setminus N) \cap (M \setminus L) \tag*{Lemma}
+  \end{align*}
+\end{proof}
+
+
+\textbf{Aufgabe 2.2}
+
+Um zu zeigen, dass drei Aussagen äquivalent sind, ist es ausreichend,
+die Aussage \(A \implies B \implies C \implies A\) als wahr zu beweisen.
+
+\begin{itemize}
+\item \(N \subseteq M \implies M \cap N = N\)
+
+  \begin{proof}
+
+    Wir zeigen, aus \(N \subseteq M \) folgt \(M \cap N = N\), indem wir
+    zeigen, dass die Aussagen  \(M \cap N \subseteq N\) und $N \subseteq M
+    \cap N$ wahr sind.
+    \begin{itemize}
+    \item \(N \subseteq M \cap N\)
+
+      Aus \(N \subseteq M\) erhalten wir, dass für alle \(x \in N\) gilt $x
+      \in M$.  Es gilt aber auch \(N \subseteq N\), denn für alle \(x \in N\) gilt
+      \(x \in N\).
+
+      Es gilt für alle \(x \in N\) die Aussage $(x \in
+      M) \wedge (x \in N)$, d.h., \(N \subseteq M \cap N\).
+    \item \(M \cap N \subseteq N\)
+
+      Aus der Definition von \(M \cap N\) erhalten wir, dass es für alle $x \in
+      M \cap N$, die Aussage \(x \in N\) gilt.  D.h., \(M \cap N \subseteq N\).
+    \end{itemize}
+
+
+    Weil die beide Aussagen  \(M \cap N \subseteq N\) und $N \subseteq M
+    \cap N$ wahr sind, ist auch die Aussage \(M \cap N = N\) wahr.
+  \end{proof}
+\item \(M \cap N = N \implies M \cup N = M\)
+
+  \begin{proof}
+
+    Wir zeigen, aus \(M \cap N = N \) folgt \(M \cup N = M\), indem wir
+    zeigen, dass die Aussagen  \(M \cup N \subseteq M\) und $M \subseteq M
+    \cup N$ wahr sind.
+    \begin{itemize}
+    \item \(M \subseteq M \cup N\)
+
+
+      Aus der Definition von \(M \cup N\) erhalten wir, dass es für alle $x \in
+      M$, die Aussage \(x \in M \cup N\) gilt.  D.h., \(M \subseteq M \cup N\).
+
+    \item \(M \cup N \subseteq M\)
+
+      Aus \(M \cap N = N\) erhalten wir, \(N \subseteq M \cap N\).  D.h., dass
+      für alle \(x \in N\) gilt \(x \in N \wedge x \in M\).  Insbosondere, es
+      gilt für alle \(x \in N\) die Aussage \(x \in M\), also
+      \(N \subseteq M\).
+
+      Wegen \(N \subseteq M\), gilt \((M \cup N) \subseteq (M \cup M) = M\),
+      also, \(M \cup N \subseteq M\).
+    \end{itemize}
+
+
+    Weil die beide Aussagen \(M \subseteq M \cup N\) und
+    \(M \cup N \subseteq M\) wahr sind, ist auch die Aussage
+    \(M \cup N = M\) wahr.
+  \end{proof}
+
+\item \(M \cup N = M \implies N \subseteq M\)
+
+  \begin{proof}
+    Aus \(M \cup N = M\) folgt, dass \(M \cup N \subseteq M\) gilt.
+    Es gilt für alle \(x \in M \cup N\) die Aussage \(x \in M\).
+    Insbesondere, für alle \(x \in N\) gilt \(x \in M\).  D.h., $N \subseteq
+    M$.
+  \end{proof}
+\end{itemize}
+
+\textbf{Aufgabe 2.3.1}
+
+Wir beweisen diese Aufgabe, indem wir zeigen, dass
+$(8+24\mathbb{Z}) \cup (16+24\mathbb{Z}) \subseteq 8\mathbb{Z}
+\setminus 3\mathbb{Z}$ und
+$ 8\mathbb{Z} \setminus 3\mathbb{Z} \subseteq (8+24\mathbb{Z}) \cup
+(16+24\mathbb{Z})$.
+\begin{itemize}
+\item $(8+24\mathbb{Z}) \cup (16+24\mathbb{Z}) \subseteq 8\mathbb{Z}
+  \setminus 3\mathbb{Z}$
+
+  \begin{proof}
+
+    \begin{align*}
+      (8+24\mathbb{Z}) \cup (16+24\mathbb{Z})
+      &\iff (3(8\mathbb{Z}+2)+2) \cup (3(8\mathbb{Z}+5)+1)
+        \tag{1}\\
+      &\iff 8(3\mathbb{Z}+1) \cup 8(3\mathbb{Z}+2)
+        \tag{2}\\
+    \end{align*}
+
+    Der Formel (1) ist durch \(3\) nicht teilbar und der Formel (2) ist
+    durch \(8\) teilbar.  Deshalb gilt, $(8+24\mathbb{Z}) \cup (16+24\mathbb{Z}) \subseteq 8\mathbb{Z}
+    \setminus 3\mathbb{Z}$.
+  \end{proof}
+\item
+  $ 8\mathbb{Z} \setminus 3\mathbb{Z} \subseteq (8+24\mathbb{Z})
+  \cup (16+24\mathbb{Z})$
+  \begin{proof}
+    \begin{align*}
+      8\mathbb{Z} \setminus 3\mathbb{Z}
+      &\iff 8\mathbb{Z} \cap \overline{3\mathbb{Z}}
+        \tag*{Lemma Aufgabe 2.1.1.1}\\
+      &\iff 8\mathbb{Z} \cap \left( \left( 3\mathbb{Z} + 1 \right) \cup
+        \left( 3\mathbb{Z} + 2 \right) \right) \\
+      &\iff \left( 8\mathbb{Z} \cap \left( 3\mathbb{Z} + 1 \right) \right)
+        \cup \left( 8\mathbb{Z} \cap \left( 3\mathbb{Z} + 2 \right)
+        \right)
+        \tag*{Distributivität}
+    \end{align*}
+    \begin{itemize}
+    \item Falls $x \in 8\mathbb{Z} \cap \left( 3\mathbb{Z} + 1
+      \right)$
+
+      Seien \(x = 8p = 3q+1\) mit \(p, q \in \mathbb{Z}\).
+
+      Die Gleichung \(q = \frac{8p-1}{3}\) ist in (1) lösbar, denn, aus
+      \(\frac{8p-1}{3}=8\mathbb{Z}+5\) folgt \(p = 3\mathbb{Z}+2\).
+
+      Deshalb gilt \(x \in (8+24\mathbb{Z}) \cup (16+24\mathbb{Z})\).
+    \item Falls $x \in 8\mathbb{Z} \cap \left( 3\mathbb{Z} + 2
+      \right)$
+
+
+      Seien \(x = 8p = 3q+2\) mit \(p, q \in \mathbb{Z}\).
+
+      Die Gleichung \(q = \frac{8p-2}{3}\) ist in (1) lösbar, denn, aus
+      \(\frac{8p-2}{3}=8\mathbb{Z}+2\) folgt \(p = 3\mathbb{Z}+1\).
+
+      Deshalb gilt \(x \in (8+24\mathbb{Z}) \cup (16+24\mathbb{Z})\).
+    \end{itemize}
+
+  \end{proof}
+\end{itemize}
+
+\textbf{Aufgabe 2.3.2}
+\begin{itemize}
+\item \((8+11\mathbb{Z}) \cap 4\mathbb{Z} \subseteq 8+44\mathbb{Z}\)
+
+  \begin{proof}
+    Sei \(x \in (8+11\mathbb{Z}) \cap 4\mathbb{Z}\).  Dann gilt
+    \(x=8+11p=4q\) mit \(p, q \in \mathbb{Z}\).  Es gilt also
+    \(q=2+\frac{11}{4}p\) mit \(p,q \in \mathbb{Z}\).
+
+    Wir zeigen, dass diese Gleichung in \(8+44\mathbb{Z}\) eine Lösung
+    hat.
+
+    Wegen \(8+44\mathbb{Z} \iff 4(2+11\mathbb{Z})\), ist es ausreichend,
+    zu zeigen, dass \(q=2+\frac{11}{4}p=2+11\mathbb{Z}\) lösbar ist.
+
+    Diese ist tatsächlich lösbar, denn,
+
+    \begin{align*}
+      2+11\mathbb{Z} &= 2+\frac{11}{4}p\\
+      11\mathbb{Z} &= \frac{11}{4}p\\
+      p &= \frac{44\mathbb{Z}}{11} = 4\mathbb{Z}
+    \end{align*}
+
+    Deshalb gilt die Behauptung \((8+11\mathbb{Z}) \cap 4\mathbb{Z} \subseteq 8+44\mathbb{Z}\).
+  \end{proof}
+\item \(8+44\mathbb{Z} \subseteq (8+11\mathbb{Z}) \cap 4\mathbb{Z}\).
+
+  \begin{proof}
+    Wegen \(8+44\mathbb{Z} \iff 4(2+11\mathbb{Z})\), gilt für alle $x
+    \in 8+44\mathbb{Z}\( dass \(x\) durch \(4\) teilbar ist, also \)x \in
+    4\mathbb{Z}$.
+
+    Wegen \(8+44\mathbb{Z} \iff 8+4\cdot 11 \mathbb{Z}\), gilt für alle
+    \(x \in 8+44\mathbb{Z}\) dass \(x\) durch \(11\) geteilt einen Rest von
+    \(8\) hat, also \(x \in (8+11\mathbb{Z})\).
+
+    Deshalb gilt die Behauptung $8+44\mathbb{Z} \subseteq
+    (8+11\mathbb{Z}) \cap 4\mathbb{Z}$.
+  \end{proof}
+\end{itemize}
+
+\textbf{Aufgaben 2.3.3}
+
+\textit{Behauptung}: Seien \(k, m, n \in \mathbb{Z}\).  Dann gilt
+entweder \(m + k\mathbb{Z}=n+k\mathbb{Z}\) oder $(m+k\mathbb{Z}) \cap
+(n+k\mathbb{Z})=\emptyset$.
+
+\begin{proof}
+  Wir zeigen, dass diese Aussage wahr ist, indem wir zeigen, dass die
+  beide Behauptung nicht gleichzeitig wahr oder gleichzeitig falsch
+  sein darf.
+
+  \begin{itemize}
+  \item Gleichzeitig wahr: $(m+k\mathbb{Z} = n+k\mathbb{Z}) \wedge
+    ((m+k\mathbb{Z}) \cap (n+k\mathbb{Z})=\emptyset)$
+
+    Seien \(A =m+k\mathbb{Z}\) und  \(B=n+k\mathbb{Z}\).  Wegen
+    Voraussetzungen gilt \(A=B\) und \(A \cap B = \emptyset\).
+
+    Wegen \(A=B\), gilt \(A \cap B = A = B\).  Es gilt aber auch
+    \(A \cap B = \emptyset\).  Daraus folgt, dass \(A = B = \emptyset\).
+    Dies ist aber im Widerspruch zur Voraussetzung \(A =m+k\mathbb{Z}\)
+    und \(B=n+k\mathbb{Z}\), denn \(A\) und \(B\) sind eindeutig nicht
+    leere Mengen.
+
+    Deshalb können die beide Aussagen nicht gleichzeitig wahr sein.
+
+  \item Gleichzeitig falsch: $(m+k\mathbb{Z} \neq n+k\mathbb{Z}) \wedge
+    ((m+k\mathbb{Z}) \cap (n+k\mathbb{Z})\neq \emptyset)$
+
+    Wegen \((m+k\mathbb{Z}) \cap (n+k\mathbb{Z})\neq \emptyset\),
+    existiert ein Element \(x\) mit der Eigenschaften
+    \(x \in m + k\mathbb{Z}\) und \(x \in n+k\mathbb{Z}\).
+
+    Seien \(x = m+kp = n+k(p+q)\) mit \(p,q \in\mathbb{Z}\).  Daraus
+    folgt, \(m=n+kq\).
+
+    Weil \(m\) gleich \(n+kq\) ist, gilt \(m+k\mathbb{Z}=n+kq+k\mathbb{Z}\)
+    mit \(q \in \mathbb{Z}\).  D.h., es gilt
+    \(m + k\mathbb{Z} = n+k\mathbb{Z}\).  Dies ist aber im Widerspruch
+    zur Voraussetzung \(m+k\mathbb{Z} \neq n+k\mathbb{Z}\).
+
+    Deshalb können die beide Aussagen nicht gleichzeitig falsch sein.
+
+  \end{itemize}
+\end{proof}
+
+\textbf{Aufgabe 2.4.1}
+
+\textit{Behauptung.}  Seien \(M, N\) Mengen.  Dann gilt $\mathcal{P}(M)
+\cap \mathcal{P}(N) = \mathcal{P}(M \cap N)$.
+
+\begin{proof}
+\begin{align*}
+  X \in \mathcal{P}(M) \cap \mathcal{P}(N)
+  &\iff (X \in \mathcal{P}(M)) \wedge (X \in \mathcal{P}(N))
+  \tag*{Definition von Durchschnitt}\\
+  &\iff (X \subseteq M) \wedge (X \subseteq N)
+    \tag*{Definition von Potenzmenge}\\
+  &\iff \forall x \in X: x \in M \wedge x \in N
+    \tag*{Definition von Teilmenge}\\
+  &\iff \forall x \in X: x \in M \cap N
+  \tag*{Definition von Durchschnitt}\\
+  &\iff X \subseteq M \cap N
+    \tag*{Definition von Teilmenge}\\
+  &\iff X \in \mathcal{P}(M \cap N)
+    \tag*{Definition von Potenzmenge}
+\end{align*}
+
+D.h., für alle \(X \in \mathcal{P}(M) \cap \mathcal{P}(N)\) gilt auch
+\(X \in \mathcal{P}(M \cap N)\) und umgekehrt.
+
+Deshalb gilt
+\(\mathcal{P}(M) \cap \mathcal{P}(N) = \mathcal{P}(M\cap N)\).
+  \end{proof}
+
+\textbf{Aufgabe 2.4.2}
+
+\textit{Behauptung.}  Seien \(M, N\) Mengen.  Dann gilt $\mathcal{P}(M)
+\cup \mathcal{P}(N) \subseteq \mathcal{P}(M \cup N)$.
+
+\begin{proof}
+
+\begin{align*}
+  X \in \mathcal{P}(M) \cup \mathcal{P}(N)
+  &\Leftrightarrow X \in \mathcal{P}(M) \lor X \in \mathcal{P}(N)
+    \tag*{Definition von Vereinigung}\\
+  &\Leftrightarrow X \subseteq M \lor X \subseteq N
+    \tag*{Definition von Potenzmengen}\\
+  &\Rightarrow \forall x \in X: x \in M \lor x \in N
+    \tag*{Definition von Teilmengen}\\
+  &\Leftrightarrow X \subseteq M \cup N
+    \tag*{Definition von Vereinigung}\\
+  &\Leftrightarrow X \in \mathcal{P}(M \cup N)
+    \tag*{Definition von Potenzmengen}
+\end{align*}
+  \end{proof}
+
+  Seien \(M= \left\{ 0 \right\}\) und \(N= \left\{ 1 \right\}\).  Dann
+  gilt \(\left\{ 0,1 \right\} \subseteq \mathcal{P}(M \cup N)\).
+
+  Aber es gilt auch \(\left\{ 0,1 \right\} \nsubseteq M\) und
+  \(\left\{ 0,1 \right\} \nsubseteq N\).  Deshalb gilt die Gleichheit
+  \(\mathcal{P}(M) \cup \mathcal{P}(N) = \mathcal{P}(M \cup N)\) nicht.
+\\\\
+\textbf{Lemma 2.4.3.1}  Seien \(A, B, C\) Mengen mit \(A \subseteq B\) und
+\(B \subseteq C\).  Dann gilt \(A \subseteq C\).
+
+\begin{proof}
+  Aus der Definition von Teilmengen erhalten wir, dass für alle $a \in
+  A$, es gilt \(a \in B\).  Für alle \(b \in B\) gilt auch \(b \in C\).
+
+  Daraus folgt, dass für alle \(a \in A\), es gilt \(a \in B\) und
+  \(a \in C\).  D.h., \(A \subseteq C\).
+  \end{proof}
+
+\textbf{Aufgabe 2.4.3}
+
+\textit{Behauptung.}  Seien \(M, N\) Mengen.  Dann gilt
+\(M \subseteq N \iff \mathcal{P}(M) \subseteq \mathcal{P}(N)\).
+\begin{proof}
+\begin{align*}
+  M \subseteq N
+  &\iff \forall X \in \mathcal{P}(M): X \subseteq M \subseteq N
+    \tag*{Lemma 2.4.3.1}\\
+  &\iff \forall X \in \mathcal{P}(M): X \in \mathcal{P}(N)
+    \tag*{Definition von Potenzmengen}\\
+  &\iff \mathcal{P}(M) \subseteq \mathcal{P}(N)
+    \tag*{Definition von Teilmengen}
+\end{align*}
+\end{proof}
+
+\end{document}

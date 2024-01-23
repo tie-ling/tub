@@ -1,0 +1,296 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+\documentclass[draft,a5paper]{article}
+
+% 让每个章节 subsection 在新的一页上开始
+% 而不是紧接着上一章节
+\AddToHook{cmd/subsection/before}{\clearpage}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+
+\geometry{left=1cm,
+ right=1cm,
+ top=1cm,
+ bottom=2cm}
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+
+% 调整 Emacs 预览字体大小
+% (setq preview-scale-function 1.5)
+
+\usepackage{amsmath,mathtools,fontspec,amssymb,amsthm,parskip,interval,unicode-math}
+\usepackage{xcharter-otf}
+
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\providecommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\providecommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+% 定义新函数，依赖于AMSmath
+\DeclareMathOperator{\card}{card}
+
+\newcommand{\wt}{\widetilde}
+\newcommand{\dd}{\,\mathrm{d}}
+
+% 标题与作者
+\title{HA 8, CoMa 1, Laurin, Gruppe 108}
+\author{Kuan 480169, Yu 478912, Guo 480788}
+
+\begin{document}
+\maketitle
+\begin{center}
+Ting Yu Kuan 480169, Shilong Yu 478912, Yuchen Guo 480788
+\end{center}
+\newpage
+\subsection{1. Aufgabe}
+\subsubsection{Teil a}
+% ub 9 aufgabe 4
+\begin{Behauptung}
+  Für alle \(x \in \ointerval{0}{1}\) gilt
+  \[f(x) \coloneq x \log_{2}(x) + (1-x)\log_{2}(1-x) \ge -1.\]
+\end{Behauptung}
+\begin{proof}
+  Es gilt für die ersten Ableitung von \(f\) dass
+  \begin{align*}
+    f'(x) &= \log_{2}(x) + \frac{1}{\ln 2} - \log_{2}(1-x) -
+            \frac{1}{\ln 2} \\
+    &= \log_{2}(x) - \log_{2}(1-x).
+  \end{align*}
+  Wir berechnen \(f'(x) > 0\), erhalten wir dann \(x > \frac{1}{2}\).
+  Wir berechnen \(f'(x) < 0\), erhalten wir dann \(x < \frac{1}{2}\).
+  Deshalb besitzt \(f'(x)\) ein globales Minimum im Punkt \(x =
+  \frac{1}{2}\).
+  Wir erhalten \(f(\frac{1}{2}) = -1\), also das globales Minimum ist
+  \(-1\) und die Behauptung gilt.
+\end{proof}
+\subsubsection{Teil b}
+\begin{Behauptung}
+  Jeder auf paarweisen Vergleichen basierende Algorithmus zum
+  Sortieren einer \(n\)-elementigen total geordneten Mengen benötigt im
+  Average-Case \(\Omega(n \log n)\) Vergleiche.
+\end{Behauptung}
+\begin{proof}
+  Wir nehmen an, dass die Elemente des Arrays paarweise verschieden
+  sind.  Wir betrachten einen innere Knote des Entscheidungsbaums.
+  Jede innere Knoten des Baums entsprechen Vergleichen im Algorithmus
+  und besitzt zwei Kinder.  Im Average-Case ist den Kinder gleich groß
+  und jedes innere Knoten reduziert die Anzahl von Vergleichen um ein
+  Halbe.
+  \begin{align*}
+    \log_2(n!) &= \sum_{i=1}^n \log_2(i) \\
+               &\le \sum_{i = \lfloor n/2 \rfloor}^n \log_2(i) \\
+               &\le \lceil n/2 \rceil \log_2(\lfloor n/2 \rfloor) \\
+               &\le \frac{n \log(n-1)}{2} - 1 \\
+               &\in \Omega(n\log(n))
+  \end{align*}
+\end{proof}
+\subsection{2. Aufgabe}
+\subsubsection{Teil a}
+\begin{verbatim}
+def insertionSort(A):
+    n = len(A)
+    for i in range(1, n):
+        s = A[i]
+        k = i
+        while k > 0 and s < A[k-1]:
+            A[k] = A[k-1]
+            k -= 1
+        A[k] = s
+\end{verbatim}
+\begin{Behauptung}
+  Für den List \texttt{[8, 7, 6, 5, 4, 3, 2, 1]}
+benötigt InsertionSort die größtmögliche Anzahl an
+Vergleichen.
+\end{Behauptung}
+\begin{proof}
+  InsertionSort benötigt für diesen List die größtmögliche
+Anzahl an Vergleichen, denn die List hat die
+Eigenschaft, dass die Zahl an der \(i\)-ten Stelle kleiner als
+alle Zahlen an der \(0 \le j \le i-1\)-ten Stelle und
+die innere \texttt{while}-Schleife benötigt jeweils
+\(i-1\)-mal Vergleichen zu terminieren.
+\end{proof}
+\subsubsection{Teil b}
+\begin{verbatim}
+def mergeSort(A):
+    if len(A) <= 1:
+        return(A)
+    else:
+        return(merge(mergeSort(A[:len(A)//2]),
+                     mergeSort(A[len(A)//2:])))
+def merge(left, right):
+    merged = []
+    while left and right:
+        if left[-1] < right[0]:
+            return (left + right)
+        if left[0] < right[0]:
+            merged.append(left[0])
+            left = left[1:]
+        else:
+            merged.append(right[0])
+            right = right[1:]
+    merged.extend(left + right)
+    return merged
+\end{verbatim}
+\begin{Behauptung}
+  Für den List \texttt{[5, 1, 7, 3, 6, 2, 8, 4]}
+benötigt MergeSort die größtmögliche Anzahl an
+Vergleichen.
+\end{Behauptung}
+\begin{proof}
+  MergeSort benötigt für diesen List die größtmögliche Anzahl an
+  Vergleichen, denn die linksseitige- und rechtsseitige-Arrays
+  alternierende Elemente besitzt und daher jeden Paar von Element
+  einmal Vergleich benötigt.
+\end{proof}
+\subsubsection{Teil c}
+\begin{verbatim}
+def quickSort(A):
+    if len(A) <= 1:
+        return A
+    else:
+        pivot = A[0]
+        B = []
+        C = []
+        for i in A[1:]:
+            if i <= pivot:
+                B.append(i)
+            else:
+                C.append(i)
+        return quickSort(B) + [pivot] + quickSort(C)
+\end{verbatim}
+\begin{Behauptung}
+  Für den List \texttt{[1, 2, 3, 4, 5, 6, 7, 8]}
+benötigt QuickSort die größtmögliche Anzahl an
+Vergleichen mit \texttt{pivot = A[0]}.
+\end{Behauptung}
+\begin{proof}
+  QuickSort benötigt für diesen List die größtmögliche
+Anzahl an Vergleichen, denn die List ist bereits sortiert
+und wir nehmen jedes Mal das erste Element der List als
+Pivot-Element und der Algorithmus benötigt insgesamt
+\begin{align*}
+7+6+5+4+3+2+1 \text{ Mal Vergleichungen}
+\end{align*}
+um zu terminieren.  Die Länge der Liste reduziert jedes
+Mal um Eins und Eins ist die kleinstmögliche Zahl, mit
+der der Algorithmus noch terminieren kann.  Damit ist
+die Anzahl der Vergleichen am größten.
+\end{proof}
+\subsection{3. Aufgabe}
+\subsubsection{Teil a}
+\begin{verbatim}
+def find_min_max(A: list[int]):
+    list_of_smaller_elements = []
+    list_of_larger_elements = []
+    for i in range(0, len(A) - 1, 2):
+        if A[i] < A[i+1]:
+            list_of_larger_elements.append(A[i+1])
+            list_of_smaller_elements.append(A[i])
+        else:
+            list_of_larger_elements.append(A[i])
+            list_of_smaller_elements.append(A[i+1])
+    max_element = list_of_larger_elements[0]
+    min_element = list_of_smaller_elements[0]
+    if len(A) % 2 == 1:
+        if A[-1] < min_element:
+            list_of_smaller_elements.append(A[-1])
+        else:
+            list_of_larger_elements.append(A[-1])
+    for i in list_of_larger_elements:
+        if i > max_element:
+            max_element = i
+    for i in list_of_smaller_elements:
+        if i < min_element:
+            min_element = i
+    return min_element, max_element
+\end{verbatim}
+\subsubsection{Teil b}
+\begin{Behauptung}
+  Der Algorithmus ist korrekt und die
+  Anzahl der Vergleiche ist kleiner-gleich
+  \[3 \left \lfloor \frac{n}{2} \right \rfloor.\]
+\end{Behauptung}
+\begin{proof}
+    Im ersten Teil vergleichen wir paarweise die Elementen
+  in der ganzen Liste, zu jedem Element \(x\) der Liste
+  \texttt{list\_of\_smaller\_elements} existiert mindestens
+  ein Element \(y\) der Liste
+  \texttt{list\_of\_larger\_elements} mit der Eigenschaft
+  \(x < y\).  Insgesamnt wird höchstens
+  \(\left \lfloor \frac{n}{2} \right \rfloor + 1\)
+  Vergleichen benötigt.
+
+  Im nächsten Schritt wird jeweils das Minimum und das
+  Maximum in der beiden Listen mittels einem naiven
+  Algorithmus gefunden.  Dieses Schritt benötigt
+  höchstens
+  \[\left \lfloor \frac{n}{2} \right \rfloor - 1 + \left
+    \lfloor \frac{n}{2} \right \rfloor\]
+  Vergleichungen.
+  Insgesamt wird höchstens
+  \(3 \left \lfloor \frac{n}{2} \right \rfloor\) Schritten
+  benötigt.
+
+  Die Korrektheit ist klar, denn das Maximum und das
+  Minimum jeweils größer gleich und kleiner gleich alle
+  Elemente und deshalb in der zwei Teil-Liste enthalten sind.
+\end{proof}
+\subsection{4. Aufgabe}
+\subsubsection{Teil i}
+\begin{Behauptung}
+  Der Algorithmus läuft auch bei einer Partitionierung in Gruppen der
+  Größe \(7\) in Linearzeit.
+\end{Behauptung}
+\begin{proof}
+  Wir betrachten die folgende Routine.  Partitioniere \(A\) in
+  \(\floor{\abs{A}/7}\) Teilmengen mit \(7\) Elementen und eine Teilmenge
+  mit der restlichen \((n \bmod 7)\) Elementen, Laufzeit \(O(\abs{A})\).
+  Bestimme für jede dieser Teilmengen deren Median und bilde Menge
+  \(A_{M}\) dieser Mediane, Laufzeit \(O(\abs{A})\).  Berechne mittels
+  rekursivem Aufruf von Algorithmus den Median \(x\) von \(A_{M}\) und
+  verwende \(x\) als Pivot-Element.
+
+  Wir erhalten
+  \begin{align*}
+    \abs{A_{M}} &= \ceil{\frac{n}{7}} \\
+    \abs{A_{> x}} &\ge 4 \left(\ceil{\frac{1}{2}\ceil{\frac{n}{7}}} -
+                    2\right) \ge \frac{4n}{14} - 8 \\
+    \implies &\abs{A_{> x}} \le \frac{10n}{14} + 8
+  \end{align*}
+  Folglich gilt für die monotone Laufzeitfunktion des rekursiven
+  Algorithmus
+  \[f(n) \le f\left(\ceil{\frac{n}{7}}\right) +
+    f\left(\floor{\frac{10n}{14} + 8}\right) + c \cdot n\]
+  für ein \(c > 0\) und alle \(n \in \mathbb{N}_{> 0}\).
+  Wegen letzter Folie des Vorlesungs gilt \(f(n) \in O(n)\).
+\end{proof}
+\subsubsection{Teil ii}
+Bei Verwendung von Dreiergruppen läuft der Algorithmus nicht mehr in
+Linearzeit.  Denn in diesem Fall gilt
+\[\abs{A_{< x}} \le \floor{\frac{5n}{6}+2} \not{<} n\]
+und den Beweis am letzter Folie des Vorlesungs gilt nicht mehr.
+\subsubsection{Teil iii}
+Man kann den Quicksort Algorithmus so modifizieren, indem man den
+Pivot mittels Median-Partitionierung findet.
+% ub 9 aufgabe 1
+% ub 9 aufgabe 3
+\end{document}
+

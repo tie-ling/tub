@@ -1,0 +1,370 @@
+%% page style
+\documentclass[12pt]{extarticle}
+\usepackage[margin=2cm]{geometry}
+\usepackage{fancyhdr,parskip}
+\pagestyle{fancy}
+\usepackage[onehalfspacing]{setspace}
+\setlength{\parindent}{0pt}
+\lhead{\myAuthor}
+\rhead{\mySubject \ \myHausaufgaben. Übungsblatt \\ \myTutor}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+
+%% language
+\usepackage[utf8]{inputenc}
+\usepackage{xcharter-otf}
+\usepackage[ngerman]{babel}
+
+%% default packages
+\usepackage{amsmath,mathtools,fontspec,amsthm,amssymb,amsfonts,
+  stmaryrd, % for the lightning symbol used in proof by contraction
+  tikz,     % used to draw diagrams
+}
+
+
+%% metadata
+\newcommand{\myAuthor}{Yuchen Guo 480788 | Meng Zhang 484981 | TB9}
+\newcommand{\myHausaufgaben}{8}
+\newcommand{\mySubject}{Analysis}
+\newcommand{\myTutor}{Tilman}
+
+
+%% custom commands
+\newcommand{\beh}{\textit{Behauptung.}\ }
+\newcommand{\aufgn}[1]{\textbf{Aufgabe #1.}}
+\newcommand{\mg}[1]{\mathbb{#1}}
+
+\begin{document}
+\aufgn{8.1.i}
+
+\beh Die Funktion
+\(f \colon \left] 0, \infty \right[ \to \mg{R}\),
+\(x \mapsto \sqrt{x}\) ist gleichmäßig stetig mit $\delta
+= \varepsilon^2$ aber nicht Lipschitz-stetig.
+
+\begin{proof}
+Zur Abkürzung setzen wir $D := \left] 0, \infty
+\right[\(.  Sei \(x, y \in D\) mit \)\left| x - y \right| <
+\delta$.  O.B.d.A sei \(x \le y\).  Dann gilt wegen
+\(\delta =  \varepsilon^2\) dass
+\begin{align*}
+  \left| x - y \right| &= y - x < \varepsilon^2 \\
+  y < x + \varepsilon^2 &\le x + \varepsilon^2 + 2
+  \varepsilon \sqrt{x}\\
+  y &< \left( \sqrt{x} + \varepsilon \right)^2
+\end{align*}
+Wegen \(0 < x < y\) und \(\varepsilon > 0\) folgt
+\begin{align*}
+  \sqrt{y} &< \sqrt{x} + \varepsilon \\
+  \sqrt{y} - \sqrt{x} &< \varepsilon \\
+  \left| f(y) - f(x) \right| &< \varepsilon
+\end{align*}
+Daraus folgt, dass die Funktion in Definitionsbereich
+gleichmäßig stetig ist.
+
+Die Funktion ist nicht Lipschitz-stetig.  Angenommen,
+es existiert ein \(L > 0\) mit
+\(\left| f(x) - f(y) \right| \le L \left| x - y \right|\)
+für alle \(x, y \in D\).  O.B.d.A sei \(x \le y\).  Dann
+gilt
+\begin{align*}
+\left| f(x) - f(y) \right| &\le L \left| x - y \right| \\
+  \sqrt{y} - \sqrt{x} &\le L (y-x) \\
+  \frac{1}{\sqrt{y} - \sqrt{x}} &\le L.
+\end{align*}
+Als \(x-y \to 0\) gilt \(L \to \infty\).
+\end{proof}
+
+\aufgn{8.1.ii}
+
+\beh Die Funktion
+\(g \colon \left]0, \infty\right[ \to \mg{R}\),
+\(x \mapsto \frac{1}{\sqrt{x}}\) ist stetig aber nicht
+gleichmäßig stetig.
+
+\begin{proof}
+  Die Funktion ist stetig.  Denn es gilt für alle Folge
+  \((a_n) \subseteq \left]0, \infty\right[\) mit
+  $\lim_{n \to \infty}{(a_n)}=p \in \left]0,
+    \infty\right[$ dass
+\begin{align*}
+  \lim_{n \to \infty}{g(a_n)}
+  = g \left(\lim_{n \to \infty}{a_n} \right) = g(p).
+\end{align*}
+
+Die Funktion ist nicht gleichmäßig stetig, denn sei
+\(\delta > 0\) beliebig gewählt.  Sei \(x, y \in D\) mit
+\(\left| x - y \right| < \delta\).  O.B.d.A sei
+\(x \le y\).
+Weiter gilt, weil \(g\) monoton fallend ist,
+\begin{align*}
+  \left| g(x) - g(y) \right|
+  &= g(x) - g(y)  \\
+  & =\frac{1}{\sqrt{x}} - \frac{1}{\sqrt{y}}.
+\end{align*}
+
+Als \(x \to 0\) gilt \(g(x) \to \infty\) aber
+\(g(y) < \infty\).  Also
+\(g(x) - g(y) = \infty > \varepsilon\).
+
+Damit haben wir gezeigt, dass \(g\) gleichmäßig stetig
+ist.
+\end{proof}
+\aufgn{8.2}
+
+Sei die Folge \((a_n) \subseteq \mg{R}\) und
+\(d \in \mg{R}\) ein Häufungspunkt von \((a_n)\) mit
+\(d \notin (a_n)\).  Dann existiert eine Teilfolge
+\((a_{n_k})\) von \((a_n)\) mit
+\(\lim_{k \to \infty}{a_{n_k}} = d\).
+
+\aufgn{8.2.i}
+
+\beh Ist \(f \colon (a_n) \to \mg{R}\) gleichmäßig
+stetig, so existiert eine stetige Funktion
+\(F \colon (a_n) \cup \left\{ m \right\} \to \mg{R}\) mit
+\(F\vert_{(a_n)}=f\).
+
+\begin{proof}
+Wir zeigen, dass solche Funktion existiert, indem wir
+zeigen, dass diese Funktion
+\begin{align*}
+  F(x) =
+\begin{cases}
+  f(x) & x \in (a_n) \\
+  \lim_{x \to d}{f(x)} & x = d
+\end{cases}
+\end{align*} stetig ist.
+Wegen der gleichmäßig-Stetigkeit der Funktion $f \colon
+(a_n) \to \mg{R}$ ist \(F\) stetig in \((a_n)\).  Nun
+betrachten wir den Fall \(x = d\).  Zu zeigen: $\lim_{x
+  \to d^-}{f(x)} = \lim_{x \to d^+}{f(x)}$.
+
+Es gilt wegen der gleichmäßige Stetigkeit von \(f\) dass
+für alle \(\varepsilon > 0\) existiert ein \(\delta > 0\)
+sodass für alle \(x, y \in (a_n)\) mit
+\(\left| x - y \right| < \delta\) gilt
+\(\left| f(x) - f(y) \right| < \varepsilon\).
+
+Angenommen,
+\(\lim_{x \to d^-}{f(x)} \ne \lim_{x \to d^+}{f(x)}\), also
+\begin{align*}
+  \left| \lim_{x \to d^-}{f(x)} - \lim_{x \to d^+}{f(x)}
+  \right| = h > 0.
+\end{align*}
+Dann ist die Funktion nicht gleichmäßig stetig, also es
+existiert ein \(\varepsilon > 0\), nämlich alle
+\(\varepsilon < h\), sodass für alle \(\delta > 0\)
+existiert \(x, y \in (a_n)\) mit
+\(\left| x - y \right| < \delta\) sodass
+\(\left| f(x) - f(y) \right| \ge \varepsilon\).
+
+Damit gilt
+$\lim_{x \to d^-}{f(x)} = \lim_{x \to d^+}{f(x)} =
+\lim_{x \to d}{f(x)}=F(d)$.  Die Funktion \(F\) ist in
+\(d\) stetig.
+\end{proof}
+
+
+\aufgn{8.2.ii}
+
+\beh Sei \(g \colon \left] a, b \right] \to \mg{R}\) stetig.  Es gilt
+\begin{align*}
+g \text{ gleichmäßig stetig } \iff \lim_{x \to
+  a^+}{g(x)} \text{ existiert.}
+\end{align*}
+
+\begin{proof}
+Wir beweisen diese Behauptung als wahr, indem wir
+zeigen, dass die Hinrichtung und Rückrichtung wahr
+sind.
+
+\textit{Hinrichtung.} Sei $(p_n) \subseteq \left] a, b
+\right]\( eine Folge mit \)\lim_{n \to \infty}{p_n} =
+a$.  Zu zeigen: \(\lim_{n \to \infty}{g(p_n)}\)
+existiert.
+
+Sei \(\delta > 0\) beliebig gewählt. Weil die Folge
+\((p_n)\) gegen \(a\) konvergiert, existiert ein
+\(N_{\delta} \in \mg{N}\) sodass für alle
+\(n, m \in \mg{N}_{\ge N_{\delta}}\) gilt
+(O.Forster §5, Satz 1: Konvergente Folgen sind
+Cauchy-Folgen)
+\begin{align*}
+\left| a_n - a_m \right| < \delta.
+\end{align*}  Weiter gilt wegen der gleichmäßigen
+Stetigkeit der Funktion \(g\) dass zu jedem $\varepsilon
+> 0\( existiert ein \(\delta > 0\) sodass für alle \)a_n,
+a_m \in \left]a, b\right]\( mit \)\left| a_n - a_m
+\right| < \delta$ gilt
+\begin{align*}
+\left| g(a_n) - g(a_m) \right| < \varepsilon.
+\end{align*}
+Weil \(\varepsilon > 0\) beliebig gewählt war, ist die
+Folge \((g(a_n))\) eine Cauchy-Folge und diese Folge
+besitzt wegen der Vollständigkeits-Axiom einen
+Grenzwert.  D.h., es existiert
+\(\lim_{n \to \infty}{g(p_n)} \in \mg{R}\).  Daraus
+folgt, \(\lim_{x \to a^+}{g(x)} \in \mg{R}\) existiert.
+
+\textit{Rückrichtung.} Sei
+\((p_n) \subseteq \left] a, b \right]\) eine Folge mit
+\(\lim_{n \to \infty}{p_n} = a\). Sei \(\delta > 0\)
+beliebig gewählt.  Es gilt wegen der Konvergenz von
+\((p_n)\) dass
+\begin{align*}
+\left| a_n - a_m \right| < \delta.
+\end{align*}
+Wegen der Voraussetzung existiert der Grenzwert
+\(\lim_{n \to \infty}{g(p_n)} \in \mg{R}\), d.h., die
+Folge \((g(p_n))\) konvergiert.  Sei \(\varepsilon > 0\)
+beliebig gewählt. Es gilt wegen (O.Forster
+§5, Satz 1: siehe oben) dass
+\begin{align*}
+\left| g(a_n) - g(a_m) \right| < \varepsilon.
+\end{align*}
+Weil \(\delta, \varepsilon \in \mg{R}_{>0}\) beliebig
+gewählt waren, existiert zu jedem \(\varepsilon > 0\) ein
+\(\delta > 0\) sodass für alle $a_n, a_m \in \left] a, b
+\right]$ mit \(\left| a_n - a_m \right| < \delta\) gilt
+\begin{align*}
+\left| g(a_n) - g(a_m) \right| < \varepsilon.
+\end{align*}
+Also die Funktion \(g\) ist gleichmäßig stetig.
+\end{proof}
+
+\aufgn{8.2.iii}
+
+Falls nur die Stetigkeit von \(f\) vorausgesetzt ist, ist
+die Aussage von (i) nicht wahr.  Dies zeigen wir mit
+einem Gegenbeispiel.
+
+Sei
+$D:=(\mg{R} \setminus \left\{ 0 \right\}) \subseteq
+\mg{R}$ und \(0 \in \mg{R}\) ein Häufungspunkt von \(D\)
+mit \(0 \notin D\).  Die Funktion \(f: D \to \mg{R}\),
+\(x \mapsto \frac{1}{x}\) ist stetig auf \(D\).  Sei dann
+\(a \in \mg{R}\) beliebig und die Funktion
+\begin{align*}
+  F(x) =
+\begin{cases}
+  f(x) & x \in D, \\
+  a & x = d.
+\end{cases}
+\end{align*}
+Angenommen, die Funktion ist stetig in \(0\).  Dann
+existiert zu jedem \(\varepsilon > 0\) ein \(\delta > 0\)
+mit \(\left| f(y) - a \right| < \varepsilon\) für alle
+\(\left| y-0 \right| < \delta\).  Diese ist nicht der
+Fall, denn es gilt \(\varepsilon \to \infty\) wenn
+\(y \to 0\).
+
+Die Funktion \(F(x)\) ist nicht stetig in \(0\) für alle
+\(a \in \mg{R}\), also nicht stetig fortsetzbar.
+
+\aufgn{8.3}
+
+\beh Eine stetige Funktion \(f \colon \mg{R} \to \mg{R}\)
+mit \(\lim_{\left| x \right| \to \infty}{f(x)}=\infty\)
+hat ein Minimum.
+
+\begin{proof}
+  Angenommen, ein Minimum existiert nicht.
+
+  \textit{Falls 1.} Es gilt
+  \(\inf (f(\mg{R})) = -\infty\). Dann existiert ein
+  Folge \((a_n)\) mit
+  \(\lim_{n \to \infty}f(a_n) = - \infty\).
+
+  \textit{Falls 1.1.}  Falls \((a_n)\) divergiert
+  bestimmt gegen \(\pm \infty\).  O.B.d.A sei
+  \(\lim_{n \to \infty}{a_n} = \infty\).  Dann gilt im
+  Widerspruch zur Voraussetzung
+  (\(\lim_{\left| x \right| \to \infty}{f(x)} = \infty\))
+  dass
+\begin{align*}
+  \lim_{n \to \infty}{f(a_n)}
+  = \lim_{\left| x \right|  \to \infty}{f(x)}
+  = - \infty \ne \infty.
+\end{align*}
+
+\textit{Falls 1.2.}  Falls \((a_n)\) konvergiert gegen
+\(a \in \mg{R}\).  Dann ist der Funktionswert \(f\) im
+Widerspruch zur Voraussetzung (Wertbereich ist
+\(\mg{R}\)) nicht im Wertbereich.
+\begin{align*}
+  \lim_{n \to \infty}{f(a_n)}
+  = - \infty = f(a) \notin \mg{R}
+\end{align*}
+
+\textit{Falls 2.} Das Infimum
+\(p := \inf (f(\mg{R})) \in \mg{R}\) liegt nicht im
+\(f(\mg{R})\).  Dann existiert ein Folge \((a_n)\) mit
+\(\lim_{n \to \infty}f(a_n) = p\).
+
+  \textit{Falls 2.1.}  Falls \((a_n)\) divergiert
+  bestimmt gegen \(\pm \infty\).  O.B.d.A sei
+  \(\lim_{n \to \infty}{a_n} = \infty\).  Dann gilt im
+  Widerspruch zur Voraussetzung
+  (\(\lim_{\left| x \right| \to \infty}{f(x)} = \infty\))
+  dass
+\begin{align*}
+\lim_{x \to \infty}{f(x)} = p \ne \infty.
+\end{align*}
+
+\textit{Falls 2.2.}  Falls \((a_n)\) konvergiert gegen
+\(a \in \mg{R}\).  Dann ist die Funktion \(f\) im
+Widerspruch zur Voraussetzung (\(f\) stetig in \(\mg{R}\))
+in \(a \in \mg{R}\) nicht stetig wegen Voraussetzung $p
+\notin f(\mg{R})$ dass
+\begin{align*}
+  \lim_{n \to \infty}{f(a_n)} = p
+  \ne f \left( \lim_{n  \to \infty}{a_n} \right).
+\end{align*}
+Daraus folgt, dass eine stetige und koerzitive Funktion
+stets ein Minimum besitzt.
+\end{proof}
+\aufgn{8.4}
+
+\beh Es gilt für alle \(\lambda_i \ge 0\) und \(x_i > 0\)
+mit \(\sum_{k=1}^n{\lambda_k} = 1\) dass
+\begin{align*}
+  \ln \left( \sum_{i=1}^n{\lambda_ix_i} \right) \ge
+  \sum_{i=1}^n{\lambda_i\ln(x_i)}.
+\end{align*}
+
+\begin{proof}
+  Wegen (Satz 4.43) und (Definition 4.44) gilt, die
+  Exponentialfunktion
+  \(\exp \colon \mg{R} \to \left] 0 , \infty \right[\)
+  ist streng monoton wachsend und stetig und deren
+  Umkehrfunktion
+  \(\ln \colon \left]0, \infty\right[ \to \mg{R}\) ist
+  streng monoton wachsend und stetig.  Sei \((a_i)\) eine
+  Folge mit \(e^{a_i}:=x_i\) für alle
+  \(i \in \mg{N} \setminus \left\{ 0 \right\}\).  O.B.d.A
+  sei die Folge monoton wachsend.  Zu zeigen:
+\begin{align*}
+  \ln \left( \sum_{i=1}^n{\lambda_ie^{a_i}} \right) \ge
+  \sum_{i=1}^n{\lambda_ia_i}.
+\end{align*}
+  Weil die Exponentialfunktion konvex ist, d.h. für
+  alle \(\lambda \in \left[0, 1\right]\) und alle $x, y
+  \in \mg{R}$ gilt
+\begin{align*}
+  \exp(\lambda x + (1-\lambda) y)
+  \le \lambda e^x + (1-\lambda)e^y.
+\end{align*}
+Daraus folgt,
+\begin{align*}
+  \exp(\lambda a_i + (1-\lambda) a_j)
+  &\le \lambda e^{a_i} + (1-\lambda)e^{a_j} \\
+  \lambda a_i + (1-\lambda) a_j
+  &\le \ln \left( \lambda e^{a_i} + (1-\lambda)e^{a_j}  \right).
+\end{align*}
+Wegen  \(\sum_{k=1}^n{\lambda_k} = 1\) gilt
+\begin{align*}
+  \lambda_i a_i < (1-\lambda_i) a_i.
+\end{align*}
+Weil die Folge \((a_n)\) monoton wachsend ist, gilt
+\end{proof}
+\end{document}
