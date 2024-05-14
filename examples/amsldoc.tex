@@ -14,10 +14,7 @@
 %
 % The Current Maintainer of this work is the LaTeX Project.
 %
-\documentclass[draft,leqno,titlepage,openany,a5paper]{amsldoc}[1999/12/13]
-\usepackage[
-left=1cm,right=1cm,top=2cm,bottom=1cm
-]{geometry}
+\documentclass[leqno,titlepage,openany]{amsldoc}[1999/12/13]
 
 \def\MaintainedByLaTeXTeam#1{%
 \begin{center}%
@@ -60,12 +57,12 @@ Bug reports can be opened (category \texttt{#1}) at\\%
 \let\indexenvironmentfont\texttt
 \let\indexfont\texttt
 \makeatother
-%    For a package that won't be indexed, i.e. amsmath,mathtools,fontspec
+%    For a package that won't be indexed, i.e. amsmath
 \newcommand{\nipkg}{\textsf}
 \def\tikz/{Ti\textit{k}Z}
 %    End definitions for amsldoc.cls
 
-\title{User's Guide for the \nipkg{amsmath,mathtools,fontspec} Package (Version~2.1)}
+\title{User's Guide for the \nipkg{amsmath} Package (Version~2.1)}
 \author{American Mathematical Society, \LaTeX\ Project}
 \date{1999-12-13\\(revised 2002-02-25, 2016-11-14, 2018-04-05, 2019-10-14, 2020-02-18)}
 \makeatletter
@@ -77,11 +74,9 @@ Bug reports can be opened (category \texttt{#1}) at\\%
 % 2021-08-22: reported typo fixed mathools -> mathtools
 
 
-%    Use the amsmath,mathtools,fontspec package and amscd package in order to print
+%    Use the amsmath package and amscd package in order to print
 %    examples.
-
-\usepackage{amsmath,mathtools,fontspec,amssymb,parskip,interval,fontspec,mathtools}
-\setmainfont{TeX Gyre Termes}
+\usepackage{amsmath}
 \usepackage{amscd}
 
 \usepackage{imakeidx}
@@ -218,7 +213,7 @@ Bug reports can be opened (category \texttt{#1}) at\\%
 %%  \rule[-1pt]{5pt}{.6pt}}}
 \newcommand{\lspx}{\mathord{\Rightarrow\mkern-1mu}}
 \newcommand{\rspx}{\mathord{\mkern-1mu\Leftarrow}}
-\newcommand{\spx}[1]{\(\lspx #1\rspx\)}
+\newcommand{\spx}[1]{$\lspx #1\rspx$}
 
 %    For a list of characters representing document input.
 \newcommand{\clist}[1]{%
@@ -274,18 +269,18 @@ Bug reports can be opened (category \texttt{#1}) at\\%
 \mainmatter
 \chapter{Introduction}
 
-\index{amsmath,mathtools,fontspec@\texttt{amsmath} package|(}
+\index{amsmath@\texttt{amsmath} package|(}
 
-The \nipkg{amsmath,mathtools,fontspec} package is a \LaTeX{} package that provides
+The \nipkg{amsmath} package is a \LaTeX{} package that provides
 miscellaneous enhancements for improving the information structure and
 printed output of documents that contain mathematical formulas. Readers
 unfamiliar with \LaTeX{} should refer to \cite{lamport}. If you have an
-up-to-date version of \LaTeX{}, the \nipkg{amsmath,mathtools,fontspec} package is normally
+up-to-date version of \LaTeX{}, the \nipkg{amsmath} package is normally
 provided along with it. Upgrading when a newer version of the
-\nipkg{amsmath,mathtools,fontspec} package is released can be done via
-\url{http://mirror.ctan.org/macros/latex/required/amsmath,mathtools,fontspec.zip}.
+\nipkg{amsmath} package is released can be done via
+\url{http://mirror.ctan.org/macros/latex/required/amsmath.zip}.
 
-This documentation describes the features of the \nipkg{amsmath,mathtools,fontspec} package
+This documentation describes the features of the \nipkg{amsmath} package
 and discusses how they are intended to be used. It also covers some
 ancillary packages:
 \begin{ctab}{lll}
@@ -301,7 +296,7 @@ and \url{https://www.ams.org/tex/amsfonts.html}. For documentation of the
 
 If you are a long-time \latex/ user and have lots of mathematics in what
 you write, then you may recognize solutions for some familiar problems
-in this list of \nipkg{amsmath,mathtools,fontspec} features:
+in this list of \nipkg{amsmath} features:
 \begin{itemize}
 
 \item A convenient way to define new `operator name' commands analogous
@@ -329,10 +324,10 @@ equation instead of the automatically supplied number.
 
 \end{itemize}
 
-The \nipkg{amsmath,mathtools,fontspec} package is distributed together with some small
+The \nipkg{amsmath} package is distributed together with some small
 auxiliary packages:
 \begin{description}
-\item[\nipkg{amsmath,mathtools,fontspec}] Primary package, provides various features for
+\item[\nipkg{amsmath}] Primary package, provides various features for
   displayed equations and other mathematical constructs.
 
 \item[\pkg{amstext}] Provides a \cn{text} command for
@@ -354,22 +349,22 @@ is recommended instead.
 
 \end{description}
 
-The \nipkg{amsmath,mathtools,fontspec} package incorporates \pkg{amstext}, \pkg{amsopn}, and
+The \nipkg{amsmath} package incorporates \pkg{amstext}, \pkg{amsopn}, and
 \pkg{amsbsy}. The features of \pkg{amscd} and \pkg{amsxtra}, however,
 are available only by invoking those packages separately.
 
 The independent \pkg{mathtools} package \cite{mt} provides some
-enhancements to \nipkg{amsmath,mathtools,fontspec}; \pkg{mathtools} loads \nipkg{amsmath}
-automatically, so there is no need to separately load \nipkg{amsmath,mathtools,fontspec}
+enhancements to \nipkg{amsmath}; \pkg{mathtools} loads \nipkg{amsmath}
+automatically, so there is no need to separately load \nipkg{amsmath}
 if \pkg{mathtools} is used.  Some \pkg{mathtools} facilities
 will be noted below as appropriate.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Options for the \nipkg{amsmath,mathtools,fontspec} package}\label{options}
+\chapter{Options for the \nipkg{amsmath} package}\label{options}
 
-The \nipkg{amsmath,mathtools,fontspec} package has the following options:
-\index{options!amsmath,mathtools,fontspec@\texttt{amsmath} package options|(}
+The \nipkg{amsmath} package has the following options:
+\index{options!amsmath@\texttt{amsmath} package options|(}
 \begin{description}
 
 \item[\opt{centertags}] (default) For an equation containing a
@@ -386,8 +381,8 @@ numbers\index{equationn@equation numbers!vertical placement} level with the last
 superscripts\index{subscripts and superscripts!placement}\relax
 \index{limits|see{subscripts and superscripts}} of summation symbols
 above and below, in displayed equations. This option also affects other
-symbols of the same type\mdash \(\prod\), \(\coprod\), \(\bigotimes\),
-\(\bigoplus\), and so forth\mdash but excluding integrals (see below).
+symbols of the same type\mdash $\prod$, $\coprod$, $\bigotimes$,
+$\bigoplus$, and so forth\mdash but excluding integrals (see below).
 
 \item[\opt{nosumlimits}] Always place the subscripts and superscripts of
 summation-type symbols to the side, even in displayed equations.
@@ -398,7 +393,7 @@ integral\index{integrals!placement of limits} symbols.
 \item[\opt{nointlimits}] (default) Opposite of \opt{intlimits}.
 
 \item[\opt{namelimits}] (default) Like \opt{sumlimits}, but for certain
-`operator names' such as \(\det\), \(\inf\), \(\lim\), \(\max\), \(\min\), that
+`operator names' such as $\det$, $\inf$, $\lim$, $\max$, $\min$, that
 traditionally have subscripts%
 \index{subscripts and superscripts!placement} placed underneath when
 they occur in a displayed equation.
@@ -417,16 +412,16 @@ they occur in a displayed equation.
 
 To use one of these package options, put the option name in the optional
 argument of the \cn{usepackage} command\mdash e.g.,
-\verb"\usepackage[intlimits]{amsmath,mathtools,fontspec}".
-For AMS document classes and any other classes that preload \nipkg{amsmath,mathtools,fontspec}
+\verb"\usepackage[intlimits]{amsmath}".
+For AMS document classes and any other classes that preload \nipkg{amsmath}
 desired options must be specified with the \cn{documentclass}\mdash
 e.g.,\\
 \verb+\documentclass[intlimits,tbtags,reqno]{amsart}+.
 
-The \nipkg{amsmath,mathtools,fontspec} package also recognizes the following options which
+The \nipkg{amsmath} package also recognizes the following options which
 are normally selected (implicitly or explicitly) through the
 \cn{documentclass} command, and thus need not be repeated in the option
-list of the \cn{usepackage}|{amsmath,mathtools,fontspec}| statement.
+list of the \cn{usepackage}|{amsmath}| statement.
 \begin{description}
 
 \item[\opt{leqno}] Place equation numbers on the left.%
@@ -456,7 +451,7 @@ using |\!\begin{aligned}| continue to work as before.
 \item[\opt{alignedleftspaceyesifneg}] Only add \cn{\,} if the environment is prefixed by negative space. (New default behavior.)
 \end{description}
 
-\index{options!amsmath,mathtools,fontspec@\texttt{amsmath} package options|)}
+\index{options!amsmath@\texttt{amsmath} package options|)}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -464,7 +459,7 @@ using |\!\begin{aligned}| continue to work as before.
 \chapter{Displayed equations}
 
 \section{Introduction}
-The \nipkg{amsmath,mathtools,fontspec} package provides a number of additional displayed
+The \nipkg{amsmath} package provides a number of additional displayed
 equation structures\index{displayed equations}%
 \index{equations|see{displayed equations}} beyond the ones
 provided in basic \latex/. The augmented set includes:
@@ -491,7 +486,7 @@ particular line by putting \cn{notag} before the end of that line;
 mess up the numbering.  You can also
 override\index{equationn@equation numbers!overriding} a number with a tag
 of your own using \cn{tag}|{|\<label>|}|, where \<label> means arbitrary
-text such as |\(*\)| or |ii| used to \qq{number} the equation.
+text such as |$*$| or |ii| used to \qq{number} the equation.
 A tag can reference a different tagged display by use of
 |\tag{\ref{|\<label>|}|\<modifier>|}| where \<modifier> is optional.
 If you are using \pkg{hyperref}, use \cn{ref*};
@@ -501,10 +496,10 @@ tag containing a nested link from linking to the original display.
 There is also a
 \cn{tag*} command that causes the text you supply to be typeset
 literally, without adding parentheses around it. \cn{tag} and \cn{tag*}
-can also be used within the unnumbered versions of all the \nipkg{amsmath,mathtools,fontspec}
+can also be used within the unnumbered versions of all the \nipkg{amsmath}
 alignment structures. Some examples of the use of \cn{tag} may be found
 in the sample files \fn{testmath.tex} and \fn{subeqn.tex} provided with
-the \nipkg{amsmath,mathtools,fontspec} package.
+the \nipkg{amsmath} package.
 
 The \env{split} environment is a special subordinate form that is used
 only \emph{inside} one of the others. It cannot be used inside
@@ -719,7 +714,7 @@ Like \env{multline}, the \env{split} environment is for \emph{single}
 equations that are too long to fit on one line and hence must be split
 into multiple lines.  Unlike \env{multline}, however, the \env{split}
 environment provides for alignment among the split lines, using |&| to
-mark alignment points. Unlike the other \nipkg{amsmath,mathtools,fontspec} equation
+mark alignment points. Unlike the other \nipkg{amsmath} equation
 structures, the \env{split} environment provides no numbering, because
 it is intended to be used \emph{only inside some other displayed
   equation structure}, usually an \env{equation}, \env{align}, or
@@ -905,16 +900,16 @@ mathematics:
 \begin{equation}\label{eq:C}
 P_{r-j}=
   \begin{cases}
-    0&  \text{if \(r-j\) is odd},\\
-    r!\,(-1)^{(r-j)/2}&  \text{if \(r-j\) is even}.
+    0&  \text{if $r-j$ is odd},\\
+    r!\,(-1)^{(r-j)/2}&  \text{if $r-j$ is even}.
   \end{cases}
 \end{equation}
-and in the \nipkg{amsmath,mathtools,fontspec} package there is a \env{cases} environment to
+and in the \nipkg{amsmath} package there is a \env{cases} environment to
 make them easy to write:
 \begin{verbatim}
 P_{r-j}=\begin{cases}
-    0&  \text{if \(r-j\) is odd},\\
-    r!\,(-1)^{(r-j)/2}&  \text{if \(r-j\) is even}.
+    0&  \text{if $r-j$ is odd},\\
+    r!\,(-1)^{(r-j)/2}&  \text{if $r-j$ is even}.
   \end{cases}
 \end{verbatim}
 Notice the use of \cn{text} (cf.~\secref{text}) and the nested math
@@ -924,14 +919,14 @@ a \env{dcases} environment for this purpose.
 
 The |-ed|\index{ed env@\texttt{-ed} environments|)} and \env{cases}
 environments must appear within an enclosing math environment, which can
-be either in text, between |\(...\)|, or in any of the display environments.
+be either in text, between |$...$|, or in any of the display environments.
 
 %% ------------------------------------------------------------------ %%
 
 \section{Adjusting tag placement}
 
 Placing equation numbers can be a rather complex problem in multiline
-displays. The environments of the \nipkg{amsmath,mathtools,fontspec} package try hard to
+displays. The environments of the \nipkg{amsmath} package try hard to
 avoid overprinting an equation number on the equation contents, if
 necessary moving the number down or up to a separate line. Difficulties
 in accurately calculating the profile of an equation can occasionally
@@ -957,14 +952,14 @@ several times to keep up with changing document contents.
 You can use the \cn{\\}|[|\<dimension>|]|%
 \index{options!extra vertical space after \cn{\\}}
 command to get extra vertical
-space between lines in all the \nipkg{amsmath,mathtools,fontspec} displayed equation
+space between lines in all the \nipkg{amsmath} displayed equation
 environments, as is usual in \latex/. Do not type a space between the%
 \index{options!space before \texttt{[}}
 \cn{\\} and the following |[|; \emph{only} for display environments
-defined by \nipkg{amsmath,mathtools,fontspec} the space is interpreted to mean that the
+defined by \nipkg{amsmath} the space is interpreted to mean that the
 bracketed material is part of the document content.
 
-When the \nipkg{amsmath,mathtools,fontspec} package is
+When the \nipkg{amsmath} package is
 in use \ii{page breaks} between equation lines are normally disallowed;
 the philosophy is that page breaks in such material should receive
 individual attention from the author. To get an individual page break
@@ -1046,7 +1041,7 @@ C.8.4]{lamport}:
 This works pretty well, except that the equation counter won't be reset
 to zero at the beginning of a new section or chapter, unless you do it
 yourself using \cn{setcounter}. To make this a little more convenient,
-the \nipkg{amsmath,mathtools,fontspec} package provides a
+the \nipkg{amsmath} package provides a
 command\index{equationn@equation numbers!hierarchy} \cn{numberwithin}.
 To have equation numbering tied to section numbering, with automatic
 reset of the equation counter, write
@@ -1067,7 +1062,7 @@ set in upright type regardless of type style of the context.
 
 \subsection{Subordinate numbering sequences}
 
-The \nipkg{amsmath,mathtools,fontspec} package provides also a wrapper environment,
+The \nipkg{amsmath} package provides also a wrapper environment,
 \env{subequations}\index{equationn@equation numbers!subordinate numbering}, to make it
 easy to number equations in a particular \cn{align} or similar group with
 a subordinate numbering scheme. For example
@@ -1108,7 +1103,7 @@ throughout a document by applying this patch in the preamble:
 \makeatother
 \end{verbatim}
 (This modification may be included in a future version of
-\nipkg{amsmath,mathtools,fontspec}.)
+\nipkg{amsmath}.)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1117,11 +1112,11 @@ throughout a document by applying this patch in the preamble:
 
 \section{Matrices}\label{ss:matrix}
 
-The \nipkg{amsmath,mathtools,fontspec} package provides some environments for
+The \nipkg{amsmath} package provides some environments for
 matrices\index{matrices} beyond the basic \env{array} environment of
 \latex/. The \env{pmatrix}, \env{bmatrix}, \env{Bmatrix}, \env{vmatrix}
-and \env{Vmatrix} have (respectively) \((\,)\), \([\,]\), \(\lbrace\,\rbrace\),
-\(\lvert\,\rvert\), and \(\lVert\,\rVert\) delimiters\index{delimiters}
+and \env{Vmatrix} have (respectively) $(\,)$, $[\,]$, $\lbrace\,\rbrace$,
+$\lvert\,\rvert$, and $\lVert\,\rVert$ delimiters\index{delimiters}
 built in. For naming consistency there is a
 \env{matrix} environment sans delimiters. This is not entirely redundant
 with the \env{array} environment; the matrix environments all use more
@@ -1203,7 +1198,7 @@ will be used as a multiplier (i.e., the normal value is 1.0).
 
 \section{Math spacing commands}
 
-The \nipkg{amsmath,mathtools,fontspec} package slightly extends the set of math
+The \nipkg{amsmath} package slightly extends the set of math
 spacing\index{horizontal spacing} commands, as shown below.
 Both the spelled-out and abbreviated forms of these commands are robust,
 and they can also be used outside of math.
@@ -1249,9 +1244,9 @@ kinds follows American Mathematical Society conventions:
 \begin{minipage}[t]{.54\textwidth}
 \begin{verbatim}
 Then we have the series $A_1, A_2,
-\dotsc\(, the regional sum \)A_1
+\dotsc$, the regional sum $A_1
 +A_2 +\dotsb $, the orthogonal
-product \(A_1 A_2 \dotsm \), and
+product $A_1 A_2 \dotsm $, and
 the infinite integral
 \[\int_{A_1}\int_{A_2}\dotsi\].
 \end{verbatim}
@@ -1259,16 +1254,16 @@ the infinite integral
 &
 \begin{minipage}[t]{.45\textwidth}
 \noindent
-Then we have the series \(A_1,A_2,\dotsc\),
-the regional sum \(A_1+A_2+\dotsb\),
-the orthogonal product \(A_1A_2\dotsm\),
+Then we have the series $A_1,A_2,\dotsc$,
+the regional sum $A_1+A_2+\dotsb$,
+the orthogonal product $A_1A_2\dotsm$,
 and the infinite integral
 \[\int_{A_1}\int_{A_2}\dotsi.\]
 \end{minipage}
 \end{tabular}
 \end{center}
 For most situations, the undifferentiated \cn{dots} can be used, and
-\nipkg{amsmath,mathtools,fontspec} will output the most suitable form based on the
+\nipkg{amsmath} will output the most suitable form based on the
 immediate context; if an inappropriate form results, it can be corrected
 after examining the output.
 
@@ -1281,13 +1276,13 @@ line break\index{line break|(} after the following hyphen or dash. For
 example, if you write `pages 1\ndash 9' as |pages 1\nobreakdash--9|
 then a line break will never occur between the dash and the 9. You can
 also use \cn{nobreakdash} to prevent undesirable hyphenations in
-combinations like |\(p\)-adic|. For frequent use, it's advisable to make
+combinations like |$p$-adic|. For frequent use, it's advisable to make
 abbreviations, e.g.,
 \begin{verbatim}
-\newcommand{\p}{\(p\)\nobreakdash}% for "\p-adic"
+\newcommand{\p}{$p$\nobreakdash}% for "\p-adic"
 \newcommand{\Ndash}{\nobreakdash--}% for "pages 1\Ndash 9"
 %    For "\n dimensional" ("n-dimensional"):
-\newcommand{\n}[1]{\(n\)\nobreakdash-\hspace{0pt}}
+\newcommand{\n}[1]{$n$\nobreakdash-\hspace{0pt}}
 \end{verbatim}
 The last example shows how to prohibit a line break\index{line break|)}
 after the hyphen but allow normal hyphenation in the following
@@ -1298,9 +1293,9 @@ word. (It suffices to add a zero-width space after the hyphen.)
 \section{Accents in math}
 
 In ordinary \LaTeX{} the placement of the second accent in doubled math
-accents is often poor. With the \nipkg{amsmath,mathtools,fontspec} package you
+accents is often poor. With the \nipkg{amsmath} package you
 will get improved placement of the second accent:
-\(\hat{\hat{A}}\) (\cn{hat}|{\hat{A}}|).
+$\hat{\hat{A}}$ (\cn{hat}|{\hat{A}}|).
 
 The commands \cn{dddot} and \cn{ddddot} are available to produce triple
 and quadruple dot accents in addition to the \cn{dot} and \cn{ddot}
@@ -1312,7 +1307,7 @@ package and use \cn{sphat} or \cn{sptilde}. Usage is \verb'A\sphat'
 
 
 To place an arbitrary symbol in math accent position, or to get under
-accents, see the \pkg{accents} package by Javier Bezos. (\nipkg{amsmath,mathtools,fontspec}
+accents, see the \pkg{accents} package by Javier Bezos. (\nipkg{amsmath}
 must be loaded before \pkg{accents}.)
 
 %% ------------------------------------------------------------------ %%
@@ -1320,16 +1315,16 @@ must be loaded before \pkg{accents}.)
 \section{Roots}
 
 In ordinary \latex/ the placement of root indices is sometimes not so
-good: \(\sqrt[\beta]{k}\) (|\sqrt||[\beta]{k}|).  In the
-\nipkg{amsmath,mathtools,fontspec} package \cn{leftroot} and \cn{uproot} allow you to adjust
+good: $\sqrt[\beta]{k}$ (|\sqrt||[\beta]{k}|).  In the
+\nipkg{amsmath} package \cn{leftroot} and \cn{uproot} allow you to adjust
 the position of the root:%
 \index{options!adjust positioning}
 \begin{verbatim}
   \sqrt[\leftroot{-2}\uproot{2}\beta]{k}
 \end{verbatim}
 will move the beta up and to the right:
-\(\sqrt[\leftroot{-2}\uproot{2}\beta]{k}\). The negative argument used
-with \cn{leftroot} moves the \(\beta\) to the right. The units are a small
+$\sqrt[\leftroot{-2}\uproot{2}\beta]{k}$. The negative argument used
+with \cn{leftroot} moves the $\beta$ to the right. The units are a small
 amount that is a useful size for such adjustments.
 
 %% ------------------------------------------------------------------ %%
@@ -1351,7 +1346,7 @@ argument, like \cn{fbox} except that the contents are in math mode:
 
 Basic \latex/ provides \cn{overrightarrow} and \cn{overleftarrow}
 commands. Some additional over and under arrow commands are provided
-by the \nipkg{amsmath,mathtools,fontspec} package to extend the set:
+by the \nipkg{amsmath} package to extend the set:
 
 \begin{tabbing}
 \qquad\=\ncn{overleftrightarrow}\qquad\=\kill
@@ -1383,11 +1378,11 @@ A\xleftarrow{n+\mu-1}B \xrightarrow[T]{n\pm i-1}C
 
 \latex/ provides \cn{stackrel} for placing a
 superscript\index{subscripts and superscripts} above a binary relation.
-In the \nipkg{amsmath,mathtools,fontspec} package there are somewhat more general commands,
+In the \nipkg{amsmath} package there are somewhat more general commands,
 \cn{overset} and \cn{underset}, that can be used to place one symbol
 above or below another symbol, whether it's a relation or something
-else. The input |\overset{*}{X}| will place a superscript-size {\small\(*\)} above
-the {\small\(X\)}: {\small\(\smash{\overset{*}{X}}\)};
+else. The input |\overset{*}{X}| will place a superscript-size {\small$*$} above
+the {\small$X$}: {\small$\smash{\overset{*}{X}}$};
 \cn{underset} is the analog for adding a
 symbol underneath. The command \cn{overunderset} is a combination of
 these, taking three arguments to place superscript sized expressions
@@ -1404,7 +1399,7 @@ See also the description of \cn{sideset} in \secref{sideset}.
 The \cn{frac} command, which is in the basic command set of
 \latex/,\index{fractions|(} takes two arguments\mdash numerator and
 denominator\mdash and typesets them in normal fraction form. The
-\nipkg{amsmath,mathtools,fontspec} package provides also \cn{dfrac} and \cn{tfrac} as
+\nipkg{amsmath} package provides also \cn{dfrac} and \cn{tfrac} as
 convenient abbreviations for |{\displaystyle\frac| |...| |}|
 and\indexcs{textstyle}\relax
 \indexcs{displaystyle} |{\textstyle\frac| |...| |}|.
@@ -1421,8 +1416,8 @@ and\indexcs{textstyle}\relax
 
 \subsection{The \cn{binom}, \cn{dbinom}, and \cn{tbinom} commands}
 
-For binomial expressions\index{binomials} such as \(\binom{n}{k}\)
-\nipkg{amsmath,mathtools,fontspec} has \cn{binom}, \cn{dbinom} and \cn{tbinom}:
+For binomial expressions\index{binomials} such as $\binom{n}{k}$
+\nipkg{amsmath} has \cn{binom}, \cn{dbinom} and \cn{tbinom}:
 \begin{equation}
 2^k-\binom{k}{1}2^{k-1}+\binom{k}{2}2^{k-2}
 \end{equation}
@@ -1464,7 +1459,7 @@ notation, along the lines of \cn{frac} and \cn{binom}.
 
 The primitive generalized fraction commands \cs{over}, \cs{overwithdelims},
 \cs{atop}, \cs{atopwithdelims}, \cs{above}, \cs{abovewithdelims} produce
-warning  messages if used with the \nipkg{amsmath,mathtools,fontspec} package, for reasons
+warning  messages if used with the \nipkg{amsmath} package, for reasons
 discussed in \fn{technote.tex}.
 
 %% ------------------------------------------------------------------ %%
@@ -1500,7 +1495,7 @@ accomplished by using \cn{cfrac}|[l]| or \cn{cfrac}|[r]| instead of
 The command \cn{smash} is used to typeset a subformula with an
 effective height and depth of zero, which is sometimes
 useful in adjusting the subformula's position with respect to adjacent
-symbols. With the \nipkg{amsmath,mathtools,fontspec} package \cn{smash} has optional
+symbols. With the \nipkg{amsmath} package \cn{smash} has optional
 arguments\index{options!behavior of particular options}
 |[t]|\index{t option@\texttt{t} (top) option} and
 |[b]|\index{b option@\texttt{b} (bottom) option} because occasionally it is
@@ -1509,7 +1504,7 @@ of something while retaining the natural depth or height. For example,
 when adjacent radical symbols are unevenly sized or positioned because
 of differences in the height and depth of their contents, \cn{smash}
 can be employed to make them more consistent. Compare
-\(\sqrt{x}+\sqrt{y}+\sqrt{z}\) and \(\sqrt{x}+\sqrt{\smash[b]{y}}+\sqrt{z}\),
+$\sqrt{x}+\sqrt{y}+\sqrt{z}$ and $\sqrt{x}+\sqrt{\smash[b]{y}}+\sqrt{z}$,
 where the latter was produced by
 \verb"$\sqrt{x}" \verb"+"
 \verb"\sqrt{"\5\verb"\smash[b]{y}}" \verb"+" \verb"\sqrt{z}$".
@@ -1539,12 +1534,12 @@ size&
   size& \ncn{right}& \ncn{bigr}& \ncn{Bigr}& \ncn{biggr}& \ncn{Biggr}\\
 \hline
 Result\vstrut{5ex}&
-  \(\displaystyle(b)(\frac{c}{d})\)&
-  \(\displaystyle\left(b\right)\left(\frac{c}{d}\right)\)&
-  \(\displaystyle\bigl(b\bigr)\bigl(\frac{c}{d}\bigr)\)&
-  \(\displaystyle\Bigl(b\Bigr)\Bigl(\frac{c}{d}\Bigr)\)&
-  \(\displaystyle\biggl(b\biggr)\biggl(\frac{c}{d}\biggr)\)&
-  \(\displaystyle\Biggl(b\Biggr)\Biggl(\frac{c}{d}\Biggr)\)
+  $\displaystyle(b)(\frac{c}{d})$&
+  $\displaystyle\left(b\right)\left(\frac{c}{d}\right)$&
+  $\displaystyle\bigl(b\bigr)\bigl(\frac{c}{d}\bigr)$&
+  $\displaystyle\Bigl(b\Bigr)\Bigl(\frac{c}{d}\Bigr)$&
+  $\displaystyle\biggl(b\biggr)\biggl(\frac{c}{d}\biggr)$&
+  $\displaystyle\Biggl(b\Biggr)\Biggl(\frac{c}{d}\Biggr)$
 \end{ctab}
 The first kind of situation is a cumulative operator with limits above
 and below. With \cn{left} and \cn{right} the delimiters usually turn out
@@ -1579,30 +1574,30 @@ easier to see.
 \bigl((a_2 b_1) + (a_1 b_2)\bigr)
 \end{verbatim}
 The third kind of situation is a slightly oversize object in running
-text, such as \(\left\lvert\frac{b'}{d'}\right\rvert\) where the
+text, such as $\left\lvert\frac{b'}{d'}\right\rvert$ where the
 delimiters produced by \cn{left} and \cn{right} cause too much line
 spreading. In that case \ncn{bigl} and \ncn{bigr}\index{big@\cn{big},
 \cn{Big}, \cn{bigg}, \dots\ delimiters} can be used to produce
 delimiters that are slightly larger than the base size but still able to
 fit within the normal line spacing:
-\(\bigl\lvert\frac{b'}{d'}\bigr\rvert\).
+$\bigl\lvert\frac{b'}{d'}\bigr\rvert$.
 
 In ordinary \latex/ \ncn{big}, \ncn{bigg}, \ncn{Big}, and \ncn{Bigg}
 delimiters aren't scaled properly over the full range of \latex/ font
-sizes.  With the \nipkg{amsmath,mathtools,fontspec} package they are.%
+sizes.  With the \nipkg{amsmath} package they are.%
 \index{delimiters!fixed size|)}
 
 \subsection{Vertical bar notations}
 
-The \nipkg{amsmath,mathtools,fontspec} package provides commands \cn{lvert}, \cn{rvert},
+The \nipkg{amsmath} package provides commands \cn{lvert}, \cn{rvert},
 \cn{lVert}, \cn{rVert} (compare \cn{langle}, \cn{rangle}) to address the
 %problem of overloading for the vert bar character \qc{\|}. This
 problem of overloading for the vert bar character \qcvert. This
 character is currently used in \latex/ documents to represent a wide
 variety of mathematical objects: the `divides' relation in a
-number-theory expression like \(p\vert q\), or the absolute-value
-operation \(\lvert z\rvert\), or the `such that' condition in set
-notation, or the `evaluated at' notation \(f_\zeta(t)\bigr\rvert_{t=0}\).
+number-theory expression like $p\vert q$, or the absolute-value
+operation $\lvert z\rvert$, or the `such that' condition in set
+notation, or the `evaluated at' notation $f_\zeta(t)\bigr\rvert_{t=0}$.
 The multiplicity of uses in itself is not so bad; what is bad, however,
 is that fact that not all of the uses take the same typographical
 treatment, and that the complex discriminatory powers of a knowledgeable
@@ -1625,7 +1620,7 @@ bar symbols:
 \providecommand{\norm}[1]{\lVert#1\rVert}
 \end{verbatim}
 whereupon the document would contain |\abs{z}| to produce $\lvert
-z\rvert$ and |\norm{v}| to produce \(\lVert v\rVert\).
+z\rvert$ and |\norm{v}| to produce $\lVert v\rVert$.
 The \pkg{mathtools} provides the command \cn{DeclarePairedDelimiter}
 for defining |\abs|-like macros with scaling delimiters.
 \index{delimiters|)}
@@ -1637,12 +1632,12 @@ for defining |\abs|-like macros with scaling delimiters.
 \section{Defining new operator names}\label{s:opname}
 
 Math functions\index{operator names}\relax \index{function
-names|see{operator names}} such as \(\log\), \(\sin\), and \(\lim\) are
+names|see{operator names}} such as $\log$, $\sin$, and $\lim$ are
 traditionally typeset in roman type to make them visually more distinct
 from one-letter math variables, which are set in math italic. The more
 common ones have predefined names, \cn{log}, \cn{sin}, \cn{lim}, and so
 forth, but new ones come up all the time in mathematical papers, so the
-\nipkg{amsmath,mathtools,fontspec} package provides a general mechanism for defining new
+\nipkg{amsmath} package provides a general mechanism for defining new
 `operator names'. To define a math function \ncn{xxx} to work like
 \cn{sin}, you write
 \begin{verbatim}
@@ -1651,18 +1646,18 @@ forth, but new ones come up all the time in mathematical papers, so the
 whereupon ensuing uses of \ncn{xxx} will produce {\upshape xxx} in the
 proper font and automatically add proper spacing\index{horizontal
 spacing!around operator names} on either side when necessary, so that you
-get \(A\xxx B\) instead of \(A\mathrm{xxx}B\). In the second argument of
+get $A\xxx B$ instead of $A\mathrm{xxx}B$. In the second argument of
 \cn{DeclareMathOperator} (the name text), a pseudo-text mode prevails:
 the hyphen character \qc{\-} will print as a text hyphen rather than a
 minus sign and an asterisk \qc{\*} will print as a raised text asterisk
 instead of a centered math star. (Compare
-\textit{a}-\textit{b}*\textit{c} and \(a-b*c\).) But otherwise the name
+\textit{a}-\textit{b}*\textit{c} and $a-b*c$.) But otherwise the name
 text is printed in math mode, so that you can use, e.g., subscripts and
 superscripts there.
 
 %%%%xxx%%%\enlargethispage{1\baselineskip}
 If the new operator should have subscripts and superscripts placed in
-`limits' position above and below as with \(\lim\), \(\sup\), or \(\max\), use
+`limits' position above and below as with $\lim$, $\sup$, or $\max$, use
 the \qc{\*} form of the \cn{DeclareMathOperator} command:
 \begin{verbatim}
 \DeclareMathOperator*{\Lim}{Lim}
@@ -1676,23 +1671,23 @@ The following operator names are predefined:
 
 \vspace{-1\baselineskip}
 \begin{ctab}{@{}rlrlrlrl}
-\cn{arccos}& \(\arccos\) &\cn{deg}& \(\deg\) &      \cn{lg}& \(\lg\) &        \cn{projlim}& \(\projlim\)\\
-\cn{arcsin}& \(\arcsin\) &\cn{det}& \(\det\) &      \cn{lim}& \(\lim\) &      \cn{sec}& \(\sec\)\\
-\cn{arctan}& \(\arctan\) &\cn{dim}& \(\dim\) &      \cn{liminf}& \(\liminf\) &\cn{sin}& \(\sin\)\\
-\cn{arg}& \(\arg\) &      \cn{exp}& \(\exp\) &      \cn{limsup}& \(\limsup\) &\cn{sinh}& \(\sinh\)\\
-\cn{cos}& \(\cos\) &      \cn{gcd}& \(\gcd\) &      \cn{ln}& \(\ln\) &        \cn{sup}& \(\sup\)\\
-\cn{cosh}& \(\cosh\) &    \cn{hom}& \(\hom\) &      \cn{log}& \(\log\) &      \cn{tan}& \(\tan\)\\
-\cn{cot}& \(\cot\) &      \cn{inf}& \(\inf\) &      \cn{max}& \(\max\) &      \cn{tanh}& \(\tanh\)\\
-\cn{coth}& \(\coth\) &    \cn{injlim}& \(\injlim\) &\cn{min}& \(\min\)\\
-\cn{csc}& \(\csc\) &      \cn{ker}& \(\ker\) &      \cn{Pr}& \(\Pr\)
+\cn{arccos}& $\arccos$ &\cn{deg}& $\deg$ &      \cn{lg}& $\lg$ &        \cn{projlim}& $\projlim$\\
+\cn{arcsin}& $\arcsin$ &\cn{det}& $\det$ &      \cn{lim}& $\lim$ &      \cn{sec}& $\sec$\\
+\cn{arctan}& $\arctan$ &\cn{dim}& $\dim$ &      \cn{liminf}& $\liminf$ &\cn{sin}& $\sin$\\
+\cn{arg}& $\arg$ &      \cn{exp}& $\exp$ &      \cn{limsup}& $\limsup$ &\cn{sinh}& $\sinh$\\
+\cn{cos}& $\cos$ &      \cn{gcd}& $\gcd$ &      \cn{ln}& $\ln$ &        \cn{sup}& $\sup$\\
+\cn{cosh}& $\cosh$ &    \cn{hom}& $\hom$ &      \cn{log}& $\log$ &      \cn{tan}& $\tan$\\
+\cn{cot}& $\cot$ &      \cn{inf}& $\inf$ &      \cn{max}& $\max$ &      \cn{tanh}& $\tanh$\\
+\cn{coth}& $\coth$ &    \cn{injlim}& $\injlim$ &\cn{min}& $\min$\\
+\cn{csc}& $\csc$ &      \cn{ker}& $\ker$ &      \cn{Pr}& $\Pr$
 \end{ctab}
 \par\nobreak
 \vspace{-1.2\baselineskip}
 \begin{ctab}{rlrl}
-\cn{varinjlim}&  \(\displaystyle\varinjlim\)&
-\cn{varliminf}&  \(\displaystyle\varliminf\)\\
-\cn{varprojlim}& \(\displaystyle\varprojlim\)&
-\cn{varlimsup}&  \(\displaystyle\varlimsup\)
+\cn{varinjlim}&  $\displaystyle\varinjlim$&
+\cn{varliminf}&  $\displaystyle\varliminf$\\
+\cn{varprojlim}& $\displaystyle\varprojlim$&
+\cn{varlimsup}&  $\displaystyle\varlimsup$
 \end{ctab}
 
 There is also a command \cn{operatorname} such that using
@@ -1710,7 +1705,7 @@ constructing more complex notation or other purposes. (Use the variant
 
 Commands \cn{mod}, \cn{bmod}, \cn{pmod}, \cn{pod} are provided to deal
 with the special spacing conventions of \qq{mod} notation. \cn{bmod} and
-\cn{pmod} are available in \latex/, but with the \nipkg{amsmath,mathtools,fontspec} package
+\cn{pmod} are available in \latex/, but with the \nipkg{amsmath} package
 the spacing of \cn{pmod} will adjust to a smaller value if it's used in
 a non-display-mode formula. \cn{mod} and \cn{pod} are variants of
 \cn{pmod} preferred by some authors; \cn{mod} omits the parentheses,
@@ -1736,7 +1731,7 @@ couple of advantages. If you want a word or phrase of text in a
 subscript, you can type |..._{\textrm{word or phrase}}|, which is slightly
 easier than the \cn{mbox} equivalent: |..._{\mbox{\rmfamily\scriptsize| |word|
 |or| |phrase}}|. Note that the standard \cn{textrm} command will use the
-\nipkg{amsmath,mathtools,fontspec} \cn{text} definition, but ensure the \verb+\rmfamily+
+\nipkg{amsmath} \cn{text} definition, but ensure the \verb+\rmfamily+
 font is used.
 \begin{equation}
 f_{[x_{i-1},x_i]} \text{ is monotonic,}
@@ -1752,14 +1747,14 @@ environment; i.e., within a theorem, the contents of \cn{text} will
 be set in italic.
 
 If a math expression is included in a \cn{text} string, it must be
-explicitly marked as math (|\(...\)|).
+explicitly marked as math (|$...$|).
 \[
 \partial_s f(x) = \frac{\partial}{\partial x_0} f(x)\quad
-  \text{for \(x= x_0 + I x_1\).}
+  \text{for $x= x_0 + I x_1$.}
 \]
 \begin{verbatim}
 \partial_s f(x) = \frac{\partial}{\partial x_0} f(x)\quad
-  \text{for \(x= x_0 + I x_1\).}
+  \text{for $x= x_0 + I x_1$.}
 \end{verbatim}
 
 Function names should \emph{not} be entered as \cn{text}.  Instead,
@@ -1818,7 +1813,7 @@ $\displaystyle
 There's also a command called \cn{sideset}, for a rather special
 purpose: putting symbols at the subscript and
 superscript\index{subscripts and superscripts!on sums} corners of a
-large operator symbol such as \(\sum\) or \(\prod\). \emph{Note: this
+large operator symbol such as $\sum$ or $\prod$. \emph{Note: this
 command is not designed to be applied to anything other than sum-class
 symbols.} The prime
 example is the case when you want to put a prime on a sum symbol. If
@@ -1837,11 +1832,11 @@ can write
 \begin{minipage}[t]{.6\columnwidth}
 \begin{verbatim}
 \sideset{}{'}
-  \sum_{n<k,\;\text{\(n\) odd}} nE_n
+  \sum_{n<k,\;\text{$n$ odd}} nE_n
 \end{verbatim}
 \end{minipage}
 &$\displaystyle
-\sideset{}{'}\sum_{n<k,\;\text{\(n\) odd}} nE_n
+\sideset{}{'}\sum_{n<k,\;\text{$n$ odd}} nE_n
 $
 \end{ctab}
 The extra pair of empty braces is explained by the fact that
@@ -1876,7 +1871,7 @@ superscripts always to the side, even in displayed formulas.
 options\index{options!behavior of particular options} in
 Section~\ref{options}.)
 
-Operator names such as \(\sin\) or \(\lim\) may have either `displaylimits'
+Operator names such as $\sin$ or $\lim$ may have either `displaylimits'
 or `limits' positioning depending on how they were defined. The standard
 operator names are defined according to normal mathematical usage.
 
@@ -2028,7 +2023,7 @@ produces $\Delta \mathbf{\Delta}\mathbf{+}\delta
 \mathbf{\delta}$; the \cn{mathbf} has no effect on the plus
 sign or the small delta.
 % should be paragraph break; avoid overfull box on next line
-The \nipkg{amsmath,mathtools,fontspec} package therefore provides two additional commands,
+The \nipkg{amsmath} package therefore provides two additional commands,
 \cn{boldsymbol} and \cn{pmb}, that can be applied to other kinds of math
 symbols. \cn{boldsymbol} can be used for a math symbol that remains
 unaffected by \cn{mathbf} if (and only if) your current math font set
@@ -2057,7 +2052,7 @@ A_\infty + \pi A_0
 \sim\pmb{A}_{\pmb{\infty}} \pmb{+}\pmb{\pi} \pmb{A}_{\pmb{0}}
 \end{equation*}
 If you want to use only the \cn{boldsymbol} command without loading the
-whole \nipkg{amsmath,mathtools,fontspec} package, the \pkg{bm} package is recommended (this
+whole \nipkg{amsmath} package, the \pkg{bm} package is recommended (this
 is a standard \latex/ package, not an AMS package; you probably have it
 already if you have a 1997 or newer version of \latex/).
 
@@ -2068,12 +2063,12 @@ already if you have a 1997 or newer version of \latex/).
 For italic versions of the capital Greek letters, the following commands
 are provided:
 \begin{ctab}{rlrl}
-\cn{varGamma}& \(\varGamma\)& \cn{varSigma}& \(\varSigma\)\\
-\cn{varDelta}& \(\varDelta\)& \cn{varUpsilon}& \(\varUpsilon\)\\
-\cn{varTheta}& \(\varTheta\)& \cn{varPhi}& \(\varPhi\)\\
-\cn{varLambda}& \(\varLambda\)& \cn{varPsi}& \(\varPsi\)\\
-\cn{varXi}& \(\varXi\)& \cn{varOmega}& \(\varOmega\)\\
-\cn{varPi}& \(\varPi\)
+\cn{varGamma}& $\varGamma$& \cn{varSigma}& $\varSigma$\\
+\cn{varDelta}& $\varDelta$& \cn{varUpsilon}& $\varUpsilon$\\
+\cn{varTheta}& $\varTheta$& \cn{varPhi}& $\varPhi$\\
+\cn{varLambda}& $\varLambda$& \cn{varPsi}& $\varPsi$\\
+\cn{varXi}& $\varXi$& \cn{varOmega}& $\varOmega$\\
+\cn{varPi}& $\varPi$
 \end{ctab}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2085,7 +2080,7 @@ are provided:
 This is a supplement to Chapter~8 of the \latex/ manual \cite{lamport}
 (first edition: Chapter~6). Appendix~B of the
 \textit{Companion}~\cite{tlc2} lists all \latex/ errors including those
-for \nipkg{amsmath,mathtools,fontspec} with likely causes for each.  For the reader's
+for \nipkg{amsmath} with likely causes for each.  For the reader's
 convenience, the set of error messages discussed here overlaps
 somewhat with the set in those references,
 but please be aware that we don't provide exhaustive coverage here.
@@ -2116,7 +2111,7 @@ error during typesetting.
 \begin{error}{\begin{split} won't work here.}
 \errexa
 \begin{verbatim}
-! Package amsmath,mathtools,fontspec Error: \begin{split} won't work here.
+! Package amsmath Error: \begin{split} won't work here.
  ...
 
 l.8 \begin{split}
@@ -2136,10 +2131,10 @@ equation; it needs to be used within some other environment such as
 \begin{error}{Erroneous nesting of equation structures}
 \errexa
 \begin{verbatim}
-! Package amsmath,mathtools,fontspec Error: Erroneous nesting of equation structures;
-(amsmath,mathtools,fontspec)                trying to recover with `aligned'.
+! Package amsmath Error: Erroneous nesting of equation structures;
+(amsmath)                trying to recover with `aligned'.
 
-See the amsmath,mathtools,fontspec package documentation for explanation.
+See the amsmath package documentation for explanation.
 Type  H <return>  for immediate help.
  ...
 
@@ -2157,9 +2152,9 @@ other displayed equation structure. The chief exception is that
 \begin{error}{Extra & on this line}
 \errexa
 \begin{verbatim}
-! Package amsmath,mathtools,fontspec Error: Extra & on this line.
+! Package amsmath Error: Extra & on this line.
 
-See the amsmath,mathtools,fontspec package documentation for explanation.
+See the amsmath package documentation for explanation.
 Type  H <return>  for immediate help.
  ...
 
@@ -2213,10 +2208,10 @@ Type 1 format, directory
 
 If the font name begins with \fn{cmex}, there is a special option%
 \index{options!behavior of particular options}
-\opt{cmex10} for the \nipkg{amsmath,mathtools,fontspec} package that provides a temporary
+\opt{cmex10} for the \nipkg{amsmath} package that provides a temporary
 workaround. I.e., change the \cn{usepackage} to
 \begin{verbatim}
-\usepackage[cmex10]{amsmath,mathtools,fontspec}
+\usepackage[cmex10]{amsmath}
 \end{verbatim}
 This will force the use of the 10-point size of the \fn{cmex} font in
 all cases. Depending on the contents of your document this may be
@@ -2227,11 +2222,11 @@ adequate.
 \begin{error}{Improper argument for math accent}
 \errexa
 \begin{verbatim}
-! Package amsmath,mathtools,fontspec Error: Improper argument for math accent:
-(amsmath,mathtools,fontspec)                Extra braces must be added to
-(amsmath,mathtools,fontspec)                prevent wrong output.
+! Package amsmath Error: Improper argument for math accent:
+(amsmath)                Extra braces must be added to
+(amsmath)                prevent wrong output.
 
-See the amsmath,mathtools,fontspec package documentation for explanation.
+See the amsmath package documentation for explanation.
 Type  H <return>  for immediate help.
  ...
 
@@ -2251,7 +2246,7 @@ braces. In this example extra braces are needed as follows:
 \errexa
 \begin{verbatim}
 ! Math formula deleted: Insufficient extension fonts.
-l.8 \(ab+b^2\)
+l.8 $ab+b^2$
 
 ?
 \end{verbatim}
@@ -2278,7 +2273,7 @@ look up `weird error' in the index to The TeXbook.)
 \end{verbatim}
 \errexpl
 There are many possibilities that can lead to this error. However, one
-possibility that is relevant for the \nipkg{amsmath,mathtools,fontspec} package is that you
+possibility that is relevant for the \nipkg{amsmath} package is that you
 forgot to give the number argument of an \env{alignat} environment, as
 in:
 \begin{verbatim}
@@ -2397,10 +2392,10 @@ appear within \verb+\text{...}+).
 \begin{error}{Old form `\pmatrix' should be \begin{pmatrix}.}
 \errexa
 \begin{verbatim}
-! Package amsmath,mathtools,fontspec Error: Old form `\pmatrix' should be
+! Package amsmath Error: Old form `\pmatrix' should be
                          \begin{pmatrix}.
 
-See the amsmath,mathtools,fontspec package documentation for explanation.
+See the amsmath package documentation for explanation.
 Type  H <return>  for immediate help.
  ...
 
@@ -2414,7 +2409,7 @@ ill-advised in LaTeX.
 ?
 \end{verbatim}
 \errexpl
-When the \nipkg{amsmath,mathtools,fontspec} package is used, the old forms of \cn{pmatrix},
+When the \nipkg{amsmath} package is used, the old forms of \cn{pmatrix},
 \cn{matrix}, and \cn{cases} cannot be used any longer because of naming
 conflicts. Their syntax did not conform with standard \LaTeX{} syntax
 in any case.
@@ -2454,7 +2449,7 @@ or by using abbreviations for certain environments, such as |\bal| and
 \eal
 \end{verbatim}
 For technical reasons that kind of abbreviation does not work with
-the more complex displayed equation environments of the \nipkg{amsmath,mathtools,fontspec} package
+the more complex displayed equation environments of the \nipkg{amsmath} package
 (\env{gather}, \env{align}, \env{split}, etc.; cf.\ \fn{technote.tex}).
 \end{error}
 
@@ -2466,10 +2461,10 @@ See the discussion for the error message
 \begin{error}{Unknown option `xxx' for package `yyy'}
 \errexa
 \begin{verbatim}
-! LaTeX Error: Unknown option `intlim' for package `amsmath,mathtools,fontspec'.
+! LaTeX Error: Unknown option `intlim' for package `amsmath'.
 ...
 ? h
-The option `intlim' was not declared in package `amsmath,mathtools,fontspec', perhaps you
+The option `intlim' was not declared in package `amsmath', perhaps you
 misspelled its name. Try typing  <return>  to proceed.
 ?
 \end{verbatim}
@@ -2486,8 +2481,8 @@ it to have. Consult the documentation for the given package.
 \begin{error}{Cannot use `split' here}
 \errexa
 \begin{verbatim}
-Package amsmath,mathtools,fontspec Warning: Cannot use `split' here;
-(amsmath,mathtools,fontspec)                trying to recover with `aligned'
+Package amsmath Warning: Cannot use `split' here;
+(amsmath)                trying to recover with `aligned'
 \end{verbatim}
 \errexpl The \env{split} environment is designed to serve as the entire
 body of an equation, or an entire line of an \env{align} or \env{gather}
@@ -2507,13 +2502,13 @@ after it within the same enclosing structure:
 \begin{error}{Foreign command \over [or \atop or \above]}
 \errexa
 \begin{verbatim}
-Package amsmath,mathtools,fontspec Warning: Foreign command \over; \frac or \genfrac
-(amsmath,mathtools,fontspec)                should be used instead.
+Package amsmath Warning: Foreign command \over; \frac or \genfrac
+(amsmath)                should be used instead.
 \end{verbatim}
 \errexpl The primitive generalized fraction commands of \tex/\mdash
 \cs{over}, \cs{atop}, \cs{above}\mdash are deprecated when the
-\nipkg{amsmath,mathtools,fontspec} package is used because their syntax is foreign to \latex/
-and \nipkg{amsmath,mathtools,fontspec} provides native \latex/ equivalents. See
+\nipkg{amsmath} package is used because their syntax is foreign to \latex/
+and \nipkg{amsmath} provides native \latex/ equivalents. See
 \fn{technote.tex} for further information.
 \end{error}
 
@@ -2547,7 +2542,7 @@ previous item.
 \begin{erroro}{Bracketed material disappears at the beginning of
   \env{aligned} or \env{gathered}}
 %
-For most multiline equation environments, \nipkg{amsmath,mathtools,fontspec} disables the
+For most multiline equation environments, \nipkg{amsmath} disables the
 \latex/ convention to recognize a [bracketed] expression as an option%
 \index{ed env@\texttt{-ed} environments}%
 \index{options!positioning of \texttt{-ed} environments}%
@@ -2565,33 +2560,33 @@ beginning of \env{aligned} and \env{gathered}, and is a bug.  Insert
 \section{Compatibility with other packages}
 
 Several packages have already been mentioned as providing facilities
-lacking in \nipkg{amsmath,mathtools,fontspec}.
+lacking in \nipkg{amsmath}.
 
 \begin{itemize}
 \item \pkg{bm} is recommended for specifying bold math symbols.
-\item \pkg{mathtools} provides enhancements to some \nipkg{amsmath,mathtools,fontspec}
+\item \pkg{mathtools} provides enhancements to some \nipkg{amsmath}
   environments as well as additional compatible features, such as
   \env{rcases} (similar to \env{cases} but with the brace on the
   right-hand side), \env{multlined} (a subsidiary environment
   comparable to \env{multline}), and \cn{shortintertext} (more
   compact spacing than \cn{intertext}).  If \pkg{mathtools} is used,
-  \nipkg{amsmath,mathtools,fontspec} is loaded automatically, so it is not necessary
+  \nipkg{amsmath} is loaded automatically, so it is not necessary
   to load it separately.
 \item \pkg{unicode-math} provides commands for (most?)\ math symbols
   in Unicode.
 %\item \pkg{empheq}
 \end{itemize}
 
-These packages have known problems when used with \nipkg{amsmath,mathtools,fontspec}.
+These packages have known problems when used with \nipkg{amsmath}.
 \begin{itemize}
 \item \pkg{lineno} may omit numbers before display environments.
 \item \pkg{breqn} redefines a number of commands from other packages,
-  so is best loaded after \nipkg{amsmath,mathtools,fontspec} and other packages with math
+  so is best loaded after \nipkg{amsmath} and other packages with math
   facilities.\\ \pkg{breqn} is not yet totally stable, and a number of
   bugs have been reported via \texttt{tex.stackexchange} \cite{tex-sx}.
 \item \pkg{wasysym}, \pkg{mathabx} and perhaps other font packages also
   define multiple integrals\index{integrals!multiple} using the same
-  names as \nipkg{amsmath,mathtools,fontspec}.
+  names as \nipkg{amsmath}.
 \end{itemize}
 
 %% ------------------------------------------------------------------ %%
@@ -2601,11 +2596,11 @@ These packages have known problems when used with \nipkg{amsmath,mathtools,fonts
 \subsection{Converting from plain \LaTeX{}}
 
 A \LaTeX{} document will typically continue to work the same in most
-respects if \verb'\usepackage{amsmath,mathtools,fontspec}' is added in the document
-preamble. By default, however, the \nipkg{amsmath,mathtools,fontspec} package suppresses page
+respects if \verb'\usepackage{amsmath}' is added in the document
+preamble. By default, however, the \nipkg{amsmath} package suppresses page
 breaks inside multiple-line displayed equation structures such as
 \env{eqnarray}, \env{align}, and \env{gather}. To continue allowing page
-breaks inside \env{eqnarray} after switching to \nipkg{amsmath,mathtools,fontspec}, you will
+breaks inside \env{eqnarray} after switching to \nipkg{amsmath}, you will
 need to add the following line in your document preamble:
 \begin{verbatim}
 \allowdisplaybreaks[1]
@@ -2614,7 +2609,7 @@ To ensure normal spacing around relation symbols, you might also want to
 change \env{eqnarray} to \env{align}, \env{multline}, or
 \env{equation}\slash\env{split} as appropriate.
 
-Most of the other differences in \nipkg{amsmath,mathtools,fontspec} usage can be considered
+Most of the other differences in \nipkg{amsmath} usage can be considered
 optional refinements, e.g., using
 \begin{verbatim}
 \DeclareMathOperator{\Hom}{Hom}
@@ -2634,15 +2629,15 @@ technical questions that are less likely to be of general interest.
 
 \section{Getting help}
 
-The \nipkg{amsmath,mathtools,fontspec} collection of packages is maintained by the \latex/
+The \nipkg{amsmath} collection of packages is maintained by the \latex/
 team \cite{ltx-team}.  Bugs should be reported using the instructions
 at \url{https://www.latex-project.org/bugs/}.
-Please be careful not to confuse \nipkg{amsmath,mathtools,fontspec} with the AMS document
+Please be careful not to confuse \nipkg{amsmath} with the AMS document
 classes (\cls{amsart}, \cls{amsbook}, and \cls{amsproc}), which
-automatically incorporate \nipkg{amsmath,mathtools,fontspec}; bugs in the classes should
+automatically incorporate \nipkg{amsmath}; bugs in the classes should
 be reported directly to AMS, by email to \mail{tech-support@ams.org}.
 
-%Questions or comments regarding \nipkg{amsmath,mathtools,fontspec} and related packages
+%Questions or comments regarding \nipkg{amsmath} and related packages
 %should be sent to:
 %\begin{infoaddress}
 %American Mathematical Society\\
@@ -2702,7 +2697,7 @@ development of free \tex/-related software. There are also many local
 \tex/ user groups in other countries; information about contacting a
 local user group can be gotten from the \tex/ Users Group.
 
-\index{amsmath,mathtools,fontspec@\texttt{amsmath} package|)}
+\index{amsmath@\texttt{amsmath} package|)}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
@@ -2739,7 +2734,7 @@ online, from a link on the same page.
 %Michel Goossens, Frank Mittelbach, and Alexander Samarin,
 %\booktitle{The \latex/ companion}, Addison-Wesley, Reading, MA, 1994.
 %  [\emph{Note: The 1994 edition is not a reliable guide for the
-%    \nipkg{amsmath,mathtools,fontspec} package unless you refer to the errata for Chapter
+%    \nipkg{amsmath} package unless you refer to the errata for Chapter
 %    8\mdash file \fn{compan.err}, distributed with \LaTeX{}.}]
 
 \bibitem{msf} Frank Mittelbach and Rainer Sch\"opf,
