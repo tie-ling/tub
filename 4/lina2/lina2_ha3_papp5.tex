@@ -19,9 +19,10 @@
 
 % 让 TeX 支持德语
 \usepackage[ngerman]{babel}
-\usepackage[varvw,varg,amsthm,varbb]{newtx}
-\usepackage{newtxmath}
-\usepackage{parskip,interval}
+\usepackage{unicode-math,amsthm,parskip,interval}
+\setmainfont{TeX Gyre Termes}
+\setmathfont{TeX Gyre Termes Math}
+\setmathfont[range=\mathcal]{latinmodern-math.otf}
 
 % 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
 \providecommand{\skp}[1]{\langle#1\rangle}

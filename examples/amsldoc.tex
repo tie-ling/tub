@@ -76,8 +76,10 @@ Bug reports can be opened (category \texttt{#1}) at\\%
 
 %    Use the amsmath package and amscd package in order to print
 %    examples.
-\usepackage[varvw,varg]{newtx}
-\usepackage{newtxmath}
+\usepackage{unicode-math,parskip}
+\setmainfont{TeX Gyre Termes}
+\setmathfont{TeX Gyre Termes Math}
+\setmathfont[range=\mathcal]{latinmodern-math.otf}
 \usepackage{amscd}
 
 \usepackage{imakeidx}

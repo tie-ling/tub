@@ -26,8 +26,10 @@ File name: \fn{testmath.tex}}
 \author{American Mathematical Society}
 \date{Version 2.0a, 2023/08/24}
 
-\usepackage[varvw,varg,amsthm]{newtx}
-\usepackage{newtxmath}
+\usepackage{unicode-math,parskip,amsthm}
+\setmainfont{TeX Gyre Termes}
+\setmathfont{TeX Gyre Termes Math}
+\setmathfont[range=\mathcal]{latinmodern-math.otf}
 \usepackage{parskip}
 
 %    Some definitions useful in producing this sort of documentation:
@@ -713,7 +715,7 @@ $[\st_j(x',y)]_{j=1}^{i-1}=[\st_j(x,y')]_{j=1}^{i-1}$. Then one of
 $[\st_j(x',y)]_{j=i}^{\infty}$ and $[\st_j(x,y')]_{j=i}^{\infty}$ is a
 prefix of the other which implies that one of $\st_i(x',y)$ and
 $\st_i(x,y')$ is a prefix of the other. If the $i$th message is
-transmitted by $P_\X$ then, by the separate-transmissions property and
+transmitted by  then, by the separate-transmissions property and
 the induction hypothesis, $\st_i(x,y)=\st_i(x,y')$, hence one of
 $\st_i(x,y)$ and $\st_i(x',y)$ is a prefix of the other. By the
 implicit-termination property, neither $\st_i(x,y)$ nor $\st_i(x',y)$
@@ -742,7 +744,7 @@ of codewords $\{\st_\phi(x,y):x\in\SXgYy\}$ is prefix free.
 \label{S_Cp1}
 
 $\Cw1$, the one-way complexity of a random pair $\XcY$,
-is the number of bits $P_\X$ must transmit in the worst case
+is the number of bits  must transmit in the worst case
 when $\PY$ is not permitted to transmit any feedback messages.
 Starting with $\SXY$, the support set of $\XcY$, we define $\G$,
 the \textit{characteristic hypergraph} of $\XcY$, and show that

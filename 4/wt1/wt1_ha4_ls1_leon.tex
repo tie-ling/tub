@@ -1,0 +1,57 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+\documentclass[fleqn,draft,a5paper]{article}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+\geometry{left=1cm,
+  right=1cm,
+  top=1cm,
+  bottom=2cm}
+
+% (TeX-run-style-hooks "amsmath,mathtools,fontspec" "amsthm")
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+\usepackage{unicode-math,amsthm,parskip,interval}
+\setmainfont{TeX Gyre Termes}
+\setmathfont{TeX Gyre Termes Math}
+\setmathfont[range=\mathcal]{latinmodern-math.otf}
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\skp}[1]{\langle#1\rangle}
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\providecommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\providecommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+% 定义新函数，依赖于AMSmath
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\Rang}{Rang}
+
+\providecommand{\R}[1]{\mathrm{R#1}}
+\newcommand{\cP}{\mathbb{P}}
+\newcommand{\wt}{\widetilde}
+\newcommand{\dd}{\,\mathrm{d}}
+\title{WT1, HA4, Gruppe LS1, Leon}
+\author{Liu 503531, Zhang 484981, Guo 480788}
+
+\begin{document}
+\maketitle
+
+\subsection{Aufgabe 1}
+Wir definieren $\mathbb{1}$ die Indikatorfunktion.
+\end{document}

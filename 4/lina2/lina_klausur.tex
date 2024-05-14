@@ -21,8 +21,10 @@
 
 % 让 TeX 支持德语
 \usepackage[ngerman]{babel}
-\usepackage{amsmath,mathtools,fontspec,amssymb,amsthm,parskip,interval,mathtools,fontspec}
+\usepackage{unicode-math,amsthm,parskip,interval}
 \setmainfont{TeX Gyre Termes}
+\setmathfont{TeX Gyre Termes Math}
+\setmathfont[range=\mathcal]{latinmodern-math.otf}
 
 \DeclareMathOperator{\Span}{span}
 \DeclareMathOperator{\M}{M}
