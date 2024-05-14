@@ -13,16 +13,22 @@
 %%% ====================================================================
 \NeedsTeXFormat{LaTeX2e}% LaTeX 2.09 can't be used (nor non-LaTeX)
 [1994/12/01]% LaTeX date must December 1994 or later
-\documentclass[draft]{article}
+\documentclass[draft,a5paper]{article}
 \pagestyle{headings}
-
+% 设置页边距，上下左右
+\usepackage{geometry}
+\geometry{left=1cm,
+  right=1cm,
+  top=2cm,
+  bottom=2cm}
 \title{Sample Paper for the \pkg{amsmath} Package\\
 File name: \fn{testmath.tex}}
 \author{American Mathematical Society}
 \date{Version 2.0a, 2023/08/24}
 
-\usepackage{amsmath,amssymb,mathtools,amsthm,fontspec,mathptmx}
-\setmainfont{TeX Gyre Termes}
+\usepackage[varvw,varg,amsthm]{newtx}
+\usepackage{newtxmath}
+\usepackage{parskip}
 
 %    Some definitions useful in producing this sort of documentation:
 \chardef\bslash=`\\ % p. 424, TeXbook

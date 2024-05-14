@@ -76,8 +76,8 @@ Bug reports can be opened (category \texttt{#1}) at\\%
 
 %    Use the amsmath package and amscd package in order to print
 %    examples.
-\usepackage{amsmath,amssymb,mathtools,fontspec,mathptmx}
-\setmainfont{TeX Gyre Termes}
+\usepackage[varvw,varg]{newtx}
+\usepackage{newtxmath}
 \usepackage{amscd}
 
 \usepackage{imakeidx}
@@ -382,8 +382,7 @@ numbers\index{equationn@equation numbers!vertical placement} level with the last
 superscripts\index{subscripts and superscripts!placement}\relax
 \index{limits|see{subscripts and superscripts}} of summation symbols
 above and below, in displayed equations. This option also affects other
-symbols of the same type\mdash $\prod$, $\bigotimes$,
-% symbols of the same type\mdash $\prod$, $\coprod$, $\bigotimes$,
+symbols of the same type\mdash $\prod$, $\coprod$, $\bigotimes$,
 $\bigoplus$, and so forth\mdash but excluding integrals (see below).
 
 \item[\opt{nosumlimits}] Always place the subscripts and superscripts of
