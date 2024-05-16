@@ -2,7 +2,7 @@
 % settings for chktex
 % chktex-file 3
 
-\documentclass[fleqn,draft,a5paper]{article}
+\documentclass[fleqn,draft,a5paper,12pt]{article}
 
 % 隐藏默认的章节序号：实际作业中与这个冲突
 % https://tex.stackexchange.com/a/30225
@@ -19,10 +19,10 @@
 
 % 让 TeX 支持德语
 \usepackage[ngerman]{babel}
-\usepackage{unicode-math,amsthm,parskip,interval}
+\usepackage{amsmath,unicode-math,amsthm,parskip,interval}
 \setmainfont{TeX Gyre Termes}
 \setmathfont{TeX Gyre Termes Math}
-\setmathfont[range=\mathcal]{latinmodern-math.otf}
+\setmathfont[range={\mathcal}]{latinmodern-math.otf}
 
 % 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
 \providecommand{\skp}[1]{\langle#1\rangle}
@@ -53,6 +53,61 @@
 \maketitle
 
 \subsection{Aufgabe 1}
-Wir definieren $\mathbb{1}$ die Indikatorfunktion. $mₑc² m_{e}c^{2}$
-und $r_\textrm{sh}$
+Seien \((\Omega, \mathcal{A}, P)\) ein W-Raum und \((E, \mathcal{E})\) ein messbarer Raum.
+
+Eine Abbildung \(X\colon \Omega \to E\) heißt \(E\)-wertige Zufallsvariable, falls für
+alle \(B \in \mathcal{E}\) dass
+\(\{X \in B\} = \{\omega \in \Omega \mid X(\omega) \in B\}\in \mathcal{A}\).
+
+Ist \((E, \mathcal{E}) = (\mathbb{R}, \mathcal{B}(\mathbb{R}))\), so heißt \(X\) reellwertige Zufallsvariable.
+
+Ist \(X\) eine reelle Zufallsvariable, so heißt
+\[F_{X}\colon \mathbb{R} \to \mathbb{R}, \quad F_{X}(t) \coloneq P(X \le t)\]
+die Verteilungsfunktion von \(X\).
+
+Die Dichte \(f_{X}\colon \mathbb{R} \to \mathbb{R}\) von Verteilungsfunktion \(F_{X}\) ist
+\[F_{X}(t) = \int_{- \infty}^{t}f_{X}(x) \dd x.\]
+
+Das Bildmaß \(\cP \circ X^{-1}\) ist ein W-Maß auf \((E, \mathcal{E})\) und heißt
+Verteilung von \(X\).
+\subsubsection{Teil i}
+Sei \(Y=aX+b\) mit \(a, b \in \mathbb{R}\) und \(a \ne 0\).  Dann folgt aus Definition
+dass
+\[
+  F_{X}(t) = \cP (X \le t) = \int_{-\infty}^{t}f_{X}(x) \dd x
+\]
+und
+\[
+  F_{Y}(t) = \cP(Y \le t) = \int_{-\infty}^{t}f_{Y}(x) \dd x
+\]
+Daher
+\[
+  \text{falls } a > 0, \quad \cP(Y \le t) = \cP\left(X \le
+    \frac{t-b}{a}\right) = \int_{-\infty}^{\frac{t-b}{a}}f_{X}(x) \dd x =
+  \int_{-\infty}^{t}f_{Y}(x) \dd x.
+\]
+und
+\[
+  \text{falls } a < 0, \quad \cP(Y \le t) = \cP\left(X \le
+    \frac{t-b}{-a}\right) = \int_{-\infty}^{\frac{t-b}{-a}}f_{X}(x) \dd x =
+  \int_{-\infty}^{t}f_{Y}(x) \dd x.
+\]
+Es muss \(a \ne 0\) sein, denn sonst wäre \(Y\) konstant und es gilt \(\{Y
+\le t\} = \emptyset\) für alle \(t < b\).
+\subsubsection{Teil ii}
+\(Y \coloneq \abs{X}\).  Dann gilt wegen Definition dass
+\[\cP(Y \le t) = \cP(-t \le X \le t) = \int_{-t}^{t}f_{X}(x) \dd x =
+  \int_{-\infty}^{t}f_{Y}(x) \dd x. \]
+\subsubsection{Teil iii}
+\(Y \coloneq X^{k}\) mit \(k \in \mathbb{N} \setminus \{0\}\). Dann gilt wegen Definition dass
+\[\cP(Y \le t) = \cP(X^{k} \le t) = ? \]
+\subsection{Aufgabe 2}
+\begin{Behauptung}
+  Sei \(X\) eine reele Zufallsgröße mit Dichte \(f_{X}\). Es gilt genau
+  dann \(X \sim (-X)\), wenn für alle \(t \in \mathbb{R}\) dass
+  \(f_{X}(t) = f_{X}(-t)\) gilt.
+\end{Behauptung}
+\begin{proof}
+  Hinrichtung.  Angenommen, 
+\end{proof}
 \end{document}
