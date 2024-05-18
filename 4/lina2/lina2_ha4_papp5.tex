@@ -1,0 +1,197 @@
+% 使用 chktex 检查 tex 文件中的语法错误
+% settings for chktex
+% chktex-file 3
+
+\documentclass[fleqn,draft,a5paper,12pt]{article}
+
+% 隐藏默认的章节序号：实际作业中与这个冲突
+% https://tex.stackexchange.com/a/30225
+\setcounter{secnumdepth}{0}
+
+% 设置页边距，上下左右
+\usepackage{geometry}
+\geometry{left=1cm,
+  right=1cm,
+  top=1cm,
+  bottom=2cm}
+
+% (TeX-run-style-hooks "amsmath,mathtools,fontspec" "amsthm")
+
+% 让 TeX 支持德语
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,unicode-math,amsthm,parskip,interval}
+\setmainfont{TeX Gyre Termes}
+\setmathfont{TeX Gyre Termes Math}
+\setmathfont[range=\mathcal]{latinmodern-math.otf}
+
+% 根据 AMS 建议，应为成对符号（比如绝对值）定义新命令
+\providecommand{\skp}[1]{\langle#1\rangle}
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\providecommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\providecommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+
+% 定理定义，依赖于 amsthm
+\theoremstyle{remark}
+\newtheorem*{Behauptung}{Behauptung}
+\newtheorem*{Lemma}{Lemma}
+\newtheorem*{Satz}{Satz}
+\newtheorem*{Definition}{Definition}
+
+% 定义新函数，依赖于AMSmath
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\Rang}{Rang}
+
+\providecommand{\R}[1]{\mathrm{R#1}}
+
+\newcommand{\wt}{\widetilde}
+\newcommand{\dd}{\,\mathrm{d}}
+\title{HA 4, LinA 2, Papp, Papp5}
+\author{Shilong Yu 478912, Yuchen Guo 480788}
+
+\begin{document}
+\maketitle
+
+
+\subsection{Aufgabe 1}
+
+\begin{Behauptung}
+  Jede invertierbare Matrix \(A \in \mathrm{GL}(n; K)\) kann durch
+  Spaltenumformungen vom Typ III (Addition einer \(\mu\)-fachen \(i\)-ten
+  Spalte zu einer \(j\)-ten Spalte mit \(j \ne i\)) in eine Diagonalmatrix
+  \[
+    D =
+    \begin{bmatrix}
+      \lambda_{1} & & 0 \\
+            &  \ddots & \\
+      0 & & \lambda_{n}
+    \end{bmatrix}
+  \]
+  überführt werden.
+\end{Behauptung}
+\begin{proof}
+  Wir wenden das Eliminationsverfahren von Gauss an und bezeichnen die
+  Spalten von \(A\) als
+  \[ A =
+    \begin{bmatrix}
+      a_{1} & a_{2} & \cdots & a_{n}
+    \end{bmatrix}.
+  \]
+  Weil \(A\) invertierbar ist, existiert mindestens eine Spalte \(a_{i}\),
+  deren ersten Eintrag ungleich Null ist.  Wir ersetzen \(a_{1}\) mit
+  \(a_{1}+a_{i}\):
+  \[ A' =
+    \begin{bmatrix}
+      a_{1}+a_{i} & a_{2} & \cdots & a_{n}
+    \end{bmatrix}
+  \]
+  um sicher zu stellen, dass der erste Eintrag der ersten Spalte
+  \(A'_{1,1}\) ungleich Null ist.  Nun addieren zu alle andere Spalte
+  \(j \ne 1\) die \(-\frac{A_{1,j}}{A_{1,1}}\)-fache \(A'_{\cdot,1}\) Spalte,
+  erhalten wir
+  \[ A'' =
+    \begin{bmatrix}
+      a_{1} + a_{i} & 0 & \cdots & 0 \\
+      \vdots & a''_{2} & \cdots & a''_{n}
+    \end{bmatrix}
+  \]
+  und so weiter.  Schließlich erhalten wir
+  \[
+    \begin{bmatrix}
+      \lambda_{1} & 0 & 0 \\
+      m      &  \ddots & 0 \\
+      p & q & \lambda_{n}
+    \end{bmatrix}.   
+  \]
+  Lemma.  Wir bemerken, dass alls \(\lambda_{i}\) ungleich Null ist, denn andersfalls
+  ist
+  \[
+    \begin{bmatrix}
+      \lambda_{1} & 0 & 0 & 0 \\
+      m & \lambda_{2} & 0 & 0 \\
+      n & p & [0] & 0 \\
+      q & r & s & \lambda_{4}
+    \end{bmatrix}
+  \]
+  und die Matrix ist im Widerspruch zur Voraussetzung nicht
+  invertierbar.  Siehe HA3.
+
+  Im letzten Schritt addieren wir, von rechts nach links, von unten
+  nach oben, letzte Spalte zu alle andere nicht-diagonale Einträge, um
+  solche Einträge zu beseitigen:
+  \[
+    \begin{bmatrix}
+      \lambda_{1} & 0 & 0 & 0  & \\
+      m & \lambda_{2} & 0 & 0 & \uparrow \\
+      n & p & \lambda_{3} & 0 & \vdots \\
+      q & 0 & 0 & \lambda_{4} & \\
+      & \leftarrow & \cdots  & & 
+    \end{bmatrix}
+  \]
+  Dieser Schritt ist möglich, denn \(\lambda_{i}, 1 \le i \le n\) sind ungleich
+  Null.  Daraus folgt die Behauptung.
+\end{proof}
+\subsection{Aufgabe 2}
+\begin{Behauptung}
+  Je zwei Matrizen \(A, B \in M(m \times n; \mathbb{R}), m, n \in \mathbb{N}_{>0}\) sind durch
+  einen stetige Kurve verbindbar.
+\end{Behauptung}
+\begin{proof}
+  Wir definieren die Funktion
+  \[ f\colon \interval{0}{1} \to M(m \times n; \mathbb{R}), \quad t \mapsto (1-t)A + tB. \]
+  Aus Definition folgt, dass \(f(0) = A\) und \(f(1)=B\).
+
+  Offensichtlich ist für alle \(t \in \interval{0}{1}\) der Funktionswert
+  \(f(t)\) eine Matrix wegen Skalarmultiplikation und Matrixaddition.
+ Die Funktion  \(f\)  ist stetig, denn \(f\) ist eine Komposition von
+ elementare Funktionen.
+\end{proof}
+\subsection{Aufgabe 3}
+Sei \(K\) Körper, \(V\) ein \(K\)-Vektorraum und \(f \in \mathrm{End}(V)\).
+\begin{Behauptung}
+  Falsch: Ist \(0\) im Kern von \(f\), so ist \(f\) injektiv.
+\end{Behauptung}
+\begin{proof}
+  Angenommen, \(\dim V = 2\) und \(e_{1}, e_{2}\) sei die kanonische
+  Basis.  Wir betrachten die Funktion \(f\) mit \(f(e_{1})=e_{2}\) und
+  \(f(e_{2}) = 0\).  Dann ist \(f(0) = f(e_{2}) = 0\) und daher nicht injektiv.
+\end{proof}
+\begin{Behauptung}
+  Falsch: Ist \(f \circ f\) die Nullabbildung, so ist auch \(f\) die Nullabbildung.
+\end{Behauptung}
+\begin{proof}
+  Angenommen, \(\dim V = 2\) und \(e_{1}, e_{2}\) sei die kanonische
+  Basis. Wir betrachten die Funktion \(f\) mit \(f(e_{1})=e_{2}\) und
+  \(f(e_{2}) = 0\) mit der Darstellende Matrix
+  \[
+    M_{\mathcal{B}}(f) =
+    \begin{bmatrix}
+      0 & 0 \\ 1 & 0
+    \end{bmatrix}.
+  \]
+  Es gilt \(f \circ f = 0\) aber \(f \ne 0\).
+\end{proof}
+\subsection{Aufgabe 4}
+\begin{Behauptung}
+  \(A, B \in \mathrm{GL}(2, \mathbb{R})\) mit \(A =
+  \begin{bmatrix}
+    1 & 0 \\ 0 & 1
+  \end{bmatrix}
+  \)
+  und
+  \(B =
+  \begin{bmatrix}
+    -1 & 0 \\ 0 & 1
+  \end{bmatrix}
+  \)
+  können nicht durch eine stetige Kurve verbinden werden.
+\end{Behauptung}
+\begin{proof}
+  Wegen Satz am Seite 234, sind \(A, B \in \mathrm{GL}(2, \mathbb{R})\) genau dann
+  verbindbar, falls \(\det (A \cdot B) >0\).  Daher berechnen wir die
+  Determinanten von beiden:
+  \[\det A = 1 \cdot 1 - 0 \cdot 0 = 1, \quad \det B = -1 \cdot 1 - 0 \cdot 0 = -1.\]
+  Die Bedingung \(\det (A \cdot B) > 0 \) ist nicht erfüllt.  Damit folgt
+  die Behauptung.
+\end{proof}
+\end{document}

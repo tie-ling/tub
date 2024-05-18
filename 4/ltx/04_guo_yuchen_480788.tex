@@ -1,0 +1,145 @@
+% Datum 29.04.2024
+% Vorname Yuchen
+% Nachname Guo
+% Matrikelnummer 480788
+% E-Mail-Adresse gyuchen86@gmail.com
+
+% Beginn der Präambel
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{array}
+\usepackage{amsmath,amssymb}
+\usepackage{accents}
+\title{Bärenstarker Titel}
+\author{Yuchen Guo, Eisbär}
+\date{\today}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\p}{\partial}
+\newcommand\borel[1]{\mathcal{#1}}
+\newcommand\caratheo[2]{\left[#1,#2\right]}
+\newcommand\bb[1]{\boldsymbol{#1}}
+
+% Beginn der eigentlichen Text-Umgebung
+\begin{document}
+\maketitle
+\tableofcontents
+\(\N \subseteq \Z \subseteq \R \subseteq \C\). \(\borel{C}, \caratheo{a}{b}\).
+\begin{itemize}
+\item Es gilt
+  \begin{align*}
+    M_{1} &= \{(x, y) \in \mathbb{R}^{2} \mid |x| + |y| = 1\} \\
+    \mathring{M}_{1} & = \emptyset \\
+    \partial M_{1} &= \{(x, y) \in \mathbb{R}^{2} \mid |x| + |y| = 1\} = M_{1}
+  \end{align*}
+\item Mit Hilfe der Rechenregeln für Summen (Linearität) erhalten wir:
+  \begin{align*}
+    \nabla(f+g)(x)
+    &=
+      \begin{pmatrix}
+        \partial_{x_{1}}(f(x)+g(x)) \\
+        \ldots \\
+        \partial_{x_{n}}(f(x)+g(x))
+      \end{pmatrix} \\
+    &=    \begin{pmatrix}
+      \partial_{x_{1}}f(x)+\partial_{x_{1}}g(x) \\
+      \ldots \\
+      \partial_{x_{n}}f(x)+\partial_{x_{n}}g(x)
+    \end{pmatrix} \\
+    &= \nabla f(x) + \nabla g(x)
+  \end{align*}
+\item Wir betrachten das folgende lineare Gleichungssystem:
+  \[
+    \begin{pmatrix}
+      1 & 1 & 1 \\ 2 & -2 & -1 \\ 4 & 4 & 1
+    \end{pmatrix}
+    \begin{pmatrix}
+      c_{1} \\ c_{2} \\ c_{3}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      2 \\ -1 \\ 0
+    \end{pmatrix}
+  \]
+  Wir lösen es mit Hilfe des Gauss-Algorithmus:
+  \begin{align*}
+    \begin{matrix}
+      1 & 1 & 1 & | & 2 \\
+      2 & -2 & -1 & | & -1 \\
+      4 & 4 & 1 & | & 0
+    \end{matrix}
+    \rightsquigarrow
+    &\begin{matrix}
+      1 & 1 & 1 & | & 2 \\
+      2 & -2 & -1 & | & -1 \\
+      0 & 0& -3 & | & -8
+    \end{matrix} \\
+    \rightsquigarrow&
+                      \begin{matrix}
+                        1 & 1 & 1 & | & 2 \\
+                        2 & -2 & -1 & | & -1 \\
+                        0 & 0 & -3 & | & -8
+                      \end{matrix} \\
+    \rightsquigarrow&
+                      \begin{matrix}
+                        1 & 1 & 1 & | & 2 \\
+                        0 & -4 & -3 & | & -5 \\
+                        0 & 0 & -3 & | & -8
+                      \end{matrix}
+  \end{align*}
+\end{itemize}
+\begin{enumerate}
+\item Die Funktion
+  \[f\colon \mathbb{R}^{2} \to \mathbb{R}, \quad f(x, y) =
+    \begin{cases}
+      x \sin\left(\frac1y\right) + y\cos\left(\frac1x\right)
+      & \text{falls \(x \ne 0\) und \(y \ne 0\)} \\
+      0 & \text{falls \(x = 0\) und \(y = 0\)}
+    \end{cases}
+  \]
+  ist stetig auf \(\mathbb{R}^{2}\) außer auf \(\{(x, y) \in \mathbb{R}^{2} \mid x = 0 \text{
+    oder } y = 0 \} \setminus \{(0, 0)\}\).
+\item Mit Hilfe des \texttt{\textbackslash{}cfrac}-Befehls setzen wir einen schönen
+  Kettenbruch:
+  \begin{align*}
+    \frac4\pi = 1 + \cfrac{1^{2}}{3+
+    \cfrac{2^{2}}{5+
+    \cfrac{3^{2}}{7+
+    \cfrac{4^{2}}{
+    9 + \cfrac{5^{2}}{\ddots}
+    }}}}
+  \end{align*}
+\item \texttt{split}-Umgebung.  Die folgende Rechnung bestätigt unsere
+  Formel für den Laplace-Operator in Polarkoordinaten.
+  \begin{align*}
+          \p^{2}_{r}g + \frac1r \cdot \p_{r}g + \frac{1}{r^{2}} \cdot \p^{2}_{\varphi}g
+      &= \cos(\varphi)^{2} \p_{x}^{2}f + 2 \cos(\varphi)\sin(\varphi)\p_{x}\p_{y} f \\
+      &\quad + \sin(\varphi)^{2}\p_{y}^{2}f + \frac1r(\cos(\varphi)\p_{x}f +
+        \sin(\varphi)\p_{y}f) \\
+      &\quad + \frac{1}{r^{2}}(-r(\cos(\varphi)\partial_{x}f + \sin(\varphi)\p_{y}f)) \\
+      &\quad + r^{2}(\sin(\varphi)^{2}\p_{x}^{2}f + \cos(\varphi)^{2}\p_{y}^{2}f) \\
+      &\quad - 2r^{2}\sin(\varphi)\cos(\varphi)\p_{x}\p_{y}f) \\
+      &= \p_{x}^{2}f(\cos(\varphi)^{2} + \sin(\varphi)^{2}) \tag{1}\\
+      &\quad + \p_{y}^{2}f(\sin(\varphi)^{2} + \cos(\varphi)^{2}) \\
+      &\quad + \p_{x}\p_{y}f(2 \cos(\varphi)\sin(\varphi) - 2 \sin(\varphi)\cos(\varphi)) \\
+      &\quad + \p_{x}f(\frac1r \cos(\varphi) - \frac1r \cos(\varphi)) \\
+      &\quad + \p_{y}f(\frac1r \sin(\varphi) - \frac1r \sin(\varphi)) \\
+      &= \p_{x}^{2}f + \p_{y}^{2} f
+  \end{align*}
+\item Wir betrachten die Maxwellschen Gleichungen, wobei wir
+  \(\bb{B}, \bb{E}, \bb{j}\) \textit{fett} setzen, statt sie mit
+  Vektorpfeilen zu versehen, wie es in der Literatur auch vorkommt.
+  De Gleichungen sollen zentriert gesetzt werden, also nicht nach dem
+  Gleichheitszeichen ausgerichtet werden.
+  \begin{gather*}
+    \nabla \cdot \bb{E} = \frac{\rho}{\varepsilon_{0}} \\
+    \nabla \cdot \bb{B} = 0 \\
+    \nabla \times \bb{E} = -\frac{\partial B}{\partial t} \\
+    \nabla \times \bb{B} = \mu_{0} \bb{j} + \mu_{0} \varepsilon_{0} \frac{\p \bb{E}}{\p t}    
+  \end{gather*}
+\end{enumerate}
+\end{document}
